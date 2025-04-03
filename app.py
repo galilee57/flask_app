@@ -15,7 +15,7 @@ def hello_world():
     return 'Hello World'
 
 @app.route('/test')
-# ‘/’ URL is bound with test function.
+# ‘/test’ URL is bound with test function.
 def hello_world():
     return 'Testing'
     
