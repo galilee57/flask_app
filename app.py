@@ -4,8 +4,11 @@ import os
 
 app = Flask(__name__)
 
+# Chemin absolu vers le fichier cartes.json
+cartes_path = os.path.join(os.path.dirname(__file__), "cartes.json")
+
 # Charger les cartes
-with open("cartes.json", encoding="utf-8") as f:
+with open(cartes_path, encoding="utf-8") as f:
     cartes = json.load(f)
 
 # Lister les fichiers statiques et templates dispo
