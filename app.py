@@ -5,7 +5,8 @@ import os
 
 app = Flask(__name__)
 
-with open('cartes.json', encoding='utf-8') as f:
+basedir = os.path.dirname(__file__)
+with open(os.path.join(basedir, 'cartes.json'), encoding='utf-8') as f:
     cartes = json.load(f)
 
 @app.route('/')
