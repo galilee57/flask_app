@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+<nav style="background-color: #f5f5f5; padding: 1rem;">
+    <a href="{{ url_for('index') }}">Accueil</a> |
+    <a href="#">À propos</a> |
+    <a href="#">Contact</a>
+</nav>
+
+<main style="padding: 2rem;">
+    {% block content %}{% endblock %}
+</main>
+
+{% block js %}{% endblock %}
+</body>
+</html>
