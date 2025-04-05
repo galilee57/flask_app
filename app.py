@@ -1,27 +1,23 @@
-# Importing flask module in the project is mandatory
-# An object of Flask class is our WSGI application.
-from flask import Flask
 
-# Flask constructor takes the name of 
-# current module (__name__) as argument.
+from flask import Flask, render_template, url_for, abort
+import json
+import os
+
 app = Flask(__name__)
 
-# The route() function of the Flask class is a decorator, 
-# which tells the application which URL should call 
-# the associated function.
+with open('cartes.json', encoding='utf-8') as f:
+    cartes = json.load(f)
+
 @app.route('/')
-# ‘/’ URL is bound with hello_world() function.
-def hello_world():
-    return 'Hello World'
+def index():
+    return render_template('index.html', cartes=cartes)
 
-@app.route('/test')
-# ‘/test’ URL is bound with test function
-def hello_world():
-    return 'Testing'
-    
-# main driver function
+@app.route('/<project_id>')
+def page_project(project_id):
+    project = next((item for item in cartes if item['id'] == project_id), None)
+    if project is None:
+        abort(404)
+    return render_template('project.html', project=project)
+
 if __name__ == '__main__':
-
-    # run() method of Flask class runs the application 
-    # on the local development server.
     app.run()

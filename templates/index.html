@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes projets</title>dxcss
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>MES PROJETS</h1>
+
+    {% for carte in cartes %}
+        <div class="card">
+            <img src="{{ carte.image }}" alt="{{ carte.titre }}">
+            <div class="card-content">
+                <h2>{{ carte.titre }}</h2>
+                <p>{{ carte.description }}</p>
+                <p><strong>Catégories :</strong> {{ carte.categories | join(', ') }}</p>
+                <a href="{{ carte.lien }}" target="_blank">Voir le projet</a>
+            </div>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

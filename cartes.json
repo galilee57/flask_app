@@ -1,0 +1,58 @@
+[
+    {
+        "id": "projet_1",
+        "titre": "Musculation",
+        "description": "Une application pour suivre votre programme de musculation.",
+        "image_url": "https://example.com/projectMusculation.jpg",
+        "type": "interne",
+        "categories": ["musculation", "fitness"]
+    },
+    {
+        "id": "projet_2",
+        "titre": "Finance",
+        "description": "Modèle de prédiction basé sur un modèle ARIMA.",
+        "image_url": "https://example.com/projectFinance.jpg",
+        "type": "interne",
+        "categories": ["finance", "prédiction"]
+    },
+    {
+        "id": "projet_3",
+        "titre": "Animation simple",
+        "description": "Une animation avec Animate.js.",
+        "image_url": "https://example.com/projectJS.jpg",
+        "type": "interne",
+        "categories": ["javascript", "animation"]
+    },
+    {
+        "id": "projet_4",
+        "titre": "Simulateurs",
+        "description": "Différents simulateurs créés.",
+        "image_url": "https://example.com/projectSimulators.jpg",
+        "type": "interne",
+        "categories": ["javascript", "simulateurs"]
+    },
+    {
+        "id": "projet_5",
+        "titre": "Flags",
+        "description": "Affichage des drapeaux à partir d'une REST API.",
+        "image_url": "https://example.com/projectFlags.jpg",
+        "type": "interne",
+        "categories": ["javascript", "api"]
+    },
+    {
+        "id": "projet_6",
+        "titre": "Exercices",
+        "description": "Des animations basées sur les exercices de muscu.",
+        "image_url": "https://example.com/projectExercices.jpg",
+        "type": "interne",
+        "categories": ["musculation", "exercices"]
+    },
+    {
+        "id": "projet_7",
+        "titre": "Programmes",
+        "description": "Des programmes de musculation.",
+        "image_url": "https://example.com/projectProgrammes.jpg",
+        "type": "interne",
+        "categories": ["musculation", "programmes"]
+    }
+]

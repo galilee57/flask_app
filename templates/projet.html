@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ projet.titre}}</title>
+</head>
+<body>
+    <h1>{{ projet.titre }}</h1>
+    <p>{{ projet.description }}</p>
+    <img src="{{ projet.image }}" alt="{{ projet.titre }}">
+    {% if projet.categories %}
+        <p><strong>Catégories :</strong> {{ projet.categories | join(', ') }}</p>
+    {% endif %}
+    
+</body>
+</html>
