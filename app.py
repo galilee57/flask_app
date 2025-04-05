@@ -12,12 +12,12 @@ with open('cartes.json', encoding='utf-8') as f:
 def index():
     return render_template('index.html', cartes=cartes)
 
-@app.route('/<project_id>')
-def page_project(project_id):
-    project = next((item for item in cartes if item['id'] == project_id), None)
-    if project is None:
+@app.route('/<projet_id>')
+def page_projet(projet_id):
+    projet = next((item for item in cartes if item['id'] == projet_id), None)
+    if projet is None:
         abort(404)
-    return render_template('project.html', project=project)
+    return render_template('projet.html', projet=projet)
 
 if __name__ == '__main__':
     app.run()

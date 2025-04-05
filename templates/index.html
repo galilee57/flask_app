@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes projets</title>dxcss
+    <title>Mes projets</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>MES PROJETS</h1>
 
     {% for carte in cartes %}
-        <div class="card">
-            <img src="{{ carte.image }}" alt="{{ carte.titre }}">
-            <div class="card-content">
-                <h2>{{ carte.titre }}</h2>
-                <p>{{ carte.description }}</p>
-                <p><strong>Catégories :</strong> {{ carte.categories | join(', ') }}</p>
-                <a href="{{ carte.lien }}" target="_blank">Voir le projet</a>
-            </div>
+    <div class="card">
+        <img src="{{ url_for('static/images', filename=carte.image) }}" alt="{{ carte.titre }}">
+        <div class="card-content">
+            <h3>{{ carte.titre }}</h3>
+            <p>{{ carte.description }}</p>
+            {% if carte.categories %}
+                <p>
+                    <strong>Catégories :</strong>
+                    {{ carte.categories | join(', ') }}
+                </p>
+            {% endif %}
+            <a href="{{ url_for('page_projet', projet_id=carte.id) }}" class="btn">Voir plus</a>
+            {% if carte.lien_externe %}
+                <br>
+                <a href="{{ carte.lien_externe }}" class="btn" target="_blank">Lien externe</a>
+            {% endif %}
+        </div>
+    </div>
         </div>
     {% endfor %}
 

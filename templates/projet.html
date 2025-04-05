@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ projet.titre}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>{{ projet.titre }}</h1>
+    <img src="{{ url_for('static', filename=projet.image) }}" alt="{{ projet.titre }}" style="max-width: 400px;">
     <p>{{ projet.description }}</p>
-    <img src="{{ projet.image }}" alt="{{ projet.titre }}">
+    <a href="{{ url_for('index') }}">Retour à l'accueil</a>
+    
     {% if projet.categories %}
         <p><strong>Catégories :</strong> {{ projet.categories | join(', ') }}</p>
     {% endif %}
+
+    {% if projet.lien_externe %}
+        <p><a href="{{ projet.lien_externe }}" target="_blank">Accéder au lien externe</a></p>
+    {% endif %}
+
     
 </body>
 </html>
