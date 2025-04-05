@@ -11,7 +11,7 @@
 
     {% for carte in cartes %}
     <div class="card">
-        <img src="{{ url_for('static', filename=carte.image) }}" alt="{{ carte.titre }}">
+        <img src="{{ url_for('static', filename='images/'+carte.image) }}" alt="{{ carte.titre }}">
         <div class="card-content">
             <h3>{{ carte.titre }}</h3>
             <p>{{ carte.description }}</p>

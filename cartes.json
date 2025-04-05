@@ -27,7 +27,7 @@
         "id": "projet_4",
         "titre": "Simulateurs",
         "description": "Différents simulateurs créés.",
-        "image_url": "./static/images/projectSimulators.jpg",
+        "image": "projectSimulators.jpg",
         "type": "interne",
         "categories": ["javascript", "simulateurs"]
     },
@@ -51,7 +51,7 @@
         "id": "projet_7",
         "titre": "Programmes",
         "description": "Des programmes de musculation.",
-        "image": "projectProgrammes.jpg",
+        "image": "projectProgram.jpg",
         "type": "interne",
         "categories": ["musculation", "programmes"]
     }
