@@ -32,7 +32,7 @@
         "categories": ["javascript", "simulateurs"]
     },
     {
-        "id": "projet_5",
+        "id": "projet_countries",
         "titre": "Flags",
         "description": "Affichage des drapeaux à partir d'une REST API.",
         "image": "projectFlags.jpg",
@@ -54,5 +54,12 @@
         "image": "projectProgram.jpg",
         "type": "interne",
         "categories": ["musculation", "programmes"]
-    }
+    },
+    {
+        "id": "projet_chart",
+        "titre": "Évolution mensuelle",
+        "description": "Affichage d'une courbe dynamique à partir d’un fichier JSON",
+        "image": "projectTalentChance.jpg",
+        "categories": ["Chart.js", "Visualisation", "Statistiques"]
+      }
 ]
