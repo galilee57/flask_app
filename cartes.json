@@ -34,7 +34,7 @@
     {
         "id": "projet_countries",
         "titre": "Flags",
-        "description": "Affichage des drapeaux à partir d'une REST API.",
+        "description": "Affichage des drapeaux REST API.",
         "image": "projectFlags.jpg",
         "type": "interne",
         "categories": ["javascript", "api"]
@@ -42,7 +42,7 @@
     {
         "id": "projet_6",
         "titre": "Exercices",
-        "description": "Des animations basées sur les exercices de muscu.",
+        "description": "Des animations sur les exercices de muscu.",
         "image": "projectExercices.jpg",
         "type": "interne",
         "categories": ["musculation", "exercices"]
@@ -58,7 +58,7 @@
     {
         "id": "projet_chart",
         "titre": "Évolution mensuelle",
-        "description": "Affichage d'une courbe dynamique à partir d’un fichier JSON",
+        "description": "Affichage d'une courbe dynamique depuis JSON",
         "image": "projectTalentChance.jpg",
         "categories": ["Chart.js", "Visualisation", "Statistiques"]
       }
