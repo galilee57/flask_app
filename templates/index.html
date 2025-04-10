@@ -21,12 +21,14 @@
                     {{ carte.categories | join(', ') }}
                 </p>
             {% endif %}
-            <a href="{{ url_for('page_projet', projet_id=carte.id) }}" class="btn">Voir plus</a>
-            {% if carte.lien_externe %}
-                <br>
-                <a href="{{ carte.lien_externe }}" class="btn" target="_blank">Lien externe</a>
-            {% endif %}
         </div>
+        <div class="card-footer">
+                <a href="{{ url_for('page_projet', projet_id=carte.id) }}" class="btn">Voir plus</a>
+        </div>
+        {% if carte.lien_externe %}
+            <br>
+            <a href="{{ carte.lien_externe }}" class="btn" target="_blank">Lien externe</a>
+        {% endif %}   
     </div>
         </div>
     {% endfor %}

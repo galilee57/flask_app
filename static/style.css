@@ -1,5 +1,5 @@
 .card {
-    width: 300px;
+    width: 320px;
     height: 420px;
     background-color: #f9f9f9;
     border: 2px solid #ccc;
@@ -18,7 +18,17 @@
     object-fit: cover;
 }
 .card-content {
-    padding: 5px;
+    width: 280px;               /* Largeur fixe */
+    height: 150px;                 /* Hauteur fixe */
+    overflow: hidden;              /* Cache le contenu qui déborde */
+    text-overflow: ellipsis;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.card-footer {
+    padding-bottom: 10px;
+    text-align: center;
 }
 .btn {
     display: inline-block;
