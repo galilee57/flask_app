@@ -3,7 +3,7 @@
 {% block title %}{{ projet.titre }}{% endblock %}
 
 {% block css %}
-    {% set css_path = 'css/' + projet.id + '.css' %}
+    {% set css_path = 'css/' ~ projet.id ~ '.css' %}
     {% if css_path in css_files %}
         <link rel="stylesheet" href="{{ url_for('static', filename=css_path) }}">
     {% endif %}
@@ -12,13 +12,13 @@
 {% block content %}
     <h1>{{ projet.titre }}</h1>
     <p>{{ projet.description }}</p>
-    <img src="{{ url_for('static', filename='images/'+projet.image) }}" alt="{{ projet.titre }}" style="max-width: 400px;">
+    <img src="{{ url_for('static', filename='images/' + projet.image) }}" alt="{{ projet.titre }}" style="max-width: 400px;">
 
-    {% set custom_template = 'projets/' + projet.id + '.html' %}
+    {% set custom_template = 'projets/' ~ projet.id ~ '.html' %}
     {% if custom_template in templates %}
         {% include custom_template %}
     {% else %}
-        <p><em>Contenu spécifique non fourni.</em></p>
+        <p><em>Contenu spécifique non fourni !</em></p>
     {% endif %}
 
     {% if projet.lien_externe %}
@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block js %}
-    {% set js_path = 'js/' + projet.id + '.js' %}
+    {% set js_path = 'js/' ~ projet.id ~ '.js' %}
     {% if js_path in js_files %}
         <script src="{{ url_for('static', filename=js_path) }}"></script>
     {% endif %}
