@@ -14,3 +14,5 @@ pip install -r requirements.txt
 # 4. Lance le serveur
 
 python app.py
+
+![alt text](image.png)

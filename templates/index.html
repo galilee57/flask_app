@@ -34,7 +34,12 @@
                             </div>
                             <p class="card-text flex-grow-1">{{ carte.description }}</p>
                             {% if carte.categories %}
-                            <p><strong>Catégories :</strong> {{ carte.categories | join(', ') }}</p>
+                                <p><strong>Catégories :</strong></p>
+                                <div class="mb-2">
+                                    {% for cat in carte.categories %}
+                                        <span class="badge bg-secondary me-1">{{ cat }}</span>
+                                    {% endfor %}
+                                </div>
                             {% endif %}
                         </div>
                         <div class="card-footer d-grid gap-2">

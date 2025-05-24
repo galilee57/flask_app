@@ -18,8 +18,8 @@
     object-fit: cover;
 }
 .card-content {
-    width: 280px;               /* Largeur fixe */
-    height: 150px;                 /* Hauteur fixe */
+    width: 300px;               /* Largeur fixe */
+    height: 120px;                 /* Hauteur fixe */
     overflow: hidden;              /* Cache le contenu qui déborde */
     text-overflow: ellipsis;
     text-align: center;

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ projet.titre }}{% endblock %}
+
+{% block content %}
+<h1>{{ projet.nom }}</h1>
+<p>Détails du projet {{ projet.id }}</p>
+<h2>Liste des pays</h2>
+<button id="charger">Charger les pays</button>
+<ul id="liste-pays"></ul>
+{% endblock %}
+
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="projet_countries.css">
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="projet_countries.js"></script>
+{% endblock %}
