@@ -8,7 +8,7 @@
         "categories": ["musculation", "fitness"]
     },
     {
-        "id": "projet_2",
+        "id": "projet_finance",
         "titre": "Finance",
         "description": "Modèle de prédiction basé sur un modèle ARIMA.",
         "image": "projectFinance.jpg",
@@ -16,7 +16,7 @@
         "categories": ["finance", "prédiction"]
     },
     {
-        "id": "projet_3",
+        "id": "projet_animation",
         "titre": "Animation simple",
         "description": "Une animation avec Animate.js.",
         "image": "projectJS.jpg",
@@ -24,7 +24,7 @@
         "categories": ["javascript", "animation"]
     },
     {
-        "id": "projet_4",
+        "id": "projet_simulators",
         "titre": "Simulateurs",
         "description": "Différents simulateurs créés.",
         "image": "projectSimulators.jpg",
@@ -40,7 +40,7 @@
         "categories": ["javascript", "api"]
     },
     {
-        "id": "projet_6",
+        "id": "projet_todolist",
         "titre": "Todo List",
         "description": "Une ToDo List avec changement du fond d'écran.",
         "image": "projectToDoList.jpg",
@@ -48,12 +48,12 @@
         "categories": ["javascript"]
     },
     {
-        "id": "projet_7",
-        "titre": "Programmes",
-        "description": "Des programmes de musculation.",
-        "image": "projectProgram.jpg",
-        "type": "interne",
-        "categories": ["musculation", "programmes"]
+        "id": "projet_api",
+        "titre": "Arduino API",
+        "description": "Réception de données depuis une API Arduino.",
+        "image": "projectArduino.jpg",
+        "type": 4,
+        "categories": ["api", "iot"]
     },
     {
         "id": "projet_chart",

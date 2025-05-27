@@ -12,10 +12,10 @@
 
 {% block css %}
 <!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="projet_countries.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/projet_countries.css') }}">
 {% endblock %}
 
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="projet_countries.js"></script>
+<script src="{{ url_for('static', filename='js/projet_countries.js') }}"></script>
 {% endblock %}

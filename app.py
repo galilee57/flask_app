@@ -5,7 +5,8 @@ import json
 app = Flask(__name__)
 
 # Charger les projets depuis cartes.json
-with open("cartes.json", encoding="utf-8") as f:
+basedir = os.path.dirname(__file__)
+with open(os.path.join(basedir, "cartes.json"), encoding="utf-8") as f:
     cartes = json.load(f)
 
 @app.route('/')
@@ -18,8 +19,8 @@ def page_projet(projet_id):
     if not projet:
         abort(404)
 
-    # Exemple : templates/projets/projet_chart/projet.html
-    template_path = f"projets/{projet_id}/projet.html"
+    # Exemple : templates/projets/projet_chart.html
+    template_path = f"projets/{projet_id}.html"
 
     return render_template(template_path, projet=projet)
 
