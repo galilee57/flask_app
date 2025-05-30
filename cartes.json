@@ -16,10 +16,10 @@
         "categories": ["finance", "prédiction"]
     },
     {
-        "id": "projet_animation",
-        "titre": "Animation simple",
-        "description": "Une animation avec Animate.js.",
-        "image": "projectJS.jpg",
+        "id": "projet_memory",
+        "titre": "Jeu de Memory avec JavaScript",
+        "description": "Formation Domestika : coding d'un jeu de memory",
+        "image": "projectMemory.jpg",
         "type": 3,
         "categories": ["javascript", "animation"]
     },
