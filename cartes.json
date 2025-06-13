@@ -8,12 +8,12 @@
         "categories": ["musculation", "fitness"]
     },
     {
-        "id": "projet_finance",
-        "titre": "Finance",
-        "description": "Modèle de prédiction basé sur un modèle ARIMA.",
-        "image": "projectFinance.jpg",
-        "type": 5,
-        "categories": ["finance", "prédiction"]
+        "id": "projet_phaser",
+        "titre": "Game avec Phaser",
+        "description": "Un jeu interactif développé avec le framework Phaser.",
+        "image": "projectPhaser.png",
+        "type": 3,
+        "categories": ["javascript", "jeu"]
     },
     {
         "id": "projet_memory",

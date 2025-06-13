@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ projet.titre }}{% endblock %}
+
+{% block content %}
+<h1>{{ projet.nom }}</h1>
+<p>Détails du projet {{ projet.id }}</p>
+<h2>Mon premier Jeu avec Phaser !</h2>
+{% endblock %}
+
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/projet_phaser.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+<script src="{{ url_for('static', filename='js/projet_phaser.js') }}"></script>
+{% endblock %}

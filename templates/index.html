@@ -15,13 +15,14 @@
     <div class="container mt-5">
         <h1 class="text-center text-primary mb-4">MES PROJETS</h1>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-4">
+
                 {% for carte in cartes %}
-                <div class="col">
-                    <div class="card h-100 d-flex flex-column p-3 text-center" style="min-width: 200px;">
-                        <img src="{{ url_for('static', filename='images/' + carte.image) }}" class="card-img-top" alt="{{ carte.titre }}">
+                <div class="col d-flex">
+                    <div class="card d-flex flex-fill flex-column p-3 g-4 text-center h-100 w-200">
+                        <img src="{{ url_for('static', filename='images/' + carte.image) }}" class="card-img-top img-fluid" alt="{{ carte.titre }}">
                         <div class="card-body flex-grow-1 d-flex flex-column">
-                            <h5 class="card-title">{{ carte.titre }}</h5>
+                            <h5 class="card-title fs-5 fs-md-6">{{ carte.titre }}</h5>
                             <div class="mb-2">
                                 {%set note = carte.type  | int %}
                                 {% for i in range(1, 6) %}
@@ -32,7 +33,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <p class="card-text flex-grow-1">{{ carte.description }}</p>
+                            <p class="card-text fs-6">{{ carte.description }}</p>
                             {% if carte.categories %}
                                 <p><strong>Catégories :</strong></p>
                                 <div class="mb-2">
