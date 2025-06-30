@@ -14,7 +14,14 @@ var config = {
         preload: preload,
         create: create,
         update: update
-    }
+    },
+    plugins: {
+        scene: [{
+            key: 'rexVirtualJoystick',
+            plugin: rexvirtualjoystickplugin,
+            mapping: 'joystick'
+        }]
+    },
 };
 
 let player;
@@ -85,6 +92,21 @@ function create ()
     //  Input Events
     cursors = this.input.keyboard.createCursorKeys();
 
+    // Détection mobile (iPad, iPhone, Android)
+    const isMobile = this.sys.game.device.os.android || this.sys.game.device.os.iOS;
+
+    if (isMobile) {
+        this.joyStick = this.joystick.add(this, {
+            x: 100,
+            y: 500,
+            radius: 50,
+            base: this.add.circle(0, 0, 50, 0x888888),
+            thumb: this.add.circle(0, 0, 25, 0xcccccc),
+        });
+
+        this.joyStickCursors = this.joyStick.createCursorKeys();
+    }
+
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
     stars = this.physics.add.group({
         key: 'star',
@@ -117,32 +139,36 @@ function create ()
 
 function update ()
 {
+    const speed = 160;
+
     if (gameOver)
     {
         return;
     }
 
-    if (cursors.left.isDown)
-    {
-        player.setVelocityX(-160);
+    // Initialisation des vitesses
+    player.setVelocityX(0);
 
+    // Détection mobile : joystick actif
+    const isUsingJoystick = typeof joyStickCursors !== 'undefined';
+
+    const left = isUsingJoystick ? joyStickCursors.left.isDown : cursors.left.isDown;
+    const right = isUsingJoystick ? joyStickCursors.right.isDown : cursors.right.isDown;
+    const up = isUsingJoystick ? joyStickCursors.up.isDown : cursors.up.isDown;
+
+    if (left) {
+        player.setVelocityX(-speed);
         player.anims.play('left', true);
     }
-    else if (cursors.right.isDown)
-    {
-        player.setVelocityX(160);
-
+    else if (right) {
+        player.setVelocityX(speed);
         player.anims.play('right', true);
     }
-    else
-    {
-        player.setVelocityX(0);
-
+    else {
         player.anims.play('turn');
     }
 
-    if (cursors.up.isDown && player.body.touching.down)
-    {
+    if (up && player.body.touching.down) {
         player.setVelocityY(-330);
     }
 }

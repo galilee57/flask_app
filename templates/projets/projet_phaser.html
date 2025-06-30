@@ -14,6 +14,10 @@
 {% endblock %}
 
 {% block js %}
+<!-- Phaser-->
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+<!-- Plugins pour pad de contrôle-->
+<script src="https://cdn.jsdelivr.net/npm/phaser3-rex-plugins/dist/rexvirtualjoystickplugin.min.js"></script>
+<!-- Appel du script js spécifique au projet-->
 <script src="{{ url_for('static', filename='js/projet_phaser.js') }}"></script>
 {% endblock %}

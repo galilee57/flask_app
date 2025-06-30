@@ -3,17 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const liste = document.getElementById("liste-pays");
 
       bouton.addEventListener("click", () => {
-        axios.get("https://restcountries.com/v3.1/all")
+        axios.get("https://restcountries.com/v3.1/all?fields=name,capital,population,flags")
           .then(response => {
             const data = response.data;
             liste.innerHTML = "";
-            data.slice(0, 50).forEach(pays => {
-              const nom = pays.name.common;
-              const capitale = pays.capital ? pays.capital[0] : "N/A";
-              const population = pays.population.toLocaleString();
+
+            shuffle(data).slice(0, 5).forEach(country => {
+              const name = country.name.common;
+              const capitale = country.capital ? country.capital[0] : "N/A";
+              const population = country.population.toLocaleString();
+              const flagUrl = country.flags.png;
+
+              const img = document.createElement("img");
+              img.src = flagUrl;
+              img.alt = `Drapeau de ${name}`;
+              img.style.width = "50px";
 
               const li = document.createElement("li");
-              li.textContent = `${nom} — Capitale : ${capitale}, Population : ${population}`;
+              li.textContent = `${name} — Capitale : ${capitale}, Population : ${population}`;
+              li.prepend(img);
               liste.appendChild(li);
             });
           })
@@ -24,3 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+// Function to shuffle an array
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
