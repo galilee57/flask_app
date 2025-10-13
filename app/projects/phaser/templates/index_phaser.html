@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}PHASER GAME{% endblock %}
+
+{% block content %}
+<h1>SIMPLE PHASER GAME</h1>
+<h4>My first game developped with Phaser !</h4>
+<p>Use the arrow keys to move the player and collect stars avoiding bombs!</p>
+{% endblock %}
+
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="{{ url_for('phaser.static', filename='css/projet_phaser.css') }}">
+{% endblock %}
+
+{% block js %}
+<!-- Globals -->
+<script defer src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/phaser3-rex-plugins/dist/rexvirtualjoystickplugin.min.js"></script>
+
+<script defer src="{{ url_for('phaser.static', filename='js/projet_phaser.js') }}"></script>
+{% endblock %}

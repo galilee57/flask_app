@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}COUNTRIES{% endblock %}
+
+{% block content %}
+<h1>🎌 COUNTRIES GAME</h1>
+<h4>Drag and drop each card to the correct country to score points!</h4>
+<button id="loadButton" class="btn btn-primary">Generate</button>
+<h2 id="score">Score: 0</h2>
+<div class="container">
+    <div class="cards" id="cards"></div>
+    <div class="targets" id="targets"></div>
+</div>
+{% endblock %}
+
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="{{ url_for('countries.static', filename='css/projet_countries.css') }}">
+{% endblock %}
+
+{% block js %}
+<script>
+    let score = 0;
+
+    async function initGame() {
+        const response = await fetch('/projects/countries/get_countries');
+        const countries = await response.json();
+
+        const cardsContainer = document.getElementById('cards');
+        const targetsContainer = document.getElementById('targets');
+
+        cardsContainer.innerHTML = '';
+        targetsContainer.innerHTML = '';
+
+        const shuffled = [...countries].sort(() => 0.5 - Math.random()).slice(0, 5);
+
+        shuffled.forEach(country => {
+            // Create card
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.draggable = true;
+            card.dataset.country = country.name;
+            card.innerHTML = `
+                <img src="${country.flag}" width="80"><br>
+                <strong>Capitale :</strong> ${country.capital}<br>
+                <strong>Population :</strong> ${country.population.toLocaleString()}<br>
+                `;
+            card.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', country.name);
+            });
+            cardsContainer.appendChild(card);
+        });
+        countries.forEach(country => {
+            // Create target
+            const zone = document.createElement('div');
+            zone.className = 'target';
+            zone.dataset.country = country.name;
+            zone.textContent = country.name;
+
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggedCountry = e.dataTransfer.getData('text/plain');
+                if (draggedCountry === country.name) {
+                    score += 1;
+                    document.getElementById('score').innerText = `Score: ${score}`;
+                    const card = document.querySelector(`.card[data-country='${draggedCountry}']`);
+                    if (card) card.remove();
+                    zone.style.backgroundColor = '#d4edda'; // Green for correct
+                } else {
+                    zone.style.backgroundColor = '#f8d7da'; // Red for incorrect
+                }
+            });
+            targetsContainer.appendChild(zone);
+        });
+    }
+
+    const loadButton = document.getElementById('loadButton');
+    loadButton.addEventListener("click", () => {
+        initGame();
+        score = 0;
+        document.getElementById('score').innerText = `Score: ${score}`;
+    });
+</script>
+{% endblock %}

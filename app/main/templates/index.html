@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My projects</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">MY PROJECTS</h1>
+
+    <!-- Grille des cartes (remplie en JS) -->
+    <div id="cartes-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-4"></div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  const IMAGE_BASE = "{{ url_for('static', filename='images/') }}";
+
+  function starsHtml(note) {
+    const n = parseInt(note || 0, 10);
+    let s = "";
+    for (let i = 1; i <= 5; i++) {
+      s += (i <= n) ? '<span class="text-warning">&#9733;</span>'
+                    : '<span class="text-secondary">&#9734;</span>';
+    }
+    return s;
+  }
+
+  function badgeList(categories) {
+    if (!Array.isArray(categories) || categories.length === 0) return "";
+    return `
+      <p class="mb-1"><strong>Catégories :</strong></p>
+      <div class="mb-2">
+        ${categories.map(c => `<span class="badge bg-secondary me-1">${c}</span>`).join("")}
+      </div>`;
+  }
+
+  // ---- Carte avec bouton ----
+  function carteCard(c) {
+  const imgSrc = IMAGE_BASE + (c.image || "");
+  const titre = c.titre || "";
+  const desc  = c.description || "";
+  const note  = c.type || 0;
+  const projetUrl = `/projects/${c.id}`;
+
+  return `
+    <div class="col d-flex"> <!-- important: d-flex pour étirer la colonne -->
+      <div class="card project-card flex-fill text-center h-100 d-flex flex-column">
+        <img src="${imgSrc}" class="card-img-top project-card-img" alt="${titre}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title mb-2">${titre}</h5>
+          <div class="mb-2">${starsHtml(note)}</div>
+          <p class="card-text small text-body-secondary">${desc}</p>
+          ${badgeList(c.categories)}
+        </div>
+        <div class="card-footer bg-transparent border-0 mt-auto">
+          <div class="d-grid">
+            <button class="btn btn-primary"
+                    onclick="window.location.href='${projetUrl}'">
+              See more
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+  // ---- Utilise bien carteCard(c) ici ----
+  async function loadCartes() {
+    try {
+      const res = await fetch("/data/cartes", { headers: { "Accept": "application/json" }});
+      if (!res.ok) throw new Error(`Erreur HTTP ${res.status}`);
+      const cartes = await res.json();
+
+      const grid = document.getElementById("cartes-grid");
+      grid.innerHTML = cartes.map(carteCard).join(""); // <-- clé
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  loadCartes();
+</script>
+</body>
+</html>

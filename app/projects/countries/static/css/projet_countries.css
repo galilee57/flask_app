@@ -1,0 +1,58 @@
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.target {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 180px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.target.correct {
+    background-color: #c8f7c5;
+    border-color: #4caf50;
+}
+
+.target.wrong {
+    background-color: #ffcdd2;
+    border-color: #e53935;
+}
+
+.cards, .targets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card, .target {
+    flex: 1 1 180px;
+    max-width: 220px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.target.correct {
+  animation: bounce 0.4s ease;
+}
+.card {
+    cursor: grab;
+}
+.card:active {
+    cursor: grabbing;
+}

@@ -1,18 +1,17 @@
-# 1. Clone le dépôt
-
-git clone https://github.com/ton-utilisateur/nom-du-projet.git
-cd nom-du-projet
-
-# 2. Activer l'environnement virtuel
+# Environnement de développement : nenv
 
 source nenv/bin/activate
+(ou canda activate nenv)
 
-# 3. Installer les dépendances
+# Lancement de l'appli en mode debuger
 
-pip install -r requirements.txt
+flask --app wsgi --debug run
 
-# 4. Lance le serveur
+# Structure de l'application
 
-python app.py
+app : init.py contents blueprints registrations
+blueprints basic folder are defined with a generic path '/project/<project_name>'
 
-![alt text](image.png)
+Each folder contents its own templates and static files.
+init.py defines the folder like a blueprint and imports routes.
+routes.py defines routes from the folder.

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>MEMORY GAME</h1>
+
+ <div>
+    <div id="memory-game" class="container">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="game-info">
+                    <h2>Here is the game developed with JavaScript</h2>
+                    <p>Find pairs of cards by clicking on them. Good luck!</p>
+                    <button class="btn btn-primary" id="start-button">Start Game</button>
+                    <button class="btn btn-primary" id="reset-button">Reset Game</button>
+                    <div id="game-status"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="timer"></div>
+            </div>
+        </div>
+        <div class="grid-container" id="game-board">
+            <!-- Les cartes seront insérées ici -->
+        </div>
+    </div>  
+</div>
+
+{% endblock %}
+
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="{{ url_for('memory.static', filename='css/projet_memory.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('memory.static', filename='js/projet_memory.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Ma ToDo List - Test{% endblock %}
+
+{% block css %}
+    <!-- Bootstrap CSS (en premier) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- CSS du projet (après, pour surcharger) -->
+    <link rel="stylesheet" href="{{ url_for('todolist.static', filename='css/projet_todolist.css') }}">
+{% endblock %}
+
+{% block content %}
+  
+  <h1>Test API ToDo List</h1>
+  <h3>Create a task (POST /todolist)</h3>
+  <div class="container-fluid d-flex flex-column align-items-center mt-5" style="max-width: 900px;">
+  <h3 class="mb-4 text-center">List of tasks (GET /todolist)</h3>
+
+  <!-- 🟩 Formulaire aligné -->
+  <form id="form" class="mb-4 w-100">
+    <input 
+      type="text" 
+      id="task" 
+      class="form-control mb-2" 
+      placeholder="Enter a new task..." 
+      required
+    />
+    <button type="submit" class="btn btn-primary w-100">Add</button>
+  </form>
+
+  <!-- 🟨 Liste des tâches -->
+   <h6 class="mb-4 text-center">Click on a task to delete it, click on the icon to toggle its status.</h6>
+   <ul id="task-list" class="list-group w-100 shadow-sm"></ul>
+</div>
+{% endblock %}
+
+{% block js %}
+  <script>
+
+    const BASE_URL = "http://127.0.0.1:5000/projects/todolist/api/todolist";
+    // POST API to create a new task
+    document.getElementById("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const task = document.getElementById("task").value;
+      const res = await fetch(BASE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task, done: false }),
+      });
+      const data = await res.json();
+      console.log(data);
+      alert("Réponse du serveur : " + JSON.stringify(data));
+
+      document.getElementById("task").value = ""; // Clear input
+      fetchTasks(); // Refresh the task list
+    });
+  
+    // GET API to fetch and display tasks
+    async function fetchTasks() {
+      const res = await fetch(BASE_URL);
+      const data = await res.json();
+      
+      const taskList = document.getElementById("task-list");
+      taskList.innerHTML = ""; // Clear existing tasks
+      data.forEach(task => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+        // Raw structured in 2 columns
+        const row = document.createElement("div");
+        row.className = "d-flex justify-content-between align-items-center w-100";
+
+        // Column 1: Icon for done status toggle
+        const colIcon = document.createElement("div");
+        const icon = document.createElement("span");
+        icon.style.cursor = "pointer";
+        icon.textContent = task.done ? "✅" : "🔶";
+        colIcon.appendChild(icon);
+        row.appendChild(colIcon);
+        icon.addEventListener("click", (e) => {
+          e.stopPropagation(); // Prevent triggering the delete event
+          updateTask(task.id, { done: !task.done });
+        });
+
+        // Column 2: Task Text
+        const colText = document.createElement("div");
+        colText.textContent = task.text;
+        row.appendChild(colText);
+
+        li.appendChild(row);
+
+        taskList.appendChild(li);
+        li.addEventListener("click", () => {
+          const confirmed = confirm("Do you really want to delete this task ?");
+          if (confirmed) {
+            deleteTask(task.id);
+          }
+        });
+      });
+    }
+
+    // DELETE API to remove a task
+    async function deleteTask(taskId) {
+      const res = await fetch(`${BASE_URL}/${taskId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        alert("Tâche supprimée avec succès.");
+        fetchTasks(); // Refresh the task list
+      } else {
+        const data = await res.json();
+        alert("Erreur lors de la suppression de la tâche : " + JSON.stringify(data));
+      }
+      fetchTasks(); // Refresh the task list
+    }
+
+    // PUT API to update a task
+    async function updateTask(taskId, updatedData) {
+      const res = await fetch(`${BASE_URL}/${taskId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      });
+      if (res.ok) {
+        alert("Tâche mise à jour avec succès.");
+        fetchTasks(); // Refresh the task list
+      } else {
+        const data = await res.json();
+        alert("Erreur lors de la mise à jour de la tâche : " + JSON.stringify(data));
+      }
+    }
+
+    // Fetch tasks on page load
+    fetchTasks();
+  </script>
+{% endblock %}
