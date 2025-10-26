@@ -36,8 +36,13 @@
 
 {% block js %}
   <script>
-
-    const BASE_URL = "http://127.0.0.1:5000/projects/todolist/api/todolist";
+    // Construit l’URL complète de l’API selon APP_ENV (dev/prod)
+    // En dev: config['API_BASE_URL'] = "http://127.0.0.1:5000"
+    // En prod: config['API_BASE_URL'] = ""
+    window.API_BASE_URL = "{{ (config['API_BASE_URL'] or '') ~ '/api/todolist' }}";
+  </script>
+  <script>
+    const BASE_URL = window.API_BASE_URL;
     // POST API to create a new task
     document.getElementById("form").addEventListener("submit", async (e) => {
       e.preventDefault();

@@ -1,6 +1,170 @@
 {% extends "base.html" %}
 
-<div>
-    <h2>Évolution des données</h2>
-    <canvas id="monChart" width="600" height="300"></canvas>
-</div>
+{% block css %}
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; background: #fafafa; }
+  form { margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+  input, select { margin: 0.25rem; padding: 0.25rem; }
+  button { padding: 0.4rem 0.8rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  button:hover { background: #0056b3; }
+  h2 { margin-top: 2rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Diagramme de Marey</h1>
+
+<!-- FORMULAIRE STATIONS -->
+<form id="form-station">
+  <h2>Ajouter une station</h2>
+  <input type="text" id="st-name" placeholder="Nom (ex: Lille)" required>
+  <input type="number" id="st-km" placeholder="Km (ex: 0, 230)" step="0.1" required>
+  <button type="submit">Ajouter</button>
+</form>
+
+<!-- FORMULAIRE TRAINS -->
+<form id="form-train">
+  <h2>Ajouter un train</h2>
+  <input type="text" id="tr-name" placeholder="Nom du train (ex: TGV001)" required>
+  <input type="color" id="tr-color" value="#007bff">
+  <input type="date" id="tr-date" required><br>
+  <label>Départ :</label>
+  <select id="tr-station-depart" required></select>
+  <input type="time" id="tr-heure-depart" required><br>
+  <label>Arrivée :</label>
+  <select id="tr-station-arrivee" required></select>
+  <input type="time" id="tr-heure-arrivee" required>
+  <button type="submit">Ajouter</button>
+</form>
+
+<!-- DIAGRAMME -->
+<h2>Diagramme</h2>
+<canvas id="mareyChart" width="900" height="450"></canvas>
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+
+<script>
+  const API = "/projects/charts/api";
+  let chart;
+
+  // --------- Helpers dates ----------
+  function toLocalISO(dateObj) {
+    // Renvoie YYYY-MM-DD en tenant compte du fuseau local
+    const d = new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function normalizeDateInput(inputEl) {
+    // 1) Si le navigateur fournit valueAsDate, on l’utilise (précis)
+    if (inputEl.valueAsDate instanceof Date) {
+      return toLocalISO(inputEl.valueAsDate);
+    }
+    // 2) Sinon, on tente JJ/MM/AAAA -> AAAA-MM-JJ
+    const raw = (inputEl.value || "").trim();
+    const mFR = raw.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (mFR) return `${mFR[3]}-${mFR[2]}-${mFR[1]}`;
+    // 3) Déjà ISO ?
+    return raw;
+  }
+
+  // --------- Fetch util ----------
+  async function api(url, method='GET', data=null) {
+    const opts = { method, headers: { "Content-Type": "application/json" } };
+    if (data) opts.body = JSON.stringify(data);
+    const resp = await fetch(url, opts);
+    if (!resp.ok) {
+      let msg = `HTTP ${resp.status}`;
+      try {
+        const j = await resp.json();
+        msg = j.message || j.error || JSON.stringify(j);
+      } catch (_) {}
+      throw new Error(msg);
+    }
+    return resp.status === 204 ? null : resp.json();
+  }
+
+  // --------- Stations ----------
+  async function refreshStations() {
+    const data = await api(`${API}/stations`);
+    const options = (data.items || []).map(
+      s => `<option value="${s.id}">${s.name} (${s.km} km)</option>`
+    );
+    document.getElementById("tr-station-depart").innerHTML = options.join("");
+    document.getElementById("tr-station-arrivee").innerHTML = options.join("");
+  }
+
+  document.getElementById("form-station").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+      await api(`${API}/stations`, "POST", {
+        name: document.getElementById("st-name").value,
+        km: parseFloat(document.getElementById("st-km").value)
+      });
+      await refreshStations();
+      alert("Station ajoutée !");
+      e.target.reset();
+      await refreshChart();
+    } catch (err) {
+      alert("Erreur: " + err.message);
+    }
+  });
+
+  // --------- Trains ----------
+  document.getElementById("form-train").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+      const dateIso = normalizeDateInput(document.getElementById("tr-date"));
+      await api(`${API}/trains`, "POST", {
+        name: document.getElementById("tr-name").value,
+        color: document.getElementById("tr-color").value,
+        date: dateIso, // <-- ISO garanti
+        station_depart_id: parseInt(document.getElementById("tr-station-depart").value),
+        station_arrivee_id: parseInt(document.getElementById("tr-station-arrivee").value),
+        heure_depart: document.getElementById("tr-heure-depart").value,   // "HH:MM"
+        heure_arrivee: document.getElementById("tr-heure-arrivee").value  // "HH:MM"
+      });
+      alert("Train ajouté !");
+      e.target.reset();
+      // Remet la date du jour après reset (sinon vide)
+      document.getElementById("tr-date").value = toLocalISO(new Date());
+      await refreshChart();
+    } catch (err) {
+      alert("Erreur: " + err.message);
+    }
+  });
+
+  // --------- Chart ----------
+  async function refreshChart() {
+    // Utilise la date saisie si dispo, sinon aujourd’hui
+    const chosenISO = normalizeDateInput(document.getElementById("tr-date")) || toLocalISO(new Date());
+    const payload = await api(`${API}/marey?date=${encodeURIComponent(chosenISO)}`);
+    const ctx = document.getElementById("mareyChart").getContext("2d");
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: "scatter",
+      data: { datasets: payload.datasets },
+      options: {
+        parsing: false,
+        scales: {
+          x: { type: "time", time: { unit: "minute" }, title: { display: true, text: "Heure" } },
+          y: { title: { display: true, text: "Distance (km)" } }
+        },
+        plugins: { legend: { position: "bottom" } },
+        elements: { line: { tension: 0 }, point: { radius: 3 } }
+      }
+    });
+  }
+
+  // --------- Init ----------
+  (async function init() {
+    // Définit la date du jour en ISO local
+    document.getElementById("tr-date").value = toLocalISO(new Date());
+    await refreshStations();
+    await refreshChart();
+  })();
+</script>
+{% endblock %}

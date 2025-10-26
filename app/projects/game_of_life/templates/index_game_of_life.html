@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}GAME OF LIFE{% endblock %}
+
+{% block content %}
+<h1>🕹️ GAME OF LIFE</h1>
+<h4>Choose a size for the grid</h4>
+
+<div>
+  <button id="start" class="btn btn-primary mb-3">Start Game</button>
+  <button id="stop" class="btn btn-danger mb-3">Stop Game</button>
+  <button id="reset" class="btn btn-secondary mb-3">Reset Game</button>
+</div>
+<div id="grid-container" class="mb-3"></div>
+{% endblock %}
+
+{% block css %}
+<!-- Corriger le blueprint pour le static -->
+<link rel="stylesheet" href="{{ url_for('game_of_life.static', filename='css/projet_game_of_life.css') }}">
+{% endblock %}
+
+{% block js %}
+<script>
+  // Base URL dynamique du blueprint (s’adapte si tu changes url_prefix)
+  const BASE_URL = "{{ url_for('game_of_life.home') }}"; // ex: "/projects/game_of_life/"
+
+  let running = false;
+  let intervalId = null;
+
+  async function fetchJson(url, options) {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  function drawGrid(grid) {
+    const gridDiv = document.getElementById("grid-container");
+    let html = "<table>";
+    for (const row of grid) {
+      html += "<tr>";
+      for (const cell of row) {
+        html += `<td class="${cell ? 'alive' : ''}"></td>`;
+      }
+      html += "</tr>";
+    }
+    html += "</table>";
+    gridDiv.innerHTML = html;
+  }
+
+  async function updateGrid() {
+    // Les routes renvoient { grid: [...] }
+    const data = await fetchJson(`${BASE_URL}next`);
+    drawGrid(data.grid);
+  }
+
+  document.getElementById('start').addEventListener('click', () => {
+    if (!running) {
+      running = true;
+      intervalId = setInterval(updateGrid, 500);
+    }
+  });
+
+  document.getElementById('stop').addEventListener('click', () => {
+    running = false;
+    if (intervalId) clearInterval(intervalId);
+    intervalId = null;
+  });
+
+  document.getElementById('reset').addEventListener('click', async () => {
+    running = false;
+    if (intervalId) clearInterval(intervalId);
+    intervalId = null;
+
+    // reset est en POST si ton blueprint a @bp.post('/reset')
+    await fetchJson(`${BASE_URL}reset`, { method: 'POST' });
+    const data = await fetchJson(`${BASE_URL}state`);
+    drawGrid(data.grid);
+  });
+
+  window.onload = async () => {
+    const data = await fetchJson(`${BASE_URL}state`);
+    drawGrid(data.grid);
+  };
+</script>
+{% endblock %}

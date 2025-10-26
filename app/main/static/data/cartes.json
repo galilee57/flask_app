@@ -24,10 +24,10 @@
         "categories": ["javascript", "animation"]
     },
     {
-        "id": "simulators",
-        "titre": "Simulateurs",
-        "description": "Différents simulateurs créés.",
-        "image": "projectSimulators.jpg",
+        "id": "game_of_life",
+        "titre": "Game of Life",
+        "description": "Automate cellulaire de Conway",
+        "image": "projectGameOfLife.png",
         "type": 3,
         "categories": ["javascript", "simulateurs"]
     },
@@ -57,11 +57,11 @@
     },
     {
         "id": "charts",
-        "titre": "Évolution mensuelle",
-        "description": "Affichage d'une courbe dynamique depuis JSON",
-        "image": "projectTalentChance.jpg",
-        "type": 2,
-        "categories": ["Chart.js", "Visualisation", "Statistiques"],
+        "titre": "Marey Diagram",
+        "description": "Gestion d'une base pour affichage de trains",
+        "image": "projectMarey.jpg",
+        "type": 3,
+        "categories": ["D3.js", "SQLAlchemy", "javascript"],
         "projetUrl": "/projects/charts/"
       }
 ]

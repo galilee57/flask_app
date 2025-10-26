@@ -1,0 +1,4 @@
+body { font-family: Arial, sans-serif; text-align: center; }
+    table { border-collapse: collapse; margin: 20px auto; }
+    td { width: 15px; height: 15px; border: 1px solid #ccc; }
+    .alive { background-color: black; }
