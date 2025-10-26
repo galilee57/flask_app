@@ -1,1 +1,17 @@
 .venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# venv
+.venv/
+venv/
+
+# Flask runtime
+instance/
+*.db
+
+# OS/IDE
+.DS_Store
+.vscode/
