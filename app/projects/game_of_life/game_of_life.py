@@ -1,5 +1,8 @@
 import numpy as np
 
+# TODO : Ajouter une fonctionnalité pour sauvegarder et charger des configurations spécifiques.
+# TODO : add colors for live cells
+
 class GameOfLife:
     def __init__(self, rows, cols):
         self.rows = rows

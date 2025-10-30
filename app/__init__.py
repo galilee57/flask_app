@@ -1,17 +1,28 @@
 from flask import Flask
 from app.extensions import db, migrate
-from app.config import get_config
+from app.config import get_config, LOGS_DIR
+from pathlib import Path
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-def create_app():
-    app = Flask(__name__, template_folder="main/templates", static_folder="main/static")
+def create_app(config_name:str | None = None) -> Flask:
+    app = Flask(__name__, 
+                template_folder="main/templates", static_folder="main/static",
+                instance_relative_config=True
+                )
 
-    app.config.from_mapping(
-        SQLALCHEMY_DATABASE_URI="sqlite:///charts.db",
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,   # Pour désactiver le warning de SQLAlchemy 
-    )
+    # 1) Charger la config (inclut la DB)
+    if config_name is None:
+        config_name = os.getenv("FLASK_CONFIG", "production")
+
+    from .config import DevConfig, ProdConfig
+    cfg_map = {
+        "development": DevConfig,
+        "production": ProdConfig
+    }
+
+    app.config.from_object(cfg_map[config_name])
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -45,28 +56,18 @@ def create_app():
     from .projects.game_of_life import bp as game_of_life_bp
     app.register_blueprint(game_of_life_bp, url_prefix="/projects/game_of_life")
 
-    # --- Configuration des logs ---
-    configure_logging(app)
+    from .projects.game_of_life_3d import bp as game_of_life_3d_bp
+    app.register_blueprint(game_of_life_3d_bp, url_prefix="/projects/game_of_life_3d")
 
-    app.logger.info(f"Application démarrée en mode {os.getenv('APP_ENV', 'prod')}")
-
-    return app
-
-def configure_logging(app):
-    """Configure le logger Flask"""
-    # Niveau minimal de logs (ex: DEBUG, INFO, WARNING, ERROR)
+    # 4) Logging avec chemin absolu
     app.logger.setLevel(logging.INFO)
-
-    # Évite de dupliquer les logs en cas de reload
     if not app.logger.handlers:
-        # Crée un dossier logs s'il n'existe pas
-        os.makedirs("logs", exist_ok=True)
-
-        # Fichier rotatif (évite les fichiers trop gros)
-        file_handler = RotatingFileHandler("logs/app.log", maxBytes=100000, backupCount=3)
-        file_handler.setFormatter(logging.Formatter(
-            "%(asctime)s [%(levelname)s] in %(module)s: %(message)s"
-        ))
+        LOGS_DIR.mkdir(parents=True, exist_ok=True)
+        file_handler = RotatingFileHandler(str(LOGS_DIR / "app.log"), maxBytes=100_000, backupCount=3)
+        file_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] in %(module)s: %(message)s"))
         app.logger.addHandler(file_handler)
 
-        app.logger.info("Logger configuré avec succès 🎯")
+    app.logger.info(f"Application démarrée en mode {os.getenv('APP_ENV', 'prod')}")
+    
+    return app
+

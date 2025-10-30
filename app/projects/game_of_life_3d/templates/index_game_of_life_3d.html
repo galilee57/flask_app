@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}GAME OF LIFE{% endblock %}
+
+{% block content %}
+<h1>🕹️ GAME OF LIFE 3D</h1>
+<h4>Choose a size for the grid</h4>
+
+<div class="mb-3">
+  <button id="start" class="btn btn-primary mb-3">Start Game</button>
+  <button id="stop"  class="btn btn-danger  mb-3">Stop Game</button>
+  <button id="step"  class="btn btn-info    mb-3">Step</button>
+  <button id="reset" class="btn btn-secondary mb-3">Reset Game</button>
+  <span id="info" class="ms-2"></span>
+</div>
+
+<!-- conteneur 3D -->
+<div id="app" class="mb-3" style="width:100%; height:70vh;"></div>
+{% endblock %}
+
+{% block css %}
+<!-- Blueprint correct pour le static -->
+<link rel="stylesheet" href="{{ url_for('game_of_life_3d.static', filename='css/projet_game_of_life_3d.css') }}">
+{% endblock %}
+
+{% block js %}
+<!-- UMD global THREE + OrbitControls (non-module) -->
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  // ex: "/projects/game_of_life_3d/"
+  const BASE = "{{ url_for('game_of_life_3d.home') }}";
+  console.log("BASE URL:", BASE);
+  const appEl  = document.getElementById('app');
+  const infoEl = document.getElementById('info');
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0f1115);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  const dir = new THREE.DirectionalLight(0xffffff, 1.0);
+  dir.position.set(1,1,1);
+  scene.add(dir);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  // taille sur le conteneur, pas la fenêtre
+  renderer.setSize(appEl.clientWidth, appEl.clientHeight);
+  appEl.appendChild(renderer.domElement);
+
+  const camera = new THREE.PerspectiveCamera(55, appEl.clientWidth / appEl.clientHeight, 0.1, 2000);
+  camera.position.set(40, 40, 40);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  dirLight.position.set(1, 1, 1);
+  scene.add(dirLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+  let instanced = null;
+  let running   = false;
+  let timer     = null;
+  let shape     = [48, 48, 48];
+
+  function disposeMesh(mesh){
+    if (!mesh) return;
+    mesh.geometry?.dispose();
+    mesh.material?.dispose?.();
+    scene.remove(mesh);
+  }
+
+  function buildInstanced(alive, shape){
+  const [Z, Y, X] = shape;
+  const N = alive.length;
+
+  // A) Wireframe bleu
+  const box = new THREE.BoxGeometry(1,1,1);
+  const edgesGeom = new THREE.EdgesGeometry(box, 20);      // seuil d’angle
+  const wireMat = new THREE.LineBasicMaterial({
+    color: 0x66aaff, transparent: true, opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const wire = new THREE.InstancedMesh(edgesGeom, wireMat, Math.max(N,1));
+  wire.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+  // B) Cube intérieur emissif (cœur)
+  const innerGeom = new THREE.BoxGeometry(0.65,0.65,0.65);
+  const innerMat = new THREE.MeshPhysicalMaterial({ 
+    transmission:0.5, thickness:0.4, clearcoat:1.0, clearcoatRoughness:0.1,
+    color: 0xffa64d, emissive: 0xff7a1a, emissiveIntensity: 1.4,
+    metalness: 0.0, roughness: 0.05,
+  });
+  const inner = new THREE.InstancedMesh(innerGeom, innerMat, Math.max(N,1));
+  inner.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+  const m = new THREE.Matrix4();
+  const offset = new THREE.Vector3(-(X-1)/2, -(Y-1)/2, -(Z-1)/2);
+
+  for (let i=0; i<N; i++){
+    const [z,y,x] = alive[i];
+    m.makeTranslation(x+offset.x, y+offset.y, z+offset.z);
+    wire.setMatrixAt(i, m);
+    inner.setMatrixAt(i, m);
+  }
+  wire.count = inner.count = N;
+  wire.instanceMatrix.needsUpdate = inner.instanceMatrix.needsUpdate = true;
+
+  const group = new THREE.Group();
+  group.add(inner);
+  group.add(wire);
+  return group;
+}
+
+  async function fetchJSON(url, options){
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }
+
+  function refreshMesh(alive){
+    disposeMesh(instanced);
+    instanced = buildInstanced(alive, shape);
+    scene.add(instanced);
+  }
+
+  function updateInfo(data){
+    const aliveCount = data.alive.length;
+    const [Z, Y, X] = data.config.shape;
+    const b = data.config.rule_b.join('');
+    const s = data.config.rule_s.join('');
+    infoEl.textContent = `Alive: ${aliveCount} — Shape: ${X}×${Y}×${Z} — Rule B${b}/S${s}`;
+  }
+
+  async function loadState(){
+    const data = await fetchJSON(`${BASE}state`);
+    shape = data.config.shape;
+    updateInfo(data);
+    refreshMesh(data.alive);
+  }
+
+  async function tick(){
+    const data = await fetchJSON(`${BASE}next`);
+    updateInfo(data);
+    refreshMesh(data.alive);
+  }
+
+  document.getElementById('start').onclick = () => {
+    if (running) return;
+    running = true;
+    if (timer) clearInterval(timer);
+    timer = setInterval(tick, 350);
+  };
+
+  document.getElementById('stop').onclick = () => {
+    running = false;
+    if (timer) { clearInterval(timer); timer = null; }
+  };
+
+  document.getElementById('step').onclick = () => tick();
+
+  document.getElementById('reset').onclick = async () => {
+    running = false;
+    if (timer) { clearInterval(timer); timer = null; }
+    await fetchJSON(`${BASE}reset`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ density: 0.12 })
+    });
+    await loadState();
+  };
+
+  // resize sur le conteneur
+  window.addEventListener('resize', () => {
+    renderer.setSize(appEl.clientWidth, appEl.clientHeight);
+    camera.aspect = appEl.clientWidth / appEl.clientHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  (function render(){
+    requestAnimationFrame(render);
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+
+  loadState();
+</script>
+{% endblock %}

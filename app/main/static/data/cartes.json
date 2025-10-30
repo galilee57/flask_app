@@ -32,6 +32,14 @@
         "categories": ["javascript", "simulateurs"]
     },
     {
+        "id": "game_of_life_3d",
+        "titre": "Game of Life 3D",
+        "description": "Automate cellulaire de Conway en 3D",
+        "image": "projectGameOfLife3D.png",
+        "type": 4,
+        "categories": ["javascript", "simulateurs"]
+    },
+    {
         "id": "countries",
         "titre": "Flags",
         "description": "Affichage des drapeaux REST API.",

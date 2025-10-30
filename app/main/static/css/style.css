@@ -1,0 +1,118 @@
+/* ---- Variables globales pour un style cohérent ---- */
+:root {
+  --primary-color: #2b3a67;     /* Bleu profond, sérieux */
+  --accent-color: #4a6fa5;      /* Bleu plus clair pour les détails */
+  --text-color: #222;           /* Texte principal */
+  --bg-color: #f9f9fb;          /* Fond doux */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --font-main: "Segoe UI", Roboto, "Open Sans", sans-serif;
+}
+
+/* ---- Structure de base ---- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.6;
+}
+
+/* ---- Header ---- */
+.header-container {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* ---- Navigation dans le header ---- */
+.header-nav a {
+  text-decoration: none;
+  color: var(--accent-color);
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: var(--primary-color);
+}
+
+/* ---- Titres ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-main);
+  color: var(--primary-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.3rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Conteneur principal ---- */
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  background: #fff;
+  box-shadow: var(--shadow-light);
+  border-radius: 8px;
+}
+
+/* ---- Liens et boutons ---- */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Pied de page ---- */
+footer {
+  text-align: center;
+  color: #666;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  border-top: 1px solid #ddd;
+  margin-top: 3rem;
+}
