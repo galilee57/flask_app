@@ -93,9 +93,9 @@ function create ()
     cursors = this.input.keyboard.createCursorKeys();
 
     // Détection mobile (iPad, iPhone, Android)
-    const isMobile = this.sys.game.device.os.android || this.sys.game.device.os.iOS;
+    const isTouch = this.sys.game.device.input.touch;
 
-    if (isMobile) {
+    if (isTouch) {
         this.joyStick = this.joystick.add(this, {
             x: 100,
             y: 500,
@@ -103,7 +103,6 @@ function create ()
             base: this.add.circle(0, 0, 50, 0x888888),
             thumb: this.add.circle(0, 0, 25, 0xcccccc),
         });
-
         this.joyStickCursors = this.joyStick.createCursorKeys();
     }
 
@@ -149,12 +148,12 @@ function update ()
     // Initialisation des vitesses
     player.setVelocityX(0);
 
-    // Détection mobile : joystick actif
-    const isUsingJoystick = typeof joyStickCursors !== 'undefined';
+    // Récupère les "cursors" à utiliser : joystick mobile s'il existe, sinon clavier
+    const stick = this.joyStickCursors || cursors;
 
-    const left = isUsingJoystick ? joyStickCursors.left.isDown : cursors.left.isDown;
-    const right = isUsingJoystick ? joyStickCursors.right.isDown : cursors.right.isDown;
-    const up = isUsingJoystick ? joyStickCursors.up.isDown : cursors.up.isDown;
+    const left  = stick.left && stick.left.isDown;
+    const right = stick.right && stick.right.isDown;
+    const up    = stick.up && stick.up.isDown;
 
     if (left) {
         player.setVelocityX(-speed);

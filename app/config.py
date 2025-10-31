@@ -26,7 +26,6 @@ class Config:
     API_BASE_URL = ""                        # utilisé par tes templates
     SQLALCHEMY_DATABASE_URI = _db_uri_from_env(INSTANCE_DIR / "charts.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    LOGS_DIR = LOGS_DIR
 
 class DevConfig(Config):
     DEBUG = True
