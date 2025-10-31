@@ -1,37 +1,29 @@
 from flask import Flask
 from app.extensions import db, migrate
-from app.config import get_config, LOGS_DIR
+from app.config import get_config
 from pathlib import Path
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-def create_app(config_name:str | None = None) -> Flask:
-    app = Flask(__name__, 
-                template_folder="main/templates", static_folder="main/static",
-                instance_relative_config=True
-                )
+def create_app(config_name: str | None = None) -> Flask:
+    app = Flask(
+        __name__,
+        template_folder="main/templates",
+        static_folder="main/static",
+        instance_relative_config=True,
+    )
 
     # 1) Charger la config (inclut la DB)
-    if config_name is None:
-        config_name = os.getenv("FLASK_CONFIG", "production")
+    # - si config_name est fourni ("development" | "production"), on le respecte
+    # - sinon get_config() résout via FLASK_CONFIG puis APP_ENV
+    app.config.from_object(get_config(config_name))
 
-    from .config import DevConfig, ProdConfig
-    cfg_map = {
-        "development": DevConfig,
-        "production": ProdConfig
-    }
-
-    app.config.from_object(cfg_map[config_name])
-
+    # 2) Extensions
     db.init_app(app)
     migrate.init_app(app, db)
-    
-    # --- Configuration de l'application ---
-    config_class = get_config()
-    app.config.from_object(config_class)
 
-    # --- Blueprints commun & projets ---
+    # 3) Blueprints commun & projets
     from .main import bp as main
     app.register_blueprint(main, url_prefix="/")
 
@@ -59,15 +51,19 @@ def create_app(config_name:str | None = None) -> Flask:
     from .projects.game_of_life_3d import bp as game_of_life_3d_bp
     app.register_blueprint(game_of_life_3d_bp, url_prefix="/projects/game_of_life_3d")
 
-    # 4) Logging avec chemin absolu
+    # 4) Logging simple (sans LOGS_DIR)
     app.logger.setLevel(logging.INFO)
     if not app.logger.handlers:
-        LOGS_DIR.mkdir(parents=True, exist_ok=True)
-        file_handler = RotatingFileHandler(str(LOGS_DIR / "app.log"), maxBytes=100_000, backupCount=3)
-        file_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] in %(module)s: %(message)s"))
+        logs_dir = Path("logs")
+        logs_dir.mkdir(parents=True, exist_ok=True)
+        file_handler = RotatingFileHandler(
+            logs_dir / "app.log", maxBytes=100_000, backupCount=3
+        )
+        file_handler.setFormatter(
+            logging.Formatter("%(asctime)s [%(levelname)s] in %(module)s: %(message)s")
+        )
         app.logger.addHandler(file_handler)
 
     app.logger.info(f"Application démarrée en mode {os.getenv('APP_ENV', 'prod')}")
-    
-    return app
 
+    return app
