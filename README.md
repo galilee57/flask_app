@@ -45,8 +45,22 @@ https://www.rammaheshwari.com/#about
 
 https://lottiefiles.com/free-animations/gaming
 
+Retrogaming : incarner un personnage qui nqvigue dqns un monde varié. Bien les placer pour assurer une coherence et eviter que les visiteurs ne se perdent. Phaser Game Engine.
+
 # TODO : utilisation de Taipy pour montrer des tableaux de bord
 
-Le portfolio retrogaming : Certainement l’un des portfolios les plus créatifs que nous avons reçus chez Silkhom ! Conçu par le développeur web front-end Peter Oravec, ce portfolio est pour le moins unique en son genre. À la fois créatif et ludique, son site web est admirablement bien placé sous l’angle du retrogaming et du jeu de rôle. Le concept : le visiteur incarne un petit personnage qui navigue dans un monde varié. Durant la navigation, le petit personnage peut s’arrêter sur des éléments clés du parcours du développeur. On retrouve les technologies maitrisées dans une pièce spécifique, au même titre que ces récompenses, ses expériences, son curriculum vitæ, ses réseaux sociaux, etc.
+# TODO : Ideas for future projects
+- Reinforcement AI
+- Jeu du Taquin : exploration d'un arbre / notion d'heuristique
+- Simulation Modèle Prédateur - proie / isometrique
+- Simulation d'une contagion / isometrique
+- Machine de Turing
+- Pacman
+- Configurateur 3D : https://sketchfab.com/3d-models/
+- Admin, healthy
 
-Ces éléments ne sont pas placés au hasard dans le monde ce qui apporte une bonne cohérence dans l’expérience de navigation. Une map permet de visualiser le monde dans son ensemble pour éviter que les visiteurs se perdent. Côté technique, ce portfolio a été réalisé avec JavaScript, HTML 5, ainsi que Phaser Game Engine. Bien que cela puisse paraître simple et abordable, ce type de portfolio demande une certaine expérience et de solides connaissances en développement.
+
+
+
+
+

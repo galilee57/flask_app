@@ -1,0 +1,56 @@
+.resources {
+  margin-top: 2rem;
+  padding: 1.5rem 1rem 2rem;
+  border-radius: 12px;
+  background: #f9fafb;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.resources-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e3a8a; /* bleu profond */
+  margin-bottom: 0.25rem;
+}
+
+.resources-separator {
+  margin: 0.25rem auto 1.5rem;
+  max-width: 220px;
+  border: 0;
+  border-top: 2px solid #1e3a8a;
+  opacity: 0.5;
+}
+
+.resources-list {
+  list-style: none;             /* supprime les puces */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;          /* centre les “cartes” */
+}
+
+.resources-list li {
+  width: 100%;
+  max-width: 420px;
+}
+
+.resources-list a {
+  display: block;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;         /* effet pill */
+  background: #d5e2f7;
+  color: #1e3a8a;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.18s ease-in-out;
+}
+
+.resources-list a:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}

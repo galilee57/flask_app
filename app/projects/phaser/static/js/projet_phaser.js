@@ -210,12 +210,24 @@ function hitBomb (player, bomb)
 
     gameOver = true;
     scoreText.setText('Game Over! Final Score: ' + score);
-    this.input.keyboard.on('keydown-R', function (event) {
-        if (gameOver) {
-            location.reload(); // Reload the game on pressing 'R'
-        }
-    });
-    this.add.text(200, 300, 'Press CTR+R to Restart', { fontSize: '32px', fill: '#fff' });
-}
 
-// TODO : add touch controls for mobile devices
+    const msg = this.add.text(140, 300, 'Touch screen to restart\n(or press R)', {
+            fontSize: '32px',
+            fill: '#fff',
+            align: 'center'
+        }).setOrigin(0, 0.5);
+
+    // Redémarrage au TAP (mobile)
+    this.input.once('pointerdown', () => {
+        score = 0;
+        gameOver = false;
+        this.scene.restart(); // redémarre proprement la scène
+    });
+
+    // Redémarrage avec la touche R (desktop)
+    this.input.keyboard.once('keydown-R', () => {
+        score = 0;
+        gameOver = false;
+        this.scene.restart();
+    });
+}

@@ -24,8 +24,14 @@ class Config:
     DEBUG = False
     TESTING = False
     API_BASE_URL = ""                        # utilisé par tes templates
-    SQLALCHEMY_DATABASE_URI = _db_uri_from_env(INSTANCE_DIR / "charts.db")
+    SQLALCHEMY_DATABASE_URI = _db_uri_from_env(INSTANCE_DIR / "database.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Flask-FlatPages
+    FLATPAGES_ROOT = str(BASE_DIR / "main" / "content")
+    FLATPAGES_EXTENSION = "md"
+    FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code", "codehilite", "tables", "toc", "smarty"]
+    FLATPAGES_AUTO_RELOAD = True
 
 class DevConfig(Config):
     DEBUG = True

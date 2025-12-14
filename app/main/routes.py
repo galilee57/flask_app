@@ -25,6 +25,14 @@ def index():
 def about():
     return render_template("about.html")
 
+@bp.route("/experiences_menu")
+def experiences_menu():
+    return render_template("experiences_menu.html")
+
+@bp.route("/exploration")
+def exploration():
+    return render_template("exploration.html")
+
 # Endpoint to get all project cards
 @bp.route("/data/cartes")
 def cartes():

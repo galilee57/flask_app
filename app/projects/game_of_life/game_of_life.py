@@ -1,6 +1,5 @@
 import numpy as np
 
-# TODO : Ajouter une fonctionnalité pour sauvegarder et charger des configurations spécifiques.
 # TODO : add colors for live cells
 
 class GameOfLife:
@@ -36,3 +35,9 @@ class GameOfLife:
 
     def to_list(self):
         return self.grid.tolist()
+    
+    def from_list(self, grid_list):
+        """Load grid state from a list of lists."""
+        arr = np.array(grid_list, dtype=np.uint8)
+        self.rows, self.cols = arr.shape
+        self.grid = arr

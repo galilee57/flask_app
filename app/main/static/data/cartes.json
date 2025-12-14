@@ -3,14 +3,20 @@
         "id": "musculation",
         "titre": "Musculation",
         "description": "Une application pour suivre votre programme de musculation.",
+        "published": true,
         "image": "projectMusculation.jpg",
         "type": 5,
-        "categories": ["musculation", "fitness"]
+        "categories": ["musculation", "fitness"],
+        "resources": [
+                {"label": "Exrx.net – Exercise & Muscle Directory", "url": "https://exrx.net/Lists/Directory"},
+                {"label": "Wger Workout Manager", "url": "https://wger.de/en/software/api"}
+            ]
     },
     {
         "id": "phaser",
         "titre": "Game avec Phaser",
         "description": "Un jeu interactif développé avec le framework Phaser.",
+        "published": true,
         "image": "projectPhaser.png",
         "type": 3,
         "categories": ["javascript", "jeu"]
@@ -19,6 +25,7 @@
         "id": "memory",
         "titre": "Jeu de Memory avec JavaScript",
         "description": "Formation Domestika : coding d'un jeu de memory",
+        "published": true,
         "image": "projectMemory.jpg",
         "type": 3,
         "categories": ["javascript", "animation"]
@@ -27,30 +34,46 @@
         "id": "game_of_life",
         "titre": "Game of Life",
         "description": "Automate cellulaire de Conway",
+        "published": true,
         "image": "projectGameOfLife.png",
         "type": 3,
-        "categories": ["javascript", "simulateurs"]
+        "categories": ["javascript", "simulateurs"],
+        "resources": [
+            {"label": "Game of Life – Wikipedia", "url": "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"},
+            {"label": "ConwayLife.com – The Game of Life Wiki", "url": "https://conwaylife.com/wiki/Main_Page"},
+            {"label": "Golly – Game of Life Simulator", "url": "http://golly.sourceforge.net/"}
+            ]
     },
     {
         "id": "game_of_life_3d",
         "titre": "Game of Life 3D",
         "description": "Automate cellulaire de Conway en 3D",
+        "published": false,
         "image": "projectGameOfLife3D.png",
         "type": 4,
-        "categories": ["javascript", "simulateurs"]
+        "categories": ["javascript", "simulateurs"],
+        "resources": [
+            {"label": "Three.js Official Website", "url": "https://threejs.org/"},
+            {"label": "An example of 3D Game of Life", "url": "https://www.youtube.com/watch?v=moMow2bR5aU"}
+        ]
     },
     {
         "id": "countries",
         "titre": "Flags",
         "description": "Affichage des drapeaux REST API.",
+        "published": true,
         "image": "projectFlags.jpg",
         "type": 1,
-        "categories": ["javascript", "api"]
+        "categories": ["javascript", "api"],
+        "resources": [
+            {"label": "REST Countries API", "url": "https://restcountries.com/"}
+            ]
     },
     {
         "id": "todolist",
         "titre": "Todo List",
         "description": "Une ToDo List avec changement du fond d'écran.",
+        "published": true,
         "image": "projectToDoList.jpg",
         "type": 1,
         "categories": ["javascript"]
@@ -59,6 +82,7 @@
         "id": "arduino",
         "titre": "Arduino API",
         "description": "Réception de données depuis une API Arduino.",
+        "published": false,
         "image": "projectArduino.jpg",
         "type": 4,
         "categories": ["api", "iot"]
@@ -67,9 +91,25 @@
         "id": "charts",
         "titre": "Marey Diagram",
         "description": "Gestion d'une base pour affichage de trains",
+        "published": true,
         "image": "projectMarey.jpg",
         "type": 3,
         "categories": ["D3.js", "SQLAlchemy", "javascript"],
-        "projetUrl": "/projects/charts/"
+        "projetUrl": "/projects/charts/",
+        "resources": [
+            {"label": "Marey Diagram – Wikipedia", "url": "https://en.wikipedia.org/wiki/Marey_diagram"},
+            {"label": "D3.js Official Website", "url": "https://d3js.org/"},
+            {"label": "Flow with Marey diagram", "url": "https://www.3cs.ch/analyze-work-flow-with-marey-chart/"}
+        ]
+      },
+      {
+        "id": "viewer360",
+        "titre": "Viewer 360",
+        "description": "Viewer de photos à 360° avec Three.js",
+        "published": false,
+        "image": "project360.jpeg",
+        "type": 3,
+        "categories": ["Three.js", "Insta360"],
+        "projetUrl": "/projects/viewer360/"
       }
 ]

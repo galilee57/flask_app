@@ -4,13 +4,36 @@
 
 {% block content %}
 <h1>🕹️ GAME OF LIFE</h1>
-<h4>Choose a size for the grid</h4>
+<h4>Click to build your own pattern or random reset !</h4>
 
 <div>
   <button id="start" class="btn btn-primary mb-3">Start Game</button>
   <button id="stop" class="btn btn-danger mb-3">Stop Game</button>
-  <button id="reset" class="btn btn-secondary mb-3">Reset Game</button>
+  <button id="reset" class="btn btn-warning mb-3">Random Reset</button>
+  <button id="clear" class="btn btn-warning mb-3">Clear Game</button>
 </div>
+
+<div class="mb-3">
+  <input id="pattern-name" class="form-control d-inline-block w-auto" placeholder="Nom du pattern (ex: glider1)">
+  <button id="save-pattern" class="btn btn-success mb-1">Save</button>
+
+  <select id="pattern-select" class="form-select d-inline-block w-auto">
+    <option value="">-- choisir un pattern --</option>
+
+    <!-- Patterns enregistrés : rempli en JS -->
+    <optgroup label="Enregistrés" id="saved-optgroup"></optgroup>
+
+    <!-- Patterns génériques -->
+    <optgroup label="Génériques">
+      {% for name in patterns %}
+        <option value="gen:{{ name }}">{{ name }}</option>
+      {% endfor %}
+    </optgroup>
+  </select>
+
+  <button id="load-pattern" class="btn btn-info mb-1">Load</button>
+</div>
+
 <div id="grid-container" class="mb-3"></div>
 {% endblock %}
 
@@ -20,65 +43,8 @@
 
 {% block js %}
 <script>
-  // Base URL dynamique du blueprint (s’adapte si tu changes url_prefix)
-  const BASE_URL = "{{ url_for('game_of_life.home') }}"; // ex: "/projects/game_of_life/"
-
-  let running = false;
-  let intervalId = null;
-
-  async function fetchJson(url, options) {
-    const res = await fetch(url, options);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  }
-
-  function drawGrid(grid) {
-    const gridDiv = document.getElementById("grid-container");
-    let html = "<table>";
-    for (const row of grid) {
-      html += "<tr>";
-      for (const cell of row) {
-        html += `<td class="${cell ? 'alive' : ''}"></td>`;
-      }
-      html += "</tr>";
-    }
-    html += "</table>";
-    gridDiv.innerHTML = html;
-  }
-
-  async function updateGrid() {
-    // Les routes renvoient { grid: [...] }
-    const data = await fetchJson(`${BASE_URL}next`);
-    drawGrid(data.grid);
-  }
-
-  document.getElementById('start').addEventListener('click', () => {
-    if (!running) {
-      running = true;
-      intervalId = setInterval(updateGrid, 500);
-    }
-  });
-
-  document.getElementById('stop').addEventListener('click', () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
-  });
-
-  document.getElementById('reset').addEventListener('click', async () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
-
-    // reset est en POST si ton blueprint a @bp.post('/reset')
-    await fetchJson(`${BASE_URL}reset`, { method: 'POST' });
-    const data = await fetchJson(`${BASE_URL}state`);
-    drawGrid(data.grid);
-  });
-
-  window.onload = async () => {
-    const data = await fetchJson(`${BASE_URL}state`);
-    drawGrid(data.grid);
-  };
+  // exposer l’URL de base au JS
+  window.GOL_BASE_URL = "{{ url_for('game_of_life.home') }}";  // ex "/projects/game_of_life/"
 </script>
+<script src="{{ url_for('game_of_life.static', filename='js/game_of_life.js') }}"></script>
 {% endblock %}

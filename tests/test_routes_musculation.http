@@ -1,0 +1,24 @@
+
+### Lister tous les programmes
+GET http://localhost:5000/projects/musculation/api/programmes
+
+### Créer un programme
+POST http://localhost:5000/projects/musculation/api/programmes
+Content-Type: application/json
+
+{
+  "name": "Séance test 2",
+  "exercices": [
+    { "exercice_id": "Développé couché barre", "reps": 16, "weight": 60 },
+    { "exercice_id": "Développé couché barre", "reps": 14, "weight": 70 },
+    { "exercice_id": "Développé couché barre", "reps": 12, "weight": 80 },
+    { "exercice_id": "Squat barre arrière (back squat)", "reps": 10, "weight": 90 }
+  ]
+}
+
+### Charger un programme par ID
+GET http://localhost:5000/projects/musculation/api/programmes/1
+
+### Calculer les coefficients force/hypertrophy/endurance pour un exercice
+GET http://localhost:5000/projects/musculation/api/programmes/1/analyse
+Accept: application/json

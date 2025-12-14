@@ -2,15 +2,112 @@
 
 {% block content %}
 <h1>MUSCULATION</h1>
-<p>Here I study the balance between strength, hypertrophy and endurance.</p>
-<!-- Ajoute ici ton contenu spécifique au projet -->
+<p>Here you can evaluate your program's balance between strength, hypertrophy and endurance.</p>
+
+<div id="messageContainer">
+    <h2>Program Management</h2>
+
+    <form id="programForm" class="row g-3 align-items-center mb-3">
+        {{ workout_form.hidden_tag() }}
+
+        <div class="col-auto">
+            {{ workout_form.plan_name(
+                class="form-control", placeholder="Program name") }}
+            {% for error in workout_form.plan_name.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.new_submit(class="btn btn-primary", id="new_program") }}
+        </div>
+
+        <div class="col-auto">
+            <select id="programSelect" class="form-select">
+                <option value="">-- Choisir --</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.load_submit(class="btn btn-primary", id="load_program") }}
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.save_submit(class="btn btn-primary", id="save_program") }}
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.reset_submit(class="btn btn-danger", id="reset_program") }}
+        </div>
+    </form>
+</div>
+
+<div id="exerciseContainer" class="mb-4 d-none">
+    <h2>Exercises Details</h2>
+    <form id="exerciseForm" class="row g-3 align-items-center">
+        {{ exercise_form.hidden_tag() }}
+
+        <div class="col-auto">
+            <label for="exerciseSelect">Select an exercise :</label>
+            <select id="exerciseSelect">
+                <option value="">-- Choose --</option>
+            </select>
+        </div>
+
+        <div class="col-auto mb-4">
+            {{ exercise_form.reps.label }}
+            {{ exercise_form.reps(class="form-control", id="nb_rep", placeholder="Amount of reps") }}
+            {% for error in exercise_form.reps.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="col-auto mb-4">
+            {{ exercise_form.weight.label }}
+            {{ exercise_form.weight(class="form-control", placeholder="Weight (kg)") }}
+            {% for error in exercise_form.weight.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="col-auto">
+            {{ exercise_form.submit(class="btn btn-primary", id="add_exercice_form") }}
+        </div>
+    </form>
+
+    <div id="exerciseDetails"></div>
+</div>
+
+<div id="programContainer">
+    <h2>Program Details</h2>
+    <div id="programDetails"></div>
+</div>
+
+<div id="analysisContainer" class="mt-4 d-none">
+    <h2>Program Analysis</h2>
+    <div class="col-auto">
+        {{ workout_form.analyse_submit(class="btn btn-primary", id="analyze_program") }}
+    </div>
+    <div id="programAnalysis" class="mt-4"></div>
+</div>
+
+
 {% endblock %}
 
 {% block css %}
 <!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="projet_musculation.css">
+<link rel="stylesheet" href="{{ url_for('musculation.static', filename='css/projet_musculation.css') }}">
 {% endblock %}
 
 {% block js %}
-<script src="projet_musculation.js"></script>
+<!-- On passe l'URL de l'API en variable JS globale -->
+<script>
+    window.API_EXERCICES_URL = "{{ url_for('musculation.api_exercices') }}";
+    window.GIF_BASE_URL = "{{ url_for('musculation.static', filename='data/') }}";
+    window.API_PROGRAMMES_BASE = "{{ url_for('musculation.list_programmes') }}";
+    // => donnera /projects/musculation/api/programmes
+</script>
+
+<!-- JS du blueprint musculation -->
+<script src="{{ url_for('musculation.static', filename='js/projet_musculation.js') }}"></script>
 {% endblock %}

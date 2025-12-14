@@ -1,0 +1,11 @@
+#app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 20% 80%;  /* ← EXACTEMENT CE QUE TU VEUX */
+}
+
+#viewer {
+  position: relative;
+  width: 100%;   /* 100% de sa colonne (donc 80% de l’écran) */
+  height: 100vh;
+}

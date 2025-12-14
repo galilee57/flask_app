@@ -2,3 +2,18 @@ body { font-family: Arial, sans-serif; text-align: center; }
     table { border-collapse: collapse; margin: 20px auto; }
     td { width: 15px; height: 15px; border: 1px solid #ccc; }
     .alive { background-color: black; }
+
+td.cell {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+td.cell.alive {
+    background-color: black;
+}
+
+td.cell:hover {
+    background-color: gray;
+}

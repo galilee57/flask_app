@@ -1,0 +1,1040 @@
+[
+  {
+    "exercise": "Développé couché barre",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barre",
+      "Banc de musculation",
+      "Rack (optionnel)"
+    ],
+    "exercise_en": "Barbell Bench Press",
+    "gif": "barbell_bench_press.gif"
+  },
+  {
+    "exercise": "Développé couché haltères",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Deltoïde antérieur",
+      "Stabilisateurs de l’épaule"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc de musculation"
+    ],
+    "exercise_en": "Dumbbell Bench Press",
+    "gif": "dumbbell_bench_press.gif"
+  },
+  {
+    "exercise": "Développé incliné barre",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Portion claviculaire du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur",
+      "Triceps brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barre",
+      "Banc incliné",
+      "Rack (optionnel)"
+    ],
+    "exercise_en": "Incline Barbell Bench Press",
+    "gif": "incline_barbell_bench_press.gif"
+  },
+  {
+    "exercise": "Développé incliné haltères",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Portion claviculaire du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur",
+      "Triceps brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc incliné"
+    ],
+    "exercise_en": "Incline Dumbbell Bench Press",
+    "gif": "incline_dumbbell_bench_press.gif"
+  },
+  {
+    "exercise": "Développé décliné barre",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Portion sternale / inférieure du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barre",
+      "Banc décliné",
+      "Rack (optionnel)"
+    ],
+    "exercise_en": "Decline Barbell Bench Press",
+    "gif": "decline_barbell_bench_press.gif"
+  },
+  {
+    "exercise": "Écarté couché haltères",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc de musculation"
+    ],
+    "exercise_en": "Dumbbell Fly",
+    "gif": "dumbbell_fly.gif"
+  },
+  {
+    "exercise": "Écarté incliné haltères",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Portion claviculaire du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc incliné"
+    ],
+    "exercise_en": "Incline Dumbbell Fly",
+    "gif": "incline_dumbbell_fly.gif"
+  },
+  {
+    "exercise": "Butterfly / Pec deck",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Machine pec deck"
+    ],
+    "exercise_en": "Pec Deck Machine",
+    "gif": "pec_deck_machine.gif"
+  },
+  {
+    "exercise": "Pompes classiques",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Deltoïde antérieur",
+      "Gainage"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude",
+      "Rachis lombaire (stabilisation)"
+    ],
+    "equipment": [
+      "Poids du corps",
+      "Sol"
+    ],
+    "exercise_en": "Push-ups",
+    "gif": "push-ups.gif"
+  },
+  {
+    "exercise": "Pompes diamant",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Triceps brachial",
+      "Portion interne du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur",
+      "Gainage"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude",
+      "Rachis lombaire (stabilisation)"
+    ],
+    "equipment": [
+      "Poids du corps",
+      "Sol"
+    ],
+    "exercise_en": "Diamond Push-ups",
+    "gif": "diamond_push-ups.gif"
+  },
+  {
+    "exercise": "Dips buste penché",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Portion inférieure du grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barres parallèles",
+      "Station de dips"
+    ],
+    "exercise_en": "Chest Dips",
+    "gif": "chest_dips.gif"
+  },
+  {
+    "exercise": "Câbles croisés poulie haute",
+    "region": "Pectoraux",
+    "primary_muscles": [
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Poulies vis-à-vis",
+      "Poignées"
+    ],
+    "exercise_en": "High Cable Crossover",
+    "gif": "high_cable_crossover.gif"
+  },
+  {
+    "exercise": "Tractions pronation large",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal"
+    ],
+    "secondary_muscles": [
+      "Rhomboïdes",
+      "Trapèze moyen",
+      "Biceps brachial",
+      "Brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude",
+      "Omoplate (scapulo-thoracique)"
+    ],
+    "equipment": [
+      "Barre de traction"
+    ],
+    "exercise_en": "Wide Grip Pull-up",
+    "gif": "wide_grip_pull-up.gif"
+  },
+  {
+    "exercise": "Tractions supination",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal",
+      "Biceps brachial"
+    ],
+    "secondary_muscles": [
+      "Brachial",
+      "Brachio-radial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barre de traction"
+    ],
+    "exercise_en": "Chin-up",
+    "gif": "chin-up.gif"
+  },
+  {
+    "exercise": "Tirage vertical à la poulie",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal"
+    ],
+    "secondary_muscles": [
+      "Biceps brachial",
+      "Rhomboïdes",
+      "Trapèze moyen"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Poulie haute",
+      "Barre de tirage"
+    ],
+    "exercise_en": "Lat Pulldown",
+    "gif": "lat_pulldown.gif"
+  },
+  {
+    "exercise": "Rowing barre buste penché",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal",
+      "Rhomboïdes"
+    ],
+    "secondary_muscles": [
+      "Trapèze moyen",
+      "Biceps brachial",
+      "Lombaires (stabilisation)"
+    ],
+    "joints": [
+      "Hanche",
+      "Épaule",
+      "Coude",
+      "Rachis lombaire (stabilisation)"
+    ],
+    "equipment": [
+      "Barre",
+      "Disques de poids"
+    ],
+    "exercise_en": "Bent-over Barbell Row",
+    "gif": "bent-over_barbell_row.gif"
+  },
+  {
+    "exercise": "Rowing haltère unilatéral",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal"
+    ],
+    "secondary_muscles": [
+      "Rhomboïdes",
+      "Trapèze moyen",
+      "Biceps brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Haltère",
+      "Banc (appui)"
+    ],
+    "exercise_en": "One-arm Dumbbell Row",
+    "gif": "one-arm_dumbbell_row.gif"
+  },
+  {
+    "exercise": "Rowing T-bar",
+    "region": "Dos",
+    "primary_muscles": [
+      "Grand dorsal",
+      "Rhomboïdes"
+    ],
+    "secondary_muscles": [
+      "Trapèze moyen",
+      "Biceps brachial"
+    ],
+    "joints": [
+      "Hanche",
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "T-bar row",
+      "Barre landmine ou équivalent"
+    ],
+    "exercise_en": "T-Bar Row",
+    "gif": "t-bar_row.gif"
+  },
+  {
+    "exercise": "Tirage horizontal poulie",
+    "region": "Dos",
+    "primary_muscles": [
+      "Rhomboïdes",
+      "Trapèze moyen"
+    ],
+    "secondary_muscles": [
+      "Grand dorsal",
+      "Biceps brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Poulie basse",
+      "Poignée ou barre de tirage"
+    ],
+    "exercise_en": "Seated Cable Row",
+    "gif": "seated_cable_row.gif"
+  },
+  {
+    "exercise": "Soulevé de terre classique",
+    "region": "Dos / Jambes",
+    "primary_muscles": [
+      "Érecteurs du rachis",
+      "Ischio-jambiers",
+      "Fessiers"
+    ],
+    "secondary_muscles": [
+      "Trapèzes",
+      "Avant-bras",
+      "Grand dorsal (stabilisation)"
+    ],
+    "joints": [
+      "Hanche",
+      "Genou",
+      "Rachis lombaire"
+    ],
+    "equipment": [
+      "Barre",
+      "Disques de poids"
+    ],
+    "exercise_en": "Conventional Deadlift",
+    "gif": "conventional_deadlift.gif"
+  },
+  {
+    "exercise": "Pull-over",
+    "region": "Dos / Pectoraux",
+    "primary_muscles": [
+      "Grand dorsal",
+      "Grand pectoral"
+    ],
+    "secondary_muscles": [
+      "Grand dentelé"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Barre",
+      "Banc"
+    ],
+    "exercise_en": "Pullover",
+    "gif": "pullover.gif"
+  },
+  {
+    "exercise": "Développé militaire barre",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde antérieur",
+      "Deltoïde moyen"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Trapèze supérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Barre",
+      "Rack (optionnel)"
+    ],
+    "exercise_en": "Barbell Overhead Press",
+    "gif": "barbell_overhead_press.gif"
+  },
+  {
+    "exercise": "Développé militaire haltères",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde antérieur",
+      "Deltoïde moyen"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial",
+      "Trapèze supérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc (assis) ou debout"
+    ],
+    "exercise_en": "Dumbbell Overhead Press",
+    "gif": "dumbbell_overhead_press.gif"
+  },
+  {
+    "exercise": "Développé Arnold",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïdes (ensemble)"
+    ],
+    "secondary_muscles": [
+      "Triceps brachial"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc (assis)"
+    ],
+    "exercise_en": "Arnold Press",
+    "gif": "arnold_press.gif"
+  },
+  {
+    "exercise": "Élévations latérales haltères",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde moyen"
+    ],
+    "secondary_muscles": [
+      "Trapèze supérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Haltères"
+    ],
+    "exercise_en": "Dumbbell Lateral Raise",
+    "gif": "dumbbell_lateral_raise.gif"
+  },
+  {
+    "exercise": "Élévations latérales poulie",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde moyen"
+    ],
+    "secondary_muscles": [
+      "Trapèze supérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Poulie basse",
+      "Poignée"
+    ],
+    "exercise_en": "Cable Lateral Raise",
+    "gif": "cable_lateral_raise.gif"
+  },
+  {
+    "exercise": "Élévations frontales haltères",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde antérieur"
+    ],
+    "secondary_muscles": [
+      "Trapèze supérieur"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Haltères"
+    ],
+    "exercise_en": "Dumbbell Front Raise",
+    "gif": "dumbbell_front_raise.gif"
+  },
+  {
+    "exercise": "Oiseau haltères",
+    "region": "Épaules",
+    "primary_muscles": [
+      "Deltoïde postérieur"
+    ],
+    "secondary_muscles": [
+      "Rhomboïdes",
+      "Trapèze moyen"
+    ],
+    "joints": [
+      "Épaule"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc (optionnel)"
+    ],
+    "exercise_en": "Dumbbell Rear Delt Fly",
+    "gif": "dumbbell_rear_delt_fly.gif"
+  },
+  {
+    "exercise": "Squat barre arrière (back squat)",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "secondary_muscles": [
+      "Ischio-jambiers",
+      "Érecteurs du rachis"
+    ],
+    "joints": [
+      "Hanche",
+      "Genou",
+      "Cheville"
+    ],
+    "equipment": [
+      "Barre",
+      "Rack à squat"
+    ],
+    "exercise_en": "Back Squat",
+    "gif": "back_squat.gif"
+  },
+  {
+    "exercise": "Presse à cuisses",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Quadriceps"
+    ],
+    "secondary_muscles": [
+      "Fessiers",
+      "Ischio-jambiers"
+    ],
+    "joints": [
+      "Hanche",
+      "Genou"
+    ],
+    "equipment": [
+      "Presse à cuisses"
+    ],
+    "exercise_en": "Leg Press",
+    "gif": "leg_press.gif"
+  },
+  {
+    "exercise": "Fentes avant",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "secondary_muscles": [
+      "Ischio-jambiers"
+    ],
+    "joints": [
+      "Hanche",
+      "Genou",
+      "Cheville"
+    ],
+    "equipment": [
+      "Poids du corps",
+      "Haltères",
+      "Barre"
+    ],
+    "exercise_en": "Forward Lunges",
+    "gif": "forward_lunges.gif"
+  },
+  {
+    "exercise": "Soulevé de terre jambes tendues",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Ischio-jambiers"
+    ],
+    "secondary_muscles": [
+      "Fessiers",
+      "Érecteurs du rachis"
+    ],
+    "joints": [
+      "Hanche",
+      "Rachis lombaire"
+    ],
+    "equipment": [
+      "Barre",
+      "Disques de poids"
+    ],
+    "exercise_en": "Stiff-Leg Deadlift",
+    "gif": "stiff-leg_deadlift.gif"
+  },
+  {
+    "exercise": "Hip thrust barre",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Fessier grand"
+    ],
+    "secondary_muscles": [
+      "Ischio-jambiers",
+      "Quadriceps"
+    ],
+    "joints": [
+      "Hanche"
+    ],
+    "equipment": [
+      "Barre",
+      "Banc",
+      "Tapis de protection pour la barre"
+    ],
+    "exercise_en": "Barbell Hip Thrust",
+    "gif": "barbell_hip_thrust.gif"
+  },
+  {
+    "exercise": "Extension de jambes machine",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Quadriceps"
+    ],
+    "secondary_muscles": [],
+    "joints": [
+      "Genou"
+    ],
+    "equipment": [
+      "Machine extension de jambes"
+    ],
+    "exercise_en": "Leg Extension Machine",
+    "gif": "leg_extension_machine.gif"
+  },
+  {
+    "exercise": "Leg curl allongé",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Ischio-jambiers"
+    ],
+    "secondary_muscles": [],
+    "joints": [
+      "Genou"
+    ],
+    "equipment": [
+      "Machine leg curl allongé"
+    ],
+    "exercise_en": "Lying Leg Curl",
+    "gif": "lying_leg_curl.gif"
+  },
+  {
+    "exercise": "Mollets debout à la machine",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Mollet (gastrocnémiens)"
+    ],
+    "secondary_muscles": [
+      "Soléaire"
+    ],
+    "joints": [
+      "Cheville"
+    ],
+    "equipment": [
+      "Machine mollets debout"
+    ],
+    "exercise_en": "Standing Calf Raise",
+    "gif": "standing_calf_raise.gif"
+  },
+  {
+    "exercise": "Mollets assis",
+    "region": "Jambes",
+    "primary_muscles": [
+      "Soléaire"
+    ],
+    "secondary_muscles": [
+      "Gastrocnémiens"
+    ],
+    "joints": [
+      "Cheville"
+    ],
+    "equipment": [
+      "Machine mollets assis"
+    ],
+    "exercise_en": "Seated Calf Raise",
+    "gif": "seated_calf_raise.gif"
+  },
+  {
+    "exercise": "Curl barre droite",
+    "region": "Bras",
+    "primary_muscles": [
+      "Biceps brachial"
+    ],
+    "secondary_muscles": [
+      "Brachial",
+      "Brachio-radial"
+    ],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Barre droite"
+    ],
+    "exercise_en": "Straight Bar Curl",
+    "gif": "straight_bar_curl.gif"
+  },
+  {
+    "exercise": "Curl barre EZ",
+    "region": "Bras",
+    "primary_muscles": [
+      "Biceps brachial"
+    ],
+    "secondary_muscles": [
+      "Brachial",
+      "Brachio-radial"
+    ],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Barre EZ"
+    ],
+    "exercise_en": "EZ Bar Curl",
+    "gif": "ez_bar_curl.gif"
+  },
+  {
+    "exercise": "Curl haltères alterné",
+    "region": "Bras",
+    "primary_muscles": [
+      "Biceps brachial"
+    ],
+    "secondary_muscles": [
+      "Brachial"
+    ],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères"
+    ],
+    "exercise_en": "Alternating Dumbbell Curl",
+    "gif": "alternating_dumbbell_curl.gif"
+  },
+  {
+    "exercise": "Curl incliné haltères",
+    "region": "Bras",
+    "primary_muscles": [
+      "Biceps brachial (portion longue)"
+    ],
+    "secondary_muscles": [
+      "Brachial"
+    ],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères",
+      "Banc incliné"
+    ],
+    "exercise_en": "Incline Dumbbell Curl",
+    "gif": "incline_dumbbell_curl.gif"
+  },
+  {
+    "exercise": "Curl marteau",
+    "region": "Bras",
+    "primary_muscles": [
+      "Brachial",
+      "Brachio-radial"
+    ],
+    "secondary_muscles": [
+      "Biceps brachial"
+    ],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Haltères"
+    ],
+    "exercise_en": "Hammer Curl",
+    "gif": "hammer_curl.gif"
+  },
+  {
+    "exercise": "Barre au front (skull crusher)",
+    "region": "Bras",
+    "primary_muscles": [
+      "Triceps brachial"
+    ],
+    "secondary_muscles": [],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Barre EZ ou droite",
+      "Banc"
+    ],
+    "exercise_en": "Skull Crusher",
+    "gif": "skull_crusher.gif"
+  },
+  {
+    "exercise": "Extension triceps poulie corde",
+    "region": "Bras",
+    "primary_muscles": [
+      "Triceps brachial"
+    ],
+    "secondary_muscles": [],
+    "joints": [
+      "Coude"
+    ],
+    "equipment": [
+      "Poulie haute",
+      "Corde"
+    ],
+    "exercise_en": "Triceps Rope Pushdown",
+    "gif": "triceps_rope_pushdown.gif"
+  },
+  {
+    "exercise": "Dips entre deux bancs",
+    "region": "Bras",
+    "primary_muscles": [
+      "Triceps brachial"
+    ],
+    "secondary_muscles": [
+      "Pectoraux",
+      "Deltoïde antérieur"
+    ],
+    "joints": [
+      "Épaule",
+      "Coude"
+    ],
+    "equipment": [
+      "Deux bancs"
+    ],
+    "exercise_en": "Bench Dips",
+    "gif": "bench_dips.gif"
+  },
+  {
+    "exercise": "Crunch au sol",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Grand droit de l’abdomen"
+    ],
+    "secondary_muscles": [
+      "Obliques"
+    ],
+    "joints": [
+      "Rachis thoracique"
+    ],
+    "equipment": [
+      "Sol",
+      "Tapis"
+    ],
+    "exercise_en": "Floor Crunch",
+    "gif": "floor_crunch.gif"
+  },
+  {
+    "exercise": "Crunch machine",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Grand droit de l’abdomen"
+    ],
+    "secondary_muscles": [],
+    "joints": [
+      "Rachis thoracique"
+    ],
+    "equipment": [
+      "Machine crunch"
+    ],
+    "exercise_en": "Machine Crunch",
+    "gif": "machine_crunch.gif"
+  },
+  {
+    "exercise": "Relevé de jambes suspendu",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Bas du grand droit de l’abdomen"
+    ],
+    "secondary_muscles": [
+      "Fléchisseurs de hanche"
+    ],
+    "joints": [
+      "Hanche"
+    ],
+    "equipment": [
+      "Barre de traction",
+      "Chaises romaines (optionnel)"
+    ],
+    "exercise_en": "Hanging Leg Raise",
+    "gif": "hanging_leg_raise.gif"
+  },
+  {
+    "exercise": "Planche (gainage ventral)",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Transverse de l’abdomen"
+    ],
+    "secondary_muscles": [
+      "Grand droit",
+      "Obliques",
+      "Érecteurs du rachis"
+    ],
+    "joints": [
+      "Rachis lombaire (stabilisation)",
+      "Épaule"
+    ],
+    "equipment": [
+      "Poids du corps",
+      "Sol",
+      "Tapis"
+    ],
+    "exercise_en": "Plank",
+    "gif": "plank.gif"
+  },
+  {
+    "exercise": "Gainage latéral (side plank)",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Obliques"
+    ],
+    "secondary_muscles": [
+      "Transverse",
+      "Quadratus lumborum"
+    ],
+    "joints": [
+      "Rachis lombaire (stabilisation)",
+      "Épaule (stabilisation)"
+    ],
+    "equipment": [
+      "Poids du corps",
+      "Sol",
+      "Tapis"
+    ],
+    "exercise_en": "Side Plank",
+    "gif": "side_plank.gif"
+  },
+  {
+    "exercise": "Roue à abdos (ab wheel rollout)",
+    "region": "Abdos",
+    "primary_muscles": [
+      "Transverse",
+      "Grand droit de l’abdomen"
+    ],
+    "secondary_muscles": [
+      "Érecteurs du rachis",
+      "Épaules (stabilisation)"
+    ],
+    "joints": [
+      "Épaule",
+      "Rachis lombaire (stabilisation)",
+      "Hanche"
+    ],
+    "equipment": [
+      "Roue à abdos"
+    ],
+    "exercise_en": "Ab Wheel Rollout",
+    "gif": "ab_wheel_rollout.gif"
+  }
+]

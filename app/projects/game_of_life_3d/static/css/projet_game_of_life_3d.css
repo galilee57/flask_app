@@ -1,4 +1,35 @@
-body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-#hud { position: fixed; top: 12px; left: 12px; background: rgba(0,0,0,.55); color: #fff; padding: 8px 12px; border-radius: 10px; }
-#hud button { margin-right: 6px; }
-canvas { display:block;border-color: black;}
+/* Le bloc bleu actuel */
+#viewer360-container {
+  /* optionnel : laisse Bootstrap gérer la largeur de la carte */
+}
+
+/* Wrapper du viewer 360 */
+#viewer-wrapper {
+  width: 80vw;            /* 80% de la largeur de l’écran */
+  max-width: 1200px;      /* limite sur grands écrans */
+  margin: 0 auto 2rem;    /* centré, marge en bas */
+}
+
+/* Zone qui accueille le canvas Three.js */
+#canvas-holder {
+  width: 100%;
+  aspect-ratio: 2 / 1;    /* panorama 2:1 (adapte si tu veux) */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Le canvas lui-même suit la taille du holder */
+#canvas-holder canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Loader au centre du viewer uniquement */
+#loading {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  pointer-events: none;
+}

@@ -20,7 +20,7 @@ body {
 
 /* ---- Header ---- */
 .header-container {
-  background-color: #fff;
+  background-color: lightblue;
   box-shadow: var(--shadow-light);
   padding: 1rem 2rem;
   display: flex;
@@ -29,6 +29,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .header-container h1 {

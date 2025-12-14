@@ -4,14 +4,54 @@
 
 {% block content %}
 <h1>🕹️ GAME OF LIFE 3D</h1>
-<h4>Choose a size for the grid</h4>
+<h2>Choose parameters for the simulation</h2>
+
+<div id="rule-panel" class="mb-3">
+  <div class="mb-2">
+    <label class="me-2">
+      B (Birth):
+      <input id="rule-b" type="text" value="6" class="form-control d-inline-block w-auto"
+             title="Ex : 6 ou 36 (naissance si 3 ou 6 voisins)">
+    </label>
+    <label class="me-2">
+      S (Survival):
+      <input id="rule-s" type="text" value="567" class="form-control d-inline-block w-auto"
+             title="Ex : 567 (survie si 5, 6 ou 7 voisins)">
+    </label>
+  </div>
+
+  <div class="mb-2">
+    <label>
+      Density:
+      <input id="density" type="range" min="0.02" max="0.40" step="0.01" value="0.12">
+      <span id="density-value">0.12</span>
+    </label>
+  </div>
+
+  <div class="mb-2">
+    <label class="me-2">
+      <input id="torus" type="checkbox" checked> Torus
+    </label>
+
+    <select id="rule-preset" class="form-select d-inline-block w-auto">
+      <option value="">Presets…</option>
+      <option value="6|56">B6/S56 (plutôt stable)</option>
+      <option value="6|567">B6/S567 (équilibré)</option>
+      <option value="5|45">B5/S45 (chaotique)</option>
+    </select>
+
+    <button id="apply-config" class="btn btn-sm btn-outline-light ms-2">
+      Apply rules
+    </button>
+  </div>
+</div>
 
 <div class="mb-3">
+  <button id="reset" class="btn btn-secondary mb-3">Apply | Reset</button>
   <button id="start" class="btn btn-primary mb-3">Start Game</button>
-  <button id="stop"  class="btn btn-danger  mb-3">Stop Game</button>
   <button id="step"  class="btn btn-info    mb-3">Step</button>
-  <button id="reset" class="btn btn-secondary mb-3">Reset Game</button>
-  <span id="info" class="ms-2"></span>
+  <button id="stop"  class="btn btn-danger  mb-3">Stop Game</button>
+  <span id="info" class="mb-2"></span>
 </div>
 
 <!-- conteneur 3D -->
@@ -34,6 +74,12 @@
   console.log("BASE URL:", BASE);
   const appEl  = document.getElementById('app');
   const infoEl = document.getElementById('info');
+  const densityInput = document.getElementById('density');
+  const densityValue = document.getElementById('density-value');
+
+  densityInput.addEventListener('input', () => {
+    densityValue.textContent = Number(densityInput.value).toFixed(2);
+  });
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0f1115);
@@ -130,7 +176,7 @@
     const [Z, Y, X] = data.config.shape;
     const b = data.config.rule_b.join('');
     const s = data.config.rule_s.join('');
-    infoEl.textContent = `Alive: ${aliveCount} — Shape: ${X}×${Y}×${Z} — Rule B${b}/S${s}`;
+    infoEl.textContent = `Alive: ${aliveCount} — Shape: ${X}×${Y}×${Z}`;
   }
 
   async function loadState(){
@@ -166,10 +212,49 @@
     await fetchJSON(`${BASE}reset`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ density: 0.12 })
+      body: JSON.stringify({ density: parseFloat(densityInput.value) })
     });
     await loadState();
   };
+
+  document.getElementById('rule-preset').addEventListener('change', (e) => {
+    const v = e.target.value; // ex "6|56"
+    if (!v) return;
+    const [b, s] = v.split('|');
+    document.getElementById('rule-b').value = b;
+    document.getElementById('rule-s').value = s;
+  });
+
+  document.getElementById('apply-config').addEventListener('click', async () => {
+    // stop animation auto
+    running = false;
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    const rb = document.getElementById('rule-b').value.replace(/\D/g, ''); // garde que les chiffres
+    const rs = document.getElementById('rule-s').value.replace(/\D/g, '');
+    const density = parseFloat(densityInput.value);
+    const torus = document.getElementById('torus').checked;
+
+    // POST /config
+    const data = await fetchJSON(`${BASE}config`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        rule_b: rb,
+        rule_s: rs,
+        density: density,
+        torus: torus
+      })
+    });
+
+    // config renvoyée par le backend
+    shape = data.config.shape;
+    updateInfo(data);       // tu l’as déjà : met à jour Alive / Rule Bx/Sy
+    refreshMesh(data.alive);
+  });
 
   // resize sur le conteneur
   window.addEventListener('resize', () => {

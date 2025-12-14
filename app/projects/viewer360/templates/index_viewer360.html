@@ -1,0 +1,39 @@
+{# app/projects/viewer360/templates/index_viewer360.html #}
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('viewer360.static',
+                       filename='css/projet_360viewer.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="app">
+  <aside id="sidebar">
+    <div id="topbar">
+      <label for="select">Choisir une image</label>
+      <select id="select"></select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </aside>
+
+  <main id="viewer">
+    <div id="canvas-holder"></div>
+    <div id="loading">Chargement…</div>
+  </main>
+</div>
+{% endblock %}
+
+{% block js %}
+<!-- THREE global (UMD) -->
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  // URL de l’API générée par Flask (correcte même si le prefix change)
+  const API_IMAGES_URL = "{{ url_for('viewer360.api_images') }}";
+</script>
+
+<script src="{{ url_for('viewer360.static',
+                         filename='js/projet_360viewer.js') }}"></script>
+{% endblock %}
