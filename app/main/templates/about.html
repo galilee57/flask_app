@@ -3,15 +3,15 @@
 {% block title %}ABOUT{% endblock %}
 
 {% block content %}
-<h1>ABOUT</h1>
-
-    <img src="{{ url_for('static', filename='fonts/python.png') }}" alt="Logo" class="mb-3" style="width: 30px; height: auto;">
-      <img src="{{ url_for('static', filename='fonts/Flask.png') }}" alt="Logo" class="mb-3" style="width: 30px; height: auto;">
-      <img src="{{ url_for('static', filename='fonts/js.png') }}" alt="Logo" class="mb-3" style="width: 30px; height: auto;">
-    <p>Learn by games is a huge path to integrate advanced notions.</p>
-    <p>{{ t({"fr": "Bonjour", "en": "Hello"}) }}</p>
-    <p>{{ md_meta_i18n("/content/docs/intro", "title", "-") }}</p>
-    <p>{{ md_meta_i18n("docs/intro", "summary", "-") }}</p>
-    <p>{{ md_html_i18n("docs/intro")|safe }}</p>
-
+<div class="home">
+    <div class="text-wrapper">ABOUT</div>
+    <div class="short-presentation pt-5">
+        <div class="text-wrapper-2">Learn by games</div>
+        <p>Learn by games is a huge path to integrate advanced notions.</p>
+        <p>{{ t({"fr": "Bonjour", "en": "Hello"}) }}</p>
+        <p>{{ md_meta_i18n("/content/intro", "title", "-") }}</p>
+        <p>{{ md_meta_i18n("/content/intro", "summary", "-") }}</p>
+        <p>{{ md_html_i18n("/content/intro")|safe }}</p>
+    </div>
+</div>
 {% endblock %}

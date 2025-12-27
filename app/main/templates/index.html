@@ -3,10 +3,56 @@
 {% block title %}HOME{% endblock %}
 
 {% block content %}
-
-<div class="header-container text-bg-danger text-center py-5 mb-4 rounded-3">
-  <h1 class="display-4">{{ t({"fr": "Bienvenue sur mon Portefolio", "en": "Welcome to My Projects"}) }}</h1>
-  <p class="lead">{{ t({"fr": "Explorez une collection de mes travaux et créations.", "en": "Explore a collection of my work and creations."}) }}</p>
-</div>
-
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/home.css') }}">
+  </head>
+  <body>
+    <div class="home">
+      <div class="short-presentation">
+        <div class="text-wrapper">Welcome to my site</div>
+        <p class="hi-i-m-emmanuel-ML">
+          <span class="span">&nbsp;&nbsp; Hi, I’m Emmanuel, <br /></span>
+          <span class="text-wrapper-2">ML Engineer | Expert Python, Flask et Power BI<br /></span>
+          <span class="text-wrapper-3"></span>
+        </p>
+      </div>
+      <div class="frame"><div class="div">ABOUT ME</div></div>
+      <p class="expert-in-machine">
+        <span class="text-wrapper-4"
+          >Expert in Machine Learning, Big Data and Deep Learning.<br />I deploy solutions for operational
+          people&nbsp;&nbsp;to enhance process and quality.
+        </span>
+        <span class="text-wrapper-5">See More..</span>
+      </p>
+      <div class="image">
+        <div class="rectangle"></div>
+        <div class="rectangle-2"></div>
+        <img src="{{ url_for('static', filename='fonts/data.png') }}" class="img"/>
+      </div>
+      <p class="i-have-over-years">
+        <span class="text-wrapper-4">I have </span>
+        <span class="text-wrapper-10"><strong>over 25 years of operational management</strong></span>
+        <span class="text-wrapper-4">
+          experience in the fields of production, maintenance, and quality.<br />I am passionate about
+        </span>
+        <span class="text-wrapper-10"><strong>new technologies</strong></span>
+        <span class="text-wrapper-4"> in the service of people and collective success.<br />I have </span>
+        <span class="text-wrapper-10">deep expertise in Machine Learning</span>
+        <span class="text-wrapper-4"
+          >, Big Data, and Web Development.<br /><br />I master the entire data value chain: from extracting and
+          transforming large-scale data (PySpark, Kafka), to building predictive and deep learning models, as well as
+        </span>
+        <span class="text-wrapper-10"><strong>developing Flask applications</strong></span>
+        <span class="text-wrapper-4">
+          deployed in the cloud and creating advanced Power BI dashboards.<br /><br />My approach combines scientific
+          rigor, strong technical expertise, and hands-on operational insight.<br />I design solutions that turn data
+          <strong>into actionable insights</strong>
+        </span>
+        <span class="text-wrapper-10">for optimizing industrial processes</span>
+        <span class="text-wrapper-4"> and detecting defects.</span>
+      </p>
+    </div>
+  </body>
 {% endblock %}

@@ -11,24 +11,50 @@
 /* ---- Structure de base ---- */
 body {
   margin: 0;
-  padding: 0;
+  padding-top: 100px;
   font-family: var(--font-main);
   color: var(--text-color);
   background-color: var(--bg-color);
   line-height: 1.6;
 }
 
+.header {
+  display: flex;
+  align-items: center;        /* centrage vertical */
+  justify-content: space-between;
+  padding: 20px 20px;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11000;
+}
+
+.menu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  color: #008aaa;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
 /* ---- Header ---- */
 .header-container {
-  background-color: lightblue;
+  background-color: #008aaa;
   box-shadow: var(--shadow-light);
   padding: 1rem 2rem;
+  padding-top: var(--header-height); /* hauteur réelle du header */
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--z-header);
   width: 100%;
 }
 
@@ -116,4 +142,10 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #ddd;
   margin-top: 3rem;
+}
+
+:root {
+  --z-header: 10000;
+  --z-modal: 20000;
+  --header-height: 50px;
 }

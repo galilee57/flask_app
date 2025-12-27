@@ -1,47 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>MUSCULATION</h1>
-<p>Here you can evaluate your program's balance between strength, hypertrophy and endurance.</p>
+<class class="home">
+    <div class="text-wrapper pb-3">MUSCULATION PROGRAM BUILDER</div>
 
-<div id="messageContainer">
-    <h2>Program Management</h2>
+    <div class="text-wrapper-2 pt-5">Here you can evaluate your program's balance between strength, hypertrophy and endurance.</div>
 
-    <form id="programForm" class="row g-3 align-items-center mb-3">
-        {{ workout_form.hidden_tag() }}
+    <div id="messageContainer">
+        <h2>Program Management</h2>
 
-        <div class="col-auto">
-            {{ workout_form.plan_name(
-                class="form-control", placeholder="Program name") }}
-            {% for error in workout_form.plan_name.errors %}
-                <div class="text-danger">{{ error }}</div>
-            {% endfor %}
-        </div>
+        <form id="programForm" class="row g-3 align-items-center mb-3 pt-3 pb-3">
+            {{ workout_form.hidden_tag() }}
 
-        <div class="col-auto">
-            {{ workout_form.new_submit(class="btn btn-primary", id="new_program") }}
-        </div>
+            <div class="col-auto">
+                {{ workout_form.plan_name(
+                    class="form-control", placeholder="Program name") }}
+                {% for error in workout_form.plan_name.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
 
-        <div class="col-auto">
-            <select id="programSelect" class="form-select">
-                <option value="">-- Choisir --</option>
-            </select>
-        </div>
+            <div class="col-auto">
+                {{ workout_form.new_submit(class="btn btn-primary", id="new_program") }}
+            </div>
 
-        <div class="col-auto">
-            {{ workout_form.load_submit(class="btn btn-primary", id="load_program") }}
-        </div>
+            <div class="col-auto">
+                <select id="programSelect" class="form-select">
+                    <option value="">-- Choisir --</option>
+                </select>
+            </div>
 
-        <div class="col-auto">
-            {{ workout_form.save_submit(class="btn btn-primary", id="save_program") }}
-        </div>
+            <div class="col-auto">
+                {{ workout_form.load_submit(class="btn btn-primary", id="load_program") }}
+            </div>
 
-        <div class="col-auto">
-            {{ workout_form.reset_submit(class="btn btn-danger", id="reset_program") }}
-        </div>
-    </form>
-</div>
+            <div class="col-auto">
+                {{ workout_form.save_submit(class="btn btn-primary", id="save_program") }}
+            </div>
 
+            <div class="col-auto">
+                {{ workout_form.reset_submit(class="btn btn-danger", id="reset_program") }}
+            </div>
+        </form>
+    </div>
+</class>
 <div id="exerciseContainer" class="mb-4 d-none">
     <h2>Exercises Details</h2>
     <form id="exerciseForm" class="row g-3 align-items-center">
@@ -83,7 +85,7 @@
     <div id="programDetails"></div>
 </div>
 
-<div id="analysisContainer" class="mt-4 d-none">
+<div id="analysisContainer" class="mt-4 d-none pb-3">
     <h2>Program Analysis</h2>
     <div class="col-auto">
         {{ workout_form.analyse_submit(class="btn btn-primary", id="analyze_program") }}

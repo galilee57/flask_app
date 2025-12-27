@@ -11,55 +11,72 @@
 
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/resources.css') }}">
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/home.css') }}">
     {% block css %}{% endblock %}
 </head>
 <body>
-
+∑
 <!-- Barre de navigation Bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-  <div class="container-fluid">
+  <div class="header">
     <div class="grid-container">
-      <img src="{{ url_for('static', filename='fonts/favicon_ef.png') }}" alt="Logo" class="mb-3 me-4" style="width: 30px; height: auto;">
-      
+      <img src="{{ url_for('static', filename='fonts/logo.png') }}" alt="Logo" class="mb-3 me-4" style="width: 80px; height: auto;">
     </div>
-    <div class="grid-container ms-3">
-      <a class="navbar-brand" href="{{ url_for('main.index') }}">{{ t({"fr": "ACCUEIL", "en": "HOME"}) }}</a>
-      <a class="navbar-brand" href="{{ url_for('main.about') }}">{{ t({"fr": "A PROPOS", "en": "ABOUT"}) }}</a>
-      <a class="navbar-brand" href="{{ url_for('main.experiences_menu') }}">{{ t({"fr": "PRO", "en": "SKILLS"}) }}</a>
-      <a class="navbar-brand" href="{{ url_for('main.exploration') }}">{{ t({"fr": "LAB", "en": "LAB"}) }}</a>
+    <div class="menu">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <div class="text-wrapper-8 me-2">
+          <img src="{{ url_for('static', filename='fonts/home.png') }}" 
+              alt="GH" class="mb-2" style="width: 30px; height: auto;">
+          <a class="navbar-brand" href="{{ url_for('main.index') }}">{{ t({"fr": "ACCUEIL", "en": "HOME"}) }}</a>
+        </div>
+        <div class="text-wrapper-11 me-2">
+          <img src="{{ url_for('static', filename='fonts/user.png') }}" 
+              alt="GH" class="mb-2" style="width: 30px; height: auto;">
+          <a class="navbar-brand" href="{{ url_for('main.about') }}">{{ t({"fr": "A PROPOS", "en": "ABOUT ME"}) }}</a>
+        </div>
+        <div class="text-wrapper-11 me-2">
+          <img src="{{ url_for('static', filename='fonts/pro.png') }}" 
+              alt="GH" class="mb-2" style="width: 30px; height: auto;">
+          <a class="navbar-brand" href="{{ url_for('main.experiences_menu') }}">{{ t({"fr": "PRO", "en": "SKILLS"}) }}</a>
+        </div>
+        <div class="text-wrapper-11 me-8">
+          <img src="{{ url_for('static', filename='fonts/lab.png') }}" 
+              alt="GH" class="mb-2" style="width: 30px; height: auto;">
+          <a class="navbar-brand" href="{{ url_for('main.exploration') }}">{{ t({"fr": "LAB", "en": "LAB"}) }}</a>
+        </div>
+      </ul>
       
       <!--// TODO: Ajouter un lien vers le blog -->
       <!--// TODO: Ajouter des infographies, des articles, des réflexions persos sur l'IA, son évolution, etc. -->
       <!--// TODO: Ajouter un like et possibilité de laisser des avis -->
 
-    </div>
-    <!-- Commutateur de langue via ?lang= -->
-    <div class="grid-container">
-      <a href="#">
-        <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
-              alt="LK" class="mb-3" style="width: 30px; height: auto;">
-      </a>
-      <a href="#">
-        <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
-              alt="MD" class="mb-3" style="width: 30px; height: auto;">
-      </a>
-      <a href="#">
-        <img src="{{ url_for('static', filename='fonts/github.png') }}" 
-              alt="GH" class="mb-3 me-4" style="width: 30px; height: auto;">
-      </a>
-      <a href="{{ request.path }}?lang=fr">
-          <img src="{{ url_for('static', filename='fonts/french.png') }}" 
-              alt="FR" class="mb-3" style="width: 30px; height: auto;">
-      </a>
-      <a href="{{ request.path }}?lang=en">
-          <img src="{{ url_for('static', filename='fonts/english.png') }}" 
-              alt="EN" class="mb-3" style="width: 30px; height: auto;">
-      </a>
-    </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="#">
+          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
+                alt="LK" class="mb-2" style="width: 30px; height: auto;">
+        </a>
+        <a href="#">
+          <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
+                alt="MD" class="mb-2" style="width: 30px; height: auto;">
+        </a>
+        <a href="#">
+          <img src="{{ url_for('static', filename='fonts/github.png') }}" 
+                alt="GH" class="mb-2 me-4" style="width: 30px; height: auto;">
+        </a>
+        <a href="{{ request.path }}?lang=fr">
+            <img src="{{ url_for('static', filename='fonts/french.png') }}" 
+                alt="FR" class="mb-2" style="width: 30px; height: auto;">
+        </a>
+        <a href="{{ request.path }}?lang=en">
+            <img src="{{ url_for('static', filename='fonts/english.png') }}" 
+                alt="EN" class="mb-2" style="width: 30px; height: auto;">
+        </a>
+      </div>
+    </div>  
   </div>
 </nav>
 
-<main class="container py-4">
+<main class="container py-8">
     {% block content %}{% endblock %}
 </main>
 
