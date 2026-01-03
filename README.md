@@ -1,7 +1,7 @@
 # Environnement de développement : nenv
 
 source nenv/bin/activate
-(ou canda activate nenv)
+(ou conda activate nenv)
 
 # Lancement de l'appli en mode debuger
 
@@ -50,6 +50,7 @@ Retrogaming : incarner un personnage qui nqvigue dqns un monde varié. Bien les 
 # TODO : utilisation de Taipy pour montrer des tableaux de bord
 
 # TODO : Ideas for future projects
+
 - Reinforcement AI
 - Jeu du Taquin : exploration d'un arbre / notion d'heuristique
 - Simulation Modèle Prédateur - proie / isometrique
@@ -58,9 +59,3 @@ Retrogaming : incarner un personnage qui nqvigue dqns un monde varié. Bien les 
 - Pacman
 - Configurateur 3D : https://sketchfab.com/3d-models/
 - Admin, healthy
-
-
-
-
-
-

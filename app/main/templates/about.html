@@ -2,16 +2,69 @@
 
 {% block title %}ABOUT{% endblock %}
 
+{% block css %}
+<!-- Si besoin de CSS spécifique -->
+<link rel="stylesheet" href="{{ url_for('main.static', filename='css/about.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="home">
-    <div class="text-wrapper">ABOUT</div>
-    <div class="short-presentation pt-5">
-        <div class="text-wrapper-2">Learn by games</div>
-        <p>Learn by games is a huge path to integrate advanced notions.</p>
-        <p>{{ t({"fr": "Bonjour", "en": "Hello"}) }}</p>
-        <p>{{ md_meta_i18n("/content/intro", "title", "-") }}</p>
-        <p>{{ md_meta_i18n("/content/intro", "summary", "-") }}</p>
-        <p>{{ md_html_i18n("/content/intro")|safe }}</p>
+
+
+<div class="desktop">
+    <div class="container">
+    <div class="hero"><div class="text-wrapper">Portfolio</div></div>
+    <div class="feature-cards">
+        <div class="card">
+        <img class="image" src="img/image.png" />
+        <div class="text">
+            <div class="div">Big Data</div>
+            <div class="text-wrapper-2">2025</div>
+        </div>
+        </div>
+        <div class="card">
+        <img class="image" src="img/image-2.png" />
+        <div class="text">
+            <div class="div">Machine Learning & AI</div>
+            <div class="text-wrapper-2">2025</div>
+        </div>
+        </div>
+    </div>
+    <div class="feature-cards">
+        <div class="card">
+        <img class="image" src="img/image-4.png" />
+        <div class="text">
+            <div class="div">Web Development</div>
+            <div class="text-wrapper-2">2025</div>
+        </div>
+        </div>
+        <div class="card">
+        <img class="image" src="img/image-3.png" />
+        <div class="text">
+            <div class="div">Storytelling & Automation</div>
+            <div class="text-wrapper-2">2025</div>
+        </div>
+        </div>
+    </div>
+    <div class="text-2">
+        <div class="about">
+        <div class="text-wrapper-3">My design philosophy</div>
+        <p class="text-wrapper-4">
+            Behind every portfolio is a point of view. A great project page gives that sense of perspective to offer a
+            glimpse of the person behind the work. Is it a particular artistic movement? A way of experiencing the
+            world? What drives all these things to be the way they are?
+        </p>
+        </div>
+        <div class="contact">
+        <div class="text-wrapper-3">Reach out</div>
+        <div class="social-links">
+            <div class="text-wrapper-5">Email</div>
+            <div class="text-wrapper-4">Instagram</div>
+            <div class="text-wrapper-4">Linkedin</div>
+        </div>
+        </div>
+        <div class="divider"></div>
+    </div>
     </div>
 </div>
+
 {% endblock %}

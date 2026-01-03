@@ -28,8 +28,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-FlatPages
-    FLATPAGES_ROOT = str(BASE_DIR / "main" / "content")
-    FLATPAGES_EXTENSION = "md"
+    FLATPAGES_ROOT = str(BASE_DIR / "main/content")
+    FLATPAGES_EXTENSION = ".md"
     FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code", "codehilite", "tables", "toc", "smarty"]
     FLATPAGES_AUTO_RELOAD = True
 

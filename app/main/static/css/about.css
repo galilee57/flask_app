@@ -1,0 +1,227 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.desktop .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.desktop .hero {
+  display: flex;
+  width: 1280px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 120px 120px 80px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.desktop .text-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin-top: -1.00px;
+  font-family: "Inter-Bold", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 64px;
+  letter-spacing: -1.60px;
+  line-height: 70.4px;
+}
+
+.desktop .feature-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 0px 120px 80px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  border-radius: 8px;
+}
+
+.desktop .card {
+  display: flex;
+  flex-direction: column;
+  width: 496px;
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.desktop .image {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  aspect-ratio: 1.33;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.desktop .text {
+  align-items: baseline;
+  justify-content: space-between;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.desktop .div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: -1.00px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 24px;
+  letter-spacing: -0.48px;
+  line-height: 28.8px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #0000008c;
+  font-size: 18px;
+  letter-spacing: -0.09px;
+  line-height: 26.1px;
+  white-space: nowrap;
+}
+
+.desktop .text-2 {
+  align-items: flex-start;
+  gap: 48px;
+  padding: 80px 120px 120px;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.desktop .about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.desktop .text-wrapper-3 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 24px;
+  letter-spacing: -0.48px;
+  line-height: 28.8px;
+}
+
+.desktop .text-wrapper-4 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #0000008c;
+  font-size: 18px;
+  letter-spacing: -0.09px;
+  line-height: 26.1px;
+}
+
+.desktop .contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.desktop .social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.desktop .text-wrapper-5 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #0000008c;
+  font-size: 18px;
+  letter-spacing: -0.09px;
+  line-height: 26.1px;
+}
+
+.desktop .divider {
+  position: absolute;
+  width: calc(100% - 240px);
+  top: 0;
+  left: 120px;
+  height: 1px;
+  background-color: #0000001a;
+  border-radius: 1px;
+}

@@ -11,20 +11,28 @@
   <body>
     <div class="home">
       <div class="short-presentation">
-        <div class="text-wrapper">Welcome to my site</div>
+        <div class="text-wrapper">{{ t({"fr": "Bienvenue sur mon site", "en": "Welcome to my site"}) | safe}}</div>
         <p class="hi-i-m-emmanuel-ML">
-          <span class="span">&nbsp;&nbsp; Hi, I’m Emmanuel, <br /></span>
-          <span class="text-wrapper-2">ML Engineer | Expert Python, Flask et Power BI<br /></span>
+          <span class="span">
+            <br />&nbsp;&nbsp; {{ t({"fr": "Je suis Emmanuel, ", "en": "I’m Emmanuel, "}) }}<br />
+          </span>
+          <span class="text-wrapper-2">ML Engineer | Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI<br /></span>
           <span class="text-wrapper-3"></span>
         </p>
       </div>
       <div class="frame"><div class="div">ABOUT ME</div></div>
       <p class="expert-in-machine">
-        <span class="text-wrapper-4"
-          >Expert in Machine Learning, Big Data and Deep Learning.<br />I deploy solutions for operational
-          people&nbsp;&nbsp;to enhance process and quality.
+        <span class="text-wrapper-4">
+          {{ t({
+            "fr": 
+            "Expert en Machine Learning, Big Data et Deep Learning.<br />Je déploie des solutions avec les opérationnels
+          pour améliorer le process et la qualité.", 
+            "en": 
+            "Expert in Machine Learning, Big Data and Deep Learning.<br />I deploy solutions for operational
+          people to enhance process and quality."
+        }) | safe}}
         </span>
-        <span class="text-wrapper-5">See More..</span>
+        <span class="text-wrapper-5"><br />{{ t({"fr": "A propos ...", "en": "About Me ..."}) | safe}}</span>
       </p>
       <div class="image">
         <div class="rectangle"></div>

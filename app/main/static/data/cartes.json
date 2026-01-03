@@ -19,7 +19,11 @@
         "published": true,
         "image": "projectPhaser.png",
         "type": 3,
-        "categories": ["javascript", "jeu"]
+        "categories": ["javascript", "jeu"],
+        "resources": [
+            {"label": "Phaser Official Website", "url": "https://phaser.io/"},
+            {"label": "Phaser Tutorials", "url": "https://phaser.io/learn"}
+            ]
     },
     {
         "id": "memory",

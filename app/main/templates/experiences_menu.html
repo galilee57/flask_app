@@ -6,10 +6,11 @@
 <h1>EXPERIENCES</h1>
 
     <p>Here are areas of expertise and projects I have worked on.</p>
-    <p>{{ t({"fr": "Bonjour", "en": "Hello"}) }}</p>
-    <p>{{ md_meta_i18n("docs/intro", "title", "-") }}</p>
-    <p>{{ md_meta_i18n("docs/intro", "summary", "-") }}</p>
-    <p>{{ md_html_i18n("docs/intro")|safe }}</p>
+    <div>{{ t({"fr": "Bonjour", "en": "Hello"}) }}</div>
+    <div>{{ md_meta_i18n("docs/intro", "title", "title") }}</div>
+    <p>{{ md_meta_i18n("docs/intro", "summary", "summary") }}</p>
+    <p>{{ md_html_i18n("docs/intro/machine_learning")| safe }}</p>
+    <p>{{ md_html_i18n("docs/intro/bigdata")| safe }}</p>
 
     <a href="{{ url_for('experiences.bigdata') }}">Big Data Experience</a><br>
     <a href="{{ url_for('experiences.machine_learning') }}">Machine Learning Experience</a><br>

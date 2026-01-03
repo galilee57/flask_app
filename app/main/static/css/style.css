@@ -1,12 +1,4 @@
-/* ---- Variables globales pour un style cohérent ---- */
-:root {
-  --primary-color: #2b3a67;     /* Bleu profond, sérieux */
-  --accent-color: #4a6fa5;      /* Bleu plus clair pour les détails */
-  --text-color: #222;           /* Texte principal */
-  --bg-color: #f9f9fb;          /* Fond doux */
-  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --font-main: "Segoe UI", Roboto, "Open Sans", sans-serif;
-}
+@import "./variables.css";
 
 /* ---- Structure de base ---- */
 body {
@@ -142,10 +134,4 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #ddd;
   margin-top: 3rem;
-}
-
-:root {
-  --z-header: 10000;
-  --z-modal: 20000;
-  --header-height: 50px;
 }
