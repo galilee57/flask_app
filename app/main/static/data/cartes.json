@@ -95,7 +95,7 @@
         "id": "charts",
         "titre": "Marey Diagram",
         "description": "Gestion d'une base pour affichage de trains",
-        "published": true,
+        "published": false,
         "image": "projectMarey.jpg",
         "type": 3,
         "categories": ["D3.js", "SQLAlchemy", "javascript"],

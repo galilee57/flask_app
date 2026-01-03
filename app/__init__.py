@@ -9,11 +9,6 @@ import logging
 from logging.handlers import RotatingFileHandler
 from .blueprints import register_blueprints   # 👈 import de la fonction de déclaration
 import os, json
-from flask import current_app
-import yaml
-import markdown
-import traceback
-
 
 migrate = Migrate()
 
@@ -81,43 +76,5 @@ def create_app(config_name: str | None = None) -> Flask:
         return {
             "resources": resources
         }
-
-    @app.route("/_debug/flatpages-files")
-    def debug_flatpages_files():
-        fp = current_app.extensions["flatpages"]
-        root = Path(current_app.config["FLATPAGES_ROOT"])
-        ext = current_app.config["FLATPAGES_EXTENSION"].lstrip(".")  # "md"
-
-        lines = []
-        for f in sorted(root.rglob(f"*.{ext}")):
-            rel = f.relative_to(root).as_posix()      # ex: docs/intro.fr.md
-            page_id = rel[:-(len(ext)+1)]             # -> docs/intro.fr
-            p = fp.get(page_id)
-            lines.append(f"{'OK':2}  {page_id}" if p else f"NO  {page_id}   <-- {rel}")
-
-        return "<pre>" + "\n".join(lines) + "</pre>"
-    
-    @app.route("/_debug/flatpages-parse")
-    def debug_flatpages_parse():
-        root = Path(current_app.config["FLATPAGES_ROOT"])
-        ext = current_app.config["FLATPAGES_EXTENSION"].lstrip(".")  # md
-        md_exts = current_app.config.get("FLATPAGES_MARKDOWN_EXTENSIONS", [])
-
-        out = []
-        for f in sorted(root.rglob(f"*.{ext}")):
-            rel = f.relative_to(root).as_posix()
-            try:
-                txt = f.read_text(encoding="utf-8")
-                # Parse front-matter très simple (--- ... ---)
-                if not txt.startswith("---"):
-                    raise ValueError("Front-matter: le fichier ne commence pas par '---'")
-                _, fm, body = txt.split("---", 2)
-                yaml.safe_load(fm)  # valide YAML
-                markdown.markdown(body, extensions=md_exts)  # valide extensions Markdown
-                out.append(f"OK   {rel}")
-            except Exception as e:
-                out.append(f"FAIL {rel}\n{type(e).__name__}: {e}\n{traceback.format_exc()}\n")
-
-        return "<pre>" + "\n\n".join(out) + "</pre>"
 
     return app

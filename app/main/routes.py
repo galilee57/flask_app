@@ -12,7 +12,6 @@ def load_cartes():
     with open(chemin, encoding="utf-8") as f:
         return json.load(f)
 
-# FIXME : logs seem no to run on PA
 # Home page
 @bp.route("/")
 def index():
@@ -20,7 +19,6 @@ def index():
     cartes = load_cartes()
     return render_template("index.html")
 
-# TODO : complete Home page
 @bp.route("/about")
 def about():
     return render_template("about.html")
@@ -37,6 +35,16 @@ def exploration():
 @bp.route("/data/cartes")
 def cartes():
     cartes = load_cartes()
+
+    # If in production filter published only
+    is_prod = (
+        os.getenv("FLASK_ENV") == "production"
+        or current_app.config.get("ENV") == "production"
+    )
+
+    if is_prod:
+        cartes = [c for c in cartes if c.get("published", True)]
+
     return jsonify(cartes)
 
 # Test CSS static file serving
