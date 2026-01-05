@@ -29,6 +29,9 @@ def create_app(config_name: str | None = None) -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
 
+    app.logger.info("FLASK_CONFIG=%s", os.environ.get("FLASK_CONFIG"))
+    app.logger.info("DB=%s", app.config["SQLALCHEMY_DATABASE_URI"])
+
     pages = FlatPages(app)
 
     # i18n : appel helpers langues et markdown i18n
