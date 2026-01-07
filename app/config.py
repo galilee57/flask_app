@@ -7,7 +7,9 @@ load_dotenv()
 # Répertoires robustes (pas de chemins relatifs)
 BASE_DIR = Path(__file__).resolve().parent           # .../flask_app/app
 PROJECT_DIR = BASE_DIR.parent                        # .../flask_app
-INSTANCE_DIR = Path(os.environ.get("FLASK_INSTANCE_PATH", PROJECT_DIR / "instance"))
+INSTANCE_DIR = Path(
+    os.environ.get("FLASK_INSTANCE_PATH", PROJECT_DIR / "instance")
+).expanduser().resolve()  # .../flask_app/instance
 LOGS_DIR = PROJECT_DIR / "logs"
 INSTANCE_DIR.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -17,7 +19,7 @@ def _db_uri_from_env(default_path: Path) -> str:
     url = os.getenv("DATABASE_URL")
     if url:    # ex: "sqlite:////home/USER/flask_app/instance/charts.db" ou postgres://...
         return url
-    return f"sqlite:///{default_path}"
+    return f"sqlite:///{default_path.resolve()}"
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-key")
@@ -41,6 +43,7 @@ class DevConfig(Config):
 class ProdConfig(Config):
     DEBUG = False
     ENV = "production"
+    SQLALCHEMY_DATABASE_URI = "sqlite:////home/Galilee57/flask_app/instance/database.db"
     API_BASE_URL = "/projects/todolist"      # même domaine que Flask en prod
 
 def get_config(name: str | None = None):
