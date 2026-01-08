@@ -7,6 +7,13 @@ source nenv/bin/activate
 
 flask --app wsgi --debug run
 
+# Lancement de npx pour compilation de tailwind avec watch
+
+npx @tailwindcss/cli \
+ -i ./input.css \
+ -o ./app/main/static/css/output.css \
+ --watch
+
 # Structure de l'application
 
 app : init.py contents blueprints registrations

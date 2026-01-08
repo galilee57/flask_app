@@ -12,72 +12,92 @@
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/resources.css') }}">
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
     {% block css %}{% endblock %}
 </head>
 <body>
-∑
-<!-- Barre de navigation Bootstrap -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-  <div class="header">
-    <div class="grid-container">
-      <img src="{{ url_for('static', filename='fonts/logo.png') }}" alt="Logo" class="mb-3 me-4" style="width: 80px; height: auto;">
-    </div>
-    <div class="menu">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <div class="text-wrapper-8 me-2">
-          <img src="{{ url_for('static', filename='fonts/home.png') }}" 
-              alt="GH" class="mb-2" style="width: 30px; height: auto;">
-          <a class="navbar-brand" href="{{ url_for('main.index') }}">{{ t({"fr": "ACCUEIL", "en": "HOME"}) }}</a>
-        </div>
-        <div class="text-wrapper-11 me-2">
-          <img src="{{ url_for('static', filename='fonts/user.png') }}" 
-              alt="GH" class="mb-2" style="width: 30px; height: auto;">
-          <a class="navbar-brand" href="{{ url_for('main.about') }}">{{ t({"fr": "A PROPOS", "en": "ABOUT ME"}) }}</a>
-        </div>
-        <div class="text-wrapper-11 me-2">
-          <img src="{{ url_for('static', filename='fonts/pro.png') }}" 
-              alt="GH" class="mb-2" style="width: 30px; height: auto;">
-          <a class="navbar-brand" href="{{ url_for('main.experiences_menu') }}">{{ t({"fr": "PRO", "en": "SKILLS"}) }}</a>
-        </div>
-        <div class="text-wrapper-11 me-8">
-          <img src="{{ url_for('static', filename='fonts/lab.png') }}" 
-              alt="GH" class="mb-2" style="width: 30px; height: auto;">
-          <a class="navbar-brand" href="{{ url_for('main.exploration') }}">{{ t({"fr": "LAB", "en": "LAB"}) }}</a>
-        </div>
-      </ul>
-      
-      <!--// TODO: Ajouter un lien vers le blog -->
-      <!--// TODO: Ajouter des infographies, des articles, des réflexions persos sur l'IA, son évolution, etc. -->
-      <!--// TODO: Ajouter un like et possibilité de laisser des avis -->
 
-      <div class="d-flex align-items-center gap-3">
-        <a href="#">
-          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
-                alt="LK" class="mb-2" style="width: 30px; height: auto;">
-        </a>
-        <a href="#">
-          <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
-                alt="MD" class="mb-2" style="width: 30px; height: auto;">
-        </a>
-        <a href="#">
-          <img src="{{ url_for('static', filename='fonts/github.png') }}" 
-                alt="GH" class="mb-2 me-4" style="width: 30px; height: auto;">
-        </a>
-        <a href="{{ request.path }}?lang=fr">
-            <img src="{{ url_for('static', filename='fonts/french.png') }}" 
-                alt="FR" class="mb-2" style="width: 30px; height: auto;">
-        </a>
-        <a href="{{ request.path }}?lang=en">
-            <img src="{{ url_for('static', filename='fonts/english.png') }}" 
-                alt="EN" class="mb-2" style="width: 30px; height: auto;">
+<nav class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
+  <div class="relative mx-auto max-w-9xl px-3">
+    <div class="flex h-20 items-center">
+
+      <!-- Logo (gauche) -->
+      <div class="flex items-center">
+        <a href="{{ url_for('main.index') }}">
+          <img
+            src="{{ url_for('static', filename='fonts/logo.png') }}"
+            alt="Logo"
+            class="h-18 w-auto"
+          >
         </a>
       </div>
-    </div>  
+
+      <!-- Menu centré -->
+      <ul
+        class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex items-center gap-6"
+      >
+        <li>
+          <a href="{{ url_for('main.index') }}"
+             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
+            <img src="{{ url_for('static', filename='fonts/home.png') }}" class="h-6 w-6" alt="">
+            {{ t({"fr": "ACCUEIL", "en": "HOME"}) }}
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('main.about') }}"
+             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
+            <img src="{{ url_for('static', filename='fonts/user.png') }}" class="h-6 w-6" alt="">
+            {{ t({"fr": "A PROPOS", "en": "ABOUT ME"}) }}
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('main.experiences_menu') }}"
+             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
+            <img src="{{ url_for('static', filename='fonts/pro.png') }}" class="h-6 w-6" alt="">
+            {{ t({"fr": "PRO", "en": "SKILLS"}) }}
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('main.exploration') }}"
+             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
+            <img src="{{ url_for('static', filename='fonts/lab.png') }}" class="h-6 w-6" alt="">
+            {{ t({"fr": "LAB", "en": "LAB"}) }}
+          </a>
+        </li>
+      </ul>
+
+      <!-- Réseaux + langues (droite) -->
+      <div class="ml-auto flex items-center gap-4">
+        <a href="#" class="hover:opacity-80">
+          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" class="h-6 w-6" alt="">
+        </a>
+        <a href="#" class="hover:opacity-80">
+          <img src="{{ url_for('static', filename='fonts/medium.png') }}" class="h-6 w-6" alt="">
+        </a>
+        <a href="#" class="hover:opacity-80">
+          <img src="{{ url_for('static', filename='fonts/github.png') }}" class="h-6 w-6" alt="">
+        </a>
+
+        <div class="h-6 w-px bg-gray-300"></div>
+
+        <a href="{{ request.path }}?lang=fr">
+          <img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-6 w-6" alt="FR">
+        </a>
+        <a href="{{ request.path }}?lang=en">
+          <img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-6 w-6" alt="EN">
+        </a>
+      </div>
+
+    </div>
   </div>
 </nav>
 
-<main class="container py-8">
-    {% block content %}{% endblock %}
+<!-- Décalage du contenu à cause du fixed -->
+<main class="pt-24 mx-auto max-w-7xl px-6">
+  {% block content %}{% endblock %}
 </main>
 
 <!-- Scripts -->
