@@ -1,127 +1,127 @@
 <!DOCTYPE html>
 <html lang="{{ current_lang() }}">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Mon App{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Mon App{% endblock %}</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" 
-          integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Bootstrap (optionnel) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/resources.css') }}">
-    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-    {% block css %}{% endblock %}
+  <!-- Tailwind compilé -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+  {% block css %}{% endblock %}
 </head>
-<body>
+<body class="bg-white">
 
-<nav class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
-  <div class="relative mx-auto max-w-9xl px-3">
-    <div class="flex h-20 items-center">
+<!-- NAVBAR -->
+<nav class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
+  <div class="relative mx-auto max-w-7xl px-4">
+    <div class="flex h-20 items-center justify-between">
 
-      <!-- Logo (gauche) -->
-      <div class="flex items-center">
-        <a href="{{ url_for('main.index') }}">
-          <img
-            src="{{ url_for('static', filename='fonts/logo.png') }}"
-            alt="Logo"
-            class="h-18 w-auto"
-          >
-        </a>
-      </div>
+      <!-- LOGO -->
+      <a href="{{ url_for('main.index') }}" class="flex items-center">
+        <img src="{{ url_for('static', filename='fonts/logo.png') }}"
+             alt="Logo"
+             class="h-20 w-auto">
+      </a>
 
-      <!-- Menu centré -->
-      <ul
-        class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex items-center gap-6"
-      >
+      <!-- MENU DESKTOP -->
+      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex text-lg font-bold items-center gap-3">
         <li>
-          <a href="{{ url_for('main.index') }}"
-             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
-            <img src="{{ url_for('static', filename='fonts/home.png') }}" class="h-6 w-6" alt="">
-            {{ t({"fr": "ACCUEIL", "en": "HOME"}) }}
+          <a href="{{ url_for('main.index') }}" class="nav-link">
+            {{ t({"fr": "Accueil", "en": "Home"}) }}
           </a>
         </li>
-
         <li>
-          <a href="{{ url_for('main.about') }}"
-             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
-            <img src="{{ url_for('static', filename='fonts/user.png') }}" class="h-6 w-6" alt="">
-            {{ t({"fr": "A PROPOS", "en": "ABOUT ME"}) }}
+          <a href="{{ url_for('main.about') }}" class="nav-link">
+            {{ t({"fr": "A propos", "en": "About"}) }}
           </a>
         </li>
-
         <li>
-          <a href="{{ url_for('main.experiences_menu') }}"
-             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
-            <img src="{{ url_for('static', filename='fonts/pro.png') }}" class="h-6 w-6" alt="">
-            {{ t({"fr": "PRO", "en": "SKILLS"}) }}
+          <a href="{{ url_for('main.experiences_menu') }}" class="nav-link">
+            {{ t({"fr": "Pro", "en": "Skills"}) }}
           </a>
         </li>
-
         <li>
-          <a href="{{ url_for('main.exploration') }}"
-             class="flex items-center gap-2 text-shadow-lg font-bold text-gray-500 hover:text-blue-700">
-            <img src="{{ url_for('static', filename='fonts/lab.png') }}" class="h-6 w-6" alt="">
-            {{ t({"fr": "LAB", "en": "LAB"}) }}
+          <a href="{{ url_for('main.exploration') }}" class="nav-link">
+            Lab
           </a>
         </li>
       </ul>
 
-      <!-- Réseaux + langues (droite) -->
-      <div class="ml-auto flex items-center gap-4">
-        <a href="#" class="hover:opacity-80">
-          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" class="h-6 w-6" alt="">
-        </a>
-        <a href="#" class="hover:opacity-80">
-          <img src="{{ url_for('static', filename='fonts/medium.png') }}" class="h-6 w-6" alt="">
-        </a>
-        <a href="#" class="hover:opacity-80">
-          <img src="{{ url_for('static', filename='fonts/github.png') }}" class="h-6 w-6" alt="">
-        </a>
+      <!-- DROITE : RÉSEAUX + LANGUES + MENU MOBILE -->
+      <div class="flex items-center gap-2">
 
-        <div class="h-6 w-px bg-gray-300"></div>
+        <!-- Réseaux -->
+        <a href="#"><img src="{{ url_for('static', filename='fonts/linkedin.png') }}" class="h-8 w-8"></a>
+        <a href="#"><img src="{{ url_for('static', filename='fonts/medium.png') }}" class="h-8 w-8"></a>
+        <a href="#"><img src="{{ url_for('static', filename='fonts/github.png') }}" class="h-8 w-8"></a>
 
-        <a href="{{ request.path }}?lang=fr">
-          <img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-6 w-6" alt="FR">
-        </a>
-        <a href="{{ request.path }}?lang=en">
-          <img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-6 w-6" alt="EN">
-        </a>
+        <div class="h-8 w-px bg-gray-300"></div>
+
+        <!-- Langues -->
+        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-8 w-8"></a>
+        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-8 w-8"></a>
+
+        <!-- MENU MOBILE -->
+        <div class="relative md:hidden">
+
+          <!-- Bouton -->
+          <button id="mobileMenuBtn"
+                  class="ml-1 rounded-lg p-2 text-gray-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500">
+            <svg id="iconOpen" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="iconClose" class="hidden h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div id="mobileMenu"
+               class="absolute right-0 top-full mt-2 hidden w-40 rounded-xl border border-gray-200 bg-white shadow-lg text-lg font-bold">
+            <ul class="py-2">
+              <li><a href="{{ url_for('main.index') }}">{{ t({"fr": "Accueil", "en": "Home"}) }}</a></li>
+              <li><a href="{{ url_for('main.about') }}">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
+              <li><a href="{{ url_for('main.experiences_menu') }}">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
+              <li><a href="{{ url_for('main.exploration') }}">Lab</a></li>
+            </ul>
+          </div>
+
+        </div>
       </div>
-
     </div>
   </div>
 </nav>
 
-<!-- Décalage du contenu à cause du fixed -->
+<!-- CONTENU -->
 <main class="pt-24 mx-auto max-w-7xl px-6">
   {% block content %}{% endblock %}
 </main>
 
-<!-- Scripts -->
-<!-- Bootstrap CDN -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS MENU MOBILE -->
+<script>
+(() => {
+  const btn = document.getElementById("mobileMenuBtn");
+  const menu = document.getElementById("mobileMenu");
+  const openIcon = document.getElementById("iconOpen");
+  const closeIcon = document.getElementById("iconClose");
 
-{% block js %}{% endblock %}
+  const toggle = (open) => {
+    menu.classList.toggle("hidden", !open);
+    openIcon.classList.toggle("hidden", open);
+    closeIcon.classList.toggle("hidden", !open);
+  };
 
-<!-- Footer avec les ressources -->
-{% if resources %}
-<section class="resources mt-4">
-  <h2 class="resources-title text-center">Resources</h2>
-  <hr class="resources-separator">
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    toggle(menu.classList.contains("hidden"));
+  });
 
-  <ul class="resources-list">
-    {% for resource in resources %}
-    <li>
-      <a href="{{ resource.url }}" target="_blank" rel="noopener">
-              {{ resource.label }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}
-
+  document.addEventListener("click", () => toggle(false));
+  menu.addEventListener("click", e => e.stopPropagation());
+})();
+</script>
 </body>
 </html>
