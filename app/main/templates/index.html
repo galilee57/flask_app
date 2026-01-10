@@ -6,27 +6,26 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/home.css') }}">
   </head>
   <body>
-    <div class="grid grid-cols-12 gap-6 m-4 items-start">
+    <div class="grid grid-cols-12 gap-6 mx-2 mt-20 items-start">
 
     <!-- TEXTE GAUCHE -->
     <div class="col-span-9 space-y-4">
 
-      <div class="text-5xl font-bold text-blue-300">
+      <div class="text-5xl text-primary-500 font-bold">
         {{ t({"fr": "Bienvenue sur mon site", "en": "Welcome to my site"}) | safe }}
       </div>
 
-      <div class="text-6xl font-bold text-emerald-400">
+      <div class="text-6xl font-bold text-primary-600">
         {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
       </div>
 
-      <div class="text-2xl text-emerald-400">
+      <div class="text-2xl text-secondary-700">
         ML Engineer | Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
       </div>
 
-      <div class="text-2xl font-bold text-black">
+      <div class="text-2xl font-bold text-secondary-700 pr-8">
         {{ t({
           "fr": "Expert en Machine Learning, Big Data et Deep Learning.<br />
                 Je déploie des solutions avec les opérationnels
@@ -54,7 +53,7 @@
 
 </div>
 
-    <div class="col-start-1 col-span-12 mt-12 text-2xl font-semibold text-gray-800 leading-relaxed">
+    <div class="col-start-1 col-span-12 mt-12 text-2xl text-outline font-medium text-gray-800leading-relaxed">
       I have over 25 years of operational management experience in the fields of production, maintenance, and quality.<br /><br />
       I am passionate about new technologies in the service of people and collective success.<br />
       I have deep expertise in Machine Learning , Big Data, and Web Development.<br /><br />

@@ -16,7 +16,7 @@
 
 <!-- NAVBAR -->
 <nav class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-  <div class="relative mx-auto max-w-7xl px-4">
+  <div class="relative mx-2 px-4">
     <div class="flex h-20 items-center justify-between">
 
       <!-- LOGO -->
@@ -27,23 +27,26 @@
       </a>
 
       <!-- MENU DESKTOP -->
-      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex text-lg font-bold items-center gap-3">
-        <li>
+      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex text-xl font-bold items-center gap-3">
+        <li class="hover:text-primary-500">
           <a href="{{ url_for('main.index') }}" class="nav-link">
             {{ t({"fr": "Accueil", "en": "Home"}) }}
           </a>
         </li>
-        <li>
+        <div class="h-8 w-px bg-gray-300"></div>
+        <li class="hover:text-primary-500">
           <a href="{{ url_for('main.about') }}" class="nav-link">
             {{ t({"fr": "A propos", "en": "About"}) }}
           </a>
         </li>
-        <li>
+        <div class="h-8 w-px bg-gray-300"></div>
+        <li class="hover:text-primary-500">
           <a href="{{ url_for('main.experiences_menu') }}" class="nav-link">
             {{ t({"fr": "Pro", "en": "Skills"}) }}
           </a>
         </li>
-        <li>
+        <div class="h-8 w-px bg-gray-300"></div>
+        <li class="hover:text-primary-500">
           <a href="{{ url_for('main.exploration') }}" class="nav-link">
             Lab
           </a>
@@ -80,12 +83,12 @@
 
           <!-- Dropdown -->
           <div id="mobileMenu"
-               class="absolute right-0 top-full mt-2 hidden w-40 rounded-xl border border-gray-200 bg-white shadow-lg text-lg font-bold">
-            <ul class="py-2">
-              <li><a href="{{ url_for('main.index') }}">{{ t({"fr": "Accueil", "en": "Home"}) }}</a></li>
-              <li><a href="{{ url_for('main.about') }}">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
-              <li><a href="{{ url_for('main.experiences_menu') }}">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
-              <li><a href="{{ url_for('main.exploration') }}">Lab</a></li>
+               class="absolute right-0 top-full mt-2 hidden w-60 rounded-xl border border-gray-200 bg-white shadow-lg text-2xl font-bold">
+            <ul class="py-2 text-gray-900">
+              <li class="hover:text-primary-500"><a href="{{ url_for('main.index') }}" class="nav-link py-2">{{ t({"fr": "Accueil", "en": "Home"}) }}</a></li>
+              <li class="hover:text-primary-500"><a href="{{ url_for('main.about') }}" class="nav-link py-2">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
+              <li class="hover:text-primary-500"><a href="{{ url_for('main.experiences_menu') }}" class="nav-link py-2">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
+              <li class="hover:text-primary-500"><a href="{{ url_for('main.exploration') }}" class="nav-link py-2">Lab</a></li>
             </ul>
           </div>
 

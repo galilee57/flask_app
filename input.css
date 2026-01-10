@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* 1️⃣ Fonts globales */
+@theme {
+  --font-sans: "Roboto", system-ui, sans-serif;
+}
+
+@layer utilities {
+  .text-outline {
+    color: theme('color-primary-900');
+    text-shadow:
+      1px 0 currentColor,
+     -1px 0 currentColor,
+      0 1px currentColor,
+      0 -1px currentColor;
+  }
+}
+
+@theme {
+  /* PRIMARY – ex: emerald */
+  --color-primary-50:  #fbeaea;
+  --color-primary-100: #f6d5d5;
+  --color-primary-200: #edabab;
+  --color-primary-300: #e48181;
+  --color-primary-400: #db5757;
+  --color-primary-500: #d22d2d;
+  --color-primary-600: #a82424;
+  --color-primary-700: #7e1b1b;
+  --color-primary-800: #541212;
+  --color-primary-900: #2a0909;
+
+  /* SECONDARY – amber */
+  --color-secondary-50:  #f2ffe6;
+  --color-secondary-100: #e5fecd;
+  --color-secondary-200: #cafe9a;
+  --color-secondary-300: #b0fd68;
+  --color-secondary-400: #96fd35;
+  --color-secondary-500: #7bfc03;
+  --color-secondary-600: #63ca02;
+  --color-secondary-700: #4a9702;
+  --color-secondary-800: #316501;
+  --color-secondary-900: #193201;
+
+    /* ACCENT – sky */
+    --color-accent-50:  theme('colors.sky.50');
+    --color-accent-100: theme('colors.sky.100');
+    --color-accent-200: theme('colors.sky.200');
+    --color-accent-300: theme('colors.sky.300');
+    --color-accent-400: theme('colors.sky.400');
+    --color-accent-500: theme('colors.sky.500');
+    --color-accent-600: theme('colors.sky.600');
+    --color-accent-700: theme('colors.sky.700');
+    --color-accent-800: theme('colors.sky.800');
+    --color-accent-900: theme('colors.sky.900');
+
+    /* NEUTRAL – gray */
+    --color-neutral-50:  theme('colors.gray.50');
+    --color-neutral-100: theme('colors.gray.100');
+    --color-neutral-200: theme('colors.gray.200');
+    --color-neutral-300: theme('colors.gray.300');
+    --color-neutral-400: theme('colors.gray.400');
+    --color-neutral-500: theme('colors.gray.500');
+    --color-neutral-600: theme('colors.gray.600');
+    --color-neutral-700: theme('colors.gray.700');
+    --color-neutral-800: theme('colors.gray.800');
+    --color-neutral-900: theme('colors.gray.900');
+
+}
