@@ -27,7 +27,7 @@
       </a>
 
       <!-- MENU DESKTOP -->
-      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex text-xl font-bold items-center gap-3">
+      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex text-xl font-bold items-center gap-3">
         <li class="hover:text-primary-500">
           <a href="{{ url_for('main.index') }}" class="nav-link">
             {{ t({"fr": "Accueil", "en": "Home"}) }}
@@ -68,7 +68,7 @@
         <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-8 w-8"></a>
 
         <!-- MENU MOBILE -->
-        <div class="relative md:hidden">
+        <div class="relative lg:hidden">
 
           <!-- Bouton -->
           <button id="mobileMenuBtn"
