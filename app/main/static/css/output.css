@@ -1,9 +1,12 @@
 /*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: "Roboto", system-ui, sans-serif;
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-emerald-100: oklch(95% 0.052 163.051);
@@ -16,22 +19,22 @@
     --color-gray-900: oklch(21% 0.034 264.665);
     --color-white: #fff;
     --spacing: 0.25rem;
-    --container-7xl: 80rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
     --text-5xl: 3rem;
     --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
-    --font-weight-light: 300;
     --font-weight-bold: 700;
     --leading-relaxed: 1.625;
     --radius-lg: 0.5rem;
@@ -41,14 +44,21 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-roboto: "Roboto", system-ui, sans-serif;
+    --font-jua: "Jua", system-ui, sans-serif;
     --color-primary-50: #fbeaea;
     --color-primary-100: #f6d5d5;
     --color-primary-300: #e48181;
+    --color-primary-400: #db5757;
     --color-primary-500: #d22d2d;
     --color-primary-600: #a82424;
     --color-primary-700: #7e1b1b;
     --color-primary-800: #541212;
-    --color-secondary-400: #96fd35;
+    --color-secondary-200: #cafe9a;
+    --color-secondary-900: #193201;
+    --spacing-1\/6-screen: 16.6667vw;
+    --spacing-1\/4-screen: 25vw;
+    --spacing-1\/8-screen: 12.5vw;
   }
 }
 @layer base {
@@ -245,17 +255,11 @@
   .col-auto {
     grid-column: auto;
   }
-  .col-span-3 {
-    grid-column: span 3 / span 3;
+  .col-span-4 {
+    grid-column: span 4 / span 4;
   }
-  .col-span-9 {
-    grid-column: span 9 / span 9;
-  }
-  .col-span-12 {
-    grid-column: span 12 / span 12;
-  }
-  .col-start-1 {
-    grid-column-start: 1;
+  .col-span-8 {
+    grid-column: span 8 / span 8;
   }
   .container {
     width: 100%;
@@ -275,11 +279,32 @@
       max-width: 96rem;
     }
   }
+  .-mx-1\/8-screen {
+    margin-inline: calc(var(--spacing-1\/8-screen) * -1);
+  }
+  .mx-1\/8-screen {
+    margin-inline: var(--spacing-1\/8-screen);
+  }
   .mx-2 {
     margin-inline: calc(var(--spacing) * 2);
   }
-  .mx-auto {
-    margin-inline: auto;
+  .mx-20 {
+    margin-inline: calc(var(--spacing) * 20);
+  }
+  .-my-1\/8-screen {
+    margin-block: calc(var(--spacing-1\/8-screen) * -1);
+  }
+  .my-1\/8-screen {
+    margin-block: var(--spacing-1\/8-screen);
+  }
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
+  .my-3 {
+    margin-block: calc(var(--spacing) * 3);
+  }
+  .my-20 {
+    margin-block: calc(var(--spacing) * 20);
   }
   .ms-2 {
     margin-inline-start: calc(var(--spacing) * 2);
@@ -305,14 +330,26 @@
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
+  }
+  .mt-40 {
+    margin-top: calc(var(--spacing) * 40);
   }
   .mt-auto {
     margin-top: auto;
   }
-  .mr-4 {
-    margin-right: calc(var(--spacing) * 4);
+  .mr-1\/4-screen {
+    margin-right: var(--spacing-1\/4-screen);
+  }
+  .mr-1\/6-screen {
+    margin-right: var(--spacing-1\/6-screen);
+  }
+  .mr-1\/8-screen {
+    margin-right: var(--spacing-1\/8-screen);
   }
   .mr-10 {
     margin-right: calc(var(--spacing) * 10);
@@ -332,11 +369,38 @@
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
+  .mb-20 {
+    margin-bottom: calc(var(--spacing) * 20);
+  }
+  .mb-30 {
+    margin-bottom: calc(var(--spacing) * 30);
+  }
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
   }
+  .ml-1\/4-screen {
+    margin-left: var(--spacing-1\/4-screen);
+  }
+  .ml-1\/6-screen {
+    margin-left: var(--spacing-1\/6-screen);
+  }
+  .ml-1\/8-screen {
+    margin-left: var(--spacing-1\/8-screen);
+  }
   .ml-10 {
     margin-left: calc(var(--spacing) * 10);
+  }
+  .ml-12 {
+    margin-left: calc(var(--spacing) * 12);
   }
   .block {
     display: block;
@@ -368,6 +432,18 @@
   .h-100 {
     height: calc(var(--spacing) * 100);
   }
+  .h-\[calc\(100vh-20px\)\] {
+    height: calc(100vh - 20px);
+  }
+  .h-\[calc\(100vh-30px\)\] {
+    height: calc(100vh - 30px);
+  }
+  .h-svh {
+    height: 100svh;
+  }
+  .min-h-\[calc\(100vh-30px\)\] {
+    min-height: calc(100vh - 30px);
+  }
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
@@ -388,9 +464,6 @@
   }
   .w-px {
     width: 1px;
-  }
-  .max-w-7xl {
-    max-width: var(--container-7xl);
   }
   .grow {
     flex-grow: 1;
@@ -504,8 +577,11 @@
   .bg-primary-300 {
     background-color: var(--color-primary-300);
   }
-  .bg-secondary-400 {
-    background-color: var(--color-secondary-400);
+  .bg-primary-400 {
+    background-color: var(--color-primary-400);
+  }
+  .bg-secondary-200 {
+    background-color: var(--color-secondary-200);
   }
   .bg-transparent {
     background-color: transparent;
@@ -522,17 +598,23 @@
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
+  .p-1\/8-screen {
+    padding: var(--spacing-1\/8-screen);
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+  .px-1\/6-screen {
+    padding-inline: var(--spacing-1\/6-screen);
   }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
-  .px-6 {
-    padding-inline: calc(var(--spacing) * 6);
+  .px-12 {
+    padding-inline: calc(var(--spacing) * 12);
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
@@ -540,14 +622,14 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
+  }
   .pt-3 {
     padding-top: calc(var(--spacing) * 3);
   }
   .pt-5 {
     padding-top: calc(var(--spacing) * 5);
-  }
-  .pt-24 {
-    padding-top: calc(var(--spacing) * 24);
   }
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
@@ -561,9 +643,19 @@
   .align-middle {
     vertical-align: middle;
   }
+  .font-jua {
+    font-family: var(--font-jua);
+  }
+  .font-roboto {
+    font-family: var(--font-roboto);
+  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
   .text-5xl {
     font-size: var(--text-5xl);
@@ -577,6 +669,14 @@
     font-size: var(--text-7xl);
     line-height: var(--tw-leading, var(--text-7xl--line-height));
   }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
@@ -588,10 +688,6 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
-  }
-  .font-light {
-    --tw-font-weight: var(--font-weight-light);
-    font-weight: var(--font-weight-light);
   }
   .text-gray-600 {
     color: var(--color-gray-600);
@@ -610,6 +706,9 @@
   }
   .text-primary-800 {
     color: var(--color-primary-800);
+  }
+  .text-secondary-900 {
+    color: var(--color-secondary-900);
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
@@ -677,6 +776,12 @@
       --tw-ring-color: var(--color-blue-500);
     }
   }
+  .sm\:text-xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
+    }
+  }
   .lg\:flex {
     @media (width >= 64rem) {
       display: flex;
@@ -688,7 +793,6 @@
     }
   }
 }
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @layer utilities {
   .text-outline {
     color: transparent;
