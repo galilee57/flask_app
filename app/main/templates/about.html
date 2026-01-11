@@ -4,66 +4,32 @@
 
 {% block css %}
 <!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="{{ url_for('main.static', filename='css/about.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 {% endblock %}
 
 {% block content %}
+<div class="bg-primary-100 min-h-[calc(100vh-30px)] p-8 font-primary">
+    <div class="text-7xl text-primary-800 font-bold mt-20">
+        {{ t({"fr": "À propos de ...", "en": "About"}) }}
+    </div>
+    <div class="text-2xl mt-5 mb-10">
+        {{ t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"}) }}
+        <br>
+        {{ t({"fr": "Pour développer ce site il a fallu ...", "en": "To develop this site it took ..."}) }}
+    </div>
 
-<div class="desktop">
-    <div class="container">
-    <div class="hero"><div class="text-wrapper">Portfolio</div></div>
-    <div class="feature-cards">
-        <div class="card">
-        <img class="image" src="img/image.png" />
-        <div class="text">
-            <div class="div">Big Data</div>
-            <div class="text-wrapper-2">2025</div>
-        </div>
-        </div>
-        <div class="card">
-        <img class="image" src="img/image-2.png" />
-        <div class="text">
-            <div class="div">Machine Learning & AI</div>
-            <div class="text-wrapper-2">2025</div>
-        </div>
-        </div>
-    </div>
-    <div class="feature-cards">
-        <div class="card">
-        <img class="image" src="img/image-4.png" />
-        <div class="text">
-            <div class="div">Web Development</div>
-            <div class="text-wrapper-2">2025</div>
-        </div>
-        </div>
-        <div class="card">
-        <img class="image" src="img/image-3.png" />
-        <div class="text">
-            <div class="div">Storytelling & Automation</div>
-            <div class="text-wrapper-2">2025</div>
-        </div>
-        </div>
-    </div>
-    <div class="text-2">
-        <div class="about">
-        <div class="text-wrapper-3">My design philosophy</div>
-        <p class="text-wrapper-4">
-            Behind every portfolio is a point of view. A great project page gives that sense of perspective to offer a
-            glimpse of the person behind the work. Is it a particular artistic movement? A way of experiencing the
-            world? What drives all these things to be the way they are?
-        </p>
-        </div>
-        <div class="contact">
-        <div class="text-wrapper-3">Reach out</div>
-        <div class="social-links">
-            <div class="text-wrapper-5">Email</div>
-            <div class="text-wrapper-4">Instagram</div>
-            <div class="text-wrapper-4">Linkedin</div>
-        </div>
-        </div>
-        <div class="divider"></div>
-    </div>
+    <div class="text-xl sm:text-5xl font-normal leading-relaxed">
+        Apprendre Figma pour maquetter et intégrer de futures animations.<br>
+        Ré-apprendre le Web Design qui devient un terrain d'expression !<br>
+        <span class="text 2xl sm:text-7xl text-outline">Progresser en Python</span> et apprendre les subtilités de Flask.<br>
+        Apprendre Bootstrap puis Tailwind tellement plus simple ...<br>
+        Déployer sur PythonAnywhere, versionner avec Git et galérer avec les nombreuses exeptions.<br>
+        Intégrer des extensions Flask pour du contenu long en Markdown<br>
+        Apprendre à internationaliser le site (i18n).<br>
+        Restructurer les projets Flask grâce aux Blueprints.<br>
+        <br><br>
+        
+
     </div>
 </div>
 

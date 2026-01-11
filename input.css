@@ -6,7 +6,7 @@
 /* 1️⃣ Fonts globales */
 @theme {
   --font-roboto: "Roboto", system-ui, sans-serif;
-  --font-jua: "Jua", system-ui, sans-serif;
+  --font-primary: "Jua", system-ui, sans-serif;
 }
 
 /* 2️⃣ Utilitaires custom */
@@ -73,6 +73,8 @@
   --spacing-1\/6-screen: 16.6667vw;
   --spacing-1\/4-screen: 25vw;
   --spacing-1\/8-screen: 12.5vw;
+  --spacing-1\/3-screen: 33.3333vw;
+  --spacing-1\/2-screen: 50vw;
 
   --nav-height: 20rem;
 }

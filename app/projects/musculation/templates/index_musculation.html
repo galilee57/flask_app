@@ -1,96 +1,112 @@
 {% extends "base.html" %}
 
 {% block content %}
-<class class="home">
-    <div class="text-wrapper pb-3">MUSCULATION PROGRAM BUILDER</div>
+<div class="bg-primary-100 min-h-[calc(100vh-30px)] p-8 font-primary">
 
-    <div class="text-wrapper-2 pt-5">Here you can evaluate your program's balance between strength, hypertrophy and endurance.</div>
-
-    <div id="messageContainer">
-        <h2>Program Management</h2>
-
-        <form id="programForm" class="row g-3 align-items-center mb-3 pt-3 pb-3">
-            {{ workout_form.hidden_tag() }}
-
-            <div class="col-auto">
-                {{ workout_form.plan_name(
-                    class="form-control", placeholder="Program name") }}
-                {% for error in workout_form.plan_name.errors %}
-                    <div class="text-danger">{{ error }}</div>
-                {% endfor %}
-            </div>
-
-            <div class="col-auto">
-                {{ workout_form.new_submit(class="btn btn-primary", id="new_program") }}
-            </div>
-
-            <div class="col-auto">
-                <select id="programSelect" class="form-select">
-                    <option value="">-- Choisir --</option>
-                </select>
-            </div>
-
-            <div class="col-auto">
-                {{ workout_form.load_submit(class="btn btn-primary", id="load_program") }}
-            </div>
-
-            <div class="col-auto">
-                {{ workout_form.save_submit(class="btn btn-primary", id="save_program") }}
-            </div>
-
-            <div class="col-auto">
-                {{ workout_form.reset_submit(class="btn btn-danger", id="reset_program") }}
-            </div>
-        </form>
+    <div class="text-5xl text-primary-800 font-bold mt-20">
+        MUSCULATION PROGRAM BUILDER
     </div>
-</class>
-<div id="exerciseContainer" class="mb-4 d-none">
-    <h2>Exercises Details</h2>
-    <form id="exerciseForm" class="row g-3 align-items-center">
-        {{ exercise_form.hidden_tag() }}
+
+    <div class="text-2xl mt-5 mb-10">
+        {{ t({
+            "fr": "Ici, vous pouvez évaluer l'équilibre de votre programme entre force, hypertrophie et endurance.", 
+            "en": "Here you can evaluate your program's balance between strength, hypertrophy and endurance."
+        }) }}<br>
+        {{ t({
+            "fr": "Créez, modifiez et analysez vos programmes d'entraînement de musculation.", 
+            "en": "Create, modify and analyze your weight training programs."
+        }) }}<br>
+    </div>
+
+    <form id="programForm" class="row g-3 align-items-center mb-3 pt-3 pb-3">
+        {{ workout_form.hidden_tag() }}
 
         <div class="col-auto">
-            <label for="exerciseSelect">Select an exercise :</label>
-            <select id="exerciseSelect">
-                <option value="">-- Choose --</option>
-            </select>
-        </div>
-
-        <div class="col-auto mb-4">
-            {{ exercise_form.reps.label }}
-            {{ exercise_form.reps(class="form-control", id="nb_rep", placeholder="Amount of reps") }}
-            {% for error in exercise_form.reps.errors %}
-                <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
-        </div>
-
-        <div class="col-auto mb-4">
-            {{ exercise_form.weight.label }}
-            {{ exercise_form.weight(class="form-control", placeholder="Weight (kg)") }}
-            {% for error in exercise_form.weight.errors %}
+            {{ workout_form.plan_name(
+                class="form-control", placeholder="Program name") }}
+            {% for error in workout_form.plan_name.errors %}
                 <div class="text-danger">{{ error }}</div>
             {% endfor %}
         </div>
 
         <div class="col-auto">
-            {{ exercise_form.submit(class="btn btn-primary", id="add_exercice_form") }}
+            {{ workout_form.new_submit(class="btn btn-primary", id="new_program") }}
         </div>
+
+        <div class="col-auto">
+            <select id="programSelect" class="form-select">
+                <option value="">-- Choisir --</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.load_submit(class="btn btn-primary", id="load_program") }}
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.save_submit(class="btn btn-primary", id="save_program") }}
+        </div>
+
+        <div class="col-auto">
+            {{ workout_form.reset_submit(class="btn btn-danger", id="reset_program") }}
+        </div>
+
     </form>
+  
+    <div id="exerciseContainer" class="mb-4 d-none">
 
-    <div id="exerciseDetails"></div>
-</div>
+        <h2 class="bg-secondary-300 p-4 text-4xl rounded-2xl w-1/3-screen">Exercises Details</h2>
+        <form id="exerciseForm" class="row g-3 align-items-center">
+            
 
-<div id="programContainer">
-    <h2>Program Details</h2>
-    <div id="programDetails"></div>
-</div>
+            <div class="col-auto">
+                <label for="exerciseSelect">Select an exercise :</label>
+                <select id="exerciseSelect">
+                    <option value="">-- Choose --</option>
+                </select>
+            </div>
 
-<div id="analysisContainer" class="mt-4 d-none pb-3">
-    <h2>Program Analysis</h2>
-    <div class="col-auto">
-        {{ workout_form.analyse_submit(class="btn btn-primary", id="analyze_program") }}
+            <div class="col-auto mb-4">
+                {{ exercise_form.reps.label }}
+                {{ exercise_form.reps(class="form-control", id="nb_rep", placeholder="Amount of reps") }}
+                {% for error in exercise_form.reps.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-auto mb-4">
+                {{ exercise_form.weight.label }}
+                {{ exercise_form.weight(class="form-control", placeholder="Weight (kg)") }}
+                {% for error in exercise_form.weight.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-auto">
+                {{ exercise_form.submit(class="btn btn-primary", id="add_exercice_form") }}
+            </div>
+        </form>
+
+        <div id="exerciseDetails"></div>
+        
     </div>
-    <div id="programAnalysis" class="mt-4"></div>
+
+    <div id="programContainer">
+        <h2 class="bg-secondary-300 p-4 text-4xl rounded-2xl w-1/3-screen">Program Details</h2>
+        <div id="programDetails"></div>
+    </div>
+
+    <div id="analysisContainer" class="mt-4 d-none pb-3">
+
+        <h2>Program Analysis</h2>
+        <div class="col-auto">
+            {{ workout_form.analyse_submit(class="btn btn-primary", id="analyze_program") }}
+        </div>
+
+        <div id="programAnalysis" class="mt-4"></div>
+
+    </div>
+
 </div>
 
 {% endblock %}

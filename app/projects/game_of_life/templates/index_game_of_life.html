@@ -3,38 +3,40 @@
 {% block title %}GAME OF LIFE{% endblock %}
 
 {% block content %}
-<h1>🕹️ GAME OF LIFE</h1>
-<h4>Click to build your own pattern or random reset !</h4>
+<div class="bg-primary-100 min-h-[calc(100vh-30px)] p-8 font-primary">
+  <div class="text-5xl text-primary-800 font-bold mt-20">🕹️ GAME OF LIFE</div>
+  <div class="text-2xl mt-5 mb-10">Click to build your own pattern or random reset !</div>
 
-<div>
-  <button id="start" class="btn btn-primary mb-3">Start Game</button>
-  <button id="stop" class="btn btn-danger mb-3">Stop Game</button>
-  <button id="reset" class="btn btn-warning mb-3">Random Reset</button>
-  <button id="clear" class="btn btn-warning mb-3">Clear Game</button>
+  <div>
+    <button id="start" class="btn btn-primary mb-3">Start Game</button>
+    <button id="stop" class="btn btn-danger mb-3">Stop Game</button>
+    <button id="reset" class="btn btn-warning mb-3">Random Reset</button>
+    <button id="clear" class="btn btn-warning mb-3">Clear Game</button>
+  </div>
+
+  <div class="mb-3">
+    <input id="pattern-name" class="form-control d-inline-block w-auto" placeholder="Nom du pattern (ex: glider1)">
+    <button id="save-pattern" class="btn btn-success mb-1">Save</button>
+
+    <select id="pattern-select" class="form-select d-inline-block w-auto">
+      <option value="">-- choisir un pattern --</option>
+
+      <!-- Patterns enregistrés : rempli en JS -->
+      <optgroup label="Enregistrés" id="saved-optgroup"></optgroup>
+
+      <!-- Patterns génériques -->
+      <optgroup label="Génériques">
+        {% for name in patterns %}
+          <option value="gen:{{ name }}">{{ name }}</option>
+        {% endfor %}
+      </optgroup>
+    </select>
+
+    <button id="load-pattern" class="btn btn-info mb-1">Load</button>
+  </div>
+
+  <div id="grid-container" class="mb-3"></div>
 </div>
-
-<div class="mb-3">
-  <input id="pattern-name" class="form-control d-inline-block w-auto" placeholder="Nom du pattern (ex: glider1)">
-  <button id="save-pattern" class="btn btn-success mb-1">Save</button>
-
-  <select id="pattern-select" class="form-select d-inline-block w-auto">
-    <option value="">-- choisir un pattern --</option>
-
-    <!-- Patterns enregistrés : rempli en JS -->
-    <optgroup label="Enregistrés" id="saved-optgroup"></optgroup>
-
-    <!-- Patterns génériques -->
-    <optgroup label="Génériques">
-      {% for name in patterns %}
-        <option value="gen:{{ name }}">{{ name }}</option>
-      {% endfor %}
-    </optgroup>
-  </select>
-
-  <button id="load-pattern" class="btn btn-info mb-1">Load</button>
-</div>
-
-<div id="grid-container" class="mb-3"></div>
 {% endblock %}
 
 {% block css %}
