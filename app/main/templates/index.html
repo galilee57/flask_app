@@ -8,61 +8,64 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <div class="grid grid-cols-12 gap-6 mx-2 mt-20 items-start">
+    <div class="bg-primary-100">
+      <div class="grid grid-cols-12 gap-6 mx-2 mt-20 items-start">
 
-    <!-- TEXTE GAUCHE -->
-    <div class="col-span-9 space-y-4">
+        <!-- TEXTE GAUCHE -->
+        <div class="col-span-9 space-y-4 mt-20 ml-10">
 
-      <div class="text-5xl text-primary-500 font-bold">
-        {{ t({"fr": "Bienvenue sur mon site", "en": "Welcome to my site"}) | safe }}
+          <div class="text-5xl text-primary-500 font-bold">
+            {{ t({"fr": "Bienvenue sur mon site", "en": "Welcome to my site"}) | safe }}
+          </div>
+
+          <div class="text-6xl font-bold text-primary-600">
+            {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
+          </div>
+
+          <div class="text-2xl text-primary-700">
+            ML Engineer | Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
+          </div>
+
+          <div class="text-2xl font-bold text-primary-700 pr-8">
+            {{ t({
+              "fr": "Expert en Machine Learning, Big Data et Deep Learning.<br />
+                    Je déploie des solutions avec les opérationnels
+                    pour améliorer le process et la qualité.",
+              "en": "Expert in Machine Learning, Big Data and Deep Learning.<br />
+                    I deploy solutions for operational people to enhance
+                    process and quality."
+            }) | safe }}
+          </div>
       </div>
 
-      <div class="text-6xl font-bold text-primary-600">
-        {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
+      <!-- IMAGE DROITE -->
+      <div class="col-span-3 mt-20 mr-10 relative">
+
+        <div class="absolute inset-0 bg-blue-100 rounded-xl transform -rotate-3 translate-x-2 translate-y-2"></div>
+          <div class="absolute inset-0 bg-emerald-100 rounded-xl transform rotate-3 -translate-x-2 -translate-y-2"></div>
+
+          <img
+            src="{{ url_for('static', filename='fonts/data.png') }}"
+            class="relative w-full rounded-xl shadow-lg"
+            alt="Data illustration"
+          />
+        </div>
       </div>
 
-      <div class="text-2xl text-primary-700">
-        ML Engineer | Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
-      </div>
+      <div class="bg-secondary-400 p-4 mt-10">
+        <div class="col-start-1 col-span-12 text-5xl font-bold text-primary-800 leading-relaxed mt-5">
+          Over <span class="text-outline text-6xl">25 years </span>of operational management experience in production, maintenance, and quality.<br /><br />
+          Passionate about <span class="text-outline text-6xl">new technologies</span> for people and collective success.<br />
+          I have deep expertise in <span class="text-outline text-6xl">Machine Learning</span>, <span class="text-outline text-6xl">Big Data</span>, and <span class="text-outline text-6xl">Web Dev</span>.<br /><br />
 
-      <div class="text-2xl font-bold text-primary-700 pr-8">
-        {{ t({
-          "fr": "Expert en Machine Learning, Big Data et Deep Learning.<br />
-                Je déploie des solutions avec les opérationnels
-                pour améliorer le process et la qualité.",
-          "en": "Expert in Machine Learning, Big Data and Deep Learning.<br />
-                I deploy solutions for operational people to enhance
-                process and quality."
-        }) | safe }}
-      </div>
+          Master of the entire data value chain: from extracting and transforming large-scale data (PySpark, Kafka), to building predictive and deep learning models, 
+          as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
 
+          My approach combines scientific rigor, <span class="text-outline text-6xl">strong technical expertise</span>, and hands-on operational insight.<br />
+          I design solutions that turn data into actionable insights for <span class="text-outline text-6xl">optimizing industrial processes</span> and detecting defects.
+        </div>
+      </div>
     </div>
 
-  <!-- IMAGE DROITE -->
-  <div class="col-span-3 relative">
-
-    <div class="absolute inset-0 bg-blue-100 rounded-xl transform -rotate-3 translate-x-2 translate-y-2"></div>
-    <div class="absolute inset-0 bg-emerald-100 rounded-xl transform rotate-3 -translate-x-2 -translate-y-2"></div>
-
-    <img
-      src="{{ url_for('static', filename='fonts/data.png') }}"
-      class="relative w-full rounded-xl shadow-lg"
-      alt="Data illustration"
-    />
-  </div>
-
-</div>
-
-    <div class="col-start-1 col-span-12 mt-12 text-2xl text-outline font-light text-primary-800 leading-relaxed">
-      I have over 25 years of operational management experience in the fields of production, maintenance, and quality.<br /><br />
-      I am passionate about new technologies in the service of people and collective success.<br />
-      I have deep expertise in Machine Learning , Big Data, and Web Development.<br /><br />
-
-      I master the entire data value chain: from extracting and transforming large-scale data (PySpark, Kafka), to building predictive and deep learning models, 
-      as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
-
-      My approach combines scientific rigor, strong technical expertise, and hands-on operational insight.<br />
-      I design solutions that turn data into actionable insights for optimizing industrial processes and detecting defects.
-    </div>
   </body>
 {% endblock %}

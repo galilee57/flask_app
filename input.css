@@ -7,14 +7,12 @@
   --font-sans: "Roboto", system-ui, sans-serif;
 }
 
+/* 2️⃣ Utilitaires custom */
 @layer utilities {
   .text-outline {
-    color: theme('color-primary-900');
-    text-shadow:
-      1px 0 currentColor,
-     -1px 0 currentColor,
-      0 1px currentColor,
-      0 -1px currentColor;
+    color: transparent;
+    -webkit-text-stroke: 2px black;
+    text-stroke: 2px black;
   }
 }
 
