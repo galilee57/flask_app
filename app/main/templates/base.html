@@ -111,20 +111,32 @@
 
 {% block js %}{% endblock %}
 
-<!-- Footer avec les ressources -->
+<!-- Footer / Resources -->
 {% if resources %}
-<section class="bg-secondary-300 resources">
-  <h2 class="resources-title text-center">Resources</h2>
-  <hr class="resources-separator">
+<section class="bg-secondary-100">
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <h2 class="text-center text-xl font-semibold text-secondary-900">
+      Resources
+    </h2>
 
-  <ul class="resources-list">
-    {% for resource in resources %}
-    <li>
-      <a href="{{ resource.url }}" target="_blank" rel="noopener">
-              {{ resource.label }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+    <hr class="my-6 border-slate-200">
+
+    <ul class="mx-auto grid max-w-4xl gap-3
+             sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">   
+      {% for resource in resources %}
+      <li class="flex justify-center">
+        <a
+          href="{{ resource.url }}"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex w-full items-center justify-center rounded-4xl border bg-secondary-600 px-4 py-2 font-primary text-xl text-slate-800 shadow-sm transition hover:bg-secondary-700"
+        >
+          {{ resource.label }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 {% endif %}
 

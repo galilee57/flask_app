@@ -9,15 +9,19 @@
 {% block content %}
 
 <div class="bg-primary-100 font-primary min-h-[calc(100vh-30px)] p-8">
-  <div class="text-7xl text-primary-800 font-bold mt-20">
+  <div class="text-7xl text-primary-800 font-bold mt-5">
     {{ t({"fr": "LAB", "en": "LAB"}) }}
   </div>
   <div class="text-2xl mb-10 mt-5">
-    {{ t({"fr": "Voici les sujets que j'ai utilisés pour progresser", "en": "Here are topics I used to progress"}) }}
+    {{ t({
+      "fr": "La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. (Albert Einstein)", 
+      "en": "Knowledge is acquired through experience, everything else is just information. (Albert Einstein)"}) }}
   </div>
 
   <!-- Grille des cartes (remplie en JS) -->
-  <div id="cartes-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-4"></div>
+  <div id="cartes-grid"
+     class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-4">
+  </div>
 </div>
 
 <!-- Bootstrap JS -->
@@ -47,33 +51,46 @@
 
   // ---- Carte avec bouton ----
   function carteCard(c) {
-  const imgSrc = IMAGE_BASE + (c.image || "");
-  const titre = c.titre || "";
-  const desc  = c.description || "";
-  const note  = c.type || 0;
-  const projetUrl = `/projects/${c.id}`;
+    const imgSrc = IMAGE_BASE + (c.image || "");
+    const titre = c.titre || "";
+    const desc  = c.description || "";
+    const note  = c.type || 0;
+    const projetUrl = `/projects/${c.id}`;
 
-  return `
-    <div class="col d-flex">
-      <div class="card project-card bg-primary-300 flex-fill text-center h-100 d-flex flex-column">
-        <img src="${imgSrc}" class="card-img-top project-card-img" alt="${titre}">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title mb-2">${titre}</h5>
-          <div class="mb-2">${starsHtml(note)}</div>
-          <p class="card-text small text-body-secondary">${desc}</p>
-          ${badgeList(c.categories)}
-        </div>
-        <div class="card-footer bg-transparent border-0 mt-auto">
-          <div class="d-grid">
-            <button class="btn btn-primary"
-                    onclick="window.location.href='${projetUrl}'">
+    return `
+      <div class="flex">
+        <div class="flex h-full w-full flex-col hover:bg-secondary-700 rounded-xl bg-primary-400 text-center shadow">
+          <img
+            src="${imgSrc}"
+            class="h-48 w-full object-cover p-3 rounded-3xl"
+            alt="${titre}"
+            loading="lazy"
+          />
+
+          <div class="flex flex-1 flex-col gap-2 p-4">
+            <h5 class="text-xl font-semibold leading-snug">${titre}</h5>
+
+            <div>${starsHtml(note)}</div>
+
+            <p class="text-lg text-neutral-800 flex-1">
+              ${desc}
+            </p>
+
+            ${badgeList(c.categories)}
+          </div>
+
+          <div class="mt-auto p-4 pt-0">
+            <button
+              class="w-full rounded-2xl bg-primary-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              onclick="window.location.href='${projetUrl}'"
+              type="button"
+            >
               See more
             </button>
           </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
   }
 
   // ---- Utilise bien carteCard(c) ici ----
