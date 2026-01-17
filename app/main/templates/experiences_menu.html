@@ -3,28 +3,42 @@
 {% block title %}EXPERIENCES{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8">
-  <div class="text-7xl text-primary-800 font-bold mt-20">EXPERIENCES</div>
-  <div class="text-2xl mb-10 mt-5">Here are areas of expertise and projects I have worked on.</div>
+<div class="bg-gray-100 p-8 font-primary h-screen">
+  <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">EXPERIENCES</div>
+  <div class="text-xl sm:text-2xl mb-10 mt-2">Here are areas of expertise and projects<br />I have worked on.</div>
 
   {% set cards = [
-    {"label": "MACHINE LEARNING & AI", "href": url_for('experiences.machine_learning'), "bg": "bg-primary-300", "hover": "hover:bg-secondary-300"},
-    {"label": "BIG DATA",              "href": url_for('experiences.bigdata'),          "bg": "bg-primary-400", "hover": "hover:bg-secondary-400"},
-    {"label": "WEB DESIGN",            "href": url_for('experiences.web_design'),       "bg": "bg-primary-500", "hover": "hover:bg-secondary-500"},
-    {"label": "AUTOMATION",            "href": url_for('experiences.power_platform'),   "bg": "bg-primary-600", "hover": "hover:bg-secondary-600"}
+    {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 
+    "img": url_for('static', filename='images/machine_learning.jpg'), 
+    "bg": "bg-primary-300", "hover": "hover:bg-secondary-300"},
+
+    {"label": "BIG DATA", "href": url_for('experiences.bigdata'),
+    "img": url_for('static', filename='images/bigdata.jpg'),       
+    "bg": "bg-primary-400", "hover": "hover:bg-secondary-400"},
+
+    {"label": "WEB DESIGN", "href": url_for('experiences.web_design'),
+    "img": url_for('static', filename='images/web_design.jpg'),
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-500"},
+
+    {"label": "AUTOMATION", "href": url_for('experiences.power_platform'), 
+    "img": url_for('static', filename='images/deep_learning.jpg'),
+    "bg": "bg-primary-600", "hover": "hover:bg-secondary-600"}
   ] %}
 
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
     {% for c in cards %}
       <a href="{{ c.href }}"
-         class="block no-underline text-white text-2xl focus:outline-none">
+         class="block no-underline focus:outline-none text-white">
         <div class="{{ c.bg }} {{ c.hover }}
                     aspect-square rounded-2xl shadow-lg text-white font-bold
-                    flex items-center justify-center text-center p-6
+                    border border-neutral-400
+                    flex flex-col place-items-center md:items-start justify-center text-center p-6
                     hover:-translate-y-1 hover:shadow-xl
                     transition-all duration-200
                     focus-within:ring-4 focus-within:ring-primary-200">
-          {{ c.label }}
+          
+          <div class="text-lg md:text-xl lg:text-2xl text-white text-center">{{ c.label }}</div>
+          <img src="{{ c.img}}" alt="{{ c.label}}" class="p-2 rounded-3xl"/>
         </div>
       </a>
     {% endfor %}

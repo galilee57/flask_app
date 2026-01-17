@@ -8,18 +8,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
-    <div class="text-7xl text-primary-600 font-bold mt-20">
-        {{ t({"fr": "À propos de ...", "en": "About"}) }}
-    </div>
-    <div class="text-2xl text-primary-500 mt-5 mb-10">
-        {{ t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"}) }}
+<div class="bg-gray-100 p-8 font-primary h-screen">
+  <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">{{ t({"fr": "À propos de ...", "en": "About"}) }}</div>
+  <div class="text-xl sm:text-2xl mb-10 mt-2">
+    {{ t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"}) }}
         <br>
         {{ t({"fr": "Pour développer ce site il a fallu ...", "en": "To develop this site it took ..."}) }}
-    </div>
+  </div>
 
-    <div class="text-3xl font-normal leading-relaxed">
-        Apprendre Figma pour maquetter et intégrer de futures animations.<br>
+    <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
+        Apprendre Figma pour maquetter et anticiper les futures animations.<br>
         Ré-apprendre le Web Design qui devient un terrain d'expression !<br>
         <span class="text 2xl sm:text-4xl text-outline">Progresser en Python</span> et apprendre les subtilités de Flask.<br>
         Apprendre Bootstrap puis Tailwind tellement plus simple ...<br>
