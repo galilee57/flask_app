@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>POWER PLATFORM</h1>
-<p>Professional Experiences in Power Platform.</p>
-<!-- Ajoute ici ton contenu spécifique au projet -->
-    <div class="bg-primary-400 my-3 ml-1/4-screen py-8 px-12 rounded-2xl">
-            {{ md_html_i18n("docs/intro/deep_learning")| safe }}
-            <a href="{{ url_for('main.experiences_menu') }}">SKILLS MENU</a><br>
+<div class="bg-gray-100 p-8 font-primary">
+    <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">POWER PLATFORM</div>
+        <div class="text-xl sm:text-2xl mb-10 mt-2">4 years of experience</div>
+
+    <div class="bg-white flex flex-row text-3xl text-primary-500 my-3 rounded-2xl border border-gray-300 shadow-lg">
+        <img src="{{ url_for('static', filename='images/deep_learning.jpg') }}" 
+             alt="Big Data" class="rounded-tl-2xl rounded-bl-2xl w-0 md:w-1/4 mr-8 object-cover"/>    
+        <div class="flex flex-col">
+             <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
+                {{ md_html_i18n("docs/intro/deep_learning")| safe }}
+            </div>
+            <a href="{{ url_for('main.experiences_menu') }}">
+                <div class="animate-bounce mt-4 text-center text-xl text-primary-700 font-bold">
+                    &#8595; {{ t({"fr": "PRO", "en": "BACK"}) }}
+                </div>
+            </a><br>
+        </div>  
     </div>
+</div>
 {% endblock %}
 
 {% block js %}
-<script src="experience_power_platform.js"></script>
+<script src="deep_learning.js"></script>
 {% endblock %}
