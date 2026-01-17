@@ -7,6 +7,12 @@ source nenv/bin/activate
 
 flask --app wsgi --debug run
 
+# Console pythonAnyWhere (utiliser celle à partir de l'env dans Web Menu)
+
+git pull
+puis valider par :wq
+Reload App (menu Web)
+
 # Lancement de npx pour compilation de tailwind avec watch
 
 npx @tailwindcss/cli \
