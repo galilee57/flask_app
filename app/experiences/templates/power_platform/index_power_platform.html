@@ -4,11 +4,10 @@
 <h1>POWER PLATFORM</h1>
 <p>Professional Experiences in Power Platform.</p>
 <!-- Ajoute ici ton contenu spécifique au projet -->
-{% endblock %}
-
-{% block css %}
-<!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="experience_power_platform.css">
+    <div class="bg-primary-400 my-3 ml-1/4-screen py-8 px-12 rounded-2xl">
+            {{ md_html_i18n("docs/intro/deep_learning")| safe }}
+            <a href="{{ url_for('main.experiences_menu') }}">SKILLS MENU</a><br>
+    </div>
 {% endblock %}
 
 {% block js %}

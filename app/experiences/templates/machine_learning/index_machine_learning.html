@@ -4,6 +4,10 @@
 <h1>MACHINE LEARNING AND AI</h1>
 <p>Professional Experiences in Machine Learning and AI.</p>
 <!-- Ajoute ici ton contenu spécifique au projet -->
+    <div class="bg-primary-300 my-3 mr-1/4-screen py-8 px-12 rounded-2xl">
+            {{ md_html_i18n("docs/intro/machine_learning")| safe }}
+            <a href="{{ url_for('main.experiences_menu') }}">SKILLS MENU</a><br>
+    </div>
 {% endblock %}
 
 {% block css %}

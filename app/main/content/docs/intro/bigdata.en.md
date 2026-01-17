@@ -3,11 +3,14 @@ title: Machine Learning / Statistics
 summary: English Version
 ---
 
-## Big Data :
+**Pyspark** scripts: extraction and transformation of data from <span class="text-outline text-4xl">DataLake for Machine Learning</span>
 
-- Pyspark scripts: extraction and transformation of data from DataLake for Machine Learning
-- NB Jupyter learning modules
-- Processing of Kafka schemas to extract data dictionaries
-- Generic scripts to generate files to DataWareHouse
-- Processing of Directed Graphs to extract data in tabular formats
-- DevOps: generation of raw jobs to refined zone
+NB Jupyter learning modules
+
+Processing of <span class="text-outline text-4xl">Kafka schemas</span> to extract data dictionaries
+
+<span class="text-outline text-4xl">Generic scripts</span> to generate files to DataWareHouse
+
+Processing of <span class="text-outline text-4xl">Directed Graphs</span> to extract data in tabular formats
+
+<span class="text-outline text-4xl">DevOps</span>: generation of raw jobs to refined zone

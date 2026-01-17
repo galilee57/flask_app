@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>BIG DATA</h1>
-<p>Professional Experiences in Big Data.</p>
-<!-- Ajoute ici ton contenu spécifique au projet -->
-{% endblock %}
+<div class="bg-gray-100 p-8 font-primary">
+    <div class="text-7xl text-primary-800 font-bold mt-5">BIG DATA</div>
+        <div class="text-2xl mb-10 mt-2">4 years of experience</div>
 
-{% block css %}
-<!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="experience_bigdata.css">
+    <div class="bg-primary-400 text-3xl text-white my-3 py-8 px-12 rounded-2xl">
+            {{ md_html_i18n("docs/intro/bigdata")| safe }}
+            <a href="{{ url_for('main.experiences_menu') }}" class="animate-bounce">SKILLS MENU</a><br>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}

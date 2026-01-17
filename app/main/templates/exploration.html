@@ -8,8 +8,8 @@
 
 {% block content %}
 
-<div class="bg-primary-100 font-primary min-h-[calc(100vh-30px)] p-8">
-  <div class="text-7xl text-primary-800 font-bold mt-5">
+<div class="bg-gray-100 p-8 font-primary">
+  <div class="text-7xl text-primary-800 font-bold mt-20">
     {{ t({"fr": "LAB", "en": "LAB"}) }}
   </div>
   <div class="text-2xl mb-10 mt-5">
@@ -43,7 +43,6 @@
   function badgeList(categories) {
     if (!Array.isArray(categories) || categories.length === 0) return "";
     return `
-      <p class="mb-1"><strong>Catégories :</strong></p>
       <div class="mb-2">
         ${categories.map(c => `<span class="badge bg-secondary me-1">${c}</span>`).join("")}
       </div>`;

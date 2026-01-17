@@ -3,27 +3,33 @@
 {% block title %}EXPERIENCES{% endblock %}
 
 {% block content %}
-<div class="bg-primary-100 font-primary min-h-[calc(100vh-30px)] p-8">
-    <div class="text-7xl text-primary-800 font-bold mt-20">EXPERIENCES</div>
-    <div class="text-2xl mb-10 mt-5">Here are areas of expertise and projects I have worked on.</div>
+<div class="bg-gray-100 p-8">
+  <div class="text-7xl text-primary-800 font-bold mt-20">EXPERIENCES</div>
+  <div class="text-2xl mb-10 mt-5">Here are areas of expertise and projects I have worked on.</div>
 
-    <div class="text-sm sm:text-xl font-bold mt-10 mb-5">
-        <div class="bg-primary-300 my-3 mr-1/4-screen py-8 px-12 rounded-2xl">
-            {{ md_html_i18n("docs/intro/machine_learning")| safe }}
-            <a href="{{ url_for('experiences.bigdata') }}">See more ...</a><br>
+  {% set cards = [
+    {"label": "MACHINE LEARNING & AI", "href": url_for('experiences.machine_learning'), "bg": "bg-primary-300", "hover": "hover:bg-secondary-300"},
+    {"label": "BIG DATA",              "href": url_for('experiences.bigdata'),          "bg": "bg-primary-400", "hover": "hover:bg-secondary-400"},
+    {"label": "WEB DESIGN",            "href": url_for('experiences.web_design'),       "bg": "bg-primary-500", "hover": "hover:bg-secondary-500"},
+    {"label": "AUTOMATION",            "href": url_for('experiences.power_platform'),   "bg": "bg-primary-600", "hover": "hover:bg-secondary-600"}
+  ] %}
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {% for c in cards %}
+      <a href="{{ c.href }}"
+         class="block no-underline text-white text-2xl focus:outline-none">
+        <div class="{{ c.bg }} {{ c.hover }}
+                    aspect-square rounded-2xl shadow-lg text-white font-bold
+                    flex items-center justify-center text-center p-6
+                    hover:-translate-y-1 hover:shadow-xl
+                    transition-all duration-200
+                    focus-within:ring-4 focus-within:ring-primary-200">
+          {{ c.label }}
         </div>
-        <div class="bg-primary-400 my-3 ml-1/4-screen py-8 px-12 rounded-2xl">
-            {{ md_html_i18n("docs/intro/bigdata")| safe }}
-            <a href="{{ url_for('experiences.machine_learning') }}">See more ...</a><br>
-        </div>
-        <div class="bg-primary-300 my-3 mr-1/4-screen py-8 px-12 rounded-2xl">
-            {{ md_html_i18n("docs/intro/web_dev")| safe }}
-            <a href="{{ url_for('experiences.web_design') }}">See more ...</a><br>
-        </div>
-        <div class="bg-primary-400 my-3 ml-1/4-screen py-8 px-12 rounded-2xl">
-            {{ md_html_i18n("docs/intro/deep_learning")| safe }}
-            <a href="{{ url_for('experiences.power_platform') }}">See more ...</a><br>
-        </div>
-    </div>
+      </a>
+    {% endfor %}
+  </div>
 </div>
+
+
 {% endblock %}

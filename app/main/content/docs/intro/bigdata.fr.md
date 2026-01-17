@@ -3,8 +3,6 @@ title: Machine Learning / Statistics
 summary: Version française
 ---
 
-## Big Data :
-
 - Scripts Pyspark : extraction et transformation de données issues du DataLake pour Machine Learning
 - Modules d'apprentissage NB Jupyter
 - Traitement des schémas Kafka pour extraire les dictionnaires de données
