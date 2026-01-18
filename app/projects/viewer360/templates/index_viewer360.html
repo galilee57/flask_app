@@ -1,5 +1,8 @@
 {# app/projects/viewer360/templates/index_viewer360.html #}
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+
+{% block title %}360° IMAGE VIEWER{% endblock %}
 
 {% block css %}
 <link rel="stylesheet"
@@ -8,19 +11,27 @@
 {% endblock %}
 
 {% block content %}
-<div id="app">
-  <aside id="sidebar">
-    <div id="topbar">
-      <label for="select">Choisir une image</label>
-      <select id="select"></select>
-    </div>
-    <div class="grid" id="grid"></div>
-  </aside>
+<div class="bg-gray-100 p-8 font-primary">
 
-  <main id="viewer">
-    <div id="canvas-holder"></div>
-    <div id="loading">Chargement…</div>
-  </main>
+  {{ hero(
+      title="360° IMAGE VIEWER",
+      subtitle="Explore 360° images interactively!"
+  ) }}
+
+  <div id="app">
+    <aside id="sidebar">
+      <div id="topbar">
+        <label for="select">Choisir une image</label>
+        <select id="select"></select>
+      </div>
+      <div class="grid" id="grid"></div>
+    </aside>
+
+    <main id="viewer">
+      <div id="canvas-holder"></div>
+      <div id="loading">Chargement…</div>
+    </main>
+  </div>
 </div>
 {% endblock %}
 

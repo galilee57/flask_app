@@ -1,45 +1,40 @@
 {% extends "base.html" %}
-
-{% block css %}
-<style>
-  body { font-family: system-ui, sans-serif; margin: 2rem; background: #fafafa; }
-  form { margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
-  input, select { margin: 0.25rem; padding: 0.25rem; }
-  button { padding: 0.4rem 0.8rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-  button:hover { background: #0056b3; }
-  h2 { margin-top: 2rem; }
-</style>
-{% endblock %}
+{% from "components/typography.html" import hero %}
 
 {% block content %}
-<h1>Diagramme de Marey</h1>
+<div class="bg-gray-100 p-8 font-primary">
+  {{ hero(
+      title="Diagramme de Marey",
+      subtitle="Visualisez les horaires des trains sur un diagramme de Marey"
+  ) }}
 
-<!-- FORMULAIRE STATIONS -->
-<form id="form-station">
-  <h2>Ajouter une station</h2>
-  <input type="text" id="st-name" placeholder="Nom (ex: Lille)" required>
-  <input type="number" id="st-km" placeholder="Km (ex: 0, 230)" step="0.1" required>
-  <button type="submit">Ajouter</button>
-</form>
+  <!-- FORMULAIRE STATIONS -->
+  <form id="form-station">
+    <h2>Ajouter une station</h2>
+    <input type="text" id="st-name" placeholder="Nom (ex: Lille)" required>
+    <input type="number" id="st-km" placeholder="Km (ex: 0, 230)" step="0.1" required>
+    <button type="submit">Ajouter</button>
+  </form>
 
-<!-- FORMULAIRE TRAINS -->
-<form id="form-train">
-  <h2>Ajouter un train</h2>
-  <input type="text" id="tr-name" placeholder="Nom du train (ex: TGV001)" required>
-  <input type="color" id="tr-color" value="#007bff">
-  <input type="date" id="tr-date" required><br>
-  <label>Départ :</label>
-  <select id="tr-station-depart" required></select>
-  <input type="time" id="tr-heure-depart" required><br>
-  <label>Arrivée :</label>
-  <select id="tr-station-arrivee" required></select>
-  <input type="time" id="tr-heure-arrivee" required>
-  <button type="submit">Ajouter</button>
-</form>
+  <!-- FORMULAIRE TRAINS -->
+  <form id="form-train">
+    <h2>Ajouter un train</h2>
+    <input type="text" id="tr-name" placeholder="Nom du train (ex: TGV001)" required>
+    <input type="color" id="tr-color" value="#007bff">
+    <input type="date" id="tr-date" required><br>
+    <label>Départ :</label>
+    <select id="tr-station-depart" required></select>
+    <input type="time" id="tr-heure-depart" required><br>
+    <label>Arrivée :</label>
+    <select id="tr-station-arrivee" required></select>
+    <input type="time" id="tr-heure-arrivee" required>
+    <button type="submit">Ajouter</button>
+  </form>
 
-<!-- DIAGRAMME -->
-<h2>Diagramme</h2>
-<canvas id="mareyChart" width="900" height="450"></canvas>
+  <!-- DIAGRAMME -->
+  <h2>Diagramme</h2>
+  <canvas id="mareyChart" width="900" height="450"></canvas>
+</div> 
 {% endblock %}
 
 {% block js %}

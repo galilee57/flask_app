@@ -1,24 +1,44 @@
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
 
 {% block title %}GAME OF LIFE{% endblock %}
 
 {% block content %}
-<div class="bg-primary-100 min-h-[calc(100vh-30px)] p-8 font-primary">
-  <div class="text-5xl text-primary-800 font-bold mt-5">🕹️ GAME OF LIFE</div>
-  <div class="text-2xl mt-5 mb-10">Click to build your own pattern or random reset !</div>
+<div class="bg-slate-50 p-8 font-primary min-h-[calc(100vh-30px)]">
 
-  <div>
-    <button id="start" class="btn btn-primary mb-3">Start Game</button>
-    <button id="stop" class="btn btn-danger mb-3">Stop Game</button>
-    <button id="reset" class="btn btn-warning mb-3">Random Reset</button>
-    <button id="clear" class="btn btn-warning mb-3">Clear Game</button>
+  {{ hero(
+      title="GAME OF LIFE",
+      subtitle="A simple implementation of Conway's Game of Life"
+  ) }}
+
+  <p class="mt-4 text-slate-700">
+    Click to build your own pattern or random reset!
+  </p>
+
+  <!-- Boutons -->
+  <div class="mt-5 flex flex-wrap gap-3">
+    {{ button("Start Game", variant="first", id="start", data_action="start") }}
+    {{ button("Stop Game", variant="second", id="stop", data_action="stop") }}
+    {{ button("Random Reset", variant="second", id="reset", data_action="reset") }}
+    {{ button("Clear Game", variant="second", id="clear", data_action="clear") }}
   </div>
 
-  <div class="mb-3">
-    <input id="pattern-name" class="form-control d-inline-block w-auto" placeholder="Nom du pattern (ex: glider1)">
-    <button id="save-pattern" class="btn btn-success mb-1">Save</button>
+  <!-- Pattern controls -->
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <input id="pattern-name"
+           class="w-full sm:w-72 rounded-xl border border-slate-300 bg-white px-4 py-2 shadow-sm
+                  focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
+           placeholder="Nom du pattern (ex: glider1)" />
 
-    <select id="pattern-select" class="form-select d-inline-block w-auto">
+    {{ button("Save Pattern",
+              variant="third",
+              id="save-pattern",
+              data_action="save-pattern") }}
+
+    <select id="pattern-select"
+            class="w-full sm:w-72 rounded-xl border border-slate-300 bg-white px-4 py-2 shadow-sm
+                   focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none">
       <option value="">-- choisir un pattern --</option>
 
       <!-- Patterns enregistrés : rempli en JS -->
@@ -32,21 +52,26 @@
       </optgroup>
     </select>
 
-    <button id="load-pattern" class="btn btn-info mb-1">Load</button>
+    {{ button("Load Pattern",
+              variant="third",
+              id="load-pattern",
+              data_action="load-pattern",
+              extra_class="rounded-2xl") }}
   </div>
 
-  <div id="grid-container" class="mb-3"></div>
+  <!-- Grille -->
+  <div id="grid-container" class="mt-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm overflow-auto"></div>
 </div>
 {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('game_of_life.static', filename='css/projet_game_of_life.css') }}">
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('game_of_life.static', filename='css/projet_game_of_life.css') }}">
 {% endblock %}
 
 {% block js %}
 <script>
-  // exposer l’URL de base au JS
-  window.GOL_BASE_URL = "{{ url_for('game_of_life.home') }}";  // ex "/projects/game_of_life/"
+  window.GOL_BASE_URL = "{{ url_for('game_of_life.home') }}";
 </script>
 <script src="{{ url_for('game_of_life.static', filename='js/game_of_life.js') }}"></script>
 {% endblock %}

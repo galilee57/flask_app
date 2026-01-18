@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
 
 {% block title %}ABOUT{% endblock %}
 
@@ -9,25 +10,24 @@
 
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary h-screen">
-  <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">{{ t({"fr": "À propos de ...", "en": "About"}) }}</div>
-  <div class="text-xl sm:text-2xl mb-10 mt-2">
-    {{ t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"}) }}
-        <br>
-        {{ t({"fr": "Pour développer ce site il a fallu ...", "en": "To develop this site it took ..."}) }}
+
+  {{ hero(
+      title=t({"fr": "À propos de ...", "en": "About"}),
+      subtitle=t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"})
+  ) }}
+  
+  <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
+      Apprendre Figma pour maquetter et anticiper les futures animations.<br><br>
+      Ré-apprendre le Web Design qui devient un terrain d'expression !<br>
+      <span class="text 2xl sm:text-4xl text-outline">Progresser en Python</span> et apprendre les subtilités de Flask.<br>
+      Apprendre Bootstrap puis Tailwind tellement plus simple ...<br>
+      Déployer sur PythonAnywhere, versionner avec Git et résoudre les nombreuses exceptions.<br>
+      Intégrer des extensions Flask pour du contenu long en Markdown<br>
+      Apprendre à internationaliser le site (i18n).<br>
+      Restructurer les projets Flask grâce aux Blueprints.<br>
+      <br><br>
+      Et surtout prendre du plaisir à chaque étape de ce projet personnel !
   </div>
-
-    <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
-        Apprendre Figma pour maquetter et anticiper les futures animations.<br><br>
-        Ré-apprendre le Web Design qui devient un terrain d'expression !<br>
-        <span class="text 2xl sm:text-4xl text-outline">Progresser en Python</span> et apprendre les subtilités de Flask.<br>
-        Apprendre Bootstrap puis Tailwind tellement plus simple ...<br>
-        Déployer sur PythonAnywhere, versionner avec Git et résoudre les nombreuses exceptions.<br>
-        Intégrer des extensions Flask pour du contenu long en Markdown<br>
-        Apprendre à internationaliser le site (i18n).<br>
-        Restructurer les projets Flask grâce aux Blueprints.<br>
-        <br><br>
-        Et surtout prendre du plaisir à chaque étape de ce projet personnel !
-    </div>
+  
 </div>
-
 {% endblock %}

@@ -1,22 +1,18 @@
+
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
 
 {% block title %}LAB{% endblock %}
 
-{% block css %}
-  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/cards.css') }}">
-{% endblock %}
-
 {% block content %}
-
 <div class="bg-gray-100 p-8 font-primary">
-  <div class="text-7xl text-primary-800 font-bold mt-20">
-    {{ t({"fr": "LAB", "en": "LAB"}) }}
-  </div>
-  <div class="text-2xl mb-10 mt-5">
-    {{ t({
-      "fr": "La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. (Albert Einstein)", 
-      "en": "Knowledge is acquired through experience, everything else is just information. (Albert Einstein)"}) }}
-  </div>
+  {{ hero(
+    t({"fr": "LAB", "en": "LAB"}),
+    t({
+      "fr": "La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. (Albert Einstein)",
+      "en": "Knowledge is acquired through experience, everything else is just information. (Albert Einstein)"
+    })
+  ) }}
 
   <!-- Grille des cartes (remplie en JS) -->
   <div id="cartes-grid"
@@ -58,7 +54,11 @@
 
     return `
       <div class="flex">
-        <div class="flex h-full w-full flex-col hover:bg-secondary-700 rounded-xl bg-primary-400 text-center shadow">
+        <div class="flex h-full w-full flex-col rounded-xl 
+        bg-linear-to-b from-primary-400 to-primary-100 
+        border-neutral-700 
+        hover:from-secondary-700 hover:to-secondary-100
+        text-center shadow">
           <img
             src="${imgSrc}"
             class="h-48 w-full object-cover p-3 rounded-3xl"
@@ -80,11 +80,10 @@
 
           <div class="mt-auto p-4 pt-0">
             <button
-              class="w-full rounded-full bg-primary-600 px-4 py-2 text-sm font-medium 
-              text-white transition hover:bg-primary-700 
+              class="w-full rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium 
+              text-white transition hover:bg-primary-700 shadow
               focus:outline-none focus:ring-2 focus:ring-blue-400"
               onclick="window.location.href='${projetUrl}'"
-              type="button"
             >
               See more
             </button>
@@ -93,7 +92,7 @@
       </div>
     `;
   }
-
+  
   // ---- Utilise bien carteCard(c) ici ----
   async function loadCartes() {
     try {
@@ -109,5 +108,4 @@
   }
   loadCartes();
 </script>
-
 {% endblock %}

@@ -1,22 +1,23 @@
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
+
+{% block title %}MUSCULATION PROGRAM BUILDER{% endblock %}
 
 {% block content %}
-<div class="bg-primary-100 min-h-[calc(100vh-30px)] p-8 font-primary">
+<div class="bg-gray-100 p-8 font-primary">
 
-    <div class="text-5xl text-primary-800 font-bold mt-5">
-        MUSCULATION PROGRAM BUILDER
-    </div>
-
-    <div class="text-2xl mt-5 mb-10">
-        {{ t({
-            "fr": "Ici, vous pouvez évaluer l'équilibre de votre programme entre force, hypertrophie et endurance.", 
-            "en": "Here you can evaluate your program's balance between strength, hypertrophy and endurance."
-        }) }}<br>
-        {{ t({
-            "fr": "Créez, modifiez et analysez vos programmes d'entraînement de musculation.", 
+    {{ hero(
+        "MUSCULATION PROGRAM BUILDER",
+        t({
+            "fr": "Ici, vous pouvez évaluer l'équilibre de votre programme entre force, hypertrophie et endurance.  ",
+            "en": "Here you can evaluate your program's balance between strength, hypertrophy and endurance.  "
+            }) ~
+        t({
+            "fr": "Créez, modifiez et analysez vos programmes d'entraînement de musculation.",
             "en": "Create, modify and analyze your weight training programs."
-        }) }}<br>
-    </div>
+        })
+    ) | safe }}
 
     <form id="programForm" class="row g-3 align-items-center mb-3 pt-3 pb-3">
         {{ workout_form.hidden_tag() }}

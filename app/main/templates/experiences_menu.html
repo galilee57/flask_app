@@ -1,11 +1,19 @@
+
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
 
 {% block title %}EXPERIENCES{% endblock %}
 
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary h-screen">
-  <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">EXPERIENCES</div>
-  <div class="text-xl sm:text-2xl mb-10 mt-2">Here are areas of expertise and projects<br />I have worked on.</div>
+
+  {{ hero(
+    t({"fr": "EXPERIENCES", "en": "EXPERIENCES"}),
+    t({
+      "fr": "Voici des domaines d'expertise et des projets sur lesquels j'ai travaillé.",
+      "en": "Here are areas of expertise and projects I have worked on."
+    })
+  ) }}
 
   {% set cards = [
     {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 
@@ -38,7 +46,7 @@
                     focus-within:ring-4 focus-within:ring-primary-200">
           
           <div class="text-lg md:text-xl lg:text-2xl text-white text-center">{{ c.label }}</div>
-          <img src="{{ c.img}}" alt="{{ c.label}}" class="p-2 rounded-3xl"/>
+          <img src="{{ c.img}}" alt="{{ c.label}}" class="pt-2 rounded-3xl"/>
         </div>
       </a>
     {% endfor %}

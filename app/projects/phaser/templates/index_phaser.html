@@ -1,11 +1,16 @@
+
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
 
 {% block title %}PHASER GAME{% endblock %}
 
 {% block content %}
-<h1>SIMPLE PHASER GAME</h1>
-<h4>My first game developped with Phaser !</h4>
-<p>Use the arrow keys to move the player and collect stars avoiding bombs!</p>
+<div class="bg-gray-100 p-8 font-primary">
+    {{ hero(
+        title="PHASER GAME",
+        subtitle="A simple game developped with Phaser framework",
+    ) }}
+</div>
 {% endblock %}
 
 {% block css %}

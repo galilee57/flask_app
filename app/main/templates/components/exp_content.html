@@ -1,0 +1,26 @@
+{# templates/components/content.html #}
+
+{% macro content_card(image_url=None, image_alt="", md_html="", cta_href=None, cta_label="", cta_bounce=True) %}
+  <div class="bg-white flex flex-row text-3xl text-primary-500 my-3 rounded-2xl border border-gray-300 shadow-lg">
+    {% if image_url %}
+      <img src="{{ image_url }}"
+           alt="{{ image_alt }}"
+           class="rounded-tl-2xl rounded-bl-2xl w-0 md:w-1/4 mr-8 object-cover" />
+    {% endif %}
+
+    <div class="flex flex-col p-5">
+      <div class="text-xl sm:text-2xl font-normal leading-relaxed">
+        {{ md_html | safe }}
+      </div>
+
+      {% if cta_href and cta_label %}
+        <a href="{{ cta_href }}">
+          <button class="text-center mt-3 text-xl text-primary-700 font-bold {{ 'animate-bounce' if cta_bounce else '' }}">
+            &#8595; {{ cta_label }}
+          </button>
+        </a>
+        <br>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}

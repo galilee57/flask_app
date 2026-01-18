@@ -3,8 +3,6 @@ title: Machine Learning / Statistics
 summary: English version
 ---
 
-## Machine Learning / statistics :
-
 - 20+ process studies in Low Code (Orange/Knime) and Python (scikit-learn): cleaning (including joins) + algorithms + metrics
 - First-level defect prediction and analysis models
 - Optimization model based on production program rules

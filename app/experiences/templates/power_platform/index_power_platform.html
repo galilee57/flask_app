@@ -1,27 +1,23 @@
+
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/exp_content.html" import content_card %}
 
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary">
-    <div class="text-4xl sm:text-7xl text-primary-800 font-bold mt-10">POWER PLATFORM</div>
-        <div class="text-xl sm:text-2xl mb-10 mt-2">4 years of experience</div>
+  {{ hero("DEEP LEARNING", "20 studies and real models") }}
 
-    <div class="bg-white flex flex-row text-3xl text-primary-500 my-3 rounded-2xl border border-gray-300 shadow-lg">
-        <img src="{{ url_for('static', filename='images/deep_learning.jpg') }}" 
-             alt="Big Data" class="rounded-tl-2xl rounded-bl-2xl w-0 md:w-1/4 mr-8 object-cover"/>    
-        <div class="flex flex-col">
-             <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
-                {{ md_html_i18n("docs/intro/deep_learning")| safe }}
-            </div>
-            <a href="{{ url_for('main.experiences_menu') }}">
-                <div class="animate-bounce mt-4 text-center text-xl text-primary-700 font-bold">
-                    &#8595; {{ t({"fr": "PRO", "en": "BACK"}) }}
-                </div>
-            </a><br>
-        </div>  
-    </div>
+  {{ content_card(
+      image_url=url_for('main.static', filename='images/deep_learning.jpg'),
+      image_alt="Deep Learning",
+      md_html=md_html_i18n("docs/intro/deep_learning"),
+      cta_href=url_for('main.experiences_menu'),
+      cta_label=t({"fr": "PRO", "en": "BACK"}),
+      cta_bounce=True
+  ) }}
 </div>
 {% endblock %}
 
 {% block js %}
-<script src="deep_learning.js"></script>
+<script src="experience_machine_learning.js"></script>
 {% endblock %}

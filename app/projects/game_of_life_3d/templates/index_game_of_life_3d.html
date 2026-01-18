@@ -1,61 +1,66 @@
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
 
 {% block title %}GAME OF LIFE{% endblock %}
 
 {% block content %}
-<h1>🕹️ GAME OF LIFE 3D</h1>
-<h2>Choose parameters for the simulation</h2>
+<div class="bg-gray-100 p-8 font-primary">
 
-<div id="rule-panel" class="mb-3">
-  <div class="mb-2">
-    <label class="me-2">
-      B (Birth):
-      <input id="rule-b" type="text" value="6" class="form-control d-inline-block w-auto"
-             title="Ex : 6 ou 36 (naissance si 3 ou 6 voisins)">
-    </label>
-    <label class="me-2">
-      S (Survival):
-      <input id="rule-s" type="text" value="567" class="form-control d-inline-block w-auto"
-             title="Ex : 567 (survie si 5, 6 ou 7 voisins)">
-    </label>
+  {{ hero(
+      title="GAME OF LIFE 3D",
+      subtitle="A simple implementation of Conway's Game of Life in 3D",
+  ) }}
+
+  <div id="rule-panel" class="mb-3">
+    <div class="mb-2">
+      <label class="me-2">
+        B (Birth):
+        <input id="rule-b" type="text" value="6" class="form-control d-inline-block w-auto"
+              title="Ex : 6 ou 36 (naissance si 3 ou 6 voisins)">
+      </label>
+      <label class="me-2">
+        S (Survival):
+        <input id="rule-s" type="text" value="567" class="form-control d-inline-block w-auto"
+              title="Ex : 567 (survie si 5, 6 ou 7 voisins)">
+      </label>
+    </div>
+
+    <div class="mb-2">
+      <label>
+        Density:
+        <input id="density" type="range" min="0.02" max="0.40" step="0.01" value="0.12">
+        <span id="density-value">0.12</span>
+      </label>
+    </div>
+
+    <div class="mb-2">
+      <label class="me-2">
+        <input id="torus" type="checkbox" checked> Torus
+      </label>
+
+      <select id="rule-preset" class="form-select d-inline-block w-auto">
+        <option value="">Presets…</option>
+        <option value="6|56">B6/S56 (plutôt stable)</option>
+        <option value="6|567">B6/S567 (équilibré)</option>
+        <option value="5|45">B5/S45 (chaotique)</option>
+      </select>
+
+      {{ button("Apply Rules", id="apply-config", variant="first", extra_class="ms-3") }}
+    </div>
   </div>
 
-  <div class="mb-2">
-    <label>
-      Density:
-      <input id="density" type="range" min="0.02" max="0.40" step="0.01" value="0.12">
-      <span id="density-value">0.12</span>
-    </label>
+  <div class="mb-3">
+    {{ button("Apply | Reset", id="reset", variant="second", extra_class="mb-3") }}
+    {{ button("Start Game", id="start", variant="first", extra_class="mb-3") }}
+    {{ button("Step", id="step", variant="first", extra_class="mb-3") }}
+    {{ button("Stop Game", id="stop", variant="third", extra_class="mb-3") }}
+    <span id="info" class="mb-2"></span>
   </div>
 
-  <div class="mb-2">
-    <label class="me-2">
-      <input id="torus" type="checkbox" checked> Torus
-    </label>
-
-    <select id="rule-preset" class="form-select d-inline-block w-auto">
-      <option value="">Presets…</option>
-      <option value="6|56">B6/S56 (plutôt stable)</option>
-      <option value="6|567">B6/S567 (équilibré)</option>
-      <option value="5|45">B5/S45 (chaotique)</option>
-    </select>
-
-    <button id="apply-config" class="btn btn-sm btn-outline-light ms-2">
-      Apply rules
-    </button>
-  </div>
+  <!-- conteneur 3D -->
+  <div id="app" class="mb-3" style="width:100%; height:70vh;"></div>
 </div>
-
-<div class="mb-3">
-  <button id="reset" class="btn btn-secondary mb-3">Apply | Reset</button>
-  <button id="start" class="btn btn-primary mb-3">Start Game</button>
-  <button id="step"  class="btn btn-info    mb-3">Step</button>
-  <button id="stop"  class="btn btn-danger  mb-3">Stop Game</button>
-  <span id="info" class="mb-2"></span>
-</div>
-
-<!-- conteneur 3D -->
-<div id="app" class="mb-3" style="width:100%; height:70vh;"></div>
 {% endblock %}
 
 {% block css %}

@@ -1,31 +1,29 @@
 {% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
+
+{% block title %}MEMORY GAME{% endblock %}
 
 {% block content %}
-<h1>MEMORY GAME</h1>
+<div class="bg-gray-100 p-8 font-primary h-screen">
+    
+    {{ hero(
+        title="MEMORY GAME",
+        subtitle="A simple game developed with JavaScript"
+    ) }}
 
- <div>
-    <div id="memory-game" class="container">
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="game-info">
-                    <h2>Here is the game developed with JavaScript</h2>
-                    <p>Find pairs of cards by clicking on them. Good luck!</p>
-                    <button class="btn btn-primary" id="start-button">Start Game</button>
-                    <button class="btn btn-primary" id="reset-button">Reset Game</button>
-                    <div id="game-status"></div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div id="timer"></div>
-            </div>
-        </div>
-        <div class="grid-container" id="game-board">
-            <!-- Les cartes seront insérées ici -->
-        </div>
-    </div>  
-</div>
+    <p>Find pairs of cards by clicking on them. Good luck!</p>
 
+    {{ button("Start Game", variant="first", id="start-button") }}
+    {{ button("Reset Game", variant="second", id="reset-button") }}
+    <div id="game-status"></div>
+    <div class="game-container">
+        <div id="timer"></div>
+    </div>
+    <div class="grid-container" id="game-board">
+        <!-- Les cartes seront insérées ici -->
+    </div>
+</div>  
 {% endblock %}
 
 {% block css %}
