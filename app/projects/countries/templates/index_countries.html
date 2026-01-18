@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
 
 {% block title %}COUNTRIES{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
+<div class="bg-gray-100 p-8 font-primary min-h-screen">
 
     {{ hero(
         title="COUNTRIES GAME",
         subtitle="Drag and drop each card to the correct country to score points!"
     ) }}
 
-    <button id="loadButton" class="btn btn-primary">Generate</button>
+    {{ button("Generate", variant="first", id="loadButton") }}
+
     <h2 id="score">Score: 0</h2>
     <div class="container">
         <div class="cards" id="cards"></div>
