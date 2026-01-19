@@ -3,50 +3,95 @@
 {% block title %}HOME{% endblock %}
 
 {% block content %}
-  <div class="bg-gray-100 p-10 min-h-screen">
-    
-    <div class="text-3xl sm:text-5xl text-primary-600 font-bold my-16">
-      {{ t({"fr": "Bienvenue sur mon site !", "en": "Welcome to my site !"}) | safe }}
+  <div class="relative min-h-screen overflow-hidden">
+
+    <!-- Background image -->
+    <div
+      id="bg"
+      class="fixed inset-0 -z-10 bg-[url('/static/images/home-1.jpg')]
+         bg-cover bg-no-repeat
+         will-change-transform scale-[1.15]">
     </div>
 
-    <div class="text-2xl sm:text-3xl my-2 font-primary font-bold text-primary-800 pl-5">
-      {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
-    </div>
+    <!-- Overlay : glass effect -->
+    <div class="fixed inset-0 z-0 bg-black/30 backdrop-blur-[2px] pointer-events-none"></div>
 
-    <div class="bg-primary-600 rounded-2xl text-white p-5 shadow border border-neutral-400">
-      
-      <div class="text-3xl sm:text-6xl font-bold mb-5">
-          ML Engineer <br />Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
+    <!-- Page content -->
+    <main class="relative z-10 mx-auto max-w-5xl px-6 py-16">
+      <div class="my-16 text-3xl font-bold text-primary-300 sm:text-5xl">
+        {{ t({"fr": "Bienvenue sur mon site !", "en": "Welcome to my site !"}) | safe }}
       </div>
 
-      <div class="text-xl sm:text-3xl font-semibold">
-        {{ t({
-          "fr": "Spécialisé en Machine Learning, Big Data et Deep Learning,<br />
-                je déploie des solutions opérationnelles pour optimiser les processus et renforcer la qualité.",
-          "en": "Specialized in Machine Learning, Big Data, and Deep Learning,<br />
-                I deploy operational solutions to optimize processes and enhance quality."
-        }) | safe }}
+      <div class="my-2 pl-5 text-2xl font-primary font-bold text-primary-400 sm:text-3xl">
+        {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
       </div>
 
-    </div>
+      <div class="mt-6 rounded-2xl border border-neutral-400 bg-primary-600 p-5 text-white shadow">
+        <div class="mb-5 text-3xl font-bold sm:text-6xl">
+          ML Engineer <br />
+          Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
+        </div>
 
-
-    <div class="bg-secondary-700 rounded-2xl p-16 mt-30 shadow">
-
-      <div class="text-2xl sm:text-4xl text-white font-primary font-bold leading-relaxed">
-        Over <span class="text-outline text-5xl">25 years </span>of operational management experience in production, maintenance, and quality.<br /><br />
-        Passionate about <span class="text-outline text-5xl">new technologies</span> for people and collective success.<br />
-        I have deep expertise in <span class="text-outline text-5xl">Machine Learning</span>, <span class="text-outline text-5xl">Big Data</span>, and <span class="text-outline text-5xl">Web Dev</span>.<br /><br />
-
-        Master of the entire data value chain ... from extracting and transforming large-scale data, to building predictive and deep learning models, 
-        as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
-
-        My approach combines scientific rigor, <span class="text-outline text-5xl">strong technical expertise</span>, and hands-on operational insight.<br /><br />
-        I design solutions that turn data into actionable insights for <span class="text-outline text-6xl">optimizing industrial processes</span> and detecting defects.
+        <div class="text-xl font-semibold sm:text-3xl">
+          {{ t({
+            "fr": "Spécialisé en Machine Learning, Big Data et Deep Learning,<br />
+                  je déploie des solutions opérationnelles pour optimiser les processus et renforcer la qualité.",
+            "en": "Specialized in Machine Learning, Big Data, and Deep Learning,<br />
+                  I deploy operational solutions to optimize processes and enhance quality."
+          }) | safe }}
+        </div>
       </div>
 
-    </div>
+      <div class="mt-10 rounded-2xl bg-secondary-700 p-10 shadow sm:p-16">
+        <div class="text-2xl font-primary font-bold leading-relaxed text-white sm:text-4xl">
+          Over <span class="text-outline text-5xl">25 years</span> of operational management experience in production, maintenance, and quality.<br /><br />
+          Passionate about <span class="text-outline text-5xl">new technologies</span> for people and collective success.<br />
+          I have deep expertise in <span class="text-outline text-5xl">Machine Learning</span>, <span class="text-outline text-5xl">Big Data</span>, and <span class="text-outline text-5xl">Web Dev</span>.<br /><br />
+
+          Master of the entire data value chain ... from extracting and transforming large-scale data, to building predictive and deep learning models,
+          as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
+
+          My approach combines scientific rigor, <span class="text-outline text-5xl">strong technical expertise</span>, and hands-on operational insight.<br /><br />
+          I design solutions that turn data into actionable insights for <span class="text-outline text-6xl">optimizing industrial processes</span> and detecting defects.
+        </div>
+      </div>
+    </main>
 
   </div>
-  
+{% endblock %}
+
+{% block js %}
+<script>
+  (() => {
+    const bg = document.getElementById("bg");
+    if (!bg) return;
+
+    let ticking = false;
+
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    const update = () => {
+      const y = window.scrollY || 0;
+
+      const factor = 0.30; // intensité
+      let offset = y * factor;
+
+      // ✅ on limite pour ne jamais voir les bords
+      offset = clamp(offset, -80, 80);
+
+      bg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.15)`;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+  })();
+</script>
 {% endblock %}
