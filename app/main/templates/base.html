@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
   {% block css %}{% endblock %}
 </head>
-<body class="bg-white font-roboto">
+<body class="bg-white font-secondary">
 
 <!-- NAVBAR -->
 <nav class="fixed inset-x-0 bottom-0 top-auto z-50
@@ -60,22 +60,25 @@
         <!-- Réseaux -->
         <a href="https://www.linkedin.com/in/emmanuel-fix-32ba1798"
           target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" class="h-8 w-8">
+          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
+              class="h-6 sm:h-8 w-6 sm:w-8">
         </a>
         <a href="https://medium.com/@emmanuelfix"
           target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/medium.png') }}" class="h-8 w-8">
+          <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
+              class="h-6 sm:h-8 w-6 sm:w-8">
         </a>
         <a href="https://github.com/galilee57/flask_app/tree/d98a8b8f18083ddaef306fb488267f8b579a2a9a"
           target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/github.png') }}" class="h-8 w-8">
+          <img src="{{ url_for('static', filename='fonts/github.png') }}" 
+              class="h-6 sm:h-8 w-6 sm:w-8">
         </a>
 
         <div class="h-8 w-px bg-gray-300"></div>
 
         <!-- Langues -->
-        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-8 w-8"></a>
-        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-8 w-8"></a>
+        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-6 sm:h-8 w-6 sm:w-8"></a>
+        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-6 sm:h-8 w-6 sm:w-8"></a>
 
         <!-- MENU MOBILE -->
         <div class="relative lg:hidden">
@@ -129,14 +132,17 @@
     <hr class="my-6 border-slate-200">
 
     <ul class="mx-auto grid max-w-4xl gap-3
-             sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">   
+               sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">   
       {% for resource in resources %}
       <li class="flex justify-center">
         <a
           href="{{ resource.url }}"
           target="_blank"
           rel="noopener"
-          class="inline-flex w-full items-center justify-center rounded-4xl border bg-secondary-600 px-4 py-2 font-primary text-xl text-slate-800 shadow-sm transition hover:bg-secondary-700"
+          class="inline-flex w-full items-center justify-center 
+                rounded-3xl border bg-secondary-600 px-4 py-2 
+                font-primary text-lg sm:text-xl text-slate-800 shadow-sm 
+                transition hover:bg-secondary-700"
         >
           {{ resource.label }}
         </a>

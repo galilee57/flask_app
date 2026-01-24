@@ -18,34 +18,44 @@
   {% set cards = [
     {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 
     "img": url_for('static', filename='images/machine_learning.jpg'), 
-    "bg": "bg-primary-300", "hover": "hover:bg-secondary-300"},
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"},
 
-    {"label": "BIG DATA", "href": url_for('experiences.bigdata'),
-    "img": url_for('static', filename='images/bigdata.jpg'),       
-    "bg": "bg-primary-400", "hover": "hover:bg-secondary-400"},
+    {"label": "BIG DATA", "href": url_for('experiences.big_data'),
+    "img": url_for('static', filename='images/big_data.jpg'),       
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"},
 
     {"label": "WEB DESIGN", "href": url_for('experiences.web_design'),
     "img": url_for('static', filename='images/web_design.jpg'),
-    "bg": "bg-primary-500", "hover": "hover:bg-secondary-500"},
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"},
 
     {"label": "AUTOMATION", "href": url_for('experiences.power_platform'), 
+    "img": url_for('static', filename='images/power_platform.jpg'),
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"},
+
+    {"label": "DEEP LEARNING", "href": url_for('experiences.deep_learning'), 
     "img": url_for('static', filename='images/deep_learning.jpg'),
-    "bg": "bg-primary-600", "hover": "hover:bg-secondary-600"}
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"},
+    
+    {"label": "FABLAB", "href": url_for('experiences.fablab'), 
+    "img": url_for('static', filename='images/fablab.jpg'),
+    "bg": "bg-primary-500", "hover": "hover:bg-secondary-600"}
   ] %}
 
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-2 
+              p-4 sm:p-8 lg:p-16">
     {% for c in cards %}
       <a href="{{ c.href }}"
          class="block no-underline focus:outline-none text-white">
         <div class="{{ c.bg }} {{ c.hover }}
                     aspect-square rounded-2xl shadow-lg text-white font-bold
                     border border-neutral-400
-                    flex flex-col place-items-center md:items-start justify-center text-center p-6
+                    flex flex-col place-items-center md:items-start justify-center text-center 
+                    p-4 sm:p-6 lg:p-12
                     hover:-translate-y-1 hover:shadow-xl
                     transition-all duration-200
                     focus-within:ring-4 focus-within:ring-primary-200">
           
-          <div class="text-lg md:text-xl lg:text-2xl text-white text-center">{{ c.label }}</div>
+          <div class="text-sm md:text-lg lg:text-2xl text-white font-secondary text-center">{{ c.label }}</div>
           <img src="{{ c.img}}" alt="{{ c.label}}" class="pt-2 rounded-3xl"/>
         </div>
       </a>

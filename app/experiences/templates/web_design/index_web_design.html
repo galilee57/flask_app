@@ -3,9 +3,11 @@
 {% from "components/exp_content.html" import content_card %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
-  {{ hero("WEB DEV", "20 studies and real models") }}
 
+<div>
+
+  <div class="mt-12"></div>
+  
   {{ content_card(
       image_url=url_for('main.static', filename='images/web_design.jpg'),
       image_alt="Web Design",
@@ -14,6 +16,7 @@
       cta_label=t({"fr": "PRO", "en": "BACK"}),
       cta_bounce=True
   ) }}
+
 </div>
 {% endblock %}
 

@@ -2,22 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 @import "tailwindcss";
+@import "tailwindcss/typography";
 
 /* 1️⃣ Fonts globales */
 @theme {
-  --font-roboto: "Roboto", system-ui, sans-serif;
   --font-primary: "Jua", system-ui, sans-serif;
+  --font-secondary:  "Roboto", system-ui, sans-serif;
 }
-
-/* 2️⃣ Utilitaires custom */
-@layer utilities {
-  .text-outline {
-    color: transparent;
-    -webkit-text-stroke: 2px black;
-    text-stroke: 2px black;
-  }
-}
-
 @theme {
   /* PRIMARY – ex: emerald */
   --color-primary-50:  #fbeaea;

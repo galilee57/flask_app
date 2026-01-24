@@ -4,15 +4,14 @@
 {% from "components/exp_content.html" import content_card %}
 
 {% block content %}
-
 <div>
 
   <div class="mt-12"></div>
-
+  
   {{ content_card(
-      image_url=url_for('main.static', filename='images/deep_learning.jpg'),
-      image_alt="Deep Learning",
-      md_html=md_html_i18n("docs/intro/deep_learning"),
+      image_url=url_for('main.static', filename='images/fablab.jpg'),
+      image_alt="Fablab",
+      md_html=md_html_i18n("docs/intro/fablab"),
       cta_href=url_for('main.experiences_menu'),
       cta_label=t({"fr": "PRO", "en": "BACK"}),
       cta_bounce=True

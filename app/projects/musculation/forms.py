@@ -13,6 +13,6 @@ class WorkoutPlanForm(FlaskForm):
     plan_name = StringField('Workout Plan Name', validators=[DataRequired()])
     save_submit = SubmitField('Save Workout Plan')
     load_submit = SubmitField('Load Workout Plan')
-    new_submit = SubmitField('Create a new Workout Plan')
+    new_submit = SubmitField('Create')
     reset_submit = SubmitField('Reset Workout Plan')
     analyse_submit = SubmitField('Analyze Workout Plan')

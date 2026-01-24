@@ -1,11 +1,11 @@
 <!-- typography.html -->
 {% macro hero(title, subtitle=None) %}
   <div class="mt-10">
-    <div class="text-4xl sm:text-7xl text-primary-800 font-bold">
+    <div class="text-4xl sm:text-7xl text-primary-800 font-bold font-primary">
       {{ title }}
     </div>
     {% if subtitle %}
-      <div class="text-xl sm:text-2xl mb-10 mt-2">
+      <div class="text-xl font-primary sm:text-2xl mb-10 mt-2">
         {{ subtitle }}
       </div>
     {% endif %}

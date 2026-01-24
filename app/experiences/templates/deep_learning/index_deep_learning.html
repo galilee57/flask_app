@@ -4,13 +4,14 @@
 {% from "components/exp_content.html" import content_card %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
-  {{ hero("BIG DATA", "4 years of experience") }}
-
+<div>
+  
+  <div class="mt-12"></div>
+  
   {{ content_card(
-      image_url=url_for('main.static', filename='images/bigdata.jpg'),
-      image_alt="Big Data",
-      md_html=md_html_i18n("docs/intro/bigdata"),
+      image_url=url_for('main.static', filename='images/deep_learning.jpg'),
+      image_alt="Deep Learning",
+      md_html=md_html_i18n("docs/intro/deep_learning"),
       cta_href=url_for('main.experiences_menu'),
       cta_label=t({"fr": "PRO", "en": "BACK"}),
       cta_bounce=True
@@ -19,5 +20,5 @@
 {% endblock %}
 
 {% block js %}
-<script src="experience_machine_learning.js"></script>
+<script src="experience_deep_learning.js"></script>
 {% endblock %}

@@ -3,21 +3,20 @@
 {% block title %}HOME{% endblock %}
 
 {% block content %}
-  <div class="relative min-h-screen overflow-hidden">
+  <div class="relative min-h-screen">
 
     <!-- Background image -->
     <div
       id="bg"
-      class="fixed inset-0 -z-10 bg-[url('/static/images/home-1.jpg')]
-         bg-cover bg-no-repeat
-         will-change-transform scale-[1.15]">
-    </div>
+      class="fixed inset-0 -z-10 bg-cover bg-no-repeat will-change-transform scale-[1.15]"
+      style="background-image: url('/static/images/home-5.jpg'), url('/static/images/bigdata.jpg');"
+    ></div>
 
     <!-- Overlay : glass effect -->
-    <div class="fixed inset-0 z-0 bg-black/30 backdrop-blur-[2px] pointer-events-none"></div>
+    <div class="fixed inset-0 z-0 bg-black/50 backdrop-blur-[5px] pointer-events-none"></div>
 
     <!-- Page content -->
-    <main class="relative z-10 mx-auto max-w-5xl px-6 py-16">
+    <main class="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-16">
       <div class="my-16 text-3xl font-bold text-primary-300 sm:text-5xl">
         {{ t({"fr": "Bienvenue sur mon site !", "en": "Welcome to my site !"}) | safe }}
       </div>
@@ -26,7 +25,7 @@
         {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
       </div>
 
-      <div class="mt-6 rounded-2xl border border-neutral-400 bg-primary-600 p-5 text-white shadow">
+      <div class="mt-6 rounded-2xl border border-neutral-800 bg-primary-600 p-5 text-white shadow">
         <div class="mb-5 text-3xl font-bold sm:text-6xl">
           ML Engineer <br />
           Expert Python, Flask {{ t({"fr":"et", "en":"and"}) }} Power BI
@@ -43,16 +42,38 @@
       </div>
 
       <div class="mt-10 rounded-2xl bg-secondary-700 p-10 shadow sm:p-16">
-        <div class="text-2xl font-primary font-bold leading-relaxed text-white sm:text-4xl">
-          Over <span class="text-outline text-5xl">25 years</span> of operational management experience in production, maintenance, and quality.<br /><br />
-          Passionate about <span class="text-outline text-5xl">new technologies</span> for people and collective success.<br />
-          I have deep expertise in <span class="text-outline text-5xl">Machine Learning</span>, <span class="text-outline text-5xl">Big Data</span>, and <span class="text-outline text-5xl">Web Dev</span>.<br /><br />
-
-          Master of the entire data value chain ... from extracting and transforming large-scale data, to building predictive and deep learning models,
-          as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
-
-          My approach combines scientific rigor, <span class="text-outline text-5xl">strong technical expertise</span>, and hands-on operational insight.<br /><br />
-          I design solutions that turn data into actionable insights for <span class="text-outline text-6xl">optimizing industrial processes</span> and detecting defects.
+        <div class="text-xl font-secondary font-bold leading-relaxed text-white 
+                    sm:text-3xl">
+          {{ t({
+            "fr":
+              "Plus de <span class='text-primary-800'>25 ans</span>
+               d'expérience en gestion opérationnelle dans la production, la maintenance et la qualité.<br /><br />
+               Passionné par les <span class='text-primary-800'>nouvelles technologies</span>
+                au service des personnes et de la réussite collective.<br />
+               J'ai une expertise approfondie en <span class='text-primary-800'>Machine Learning,
+                Big Data et Web Dev.</span><br /><br />
+               
+               Maîtrise de l'ensemble de la chaîne de valeur des données ... de l'extraction et transformation de données à grande échelle,
+               à la construction de modèles prédictifs et de deep learning, 
+               ainsi que le développement d'applications Flask déployées dans le cloud 
+               et la création de tableaux de bord Power BI avancés.<br /><br />
+               
+               Mon approche allie rigueur scientifique, 
+               <span class='text-primary-800'>forte expertise technique</span> 
+               et connaissance opérationnelle terrain.<br /><br />
+               Je conçois des solutions qui transforment les données en insights 
+               exploitables pour <span class='text-primary-800'>optimiser les processus industriels</span> et détecter les défauts.",
+            "en":
+              "Over <span class='text-primary-600'>25 years</span> of operational management experience in production, maintenance, and quality.<br /><br /> 
+               Passionated about <span class='text-primary-600'>new technologies</span> for people and collective success.<br />
+               I have deep expertise in <span class='text-primary-600'>Machine Learning</span>, <span class='text-primary-800'>Big Data</span>, and <Web class='text-primary-800'>Web Dev</span>.<br /><br />
+               
+               Master of the entire data value chain ... from extracting and transforming large-scale data, to building predictive and deep learning models,
+               as well as developing Flask applications deployed in the cloud and creating advanced Power BI dashboards.<br /><br />
+               
+               My approach combines scientific rigor, <span class='text-primary-600'>strong technical expertise</span>, and hands-on operational insight.<br /><br />
+               I design solutions that turn data into actionable insights for <span class='text-primary-600'>optimizing industrial processes</span> and detecting defects."
+          }) | safe }}
         </div>
       </div>
     </main>

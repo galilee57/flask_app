@@ -1,26 +1,39 @@
 {# templates/components/content.html #}
 
 {% macro content_card(image_url=None, image_alt="", md_html="", cta_href=None, cta_label="", cta_bounce=True) %}
-  <div class="bg-white flex flex-row text-3xl text-primary-500 my-3 rounded-2xl border border-gray-300 shadow-lg">
-    {% if image_url %}
-      <img src="{{ image_url }}"
-           alt="{{ image_alt }}"
-           class="rounded-tl-2xl rounded-bl-2xl w-0 md:w-1/4 mr-8 object-cover" />
-    {% endif %}
 
-    <div class="flex flex-col p-5">
-      <div class="text-xl sm:text-2xl font-normal leading-relaxed">
-        {{ md_html | safe }}
-      </div>
+<div class="relative min-h-screen">
 
-      {% if cta_href and cta_label %}
-        <a href="{{ cta_href }}">
-          <button class="text-center mt-3 text-xl text-primary-700 font-bold {{ 'animate-bounce' if cta_bounce else '' }}">
-            &#8595; {{ cta_label }}
-          </button>
-        </a>
-        <br>
-      {% endif %}
+  <!-- Background image -->
+  {% if image_url %}
+    <img
+      src="{{ image_url }}"
+      alt="{{ image_alt }}"
+      class="fixed inset-0 -z-10 h-full w-full object-cover will-change-transform scale-[1.15]"
+    />
+  {% else %}
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-slate-900 via-gray-900 to-black"></div>
+  {% endif %}
+
+  <!-- Overlay : glass effect -->
+  <div class="fixed inset-0 z-0 bg-black/50 backdrop-blur-[5px] pointer-events-none"></div>
+
+  <!-- Page content -->
+  <main class="bg-white rounded-2xl relative z-10 mx-auto max-w-4/5 p-4 sm:p-12">
+    <div class="text-sm sm:text-lg lg:text-xl font-bold text-primary-700">
+      {{ md_html | safe }}
     </div>
-  </div>
+
+    {% if cta_href and cta_label %}
+      <a href="{{ cta_href }}">
+        <button class="text-center mt-8 text-xl text-primary-500 font-bold {{ 'animate-bounce' if cta_bounce else '' }}">
+          &#8595; {{ cta_label }}
+        </button>
+      </a>
+      <br>
+    {% endif %}
+  </main>
+
+</div> 
+
 {% endmacro %}

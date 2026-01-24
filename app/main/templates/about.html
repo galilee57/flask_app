@@ -9,25 +9,40 @@
 {% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary h-screen">
+<div class="bg-gray-100 p-8 min-h-screen">
 
   {{ hero(
       title=t({"fr": "À propos de ...", "en": "About"}),
-      subtitle=t({"fr": "Chaque site est une aventure !", "en": "Every site is an adventure!"})
+      subtitle=t({
+        "fr": "« Chaque jour est une aventure, et aucun jour ne se ressemble. » — Scott Borchetta", 
+        "en": "« Every day is an adventure, and no two days are ever alike. » — Scott Borchetta"})
   ) }}
   
-  <div class="text-2xl sm:text-3xl font-normal leading-relaxed">
-      Apprendre Figma pour maquetter et anticiper les futures animations.<br><br>
-      Ré-apprendre le Web Design qui devient un terrain d'expression !<br>
-      <span class="text 2xl sm:text-4xl text-outline">Progresser en Python</span> et apprendre les subtilités de Flask.<br>
-      Apprendre Bootstrap puis Tailwind tellement plus simple ...<br>
-      Déployer sur PythonAnywhere, versionner avec Git et résoudre les nombreuses exceptions.<br>
-      Intégrer des extensions Flask pour du contenu long en Markdown<br>
-      Apprendre à internationaliser le site (i18n).<br>
-      Restructurer les projets Flask grâce aux Blueprints.<br>
-      <br><br>
-      Et surtout prendre du plaisir à chaque étape de ce projet personnel !
-  </div>
+  <article class="text-xl text-secondary sm:text-2xl font-normal leading-relaxed
+                  p-4 sm:p-8 lg:p-16">
+      <p>Pourquoi <strong>Flask</strong> alors qu’il existe d’autres frameworks plus performants, 
+      plus tendance, plus demandés sur le marché ?<br><br>
+      Déjà parce que j’adore <strong>Python</strong> !<br><br>
+      Certes, Python n’est pas le langage le plus rapide … 
+      mais j’aime cet esprit communauté. </p>
+      Et puis un site en Python c’est la garantie de pouvoir y héberger des projets d’IA
+       plus facilement. Il y a bien sûr mieux que Flask : 
+       Django a plus de fonctions natives, fastAPI est plus performant … 
+       mais avec Flask tout est à construire ! <br>
+       Et ça c’est un avantage énorme pour <strong>apprendre</strong>, 
+       pour être libre de le faire évoluer ou tout simplement pour 
+       revenir à des fonctionnalités basiques.
+
+      Ce site a beaucoup de défauts : 
+      et il aurait été bien meilleur avec une utilisation intensive de l’IA.<br><br>
+      Alors bien sûr j’ai beaucoup prompté avec chatGPT pour corriger, 
+      améliorer et apprendre.<br>
+      Mais un portfolio doit refléter l’état de ses compétences 
+      pour représenter son auteur et lui ouvrir des voies de progrès.<br>
+      Soyez donc indulgent … mais si vous avez un <strong>feedback </strong>
+      pour me permettre de progresser n’hésitez pas à mettre un message privé sur Linkedin.<br><br>
+      <span class="font-bold text-primary-500">ENJOY !</span>
+  </article>
   
 </div>
 {% endblock %}

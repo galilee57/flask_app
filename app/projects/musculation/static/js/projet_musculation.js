@@ -438,20 +438,24 @@ function showProgramUI() {
   [program, exercise, analysis].forEach(el => {
     if (!el) return;
 
-    // on affiche
-    el.classList.remove("d-none");
+    el.classList.remove("hidden");
+    el.classList.remove("d-none"); // sécurité si une classe Bootstrap traîne
 
-    // on force le reflow pour rejouer l’animation
     el.classList.remove("fade-in");
-    void el.offsetWidth; // trick pour redémarrer l’animation
+    void el.offsetWidth;
     el.classList.add("fade-in");
   });
 }
 
 function hideProgramUI() {
-  document.getElementById("programContainer")?.classList.add("d-none");
-  document.getElementById("exerciseContainer")?.classList.add("d-none");
-  document.getElementById("analysisContainer")?.classList.add("d-none");
+  document.getElementById("programContainer")?.classList.add("hidden");
+  document.getElementById("exerciseContainer")?.classList.add("hidden");
+  document.getElementById("analysisContainer")?.classList.add("hidden");
+
+  // sécurité si Bootstrap traîne
+  document.getElementById("programContainer")?.classList.remove("d-none");
+  document.getElementById("exerciseContainer")?.classList.remove("d-none");
+  document.getElementById("analysisContainer")?.classList.remove("d-none");
 }
 
 // ---------- 6. Wiring des événements ----------

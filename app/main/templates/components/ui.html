@@ -1,11 +1,11 @@
 {% macro button(label, href=None, variant="first", disabled=False, id=None, data_action=None, extra_class="") %}
 
-  {% set base = "inline-flex items-center justify-center px-6 py-2 font-semibold rounded-3xl shadow-sm transition focus:outline-none focus:ring-2" %}
-
+  {% set base = "inline-flex items-center justify-center px-6 h-12 text-lg font-semibold rounded-3xl shadow-sm transition focus:outline-none focus:ring-2" %}
+  
   {% set v = {
     "first": base ~ " bg-primary-800 text-white hover:bg-primary-700 focus:ring-primary-300",
-    "second": base ~ " bg-primary-500 text-primary-900 hover:bg-primary-300 focus:ring-primary-200",
-    "third": base ~ " bg-primary-400 text-primary-700 border border-primary-600 hover:bg-primary-50 focus:ring-primary-200"
+    "second": base ~ " bg-primary-600 text-primary-900 hover:bg-primary-300 focus:ring-primary-200",
+    "third": base ~ " bg-primary-500 text-primary-700 border border-primary-600 hover:bg-primary-50 focus:ring-primary-200"
   }[variant] %}
 
   {% set disabled_cls = " opacity-50 cursor-not-allowed pointer-events-none" %}
@@ -30,12 +30,15 @@
 
 {% endmacro %}
 
-{% macro submit(field, variant="first", id=None, extra_class="") %}
-  {% set base = "inline-flex items-center justify-center px-6 py-2 font-semibold rounded-xl shadow-sm transition focus:outline-none focus:ring-2" %}
+{% macro submit(field, label=None, variant="first", disabled=False, id=None, extra_class="") %}
+
+  {% set base = "inline-flex items-center justify-center px-6 h-12 text-lg font-semibold rounded-3xl shadow-sm transition focus:outline-none focus:ring-2" %}
+  
   {% set v = {
     "first": base ~ " bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-300",
     "second": base ~ " bg-primary-200 text-primary-900 hover:bg-primary-300 focus:ring-primary-200"
   }[variant] %}
 
-  {{ field(class=v ~ " " ~ extra_class, id=id) }}
+  {{ field(class=v ~ " " ~ extra_class, id=id, value=(label if label is not none else None), disabled=(disabled if disabled else None)) }}
+
 {% endmacro %}
