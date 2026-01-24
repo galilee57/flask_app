@@ -3,9 +3,13 @@ title: Machine Learning / Statistics
 summary: Version française
 ---
 
-- Scripts Pyspark : extraction et transformation de données issues du DataLake pour Machine Learning
-- Modules d'apprentissage NB Jupyter
-- Traitement des schémas Kafka pour extraire les dictionnaires de données
-- Scripts génériques pour générer les fichiers vers DataWareHouse
-- Traitement de Graphes Orientés pour extraire les données en formats tabulaires
-- DevOps : génération des jobs raw vers zone refined
+# AUTOMATION PAR CODE ET OUTILS NO-CODE
+
+<br>
+✅ Flux Power Automate : Forms / Power BI (6+ ans, 40.000+ entrées), traitement de chargements au client
+<br><br>
+✅ Maitrise complète de KNIME et Orange : Data Analytics, algorithmes de MAchine Learning,  
+<br><br>
+✅
+<br><br>
+✅

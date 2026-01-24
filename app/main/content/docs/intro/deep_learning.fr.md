@@ -3,9 +3,13 @@ title: Deep Learning
 summary: Version Française
 ---
 
-## Deep Learning :
+# DEEP LEARNING
 
-- RNN de classification pour traiter les images issues de clusterings : déploiement sur plateforme web
-- Classification de produits entrée de ligne : prise en compte des particularités de position, luminosité, saisons
-- Modèles de clustering Python : traitement des paramètres PCA pour études process
-- Déploiement de modèles AI-Builder pour traitement images (Power Automate)
+<br>
+✅ RNN de classification pour traiter les images issues de clusterings : déploiement sur plateforme web
+<br><br>
+✅ Classification de produits entrée de ligne : prise en compte des particularités de position, luminosité, saisons
+<br><br>
+✅ Modèles de clustering Python : traitement des paramètres PCA pour études process
+<br><br>
+✅ Déploiement de modèles AI-Builder pour traitement images (Power Automate)
