@@ -5,23 +5,24 @@
 {% block title %}MEMORY GAME{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary h-screen">
+<div class="bg-gray-100 p-8 h-screen">
     
     {{ hero(
         title="MEMORY GAME",
         subtitle="A simple game developed with JavaScript"
     ) }}
 
-    <p>Find pairs of cards by clicking on them. Good luck!</p>
-
-    {{ button("Start Game", variant="first", id="start-button") }}
-    {{ button("Reset Game", variant="second", id="reset-button") }}
+    <p>Find pairs of cards by clicking on them.<br>Good luck!</p>
+    <div class="mt-6">
+        {{ button("Start Game", variant="first", id="start-button") }}
+        {{ button("Reset Game", variant="second", id="reset-button") }}
+    </div>
     <div id="game-status"></div>
     <div class="game-container">
-        <div id="timer"></div>
+        <div id="timer" class="mt-6 text-2xl"></div>
     </div>
-    <div class="grid-container" id="game-board">
-        <!-- Les cartes seront insérées ici -->
+    <div id="game-board"
+        class="grid grid-cols-6 gap-4 p-4 mt-24 sm:mt-12 lg:mt-4 lg:max-w-1/2-screen justify-center">
     </div>
 </div>  
 {% endblock %}

@@ -1,14 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 @import "tailwindcss";
-@import "tailwindcss/typography";
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/static/fonts/EBGaramond-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/static/fonts/EBGaramond-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/static/fonts/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/static/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Brancher la fonte à Tailwind v4 (CSS-first) */
+:root {
+  --font-primary: "EB Garamond", ui-serif, Georgia, serif;
+  --font-secondary:  "Roboto", system-ui, sans-serif;
+}
 
 /* 1️⃣ Fonts globales */
 @theme {
-  --font-primary: "Jua", system-ui, sans-serif;
+  --font-primary: "EB Garamond", system-ui, sans-serif;
   --font-secondary:  "Roboto", system-ui, sans-serif;
 }
+
 @theme {
   /* PRIMARY – ex: emerald */
   --color-primary-50:  #fbeaea;

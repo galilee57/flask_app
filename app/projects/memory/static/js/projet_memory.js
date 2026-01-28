@@ -23,19 +23,37 @@ function initGame() {
 }
 
 function renderCards() {
-    const cardContainer = document.querySelector('#game-board');
-    cardContainer.innerHTML = "";
+  const cardContainer = document.querySelector('#game-board');
+  cardContainer.innerHTML = "";
 
-    cards.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-        if (card.flipped || card.matched) cardElement.classList.add('flipped');
+  cards.forEach(card => {
+    const cardElement = document.createElement('div');
 
-        cardElement.dataset.id = card.id;
-        cardElement.innerHTML = card.flipped || card.matched ? card.icon : '';
-        cardElement.addEventListener('click', () => flipCard(card.id));
-        cardContainer.appendChild(cardElement);
-    });
+    // base Tailwind
+    cardElement.className =
+      "flex items-center justify-center select-none cursor-pointer " +
+      "w-[80px] h-[80px] max-[600px]:w-[40px] max-[600px]:h-[40px] " +
+      "rounded-[10px] p-[5px] text-[30px] max-[600px]:text-[20px] " +
+      "transition-colors duration-300";
+
+    // état (face cachée / visible)
+    if (card.flipped || card.matched) {
+      cardElement.classList.add("bg-white", "text-black");
+      cardElement.textContent = card.icon;
+    } else {
+      cardElement.classList.add("bg-red-600", "text-white");
+      cardElement.textContent = "";
+    }
+
+    // si tu veux distinguer matched (optionnel)
+    if (card.matched) {
+      cardElement.classList.add("opacity-80");
+    }
+
+    cardElement.dataset.id = card.id;
+    cardElement.addEventListener('click', () => flipCard(card.id));
+    cardContainer.appendChild(cardElement);
+  });
 }
 
 function flipCard(id) {

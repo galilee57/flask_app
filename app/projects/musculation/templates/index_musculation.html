@@ -28,7 +28,7 @@
       
         {{ workout_form.plan_name(
         id="plan_name",
-        class="w-64 h-12 text-base rounded-xl border border-gray-300 bg-white px-3 shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200",
+        class="w-48 sm:w-64 h-12 text-base rounded-xl border border-gray-300 bg-white px-3 shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200",
         placeholder=t({"fr":"Nom du programme", "en":"Program name"})
         ) }}
 
@@ -41,7 +41,7 @@
             label=t({"fr":"Créer", "en":"Create"}),
             variant="first",
             id="new_program",
-            extra_class="h-12 text-base"
+            extra_class="h-10 sm:h-12 text-base"
             ) }}
         </div>
 
@@ -56,7 +56,7 @@
     <div class="flex flex-wrap items-end gap-3">
 
         <select id="programSelect"
-            class="w-64 h-12 text-base rounded-xl border border-gray-300 bg-white px-3 shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
+            class="w-40 sm:w-64 h-12 text-base rounded-xl border border-gray-300 bg-white px-3 shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
             <option value="">-- {{ t({"fr":"Choisir", "en":"Choose"}) }} --</option>
         </select>
 
@@ -64,7 +64,8 @@
             {{ submit(workout_form.load_submit,
             label=t({"fr":"Charger", "en":"Load"}),
             variant="second",
-            id="load_program"
+            id="load_program",
+            extra_class="h-10 sm:h-12 text-base"
             ) }}
         </div>
         <div>
