@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url("/static/fonts/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  src: url("/static/fonts/Roboto-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url("/static/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  src: url("/static/fonts/Roboto-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;

@@ -8,12 +8,12 @@
 <div class="bg-gray-100 p-8 font-primary h-screen">
 
   {{ hero(
-    t({"fr": "EXPERIENCES", "en": "EXPERIENCES"}),
-    t({
-      "fr": "Voici des domaines d'expertise et des projets sur lesquels j'ai travaillé.",
-      "en": "Here are areas of expertise and projects I have worked on."
-    })
-  ) }}
+      t({"fr": "EXPERIENCES", "en": "EXPERIENCES"}),
+      t({
+        "fr": "« La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. » – Albert Einstein",
+        "en": "“Knowledge is acquired through experience, everything else is just information.” - Albert Einstein"
+      })
+    ) }}
 
   {% set cards = [
     {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 

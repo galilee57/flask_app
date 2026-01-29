@@ -8,7 +8,7 @@
     <!-- Background image -->
     <div
       id="bg"
-      class="fixed inset-0 -z-10 bg-cover bg-no-repeat will-change-transform scale-[1.15]"
+      class="fixed inset-0 -z-10 bg-cover bg-no-repeat will-change-transform scale-[1.2]"
       style="background-image: url('/static/images/home-6.jpg'), url('/static/images/bigdata.jpg');"
     ></div>
 
@@ -17,11 +17,11 @@
 
     <!-- Page content -->
     <main class="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-16">
-      <div class="my-16 text-3xl font-bold text-primary-300 sm:text-5xl">
+      <div class="my-16 text-3xl font-bold text-secondary-200 sm:text-5xl">
         {{ t({"fr": "Bienvenue sur mon site !", "en": "Welcome to my site !"}) | safe }}
       </div>
 
-      <div class="my-2 pl-5 text-2xl font-primary font-bold text-primary-400 sm:text-3xl">
+      <div class="my-2 pl-5 text-2xl font-primary font-bold text-primary-300 sm:text-3xl">
         {{ t({"fr": "Je suis Emmanuel,", "en": "I’m Emmanuel,"}) }}
       </div>
 
@@ -94,11 +94,11 @@
     const update = () => {
       const y = window.scrollY || 0;
 
-      const factor = 0.30; // intensité
+      const factor = -0.20; // intensité
       let offset = y * factor;
 
       // ✅ on limite pour ne jamais voir les bords
-      offset = clamp(offset, -80, 80);
+      offset = clamp(offset, -150, 150);
 
       bg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.15)`;
       ticking = false;

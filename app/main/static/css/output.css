@@ -81,6 +81,7 @@
     --color-primary-800: #541212;
     --color-primary-900: #2a0909;
     --color-secondary-100: #e5fecd;
+    --color-secondary-200: #cafe9a;
     --color-secondary-300: #b0fd68;
     --color-secondary-600: #63ca02;
     --color-secondary-700: #4a9702;
@@ -518,6 +519,9 @@
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .scale-\[1\.2\] {
+    scale: 1.2;
+  }
   .scale-\[1\.15\] {
     scale: 1.15;
   }
@@ -899,6 +903,12 @@
   .text-neutral-800 {
     color: var(--color-neutral-800);
   }
+  .text-primary-100 {
+    color: var(--color-primary-100);
+  }
+  .text-primary-200 {
+    color: var(--color-primary-200);
+  }
   .text-primary-300 {
     color: var(--color-primary-300);
   }
@@ -922,6 +932,9 @@
   }
   .text-red-600 {
     color: var(--color-red-600);
+  }
+  .text-secondary-200 {
+    color: var(--color-secondary-200);
   }
   .text-secondary-900 {
     color: var(--color-secondary-900);
@@ -1405,14 +1418,14 @@
 }
 @font-face {
   font-family: "Roboto";
-  src: url("/static/fonts/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  src: url("/static/fonts/Roboto-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("/static/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  src: url("/static/fonts/Roboto-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
