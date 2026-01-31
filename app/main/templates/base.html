@@ -114,7 +114,7 @@
 </nav>
 
 <!-- CONTENU -->
-<main class="pb-28 lg:pt-20 lg:pb-0">
+<main class="lg:pt-20 lg:pb-0">
   {% block content %}{% endblock %}
 </main>
 
@@ -123,26 +123,25 @@
 
 <!-- Footer / Resources -->
 {% if resources %}
-<section class="bg-secondary-100">
-  <div class="mx-auto max-w-6xl px-4 py-10">
-    <h2 class="text-center text-xl font-semibold text-secondary-900">
+<section class="bg-secondary-100 pb-24 lg:pb-8">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center text-xl sm:text-2xl font-bold text-secondary-900 p-4">
       Resources
     </h2>
 
-    <hr class="my-6 border-slate-200">
-
     <ul class="mx-auto grid max-w-4xl gap-3
-               sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">   
+               grid [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] gap-4">
       {% for resource in resources %}
       <li class="flex justify-center">
         <a
           href="{{ resource.url }}"
           target="_blank"
           rel="noopener"
-          class="inline-flex w-full items-center justify-center 
-                rounded-3xl border bg-secondary-600 px-4 py-2 
-                font-primary text-lg sm:text-xl text-slate-800 shadow-sm 
-                transition hover:bg-secondary-700"
+          class="inline-flex w-full max-w-md items-center justify-center
+                 rounded-3xl border border-secondary-700
+                 bg-secondary-600 px-6 py-3
+                 font-secondary text-lg sm:text-xl text-slate-900 shadow-sm
+                 transition hover:bg-secondary-700"
         >
           {{ resource.label }}
         </a>
@@ -176,8 +175,6 @@
     menu.addEventListener("click", e => e.stopPropagation());
   })();
 </script>
-
-
 
 </body>
 </html>

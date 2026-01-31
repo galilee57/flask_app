@@ -9,15 +9,24 @@
 
     {{ hero(
         title="COUNTRIES GAME",
-        subtitle="Drag and drop each card to the correct country to score points!"
+        subtitle="Games to master mouse movements"
     ) }}
 
-    {{ button("Generate", variant="first", id="loadButton") }}
+    <p class="my-4 text-slate-700">
+        Drag and drop each card to the correct country to score points!
+    </p>
 
-    <h2 id="score">Score: 0</h2>
+    <div class="flex flex-2 gap-4 my-6">
+        {{ button("Generate", variant="first", id="loadButton") }}
+        <h2 class="text-2xl font-bold mt-2" id="score">Score: 0</h2>
+    </div>
     <div class="container">
-        <div class="cards" id="cards"></div>
-        <div class="targets" id="targets"></div>
+        <div class="my-6">
+            <div class="cards" id="cards"></div>
+        </div>
+        <div class="my-6">
+            <div class="targets" id="targets"></div>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -29,69 +38,120 @@
 
 {% block js %}
 <script>
-    let score = 0;
+  let score = 0;
 
-    async function initGame() {
-        const response = await fetch('/projects/countries/get_countries');
-        const countries = await response.json();
+  function setZoneState(zone, state) {
+    // reset states
+    zone.classList.remove('bg-green-100', 'border-green-300', 'text-green-800');
+    zone.classList.remove('bg-red-100', 'border-red-300', 'text-red-800');
 
-        const cardsContainer = document.getElementById('cards');
-        const targetsContainer = document.getElementById('targets');
-
-        cardsContainer.innerHTML = '';
-        targetsContainer.innerHTML = '';
-
-        const shuffled = [...countries].sort(() => 0.5 - Math.random()).slice(0, 5);
-
-        shuffled.forEach(country => {
-            // Create card
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.draggable = true;
-            card.dataset.country = country.name;
-            card.innerHTML = `
-                <img src="${country.flag}" width="80"><br>
-                <strong>Capitale :</strong> ${country.capital}<br>
-                <strong>Population :</strong> ${country.population.toLocaleString()}<br>
-                `;
-            card.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text/plain', country.name);
-            });
-            cardsContainer.appendChild(card);
-        });
-        countries.forEach(country => {
-            // Create target
-            const zone = document.createElement('div');
-            zone.className = 'target';
-            zone.dataset.country = country.name;
-            zone.textContent = country.name;
-
-            zone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
-
-            zone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const draggedCountry = e.dataTransfer.getData('text/plain');
-                if (draggedCountry === country.name) {
-                    score += 1;
-                    document.getElementById('score').innerText = `Score: ${score}`;
-                    const card = document.querySelector(`.card[data-country='${draggedCountry}']`);
-                    if (card) card.remove();
-                    zone.style.backgroundColor = '#d4edda'; // Green for correct
-                } else {
-                    zone.style.backgroundColor = '#f8d7da'; // Red for incorrect
-                }
-            });
-            targetsContainer.appendChild(zone);
-        });
+    if (state === 'correct') {
+      zone.classList.add('bg-green-100', 'border-green-300', 'text-green-800');
+    } else if (state === 'incorrect') {
+      zone.classList.add('bg-red-100', 'border-red-300', 'text-red-800');
     }
+  }
 
-    const loadButton = document.getElementById('loadButton');
-    loadButton.addEventListener("click", () => {
-        initGame();
-        score = 0;
-        document.getElementById('score').innerText = `Score: ${score}`;
+  async function initGame() {
+    const response = await fetch('/projects/countries/get_countries');
+    const countries = await response.json();
+
+    const cardsContainer = document.getElementById('cards');
+    const targetsContainer = document.getElementById('targets');
+
+    cardsContainer.innerHTML = '';
+    targetsContainer.innerHTML = '';
+
+    // Responsive containers (au cas où tu ne l’as pas déjà dans ton HTML)
+    // Si tes containers existent déjà avec des classes Tailwind, tu peux supprimer ces 2 lignes.
+    cardsContainer.className = 'grid grid-cols-3 lg:grid-cols-5 gap-4';
+    targetsContainer.className = 'grid grid-cols-3 lg:grid-cols-5 gap-3';
+
+    const shuffled = [...countries].sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    shuffled.forEach(country => {
+      // Card
+      const card = document.createElement('div');
+      card.className =
+        'card cursor-move select-none rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ' +
+        'hover:shadow-md transition flex flex-col gap-3';
+      card.draggable = true;
+      card.dataset.country = country.name;
+
+      card.innerHTML = `
+        <div class="flex items-center gap-3">
+          <img src="${country.flag}" alt="Drapeau ${country.name}" class="h-12 w-auto rounded-sm border border-slate-200">
+        </div>
+
+        <div class="text-sm text-slate-700 space-y-1">
+          <div><span class="font-semibold text-slate-900">Capitale :</span> ${country.capital}</div>
+          <div><span class="font-semibold text-slate-900">Population :</span> ${country.population.toLocaleString()}</div>
+        </div>
+      `;
+
+      card.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', country.name);
+        // petit feedback visuel au drag
+        card.classList.add('opacity-70');
+      });
+
+      card.addEventListener('dragend', () => {
+        card.classList.remove('opacity-70');
+      });
+
+      cardsContainer.appendChild(card);
     });
+
+    countries.forEach(country => {
+      // Target zone
+      const zone = document.createElement('div');
+      zone.className =
+        'target rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-800 ' +
+        'shadow-sm transition flex items-center justify-between gap-3 ' +
+        'min-h-[64px]';
+      zone.dataset.country = country.name;
+
+      zone.innerHTML = `
+        <span class="font-medium">${country.name}</span>
+      `;
+
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('ring-2', 'ring-slate-300');
+      });
+
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('ring-2', 'ring-slate-300');
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('ring-2', 'ring-slate-300');
+
+        const draggedCountry = e.dataTransfer.getData('text/plain');
+
+        if (draggedCountry === country.name) {
+          score += 1;
+          document.getElementById('score').innerText = `Score: ${score}`;
+
+          const card = document.querySelector(`.card[data-country='${draggedCountry}']`);
+          if (card) card.remove();
+
+          setZoneState(zone, 'correct');
+        } else {
+          setZoneState(zone, 'incorrect');
+        }
+      });
+
+      targetsContainer.appendChild(zone);
+    });
+  }
+
+  const loadButton = document.getElementById('loadButton');
+  loadButton.addEventListener('click', () => {
+    initGame();
+    score = 0;
+    document.getElementById('score').innerText = `Score: ${score}`;
+  });
 </script>
 {% endblock %}

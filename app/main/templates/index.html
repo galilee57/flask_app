@@ -8,7 +8,7 @@
     <!-- Background image -->
     <div
       id="bg"
-      class="fixed inset-0 -z-10 bg-cover bg-no-repeat will-change-transform scale-[1.2]"
+      class="fixed inset-0 -z-10 bg-cover bg-no-repeat will-change-transform scale-[1.1]"
       style="background-image: url('/static/images/home-6.jpg'), url('/static/images/bigdata.jpg');"
     ></div>
 
@@ -98,7 +98,7 @@
       let offset = y * factor;
 
       // ✅ on limite pour ne jamais voir les bords
-      offset = clamp(offset, -150, 150);
+      offset = clamp(offset, -180, 180);
 
       bg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.15)`;
       ticking = false;
