@@ -126,17 +126,32 @@ function renderProgramDetails() {
     const name = item.exercice_id;  // nom de l'exercice
 
     return `
-      <tr>
-        <td>${idx + 1}</td>
-        <td>${name}</td>
-        <td>${item.reps}</td>
-        <td>${item.weight} kg</td>
-        <td class="text-center">
-          <button 
-            class="btn btn-sm btn-outline-danger"
+      <tr class="hover:bg-gray-50">
+        <td class="px-3 py-2 text-sm text-gray-500">${idx + 1}</td>
+
+        <td class="px-3 py-2 text-sm font-medium text-gray-900">
+          ${name}
+        </td>
+
+        <td class="px-3 py-2 text-sm text-gray-700">
+          ${item.reps}
+        </td>
+
+        <td class="px-3 py-2 text-sm text-gray-700">
+          ${item.weight} kg
+        </td>
+
+        <td class="px-3 py-2 text-center">
+          <button
+            type="button"
             title="Supprimer"
-            onclick="removeExerciseFromProgram(${idx})">
-            ✖
+            onclick="removeExerciseFromProgram(${idx})"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-full
+                  border border-red-300 text-red-600
+                  hover:bg-red-50 hover:text-red-700
+                  focus:outline-none focus:ring-2 focus:ring-red-300"
+          >
+            ✕
           </button>
         </td>
       </tr>
@@ -368,59 +383,65 @@ async function analyseCurrentProgram() {
     `).join("");
 
     programAnalysisEl.innerHTML = `
-      <h3 class="mt-3 mb-3">Analyse du programme</h3>
+      <div class="mt-4 rounded-2xl bg-white p-4 shadow">
+        <h3 class="mb-4 text-xl font-bold">Analyse du programme</h3>
 
-      <div class="row g-3 mb-3">
-        <div class="col-md-4">
-          <div class="card border-primary h-100">
-            <div class="card-body text-center">
-              <h5 class="card-title text-primary">Force</h5>
-              <p class="display-6 mb-1">${totalForce.toFixed(1)}</p>
-              <p class="text-muted mb-0">${pctForce.toFixed(1)} % du volume</p>
-            </div>
+        <!-- Cartes récap -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border border-primary-200 p-4 text-center shadow-sm">
+            <h5 class="text-sm font-semibold text-primary-700">Force</h5>
+            <p class="mt-2 text-4xl font-bold">${totalForce.toFixed(1)}</p>
+            <p class="mt-1 text-sm text-gray-500">${pctForce.toFixed(1)} % du volume</p>
+          </div>
+
+          <div class="rounded-2xl border border-secondary-200 p-4 text-center shadow-sm">
+            <h5 class="text-sm font-semibold text-secondary-700">Hypertrophie</h5>
+            <p class="mt-2 text-4xl font-bold">${totalHyp.toFixed(1)}</p>
+            <p class="mt-1 text-sm text-gray-500">${pctHyp.toFixed(1)} % du volume</p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 p-4 text-center shadow-sm">
+            <h5 class="text-sm font-semibold text-neutral-700">Endurance</h5>
+            <p class="mt-2 text-4xl font-bold">${totalEnd.toFixed(1)}</p>
+            <p class="mt-1 text-sm text-gray-500">${pctEnd.toFixed(1)} % du volume</p>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card border-success h-100">
-            <div class="card-body text-center">
-              <h5 class="card-title text-success">Hypertrophie</h5>
-              <p class="display-6 mb-1">${totalHyp.toFixed(1)}</p>
-              <p class="text-muted mb-0">${pctHyp.toFixed(1)} % du volume</p>
-            </div>
-          </div>
-        </div>
+        <!-- Tableau -->
+        <h5 class="mt-6 mb-2 text-base font-semibold">Détail par exercice</h5>
 
-        <div class="col-md-4">
-          <div class="card border-warning h-100">
-            <div class="card-body text-center">
-              <h5 class="card-title text-warning">Endurance</h5>
-              <p class="display-6 mb-1">${totalEnd.toFixed(1)}</p>
-              <p class="text-muted mb-0">${pctEnd.toFixed(1)} % du volume</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="overflow-x-auto rounded-xl border">
+          <p class="mt-2 text-xs text-gray-500 md:hidden">Faites glisser le tableau vers la droite →</p>
+          <table class="min-w-[820px] w-full whitespace-nowrap divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">#</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Exercice</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Reps</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Poids</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Volume</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Force</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Hypertrophie</th>
+                <th class="px-3 py-2 text-left font-semibold text-gray-700">Endurance</th>
+              </tr>
+            </thead>
 
-      <h5>Détail par exercice</h5>
-      <div class="table-responsive">
-        <table class="table table-sm table-striped align-middle">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Exercice</th>
-              <th>Reps</th>
-              <th>Poids</th>
-              <th>Volume</th>
-              <th>Force</th>
-              <th>Hypertrophie</th>
-              <th>Endurance</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows}
-          </tbody>
-        </table>
+            <tbody class="divide-y divide-gray-100 bg-white">
+              ${perEx.map((ex, idx) => `
+                <tr class="hover:bg-gray-50">
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${idx + 1}</td>
+                  <td class="whitespace-nowrap px-3 py-2 font-medium text-gray-900">${ex.exercice_id}</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.reps}</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.weight} kg</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.volume}</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.scores.force.toFixed(1)}</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.scores.hypertrophie.toFixed(1)}</td>
+                  <td class="whitespace-nowrap px-3 py-2 text-gray-700">${ex.scores.endurance.toFixed(1)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
       </div>
     `;
   } catch (err) {
