@@ -115,5 +115,14 @@
         "type": 3,
         "categories": ["Three.js", "Insta360"],
         "projetUrl": "/projects/viewer360/"
-      }
+      },
+      {
+        "id": "projet_test",
+        "titre": "Projet Test",
+        "description": "Espace pour tester des fonctionnalités pour de futurs projets Flask.",
+        "published": false,
+        "image": "projectTest.jpg",
+        "type": 1,
+        "categories": ["flask", "testing"]
+     }
 ]

@@ -1,9 +1,17 @@
-<!-- typography.html -->
 {% macro hero(title, subtitle=None) %}
-  <div class="mt-10">
-    <div class="text-4xl sm:text-5xl lg:text-7xl  text-primary-800 font-bold font-primary">
+  <div class="relative mt-10 pr-24">
+
+    {# Slot top-right optionnel #}
+    {% if caller is defined %}
+      <div class="absolute top-0 right-0">
+        {{ caller() }}
+      </div>
+    {% endif %}
+
+    <div class="text-4xl sm:text-5xl lg:text-7xl text-primary-800 font-bold font-primary">
       {{ title }}
     </div>
+
     {% if subtitle %}
       <div class="text-xl font-primary sm:text-2xl mb-10 mt-2">
         {{ subtitle }}

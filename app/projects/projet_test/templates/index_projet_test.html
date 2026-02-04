@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}TESTING SPACE{% endblock %}
+
+{% block content %}
+<div class="p-8 font-primary">
+  {% call hero("ESPACE POUR TESTER", "Tester des fonctionnalités pour de futur projets Flask") %}
+        {{ info_modal(
+            id="test",
+            title="TESTS FLASK",
+            text=test_text,
+            button_label="Infos"
+        ) }}
+    {% endcall %}
+</div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('projet_test.static', filename='js/projet_test.js') }}"></script>
+{% endblock %}

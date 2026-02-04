@@ -11,6 +11,7 @@ from .projects.charts import bp as charts_bp
 from .projects.game_of_life import bp as game_of_life_bp
 from .projects.game_of_life_3d import bp as game_of_life_3d_bp
 from .projects.viewer360 import bp as viewer_360_bp
+from .projects.projet_test import bp as projet_test_bp
 from .experiences import bp as experiences_bp
 
 def register_blueprints(app: Flask) -> None:
@@ -31,6 +32,7 @@ def register_blueprints(app: Flask) -> None:
         (game_of_life_bp, "/projects/game_of_life"),
         (game_of_life_3d_bp, "/projects/game_of_life_3d"),
         (viewer_360_bp, "/projects/viewer360"),
+        (projet_test_bp, "/projects/projet_test"),
         (experiences_bp, "/experiences")
     ]
 

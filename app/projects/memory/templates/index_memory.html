@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-{% from "components/typography.html" import hero %}
-{% from "components/ui.html" import button %}
 
 {% block title %}MEMORY GAME{% endblock %}
 
 {% block content %}
 <div class="bg-gray-100 p-8 h-screen">
-    
-    {{ hero(
-        title="MEMORY GAME",
-        subtitle="A simple game developed with JavaScript"
-    ) }}
 
+    {% call hero("MEMORY GAME", "A simple game developed with JavaScript") %}
+        {{ info_modal(
+            id="rgpd",
+            title="RGPD",
+            text=rgpd_text,
+            button_label="Infos"
+        ) }}
+    {% endcall %}
+
+    
     <p>Find pairs of cards by clicking on them.<br>Good luck!</p>
     <div class="mt-6">
         {{ button("Start Game", variant="first", id="start-button") }}

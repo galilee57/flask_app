@@ -5,18 +5,19 @@
 {% block title %}PHASER GAME{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
+<div class="bg-white p-8 font-primary">
     {{ hero(
         title="PHASER GAME",
         subtitle="A simple game developped with Phaser framework",
     ) }}
 </div>
+<div class="flex items-center justify-center">
+  <div id="game-container">
+  </div>
+</div>
 {% endblock %}
 
-{% block css %}
-<!-- Si besoin de CSS spécifique -->
-<link rel="stylesheet" href="{{ url_for('phaser.static', filename='css/projet_phaser.css') }}">
-{% endblock %}
+
 
 {% block js %}
 <!-- Globals -->

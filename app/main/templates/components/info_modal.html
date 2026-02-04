@@ -1,0 +1,107 @@
+{% macro info_modal(id, title, text, button_label="Infos") %}
+  {# IDs internes dérivés de `id` pour éviter les collisions #}
+  {% set dialog_id = id ~ "-dialog" %}
+  {% set open_id   = id ~ "-open" %}
+  {% set close_id  = id ~ "-close" %}
+  {% set close2_id = id ~ "-close2" %}
+  {% set backdrop_id = id ~ "-backdrop" %}
+
+  <!-- Bouton icône (ouvrir) -->
+  <button
+    id="{{ open_id }}"
+    type="button"
+    class="inline-flex items-center gap-2 rounded-lg 
+        bg-secondary-300 px-3 py-2 shadow hover:bg-secondary-700 border border-gray-400 
+        text-sm font-medium text-gray-800 font-secondary
+        focus:outline-none focus:ring-2 focus:ring-blue-500"
+    aria-haspopup="dialog"
+    aria-controls="{{ dialog_id }}"
+  >
+    <!-- Icône info -->
+    <svg class="h-6 w-6 text-gray-700" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9 9.25a.75.75 0 011.5 0v5a.75.75 0 01-1.5 0v-5z" clip-rule="evenodd"/>
+    </svg>
+    <span class="text-sm text-gray-800">{{ button_label }}</span>
+  </button>
+
+  <!-- MODAL -->
+  <div
+    id="{{ dialog_id }}"
+    class="fixed inset-0 z-50 hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="{{ id }}-title"
+  >
+    <div id="{{ backdrop_id }}" class="absolute inset-0 bg-black/40"></div>
+
+    <div class="relative flex min-h-full items-center justify-center p-4">
+      <div class="w-full max-w-2xl rounded-xl bg-white shadow-xl">
+        <div class="flex items-start justify-between border-b px-4 py-3">
+          <h2 id="{{ id }}-title" class="text-base font-semibold text-gray-900">{{ title }}</h2>
+
+          <button
+            id="{{ close_id }}"
+            type="button"
+            class="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Fermer"
+          >
+            <!-- Icône X -->
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="px-4 py-3">
+          <div class="max-h-[60vh] overflow-y-auto whitespace-pre-line text-sm leading-6 text-gray-700">
+            {{ text }}
+          </div>
+        </div>
+
+        <div class="flex justify-end border-t px-4 py-3">
+          <button
+            id="{{ close2_id }}"
+            type="button"
+            class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS encapsulé (scopé par IDs) -->
+  <script>
+    (function () {
+      const dialog = document.getElementById({{ dialog_id|tojson }});
+      const openBtn = document.getElementById({{ open_id|tojson }});
+      const closeBtn = document.getElementById({{ close_id|tojson }});
+      const closeBtn2 = document.getElementById({{ close2_id|tojson }});
+      const backdrop = document.getElementById({{ backdrop_id|tojson }});
+
+      function openDialog() {
+        dialog.classList.remove("hidden");
+        closeBtn.focus();
+        document.body.classList.add("overflow-hidden");
+      }
+
+      function closeDialog() {
+        dialog.classList.add("hidden");
+        openBtn.focus();
+        document.body.classList.remove("overflow-hidden");
+      }
+
+      openBtn.addEventListener("click", openDialog);
+      closeBtn.addEventListener("click", closeDialog);
+      closeBtn2.addEventListener("click", closeDialog);
+      backdrop.addEventListener("click", closeDialog);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
+          closeDialog();
+        }
+      });
+    })();
+  </script>
+{% endmacro %}
