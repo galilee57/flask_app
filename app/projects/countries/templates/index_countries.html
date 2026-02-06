@@ -7,10 +7,14 @@
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary min-h-screen">
 
-    {{ hero(
-        title="COUNTRIES GAME",
-        subtitle="Games to master mouse movements"
-    ) }}
+    {% call hero("COUNTRIES GAME", "Games to master mouse movements") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/flags", "title"),
+            text=md_page_i18n("docs/projects/flags"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
     <p class="my-4 text-slate-700">
         Drag and drop each card to the correct country to score points!

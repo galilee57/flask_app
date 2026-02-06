@@ -7,10 +7,14 @@
 {% block content %}
 <div class="bg-slate-50 p-8 font-primary min-h-[calc(100vh-30px)]">
 
-  {{ hero(
-      title="GAME OF LIFE",
-      subtitle="A simple implementation of Conway's Game of Life"
-  ) }}
+  {% call hero("GAME OF LIFE", "A simple implementation of Conway's Game of Life") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/game_of_life", "title"),
+            text=md_page_i18n("docs/projects/game_of_life"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
   <p class="mt-4 text-slate-700">
     Click to build your own pattern or random reset!

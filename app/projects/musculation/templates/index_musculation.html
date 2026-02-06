@@ -8,13 +8,19 @@
 {% block content %}
 <div class="bg-gray-100 p-8 min-h-screen">
 
-  {{ hero(
-      "MUSCULATION PROGRAM BUILDER",
-      t({
+  {% call hero(
+    "MUSCULATION PROGRAM BUILDER", 
+    t({
         "fr": "Ici, vous pouvez évaluer l'équilibre de votre programme entre force, hypertrophie et endurance.",
         "en": "Here you can evaluate your program's balance between strength, hypertrophy and endurance."
-      })
-  ) | safe }}
+      })) %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/musculation", "title"),
+            text=md_page_i18n("docs/projects/musculation"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
   <!-- PROGRAM FORM -->
   <form id="programForm" class="mt-6 flex flex-col gap-4">

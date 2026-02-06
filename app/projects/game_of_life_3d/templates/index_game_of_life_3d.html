@@ -7,10 +7,14 @@
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary">
 
-  {{ hero(
-      title="GAME OF LIFE 3D",
-      subtitle="A simple implementation of Conway's Game of Life in 3D",
-  ) }}
+  {% call hero("GAME OF LIFE 3D", "A simple implementation of Conway's Game of Life in 3D") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/game_of_life_3d", "title"),
+            text=md_page_i18n("docs/projects/game_of_life_3d"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
   <div id="rule-panel" class="mb-3">
     <div class="mb-2">

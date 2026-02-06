@@ -3,10 +3,15 @@
 
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary">
-  {{ hero(
-      title="Diagramme de Marey",
-      subtitle="Visualisez les horaires des trains sur un diagramme de Marey"
-  ) }}
+
+  {% call hero("Diagramme de Marey", "Visualisez les horaires des trains sur un diagramme de Marey") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/memory", "title"),
+            text=md_page_i18n("docs/projects/memory"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
   <!-- FORMULAIRE STATIONS -->
   <form id="form-station">

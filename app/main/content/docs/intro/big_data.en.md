@@ -6,6 +6,8 @@ summary: English Version
 # BIG DATA
 
 <br>
+✅ Scripts Pyspark : extraction and data transformation from DataLake for Machine Learning
+<br><br>
 ✅ NB Jupyter learning modules.  
 <br><br>
 ✅ Processing of Kafka schemas to extract data dictionaries.  

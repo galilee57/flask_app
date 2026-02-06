@@ -3,7 +3,6 @@
   {% set dialog_id = id ~ "-dialog" %}
   {% set open_id   = id ~ "-open" %}
   {% set close_id  = id ~ "-close" %}
-  {% set close2_id = id ~ "-close2" %}
   {% set backdrop_id = id ~ "-backdrop" %}
 
   <!-- Bouton icône (ouvrir) -->
@@ -11,17 +10,17 @@
     id="{{ open_id }}"
     type="button"
     class="inline-flex items-center gap-2 rounded-lg 
-        bg-secondary-300 px-3 py-2 shadow hover:bg-secondary-700 border border-gray-400 
-        text-sm font-medium text-gray-800 font-secondary
+        bg-secondary-700 px-3 py-2 shadow hover:bg-secondary-800 border border-secondary-600 
+        text-sm font-medium text-white font-secondary
         focus:outline-none focus:ring-2 focus:ring-blue-500"
     aria-haspopup="dialog"
     aria-controls="{{ dialog_id }}"
   >
     <!-- Icône info -->
-    <svg class="h-6 w-6 text-gray-700" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <svg class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9 9.25a.75.75 0 011.5 0v5a.75.75 0 01-1.5 0v-5z" clip-rule="evenodd"/>
     </svg>
-    <span class="text-sm text-gray-800">{{ button_label }}</span>
+    <span class="text-sm text-white">{{ button_label }}</span>
   </button>
 
   <!-- MODAL -->
@@ -58,15 +57,7 @@
           </div>
         </div>
 
-        <div class="flex justify-end border-t px-4 py-3">
-          <button
-            id="{{ close2_id }}"
-            type="button"
-            class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Fermer
-          </button>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -77,7 +68,6 @@
       const dialog = document.getElementById({{ dialog_id|tojson }});
       const openBtn = document.getElementById({{ open_id|tojson }});
       const closeBtn = document.getElementById({{ close_id|tojson }});
-      const closeBtn2 = document.getElementById({{ close2_id|tojson }});
       const backdrop = document.getElementById({{ backdrop_id|tojson }});
 
       function openDialog() {
@@ -94,7 +84,6 @@
 
       openBtn.addEventListener("click", openDialog);
       closeBtn.addEventListener("click", closeDialog);
-      closeBtn2.addEventListener("click", closeDialog);
       backdrop.addEventListener("click", closeDialog);
 
       document.addEventListener("keydown", (e) => {

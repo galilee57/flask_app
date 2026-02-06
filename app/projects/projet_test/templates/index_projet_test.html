@@ -7,8 +7,8 @@
   {% call hero("ESPACE POUR TESTER", "Tester des fonctionnalités pour de futur projets Flask") %}
         {{ info_modal(
             id="test",
-            title="TESTS FLASK",
-            text=test_text,
+            title=md_meta_i18n("docs/projects/memory", "title"),
+            text=md_page_i18n("docs/projects/memory"),
             button_label="Infos"
         ) }}
     {% endcall %}

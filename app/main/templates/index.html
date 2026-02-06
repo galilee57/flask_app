@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="mt-10 rounded-2xl bg-secondary-700 p-10 shadow sm:p-16">
+      <div class="mt-10 mb-10 rounded-2xl bg-secondary-700 p-10 shadow sm:p-16">
         <div class="text-xl font-secondary font-bold leading-relaxed text-white 
                     sm:text-3xl">
           {{ t({
@@ -98,7 +98,7 @@
       let offset = y * factor;
 
       // ✅ on limite pour ne jamais voir les bords
-      offset = clamp(offset, -180, 180);
+      offset = clamp(offset, -110, 110);
 
       bg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.15)`;
       ticking = false;

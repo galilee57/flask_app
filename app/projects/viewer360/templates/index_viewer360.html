@@ -12,11 +12,14 @@
 
 {% block content %}
 <div class="bg-gray-100 p-8 font-primary">
-
-  {{ hero(
-      title="360° IMAGE VIEWER",
-      subtitle="Explore 360° images interactively!"
-  ) }}
+  {% call hero("360° IMAGE VIEWER", "Explore 360° images interactively!") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/viewer360", "title"),
+            text=md_page_i18n("docs/projects/viewer360"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
 
   <div id="app">
     <aside id="sidebar">

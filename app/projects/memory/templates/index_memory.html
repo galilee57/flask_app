@@ -7,9 +7,9 @@
 
     {% call hero("MEMORY GAME", "A simple game developed with JavaScript") %}
         {{ info_modal(
-            id="rgpd",
-            title="RGPD",
-            text=rgpd_text,
+            id="test",
+            title=md_meta_i18n("docs/projects/memory", "title"),
+            text=md_page_i18n("docs/projects/memory"),
             button_label="Infos"
         ) }}
     {% endcall %}
