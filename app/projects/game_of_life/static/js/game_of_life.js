@@ -9,6 +9,46 @@ async function fetchJson(url, options) {
   return await res.json();
 }
 
+function stopRunning() {
+  running = false;
+  if (intervalId) clearInterval(intervalId);
+  intervalId = null;
+}
+
+function autoGridSize() {
+  // Breakpoints simples (à ajuster)
+  const w = window.innerWidth;
+  if (w < 640) return { rows: 40, cols: 40 };
+  if (w < 1024) return { rows: 60, cols: 60 };
+  return { rows: 100, cols: 100 };
+}
+
+/**
+ * ⚠️ Nécessite une route backend:
+ * POST `${BASE_URL}grid` avec body {rows, cols}
+ * -> renvoie { grid: [...] }
+ */
+async function applyGridSize(value) {
+  stopRunning();
+
+  let rows, cols;
+  if (value === "auto") {
+    ({ rows, cols } = autoGridSize());
+  } else {
+    const [r, c] = value.split("x").map(Number);
+    rows = r;
+    cols = c;
+  }
+
+  const data = await fetchJson(`${BASE_URL}grid`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ rows, cols })
+  });
+
+  drawGrid(data.grid);
+}
+
 function drawGrid(grid) {
   const gridDiv = document.getElementById("grid-container");
   let html = "<table id='gol-grid'>";
@@ -44,8 +84,6 @@ async function refreshSavedPatterns() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ⬇️ Ici, les éléments existent enfin
-
   // Clic sur la grille
   document.getElementById('grid-container').addEventListener('click', async (event) => {
     const cell = event.target.closest("td.cell");
@@ -71,15 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('stop').addEventListener('click', () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
+    stopRunning();
   });
 
   document.getElementById('reset').addEventListener('click', async () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
+    stopRunning();
 
     await fetchJson(`${BASE_URL}reset`, { method: 'POST' });
     const data = await fetchJson(`${BASE_URL}state`);
@@ -87,9 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('clear').addEventListener('click', async () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
+    stopRunning();
 
     await fetchJson(`${BASE_URL}clear`, { method: 'POST' });
     const data = await fetchJson(`${BASE_URL}state`);
@@ -110,14 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify({ name })
     });
 
-    // ⚠️ ton code appelait refreshPatternList() (qui n’existe pas)
     await refreshSavedPatterns();
   });
 
   document.getElementById('load-pattern').addEventListener('click', async () => {
-    running = false;
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
+    stopRunning();
 
     const select = document.getElementById('pattern-select');
     const value = select.value;
@@ -149,9 +178,36 @@ document.addEventListener('DOMContentLoaded', () => {
     drawGrid(data.grid);
   });
 
+  // ✅ Bouton / select pour changer la grille
+  // Attendus dans ton HTML:
+  // - <select id="grid-size"> avec values: auto, 40x40, 60x60, ...
+  // - <button id="apply-grid">
+  const gridSizeSelect = document.getElementById('grid-size');
+  const applyGridBtn = document.getElementById('apply-grid');
+
+  if (gridSizeSelect && applyGridBtn) {
+    applyGridBtn.addEventListener('click', async () => {
+      await applyGridSize(gridSizeSelect.value);
+    });
+
+    // Optionnel: double-clic ou Enter = appliquer direct
+    gridSizeSelect.addEventListener('change', async () => {
+      // décommente si tu veux appliquer automatiquement au changement
+      // await applyGridSize(gridSizeSelect.value);
+    });
+  }
+
   // Initialisation
   (async () => {
     await refreshSavedPatterns();
+
+    // Optionnel: si tu veux démarrer avec une taille "Auto" au lieu du state backend actuel
+    // (sinon laisse comme avant)
+    // if (gridSizeSelect && gridSizeSelect.value === 'auto') {
+    //   await applyGridSize('auto');
+    //   return;
+    // }
+
     const data = await fetchJson(`${BASE_URL}state`);
     drawGrid(data.grid);
   })();

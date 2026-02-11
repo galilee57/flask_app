@@ -20,6 +20,17 @@
     Click to build your own pattern or random reset!
   </p>
 
+  <select id="grid-size" class="border rounded px-2 py-1">
+    <option value="auto">Auto</option>
+    <option value="30x30">30×30</option>
+    <option value="40x40">40×40</option>
+    <option value="60x60">60×60</option>
+    <option value="60x80">60×80</option>
+  </select>
+
+  {{ button("Appliquer", variant="first", id="apply-grid", data_action="apply-grid") }} 
+
+
   <!-- Boutons -->
   <div class="mt-5 flex flex-wrap gap-3">
     {{ button("Start Game", variant="first", id="start", data_action="start") }}

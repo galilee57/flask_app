@@ -33,13 +33,30 @@ def apply_pattern(game, name: str, row: int, col: int):
 
 @bp.route('/')
 def home():
-    # liste dynamique des patterns intégrés
-    from .patterns import PATTERNS
     return render_template("index_game_of_life.html", patterns=sorted(PATTERNS.keys()))
+
+@bp.post("/grid")
+def set_grid():
+    """
+    Recrée une grille vide avec une nouvelle taille.
+    Nécessite: POST {rows, cols}
+    """
+    global game
+    data = request.get_json(silent=True) or {}
+
+    rows = int(data.get("rows", 60))
+    cols = int(data.get("cols", 60))
+
+    # Petite sécurité pour éviter des tailles absurdes
+    rows = max(5, min(rows, 300))
+    cols = max(5, min(cols, 300))
+
+    game = GameOfLife(rows=rows, cols=cols)  # grille vide par défaut
+    return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/state')
 def state():
-    return jsonify(grid=game.to_list())
+    return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/next')
 def next_step():
@@ -53,15 +70,19 @@ def reset():
 
 @bp.route('/toggle', methods=['POST'])
 def toggle():
-    """Toggle the state of a cell. Expects 'row' and 'col' as form data."""
     data = request.get_json(silent=True) or {}
+    if "row" not in data or "col" not in data:
+        return jsonify(ok=False, error="Missing row/col"), 400
+
     r = int(data["row"])
     c = int(data["col"])
-    # Basic validation
-    if 0 <= r < game.rows and 0 <= c < game.cols:
-        game.grid[r, c] = 1 - game.grid[r, c]  # Toggle between 0 and 1
-        return jsonify(grid=game.to_list())
-    
+
+    if not (0 <= r < game.rows and 0 <= c < game.cols):
+        return jsonify(ok=False, error="Out of bounds"), 400
+
+    game.grid[r, c] = 1 - game.grid[r, c]
+    return jsonify(ok=True, grid=game.to_list())
+
 @bp.route('/clear', methods=['POST'])
 def clear():
     game.grid.fill(0)
@@ -69,17 +90,13 @@ def clear():
 
 @bp.post("/save")
 def save_pattern():
-    """Enregistre la grille actuelle sous un nom donné."""
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
     if not name:
         return jsonify(ok=False, error="Missing name"), 400
 
     path = _pattern_path(name)
-    payload = {
-        "name": name,
-        "grid": game.to_list(),
-    }
+    payload = {"name": name, "grid": game.to_list()}
     with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f)
 
@@ -87,7 +104,6 @@ def save_pattern():
 
 @bp.post("/load")
 def load_pattern():
-    """Charge une grille enregistrée par son nom."""
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
     if not name:
@@ -109,21 +125,15 @@ def load_pattern():
 
 @bp.get("/saved")
 def list_saved():
-    """Retourne la liste des patterns disponibles."""
-    files = [
-        f[:-5]  # retire .json
-        for f in os.listdir(PATTERNS_DIR)
-        if f.endswith(".json")
-    ]
+    files = [f[:-5] for f in os.listdir(PATTERNS_DIR) if f.endswith(".json")]
     return jsonify(patterns=sorted(files))
 
 @bp.post("/pattern")
 def generic_pattern():
     data = request.get_json(silent=True) or {}
     name = data.get("name")
-    row = int(data.get("row",game.rows//2 ))
-    col = int(data.get("col",game.cols//2 ))
+    row = int(data.get("row", game.rows // 2))
+    col = int(data.get("col", game.cols // 2))
 
     apply_pattern(game, name, row, col)
-
-    return jsonify(grid=game.to_list())   
+    return jsonify(grid=game.to_list())

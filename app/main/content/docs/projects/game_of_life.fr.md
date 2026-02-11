@@ -36,4 +36,4 @@ Le Game of Life est souvent utilisé comme porte d’entrée vers la modélisati
 Ce projet s’inscrit ainsi naturellement dans une démarche orientée simulation, en continuité avec des projets plus ambitieux à venir.
 
 _La difficulté est qu'il nécessite des grilles importantes pour permettre la formation et le mouvement de grandes structures._
-Il est ainsi peu compatibke avec des écrans de smartphones : j'ai fait le choix de le rendre responsive en réduisant le nombre de cases plutôt que la taille de la grille qui aurait rendu la leture inconfortable.
+Pour rendre le projet responsive, j'ai rajouté le choix d'une grille qui peut être adaptée à la taille de l'écran.
