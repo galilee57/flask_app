@@ -6,7 +6,7 @@
 {% block title %}MUSCULATION PROGRAM BUILDER{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 min-h-screen">
+<div class="bg-white p-8 min-h-screen">
 
   {% call hero(
     "MUSCULATION PROGRAM BUILDER", 
@@ -26,7 +26,7 @@
   <form id="programForm" class="mt-6 flex flex-col gap-4">
     {{ workout_form.hidden_tag() }}
 
-    <h2 class="w-full rounded-2xl bg-secondary-300 p-4 text-3xl font-bold">
+    <h2 class="w-full rounded-2xl bg-secondary-300 border border-secondary-800 p-4 text-3xl font-bold">
       {{ t({"fr":"Choisir un programme", "en":"Choose a program"}) }}
     </h2>
 
@@ -49,7 +49,7 @@
       <div>
           {{ button(
           label=t({"fr":"Créer", "en":"Create"}),
-          variant="first",
+          variant="third",
           id="new_program",
           extra_class="h-10 sm:h-12 text-base"
           ) }}
@@ -71,7 +71,7 @@
       <div>
           {{ button(
           label=t({"fr":"Charger", "en":"Load"}),
-          variant="second",
+          variant="first",
           id="load_program",
           extra_class="h-10 sm:h-12 text-base"
           ) }}
@@ -91,7 +91,7 @@
 
   <!-- EXERCISE CONTAINER -->
   <div id="exerciseContainer" class="mt-8 hidden">
-    <h2 class="w-full rounded-2xl bg-secondary-300 p-4 text-3xl font-bold">
+    <h2 class="w-full rounded-2xl bg-secondary-300 border border-secondary-800 p-4 text-3xl font-bold">
       {{ t({"fr":"Ajouter des exercices", "en":"Add exercises"}) }}
     </h2>
 
@@ -164,7 +164,7 @@
 
   <!-- PROGRAM DETAILS -->
   <div id="programContainer" class="mt-8 hidden">
-    <h2 class="bg-secondary-300 p-4 text-3xl font-bold rounded-2xl w-full">
+    <h2 class="bg-secondary-300 border border-secondary-800 p-4 text-3xl font-bold rounded-2xl w-full">
       {{ t({"fr":"Détails du programme", "en":"Program details"}) }}
     </h2>
     <div id="programDetails" class="mt-4 rounded-2xl bg-white p-4 shadow""></div>
@@ -186,7 +186,7 @@
 
   <!-- ANALYSIS -->
   <div id="analysisContainer" class="mt-8 hidden pb-3">
-    <h2 class="w-full rounded-2xl bg-secondary-300 p-4 text-3xl font-bold">
+    <h2 class="w-full rounded-2xl bg-secondary-300 border border-secondary-800 p-4 text-3xl font-bold">
       {{ t({"fr":"Analyse du programme", "en":"Program analysis"}) }}
     </h2>
 

@@ -18,27 +18,32 @@
   {% set cards = [
     {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 
     "img": url_for('static', filename='images/machine_learning.jpg'), 
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"},
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
 
     {"label": "BIG DATA", "href": url_for('experiences.big_data'),
     "img": url_for('static', filename='images/big_data.jpg'),       
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"},
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
 
     {"label": "WEB DESIGN", "href": url_for('experiences.web_design'),
     "img": url_for('static', filename='images/web_design.jpg'),
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"},
-
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
     {"label": "AUTOMATION", "href": url_for('experiences.power_platform'), 
     "img": url_for('static', filename='images/power_platform.jpg'),
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"},
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
 
     {"label": "DEEP LEARNING", "href": url_for('experiences.deep_learning'), 
     "img": url_for('static', filename='images/deep_learning.jpg'),
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"},
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
     
     {"label": "FABLAB", "href": url_for('experiences.fablab'), 
     "img": url_for('static', filename='images/fablab.jpg'),
-    "bg": "bg-white", "hover": "hover:bg-secondary-50"}
+    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
+    "hover": "hover:from-secondary-700 hover:to-secondary-100"}
   ] %}
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 p-4">
@@ -46,7 +51,7 @@
       <a href="{{ c.href }}" class="block no-underline focus:outline-none text-primary-900">
         <div class="{{ c.bg }} {{ c.hover }}
                     aspect-3/4 rounded-2xl shadow-lg font-bold
-                    border border-neutral-400 hover:border-primary-500 hover:border-4
+                    border border-neutral-400 hover:border-secondary-500 hover:border-4
                     flex flex-col items-center
                     hover:-translate-y-1 hover:shadow-xl
                     transition-all duration-200

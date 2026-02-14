@@ -1,13 +1,17 @@
 
 {% extends "base.html" %}
-{% from "components/typography.html" import hero %}
-{% from "components/exp_content.html" import content_card %}
 
 {% block content %}
-<div>
-
-  <div class="mt-12"></div>
+<div class="max-w-4/5 mx-auto">
   
+    <div class="grid grid-cols-3 gap-2 sm:gap-6 my-8">
+      
+      {{ small_card("20+", t({"fr": "Projets ML", "en": "ML Projects"})) }}
+      {{ small_card("6+", t({"fr": "Technologies", "en": "Technologies"})) }}
+      {{ small_card("10+", t({"fr": "Années d'expérience", "en": "Years of experience"})) }}
+
+    </div>
+
   {{ content_card(
       image_url=url_for('main.static', filename='images/machine_learning.jpg'),
       image_alt="Machine Learning",

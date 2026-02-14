@@ -29,7 +29,7 @@
     <option value="60x80">60×80</option>
   </select>
 
-  {{ button("Appliquer", variant="first", id="apply-grid", data_action="apply-grid") }}
+  {{ button("Appliquer", variant="third", id="apply-grid", data_action="apply-grid") }}
 
 
   <!-- Boutons -->
@@ -37,7 +37,7 @@
     {{ t({"fr":"Cliquer pour construire votre propre pattern ou réinitialiser aléatoirement : ", "en":"Click to build your own pattern or random reset!"}) }}
   </h2>
   <div class="mt-5 flex flex-wrap gap-3">
-    {{ button("Random Reset", variant="second", id="reset", data_action="reset") }}
+    {{ button("Random Reset", variant="first", id="reset", data_action="reset") }}
     {{ button("Clear Game", variant="second", id="clear", data_action="clear") }}
   </div>
 
@@ -49,7 +49,7 @@
            placeholder="Nom du pattern (ex: glider1)" />
 
     {{ button("Save Pattern",
-              variant="third",
+              variant="first",
               id="save-pattern",
               data_action="save-pattern") }}
 
@@ -70,7 +70,7 @@
     </select>
 
     {{ button("Load Pattern",
-              variant="third",
+              variant="first",
               id="load-pattern",
               data_action="load-pattern",
               extra_class="rounded-2xl") }}

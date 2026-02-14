@@ -3,9 +3,9 @@
   {% set base = "inline-flex items-center justify-center px-6 h-12 text-sm sm:text-lg font-semibold rounded-3xl shadow-sm transition focus:outline-none focus:ring-2" %}
   
   {% set v = {
-    "first": base ~ " bg-primary-800 text-secondary-100 hover:bg-primary-700 focus:ring-primary-300",
-    "second": base ~ " bg-primary-600 text-primary-900 hover:bg-primary-300 focus:ring-primary-200",
-    "third": base ~ " bg-primary-500 text-primary-700 border border-primary-600 hover:bg-primary-50 focus:ring-primary-200"
+    "first": base ~ " bg-primary-600 text-secondary-100 border border-primary-600 hover:bg-primary-700 focus:ring-primary-300",
+    "second": base ~ " bg-primary-100 text-secondary-900 border border-primary-200 hover:bg-primary-200 focus:ring-primary-200",
+    "third": base ~ " bg-white text-primary-700 border border-primary-700 hover:bg-primary-200 focus:ring-primary-200"
   }[variant] %}
 
   {% set disabled_cls = " opacity-60 cursor-not-allowed pointer-events-none" %}
