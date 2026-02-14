@@ -32,7 +32,11 @@
         "published": true,
         "image": "projectMemory.jpg",
         "type": 3,
-        "categories": ["javascript", "animation"]
+        "categories": ["javascript", "animation"],
+        "resources": [
+            {"label": "MDN Web Docs – JavaScript Guide", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"},
+            {"label": "Domestika - Introduction to JavaScript Programming", "url": "https://www.domestika.org/en/courses/390-introduction-to-javascript-programming"}
+        ]
     },
     {
         "id": "game_of_life",
@@ -52,7 +56,7 @@
         "id": "game_of_life_3d",
         "titre": "Game of Life 3D",
         "description": "Automate cellulaire de Conway en 3D",
-        "published": false,
+        "published": true,
         "image": "projectGameOfLife3D.png",
         "type": 4,
         "categories": ["javascript", "simulateurs"],

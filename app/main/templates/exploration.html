@@ -5,7 +5,7 @@
 {% block title %}LAB{% endblock %}
 
 {% block content %}
-<div class=" p-8 mb-16 lg:mb-8">
+<div class=" p-8 mb-16 lg:mb-8 min-h-screen">
 
   {{ hero(
     t({"fr": "LAB", "en": "LAB"}),
@@ -17,7 +17,7 @@
 
   <!-- Grille des cartes (remplie en JS) -->
   <div id="cartes-grid"
-       class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+       class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
   </div>
 </div>
 
@@ -56,6 +56,7 @@
         bg-linear-to-b from-primary-400 to-primary-100 
         border-neutral-700 
         hover:from-secondary-700 hover:to-secondary-100
+        hover:border-secondary-700 hover:border-4 transition duration-300
         text-center shadow">
           <img
             src="${imgSrc}"
@@ -72,8 +73,6 @@
             <p class="text-lg text-neutral-800 flex-1">
               ${desc}
             </p>
-
-            ${badgeList(c.categories)}
           </div>
 
           <div class="mt-auto p-4 pt-0">

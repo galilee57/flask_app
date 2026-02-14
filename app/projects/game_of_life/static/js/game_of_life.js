@@ -20,7 +20,7 @@ function autoGridSize() {
   const w = window.innerWidth;
   if (w < 640) return { rows: 40, cols: 40 };
   if (w < 1024) return { rows: 60, cols: 60 };
-  return { rows: 100, cols: 100 };
+  return { rows: 60, cols: 60 };
 }
 
 /**

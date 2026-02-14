@@ -5,7 +5,7 @@
 {% block title %}GAME OF LIFE{% endblock %}
 
 {% block content %}
-<div class="bg-slate-50 p-8 font-primary min-h-[calc(100vh-30px)]">
+<div class="bg-slate-50 p-8 font-primary min-h-screen">
 
   {% call hero("GAME OF LIFE", "A simple implementation of Conway's Game of Life") %}
         {{ info_modal(
@@ -16,11 +16,12 @@
         ) }}
     {% endcall %}
 
-  <p class="mt-4 text-slate-700">
-    Click to build your own pattern or random reset!
-  </p>
+  <h2 class="p-4 text-xl font-bold">
+    {{ t({"fr":"Choisir la taille de la grille : ", "en":"Choose your grid size"}) }}
+  </h2>
 
-  <select id="grid-size" class="border rounded px-2 py-1">
+  
+  <select id="grid-size" class="border rounded p-6 text-xl">
     <option value="auto">Auto</option>
     <option value="30x30">30×30</option>
     <option value="40x40">40×40</option>
@@ -28,13 +29,14 @@
     <option value="60x80">60×80</option>
   </select>
 
-  {{ button("Appliquer", variant="first", id="apply-grid", data_action="apply-grid") }} 
+  {{ button("Appliquer", variant="first", id="apply-grid", data_action="apply-grid") }}
 
 
   <!-- Boutons -->
+   <h2 class="p-4 text-xl font-bold">
+    {{ t({"fr":"Cliquer pour construire votre propre pattern ou réinitialiser aléatoirement : ", "en":"Click to build your own pattern or random reset!"}) }}
+  </h2>
   <div class="mt-5 flex flex-wrap gap-3">
-    {{ button("Start Game", variant="first", id="start", data_action="start") }}
-    {{ button("Stop Game", variant="second", id="stop", data_action="stop") }}
     {{ button("Random Reset", variant="second", id="reset", data_action="reset") }}
     {{ button("Clear Game", variant="second", id="clear", data_action="clear") }}
   </div>
@@ -76,6 +78,11 @@
 
   <!-- Grille -->
   <div id="grid-container" class="mt-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm overflow-auto"></div>
+
+  <div class="mt-5 flex flex-wrap justify-center-safe gap-3">
+    {{ button("Start Game", variant="first", id="start", data_action="start") }}
+    {{ button("Stop Game", variant="second", id="stop", data_action="stop") }}
+  </div>
 </div>
 {% endblock %}
 

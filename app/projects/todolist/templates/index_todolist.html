@@ -5,7 +5,7 @@
 {% block title %}TODO{% endblock %}
 
 {% block content %}
-<div class="bg-slate-50 p-8 font-primary">
+<div class="bg-slate-50 p-8 font-primary min-h-screen">
   {% call hero("TODO LIST API TEST", "Test the ToDo List API with this simple interface") %}
         {{ info_modal(
             id="test",
@@ -20,16 +20,16 @@
     <input
       type="text"
       id="task"
-      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm
+      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base shadow-sm font-secondary
              focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none"
       placeholder="Enter a new task..."
       required
     />
-    {{ button("Add Task", variant="first", extra_class="mt-4") }}
+    {{ button("Add Task", variant="first", extra_class="my-4") }}
   </form>
 
   <!-- 🟨 Liste des tâches -->
-  <p class="mt-6 max-w-xl text-center text-sm text-slate-600">
+  <p class="mt-6 max-w-xl text-center text-sm text-slate-600 font-secondary">
     Click on a task to delete it, click on the icon to toggle its status.
   </p>
 
@@ -75,14 +75,15 @@
       taskList.innerHTML = ""; // Clear existing tasks
       data.forEach(task => {
         const li = document.createElement("li");
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.className = "list-group-item d-flex justify-content-between align-items-center font-secondary";
 
         // Raw structured in 2 columns
         const row = document.createElement("div");
-        row.className = "d-flex justify-content-between align-items-center w-100";
+        row.className = "flex flex-row items-center p-4";
 
         // Column 1: Icon for done status toggle
         const colIcon = document.createElement("div");
+        colIcon.className = "mr-6";
         const icon = document.createElement("span");
         icon.style.cursor = "pointer";
         icon.textContent = task.done ? "✅" : "🔶";
@@ -95,13 +96,25 @@
 
         // Column 2: Task Text
         const colText = document.createElement("div");
+        colText.className = "flex-1 ml-6";
+        colText.className = task.done ? "line-through text-gray-500" : "";
         colText.textContent = task.text;
         row.appendChild(colText);
+
+        // Column 3 : Delete icon
+        const colDelete = document.createElement("div");
+        colDelete.className = "ml-auto";
+        const deleteIcon = document.createElement("span");
+        deleteIcon.style.cursor = "pointer";
+        deleteIcon.textContent = "🗑️";
+
+        colDelete.appendChild(deleteIcon);
+        row.appendChild(colDelete);
 
         li.appendChild(row);
 
         taskList.appendChild(li);
-        li.addEventListener("click", () => {
+        deleteIcon.addEventListener("click", () => {
           const confirmed = confirm("Do you really want to delete this task ?");
           if (confirmed) {
             deleteTask(task.id);

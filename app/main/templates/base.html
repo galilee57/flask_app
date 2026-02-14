@@ -29,7 +29,7 @@
       <a href="{{ url_for('main.index') }}" class="flex items-center">
         <img src="{{ url_for('static', filename='fonts/logo.png') }}"
              alt="Logo"
-             class="h-16 sm:h-20 w-auto">
+             class="h-16 sm:h-20 w-auto hover:brightness-130 transition">
       </a>
 
       <!-- MENU DESKTOP -->
@@ -66,24 +66,24 @@
         <a href="https://www.linkedin.com/in/emmanuel-fix-32ba1798"
           target="_blank" rel="noopener noreferrer">
           <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8">
+              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
         </a>
         <a href="https://medium.com/@emmanuelfix"
           target="_blank" rel="noopener noreferrer">
           <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8">
+              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
         </a>
         <a href="https://github.com/galilee57/flask_app/tree/d98a8b8f18083ddaef306fb488267f8b579a2a9a"
           target="_blank" rel="noopener noreferrer">
           <img src="{{ url_for('static', filename='fonts/github.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8">
+              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
         </a>
 
         <div class="h-8 w-px bg-gray-300"></div>
 
         <!-- Langues -->
-        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-7 sm:h-8 w-7 sm:w-8"></a>
-        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-7 sm:h-8 w-7 sm:w-8"></a>
+        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition"></a>
+        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition"></a>
 
         <!-- MENU MOBILE -->
         <div class="relative lg:hidden">
@@ -131,7 +131,7 @@
 <section class="bg-secondary-100 pb-24 lg:pb-8">
   <div class="mx-auto max-w-6xl px-4">
     <h2 class="text-center text-xl sm:text-2xl font-bold text-secondary-900 p-4">
-      Resources
+      {{ t({"fr": "Ressources", "en": "Resources"}) }}
     </h2>
 
     <ul class="mx-auto grid max-w-4xl gap-3
