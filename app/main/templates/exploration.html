@@ -17,7 +17,9 @@
 
   <!-- Grille des cartes (remplie en JS) -->
   <div id="cartes-grid"
-       class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+       class="flex gap-6 overflow-x-auto pb-4
+            snap-x snap-mandatory
+            [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
   </div>
 </div>
 
@@ -51,16 +53,16 @@
     const projetUrl = `/projects/${c.id}`;
 
     return `
-      <div class="flex">
+      <div class="flex-none snap-start w-80 sm:w-96">
         <div class="flex h-full w-full flex-col rounded-xl 
-        bg-linear-to-b from-primary-400 to-primary-100 
-        border-neutral-700 
-        hover:from-secondary-700 hover:to-secondary-100
-        hover:border-secondary-500 hover:border-4 transition duration-300
-        text-center shadow">
+      bg-linear-to-b from-primary-400 to-primary-100 
+      border-neutral-700 
+      hover:from-secondary-700 hover:to-secondary-100
+      hover:border-secondary-500 hover:border-4 transition duration-300
+      text-center shadow">
           <img
             src="${imgSrc}"
-            class="h-48 w-full object-cover p-3 rounded-3xl"
+            class="h-84 w-full object-cover p-3 rounded-3xl"
             alt="${titre}"
             loading="lazy"
           />

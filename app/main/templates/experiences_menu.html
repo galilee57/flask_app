@@ -5,7 +5,7 @@
 {% block title %}EXPERIENCES{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary min-h-screen pb-25">
+<div class="bg-white p-8 font-primary min-h-screen pb-25">
 
   {{ hero(
       t({"fr": "EXPERIENCES", "en": "EXPERIENCES"}),
@@ -18,39 +18,40 @@
   {% set cards = [
     {"label": "ML & AI", "href": url_for('experiences.machine_learning'), 
     "img": url_for('static', filename='images/machine_learning.jpg'), 
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"},
 
     {"label": "BIG DATA", "href": url_for('experiences.big_data'),
     "img": url_for('static', filename='images/big_data.jpg'),       
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"},
 
     {"label": "WEB DESIGN", "href": url_for('experiences.web_design'),
     "img": url_for('static', filename='images/web_design.jpg'),
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"},
+
     {"label": "AUTOMATION", "href": url_for('experiences.power_platform'), 
     "img": url_for('static', filename='images/power_platform.jpg'),
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"},
 
     {"label": "DEEP LEARNING", "href": url_for('experiences.deep_learning'), 
     "img": url_for('static', filename='images/deep_learning.jpg'),
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"},
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"},
     
     {"label": "FABLAB", "href": url_for('experiences.fablab'), 
     "img": url_for('static', filename='images/fablab.jpg'),
-    "bg": "bg-linear-to-b from-primary-400 to-primary-100", 
-    "hover": "hover:from-secondary-700 hover:to-secondary-100"}
+    "bg": "bg-linear-to-b from-primary-500 to-primary-300", 
+    "hover": "hover:from-secondary-800 hover:to-secondary-300"}
   ] %}
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 p-4">
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4">
     {% for c in cards %}
-      <a href="{{ c.href }}" class="block no-underline focus:outline-none text-primary-900">
+      <a href="{{ c.href }}" class="block no-underline focus:outline-none text-white">
         <div class="{{ c.bg }} {{ c.hover }}
-                    aspect-3/4 rounded-2xl shadow-lg font-bold
+                    aspect-square rounded-2xl shadow-lg font-bold
                     border border-neutral-400 hover:border-secondary-500 hover:border-4
                     flex flex-col items-center
                     hover:-translate-y-1 hover:shadow-xl
@@ -59,7 +60,7 @@
 
           <!-- Zone titre : hauteur fixe + texte collé en bas + centré -->
           <div class="h-12 w-full flex items-end justify-center">
-            <div class="text-lg md:text-xl lg:text-2xl font-secondary text-center leading-tight">
+            <div class="text-lg md:text-xl lg:text-3xl font-secondary text-center leading-tight">
               {{ c.label }}
             </div>
           </div>

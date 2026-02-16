@@ -3,17 +3,34 @@ title: Machine Learning / Statistics
 summary: Version française
 ---
 
-# MACHINE LEARNING ET IA
+<div class="text-2xl">MACHINE LEARNING ET IA</div>
 
-<br>
+<br><br>
+
+▶ **Modélisation prédictive & analyse avancée**
+<br><br>
 ✅ 20+ études process en Python (Scikit-learn) et en Low Code (Orange / Knime)
+Conception et déploiement de modèles analytiques adaptés aux environnements industriels complexes.
 <br><br>
-✅ Modèles de prédiction de défauts et d'analyse 1er niveau
+✅ Modèles prédictifs pour l’anticipation des défauts et l’analyse opérationnelle de premier niveau
+Réduction des coûts qualité et amélioration de la réactivité terrain.
 <br><br>
-✅ Modèle d'optimisation basé sur les règles de programmes de production
+
+▶ **Optimisation industrielle & aide à la décision**
 <br><br>
-✅ Modules de formation (simulateurs en JS, Avatars AI, publication sur LMS)
+✅ Optimisation des programmes de production basée sur les règles métier
+Maximisation du rendement, réduction des pertes et aide à la décision sous contraintes industrielles.
 <br><br>
-✅ Publication de Power BI génériques (M-functions, DAX, configuration externe)
+
+✅ Industrialisation de solutions Power BI (Premium)
+M-functions avancées, DAX optimisé, paramétrage externe, modèles génériques réutilisables et maintenables.
 <br><br>
-✅ StoryTelling avec Microsoft Loop
+
+▶ **Acculturation & adoption Data**
+<br><br>
+✅ Conception de modules de formation data & IA
+Simulateurs interactifs (JavaScript), avatars IA, déploiement sur LMS pour accompagner l’adoption des outils analytiques.
+<br><br>
+✅ Data Storytelling & collaboration décisionnelle avec Microsoft Loop
+Structuration et partage des analyses pour faciliter l’alignement stratégique.
+<br><br>
