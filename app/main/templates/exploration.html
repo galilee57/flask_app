@@ -23,7 +23,15 @@
 </div>
 
 <script>
+  // On expose la langue.
+  const CURRENT_LANG = "{{ g.lang }}";
   const IMAGE_BASE = "{{ url_for('static', filename='images/') }}";
+
+  function t(translations) {
+    return translations[CURRENT_LANG] 
+        || Object.values(translations)[0] 
+        || "";
+  }
 
   function starsHtml(note) {
     const n = parseInt(note || 0, 10);
@@ -48,6 +56,7 @@
     const imgSrc = IMAGE_BASE + (c.image || "");
     const titre = c.titre || "";
     const desc  = c.description || "";
+    const descEn = c.description_en || "";
     const note  = c.type || 0;
     const projetUrl = `/projects/${c.id}`;
 
@@ -72,7 +81,12 @@
             <div>${starsHtml(note)}</div>
 
             <p class="text-lg text-neutral-800 flex-1">
-              ${desc}
+              <p class="text-lg text-neutral-800 flex-1">
+                ${t({
+                  fr: c.description.fr || "",
+                  en: c.description.en || ""
+                })}
+              </p>
             </p>
           </div>
 

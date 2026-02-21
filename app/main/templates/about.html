@@ -17,46 +17,7 @@
         "en": "“The best investment you can make is an investment in yourself... The more you learn, the more you earn.” - Warren Buffett"})
   ) }}
   
-  <article class="text-xl text-secondary sm:text-2xl font-normal leading-relaxed
-                  p-4 sm:p-8 lg:p-16">
-      <p>
-        Pourquoi <strong>Flask</strong> alors qu’il existe des frameworks plus performants, 
-        plus à la mode et plus demandés sur le marché ?
-      </p>
-      <p>
-        D'abord parce que j’adore <strong>Python</strong> !<br>
-        Certes, ce n’est pas le langage le plus rapide … 
-        mais j’aime profondément son esprit communautaire, sa lisibilité et sa philosophie.
-    </p>
-    <p>
-      Ensuite, développer un site en Python c’est la garantie de pouvoir y héberger des projets d’<strong>IA</strong>
-       plus facilement. Il y a bien sûr des alternatives robustes :  
-       Django avec son écosystème plus complet, FastAPI pour ses performances …
-    </p>
-    <p>
-      Mais avec Flask tout est à construire ! <br>
-      Et ça c’est justement là que réside son immense avantage : apprendre en profondeur, 
-      rester libre de le faire évoluer et parfois - tout simplement - pour 
-      revenir à des fonctionnalités simples et maitrisées.<br><br>
-    </p>
-    <p>
-      Ce site a nécessairement des défauts : 
-      Il aurait été bien meilleur avec une utilisation intensive de l’IA.
-    </p>
-    <p>
-      Alors bien sûr, j’ai beaucoup prompté avec ChatGPT pour corriger, 
-      améliorer et surtout apprendre.<br>
-      Mais un portfolio doit refléter un <strong>état réel de compétences</strong>, 
-      représenter son auteur avec ses limites mais lui ouvrir des voies de progrès.<br>
-    </p>
-      <p>
-      Soyez donc indulgent … et si vous avez un <strong>feedback </strong>constructif pour m'aider à 
-      progresser, n’hésitez pas à mettre un message privé sur Linkedin.
-    </p>
-    <p class="mt-6">
-      <span class="font-bold text-primary-500">ENJOY !</span>
-    </p>
-  </article>
+  {{ md_page_i18n("docs/intro/about") | safe }}
   
 </div>
 {% endblock %}

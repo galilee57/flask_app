@@ -2,7 +2,10 @@
     {
         "id": "musculation",
         "titre": "Musculation",
-        "description": "Une application pour suivre votre programme de musculation.",
+        "description": {
+            "fr": "Une application pour suivre votre programme de musculation.",
+            "en": "An application to track your muscle training program."
+        },
         "published": true,
         "image": "projectMusculation.jpg",
         "type": 5,
@@ -15,7 +18,10 @@
     {
         "id": "phaser",
         "titre": "Game avec Phaser",
-        "description": "Un jeu interactif développé avec le framework Phaser.",
+        "description": {
+            "fr": "Un jeu interactif développé avec le framework Phaser.",
+            "en": "An interactive game developed with the Phaser framework."
+        },
         "published": true,
         "image": "projectPhaser.png",
         "type": 3,
@@ -28,7 +34,10 @@
     {
         "id": "memory",
         "titre": "Jeu de Memory avec JavaScript",
-        "description": "Formation Domestika : coding d'un jeu de memory",
+        "description": {
+            "fr": "Un jeu de Memory développé dans un cours Domestika sur JavaScript.",
+            "en": "A Memory game developed in a Domestika course on JavaScript."
+        },
         "published": true,
         "image": "projectMemory.jpg",
         "type": 3,
@@ -41,7 +50,10 @@
     {
         "id": "game_of_life",
         "titre": "Game of Life",
-        "description": "Automate cellulaire de Conway",
+        "description": {
+            "fr": "Automate cellulaire de Conway.",
+            "en": "Conway's cellular automaton."
+        },
         "published": true,
         "image": "projectGameOfLife.png",
         "type": 3,
@@ -55,7 +67,10 @@
     {
         "id": "game_of_life_3d",
         "titre": "Game of Life 3D",
-        "description": "Automate cellulaire de Conway en 3D",
+        "description": {
+            "fr": "Automate cellulaire de Conway en 3D.",
+            "en": "Conway's cellular automaton in 3D."
+        },
         "published": true,
         "image": "projectGameOfLife3D.png",
         "type": 4,
@@ -68,7 +83,10 @@
     {
         "id": "countries",
         "titre": "Flags",
-        "description": "Affichage des drapeaux REST API.",
+        "description": {
+            "fr": "Affichage de drapeaux depuis une API REST.",
+            "en": "Display of flags from REST API."
+        },
         "published": true,
         "image": "projectFlags.jpg",
         "type": 1,
@@ -80,7 +98,10 @@
     {
         "id": "todolist",
         "titre": "Todo List",
-        "description": "Une ToDo List avec changement du fond d'écran.",
+        "description": {
+            "fr": "Une ToDo List avec changement d'image de fond.",
+            "en": "A ToDo List with background image change."
+        },
         "published": true,
         "image": "projectToDoList.jpg",
         "type": 1,
@@ -89,7 +110,10 @@
     {
         "id": "arduino",
         "titre": "Arduino API",
-        "description": "Réception de données depuis une API Arduino.",
+        "description": {
+            "fr": "Réception de données depuis une API Arduino.",
+            "en": "Receiving data from an Arduino API."
+        },
         "published": false,
         "image": "projectArduino.jpg",
         "type": 4,
@@ -98,7 +122,10 @@
     {
         "id": "charts",
         "titre": "Marey Diagram",
-        "description": "Gestion d'une base pour affichage de trains",
+        "description": {
+            "fr": "Gestion de base de données pour l'affichage de trains.",
+            "en": "Database management for train display."
+        },
         "published": false,
         "image": "projectMarey.jpg",
         "type": 3,
@@ -113,7 +140,10 @@
       {
         "id": "viewer360",
         "titre": "Viewer 360",
-        "description": "Viewer de photos à 360° avec Three.js",
+        "description": {
+            "fr": "Visionneuse de photos à 360° avec Three.js.",
+            "en": "360° photo viewer with Three.js."
+        },
         "published": false,
         "image": "project360.jpeg",
         "type": 3,
@@ -123,7 +153,10 @@
       {
         "id": "projet_test",
         "titre": "Projet Test",
-        "description": "Espace pour tester des fonctionnalités pour de futurs projets Flask.",
+        "description": {
+            "fr": "Espace pour tester des fonctionnalités pour de futurs projets Flask.",
+            "en": "Space to test features for future Flask projects."
+        },
         "published": false,
         "image": "projectTest.jpg",
         "type": 1,
