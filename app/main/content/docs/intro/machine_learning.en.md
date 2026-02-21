@@ -1,19 +1,48 @@
 ---
 title: Machine Learning / Statistics
-summary: English version
+summary: French version
 ---
 
-# MACHINE LEARNING AND AI
+<div class="text-2xl">MACHINE LEARNING & AI</div>
+
+<br><br>
+
+▶ **Predictive Modeling & Advanced Analytics**
 
 <br>
-✅ 20+ process studies in Low Code (Orange/Knime) and Python (scikit-learn): cleaning (including joins) + algorithms + metrics
-<br><br>
-✅ First-level defect prediction and analysis models
-<br><br>
-✅ Optimization model based on production program rules
-<br><br>
-✅ Statistical training modules (JS simulators, AI videos, publication and use on LMS)
-<br><br>
-✅ Development and publication of generic Power BI (M-functions, DAX, external configuration) for SPC defect/failure detection models.
-<br><br>
-✅ Storytelling with Microsoft Loop
+
+✅ 20+ process studies in Python (Scikit-learn) and Low Code (Orange / KNIME)  
+Design and deployment of analytical models tailored to complex industrial environments.
+
+<br>
+
+✅ Predictive models for defect anticipation and first-level operational analysis  
+Reduction of quality costs and improved field responsiveness.
+
+<br>
+
+▶ **Industrial Optimization & Decision Support**
+
+<br>
+
+✅ Optimization of production programs based on business rules  
+Yield maximization, loss reduction, and decision support under industrial constraints.
+
+<br>
+
+✅ Industrialization of Power BI solutions (Premium)  
+Advanced M-functions, optimized DAX, external parameterization, reusable and maintainable generic models.
+
+<br>
+
+▶ **Data Enablement & Adoption**
+
+<br>
+
+✅ Design of data & AI training modules  
+Interactive simulators (JavaScript), AI avatars, LMS deployment to support adoption of analytical tools.
+
+<br>
+
+✅ Data storytelling & decision-making collaboration with Microsoft Loop  
+Structuring and sharing analyses to facilitate strategic alignment.

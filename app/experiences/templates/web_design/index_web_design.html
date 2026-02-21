@@ -4,7 +4,15 @@
 
 {% block content %}
 
-<div>
+<div class="max-w-4/5 mx-auto min-h-screen pb-30">
+
+  <div class="grid grid-cols-3 gap-2 sm:gap-6 my-8">
+      
+      {{ small_card("10+", t({"fr": "Applications en production", "en": "Apps in production"})) }}
+      {{ small_card("6+", t({"fr": "Technologies", "en": "Technologies"})) }}
+      {{ small_card("6+", t({"fr": "Années d'expérience", "en": "Years of experience"})) }}
+
+  </div>
 
   <div class="mt-12"></div>
   

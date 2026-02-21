@@ -159,20 +159,23 @@ function renderProgramDetails() {
   }).join("");
 
   programDetailsEl.innerHTML = `
-    <table class="table table-striped align-middle">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Exercice</th>
-          <th>Reps</th>
-          <th>Poids</th>
-          <th class="text-center">Suppr.</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div class="overflow-x-auto rounded-xl border">
+    <p class="mt-2 text-xs text-gray-500 lg:hidden">Faites glisser le tableau vers la droite →</p>  
+    <table class="min-w-[820px] w-full whitespace-nowrap divide-y divide-gray-200 text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-3 py-2 text-left font-semibold text-gray-700">#</th>
+            <th class="px-3 py-2 text-left font-semibold text-gray-700">Exercice</th>
+            <th class="px-3 py-2 text-left font-semibold text-gray-700">Reps</th>
+            <th class="px-3 py-2 text-left font-semibold text-gray-700">Poids</th>
+            <th class="text-center px-3 py-2 font-semibold text-gray-700">Suppr.</th>
+          </tr>
+        </thead>
+      <tbody class="divide-y divide-gray-100 bg-white">
         ${rows}
       </tbody>
     </table>
+  </div>
   `;
 }
 
@@ -411,7 +414,7 @@ async function analyseCurrentProgram() {
         <h5 class="mt-6 mb-2 text-base font-semibold">Détail par exercice</h5>
 
         <div class="overflow-x-auto rounded-xl border">
-          <p class="mt-2 text-xs text-gray-500 md:hidden">Faites glisser le tableau vers la droite →</p>
+          <p class="mt-2 text-xs text-gray-500 lg:hidden">Faites glisser le tableau vers la droite →</p>
           <table class="min-w-[820px] w-full whitespace-nowrap divide-y divide-gray-200 text-sm">
             <thead class="bg-gray-50">
               <tr>

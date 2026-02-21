@@ -1,15 +1,70 @@
 ---
 title: Machine Learning / Statistics
-summary: Version française
+summary: French version
 ---
 
-# FABLAB
+<div class="text-2xl font-bold">FABLAB & DIGITAL FABRICATION</div>
 
 <br>
-✅ Complete mastery of the 3D printing workflow: design with FreeCAD / Blender / TinkerCad, slicing with Cura, multi-material printing.
-<br><br>
-✅ I’ve owned several 3D printers since 2015: Ultimaker KIT (full assembly), Creality Ender, Dagoma Magis.
-<br><br>
-✅ Member of a FabLab for 3 years: drone design/build, laser cutting, textile printing via heat transfer.
-<br><br>
-✅ Passionate about new technologies: drones, Insta360 360° camera, Meta Quest 2 VR headset.
+
+▶ **Full Mastery of the 3D Printing Workflow**
+
+<br>
+
+✅ 3D Modeling: FreeCAD, Blender, TinkerCAD
+
+<br>
+
+✅ Preparation & slicing: Cura
+
+<br>
+
+✅ Advanced parameter tuning and multi-material printing
+
+<br>
+
+▶ **Manufacturing & Prototyping**
+
+<br>
+
+✅ Hands-on experience since 2015
+
+<br>
+
+✅ Complete assembly of an Ultimaker (KIT)
+
+<br>
+
+✅ Use and optimization of Creality Ender & Dagoma Magis
+
+<br>
+
+✅ Machine calibration, maintenance, and upgrades
+
+<br>
+
+▶ **Fablab Experience (3 years)**
+
+<br>
+
+✅ Drone design and manufacturing
+
+<br>
+
+✅ Laser cutting
+
+<br>
+
+✅ Textile transfer printing
+
+<br>
+
+✅ Collaborative work in maker environments
+
+<br>
+
+▶ **Technologies & Innovation**
+
+<br>
+
+🚀 Passionate about emerging technologies: Drone · Insta 360° Camera · Meta Quest 2 VR Headset

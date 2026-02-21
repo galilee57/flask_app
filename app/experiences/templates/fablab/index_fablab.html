@@ -4,7 +4,15 @@
 {% from "components/exp_content.html" import content_card %}
 
 {% block content %}
-<div>
+<div class="max-w-4/5 mx-auto min-h-screen pb-30">
+
+  <div class="grid grid-cols-3 gap-2 sm:gap-6 my-8">
+      
+      {{ small_card("200+", t({"fr": "impressions", "en": "Prints"})) }}
+      {{ small_card("3+", t({"fr": "Technologies", "en": "Technologies"})) }}
+      {{ small_card("15+", t({"fr": "Années d'expérience", "en": "Years of experience"})) }}
+
+  </div>
 
   <div class="mt-12"></div>
   
