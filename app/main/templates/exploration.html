@@ -27,6 +27,7 @@
   const CURRENT_LANG = "{{ g.lang }}";
   const IMAGE_BASE = "{{ url_for('static', filename='images/') }}";
 
+  // Il faut recréer la fonction de traduction en JS.
   function t(translations) {
     return translations[CURRENT_LANG] 
         || Object.values(translations)[0] 

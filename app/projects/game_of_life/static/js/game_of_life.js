@@ -3,10 +3,22 @@ const BASE_URL = window.GOL_BASE_URL || "/projects/game_of_life/";
 let running = false;
 let intervalId = null;
 
+// ✅ anti-race token
+let drawVersion = 0;
+
 async function fetchJson(url, options) {
   const res = await fetch(url, options);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return await res.json();
+}
+
+// ✅ dessine seulement si c’est la réponse la plus récente
+async function safeFetchAndDraw(fetchPromise) {
+  const version = ++drawVersion;      // invalide toutes les requêtes précédentes
+  const data = await fetchPromise;
+  if (version !== drawVersion) return; // réponse obsolète => ignore
+  drawGrid(data.grid);
+  return data; // utile si tu veux lire data.rows/cols plus tard
 }
 
 function stopRunning() {
@@ -16,18 +28,12 @@ function stopRunning() {
 }
 
 function autoGridSize() {
-  // Breakpoints simples (à ajuster)
   const w = window.innerWidth;
-  if (w < 640) return { rows: 40, cols: 40 };
+  if (w < 640) return { rows: 30, cols: 30 };
   if (w < 1024) return { rows: 60, cols: 60 };
   return { rows: 60, cols: 60 };
 }
 
-/**
- * ⚠️ Nécessite une route backend:
- * POST `${BASE_URL}grid` avec body {rows, cols}
- * -> renvoie { grid: [...] }
- */
 async function applyGridSize(value) {
   stopRunning();
 
@@ -40,13 +46,13 @@ async function applyGridSize(value) {
     cols = c;
   }
 
-  const data = await fetchJson(`${BASE_URL}grid`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ rows, cols })
-  });
-
-  drawGrid(data.grid);
+  await safeFetchAndDraw(
+    fetchJson(`${BASE_URL}grid`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ rows, cols })
+    })
+  );
 }
 
 function drawGrid(grid) {
@@ -65,8 +71,7 @@ function drawGrid(grid) {
 }
 
 async function updateGrid() {
-  const data = await fetchJson(`${BASE_URL}next`);
-  drawGrid(data.grid);
+  await safeFetchAndDraw(fetchJson(`${BASE_URL}next`));
 }
 
 async function refreshSavedPatterns() {
@@ -84,7 +89,6 @@ async function refreshSavedPatterns() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Clic sur la grille
   document.getElementById('grid-container').addEventListener('click', async (event) => {
     const cell = event.target.closest("td.cell");
     if (!cell) return;
@@ -93,12 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = cell.dataset.row;
     const col = cell.dataset.col;
 
-    const data = await fetchJson(`${BASE_URL}toggle`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ row, col })
-    });
-    drawGrid(data.grid);
+    await safeFetchAndDraw(
+      fetchJson(`${BASE_URL}toggle`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ row, col })
+      })
+    );
   });
 
   document.getElementById('start').addEventListener('click', () => {
@@ -114,18 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('reset').addEventListener('click', async () => {
     stopRunning();
-
     await fetchJson(`${BASE_URL}reset`, { method: 'POST' });
-    const data = await fetchJson(`${BASE_URL}state`);
-    drawGrid(data.grid);
+    await safeFetchAndDraw(fetchJson(`${BASE_URL}state`));
   });
 
   document.getElementById('clear').addEventListener('click', async () => {
     stopRunning();
-
     await fetchJson(`${BASE_URL}clear`, { method: 'POST' });
-    const data = await fetchJson(`${BASE_URL}state`);
-    drawGrid(data.grid);
+    await safeFetchAndDraw(fetchJson(`${BASE_URL}state`));
   });
 
   document.getElementById('save-pattern').addEventListener('click', async () => {
@@ -156,32 +157,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const [kind, name] = value.split(':');
-    let data;
 
     if (kind === 'gen') {
-      data = await fetchJson(`${BASE_URL}pattern`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name })
-      });
+      await safeFetchAndDraw(
+        fetchJson(`${BASE_URL}pattern`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name })
+        })
+      );
     } else if (kind === 'saved') {
-      data = await fetchJson(`${BASE_URL}load`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name })
-      });
+      await safeFetchAndDraw(
+        fetchJson(`${BASE_URL}load`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name })
+        })
+      );
     } else {
       alert('Type de pattern inconnu.');
       return;
     }
-
-    drawGrid(data.grid);
   });
 
-  // ✅ Bouton / select pour changer la grille
-  // Attendus dans ton HTML:
-  // - <select id="grid-size"> avec values: auto, 40x40, 60x60, ...
-  // - <button id="apply-grid">
   const gridSizeSelect = document.getElementById('grid-size');
   const applyGridBtn = document.getElementById('apply-grid');
 
@@ -189,26 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyGridBtn.addEventListener('click', async () => {
       await applyGridSize(gridSizeSelect.value);
     });
-
-    // Optionnel: double-clic ou Enter = appliquer direct
-    gridSizeSelect.addEventListener('change', async () => {
-      // décommente si tu veux appliquer automatiquement au changement
-      // await applyGridSize(gridSizeSelect.value);
-    });
   }
 
-  // Initialisation
   (async () => {
     await refreshSavedPatterns();
-
-    // Optionnel: si tu veux démarrer avec une taille "Auto" au lieu du state backend actuel
-    // (sinon laisse comme avant)
-    // if (gridSizeSelect && gridSizeSelect.value === 'auto') {
-    //   await applyGridSize('auto');
-    //   return;
-    // }
-
-    const data = await fetchJson(`${BASE_URL}state`);
-    drawGrid(data.grid);
+    await safeFetchAndDraw(fetchJson(`${BASE_URL}state`));
   })();
 });

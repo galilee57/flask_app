@@ -1,11 +1,9 @@
 from . import bp
 import os
 import json
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, session
 from .game_of_life import GameOfLife
 from .patterns import PATTERNS
-
-game = GameOfLife(rows=30, cols=60)
 
 # Folder to stock grids
 BASE_DIR = os.path.dirname(__file__)
@@ -22,12 +20,27 @@ def apply_pattern(game, name: str, row: int, col: int):
     pattern = PATTERNS.get(name)
     if not pattern:
         return
-
     for dr, dc in pattern:
         r = row + dr
         c = col + dc
         if 0 <= r < game.rows and 0 <= c < game.cols:
             game.grid[r, c] = 1
+
+def _get_game() -> GameOfLife:
+    rows = int(session.get("rows", 30))
+    cols = int(session.get("cols", 60))
+    grid = session.get("grid")
+
+    game = GameOfLife(rows=rows, cols=cols, random_init=False)
+    if grid:
+        game.from_list(grid)
+    return game
+
+def _save_game(game: GameOfLife) -> None:
+    session["rows"] = game.rows
+    session["cols"] = game.cols
+    session["grid"] = game.to_list()
+    session.modified = True
 
 # === Routes ===
 
@@ -37,39 +50,41 @@ def home():
 
 @bp.post("/grid")
 def set_grid():
-    """
-    Recrée une grille vide avec une nouvelle taille.
-    Nécessite: POST {rows, cols}
-    """
-    global game
+    """Recrée une grille vide avec une nouvelle taille. POST {rows, cols}"""
     data = request.get_json(silent=True) or {}
-
     rows = int(data.get("rows", 60))
     cols = int(data.get("cols", 60))
 
-    # Petite sécurité pour éviter des tailles absurdes
     rows = max(5, min(rows, 300))
     cols = max(5, min(cols, 300))
 
-    game = GameOfLife(rows=rows, cols=cols)  # grille vide par défaut
+    # ✅ vide
+    game = GameOfLife(rows=rows, cols=cols, random_init=False)
+    _save_game(game)
     return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/state')
 def state():
+    game = _get_game()
     return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/next')
 def next_step():
+    game = _get_game()
     game.step()
-    return jsonify(grid=game.to_list())
+    _save_game(game)
+    return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/reset', methods=['POST'])
 def reset():
+    game = _get_game()
     game.reset()
+    _save_game(game)
     return jsonify(success=True, grid=game.to_list())
 
 @bp.route('/toggle', methods=['POST'])
 def toggle():
+    game = _get_game()
     data = request.get_json(silent=True) or {}
     if "row" not in data or "col" not in data:
         return jsonify(ok=False, error="Missing row/col"), 400
@@ -81,15 +96,19 @@ def toggle():
         return jsonify(ok=False, error="Out of bounds"), 400
 
     game.grid[r, c] = 1 - game.grid[r, c]
-    return jsonify(ok=True, grid=game.to_list())
+    _save_game(game)
+    return jsonify(ok=True, grid=game.to_list(), rows=game.rows, cols=game.cols)
 
 @bp.route('/clear', methods=['POST'])
 def clear():
-    game.grid.fill(0)
+    game = _get_game()
+    game.clear()
+    _save_game(game)
     return jsonify(success=True, grid=game.to_list())
 
 @bp.post("/save")
 def save_pattern():
+    game = _get_game()
     data = request.get_json(silent=True) or {}
     name = (data.get("name") or "").strip()
     if not name:
@@ -120,7 +139,9 @@ def load_pattern():
     if not grid_list:
         return jsonify(ok=False, error="Invalid pattern file"), 500
 
+    game = _get_game()
     game.from_list(grid_list)
+    _save_game(game)
     return jsonify(ok=True, grid=game.to_list())
 
 @bp.get("/saved")
@@ -130,10 +151,12 @@ def list_saved():
 
 @bp.post("/pattern")
 def generic_pattern():
+    game = _get_game()
     data = request.get_json(silent=True) or {}
     name = data.get("name")
     row = int(data.get("row", game.rows // 2))
     col = int(data.get("col", game.cols // 2))
 
     apply_pattern(game, name, row, col)
-    return jsonify(grid=game.to_list())
+    _save_game(game)
+    return jsonify(grid=game.to_list(), rows=game.rows, cols=game.cols)
