@@ -316,6 +316,9 @@
   .z-50 {
     z-index: 50;
   }
+  .z-60 {
+    z-index: 60;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -424,6 +427,12 @@
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
   }
+  .mb-20 {
+    margin-bottom: calc(var(--spacing) * 20);
+  }
+  .mb-30 {
+    margin-bottom: calc(var(--spacing) * 30);
+  }
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
   }
@@ -490,11 +499,17 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-80 {
+    height: calc(var(--spacing) * 80);
+  }
   .h-84 {
     height: calc(var(--spacing) * 84);
   }
   .h-\[80px\] {
     height: 80px;
+  }
+  .h-dvh {
+    height: 100dvh;
   }
   .h-full {
     height: 100%;
@@ -543,6 +558,9 @@
   }
   .w-50 {
     width: calc(var(--spacing) * 50);
+  }
+  .w-75 {
+    width: calc(var(--spacing) * 75);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -1543,6 +1561,16 @@
       margin-top: calc(var(--spacing) * 12);
     }
   }
+  .sm\:mb-0 {
+    @media (width >= 40rem) {
+      margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .sm\:hidden {
+    @media (width >= 40rem) {
+      display: none;
+    }
+  }
   .sm\:h-8 {
     @media (width >= 40rem) {
       height: calc(var(--spacing) * 8);
@@ -1768,6 +1796,32 @@
     @media (width >= 64rem) {
       font-size: var(--text-xl);
       line-height: var(--tw-leading, var(--text-xl--line-height));
+    }
+  }
+  .landscape\:hidden {
+    @media (orientation: landscape) {
+      display: none;
+    }
+  }
+  .landscape\:max-md\:hidden {
+    @media (orientation: landscape) {
+      @media (width < 48rem) {
+        display: none;
+      }
+    }
+  }
+  .landscape\:sm\:block {
+    @media (orientation: landscape) {
+      @media (width >= 40rem) {
+        display: block;
+      }
+    }
+  }
+  .landscape\:sm\:hidden {
+    @media (orientation: landscape) {
+      @media (width >= 40rem) {
+        display: none;
+      }
     }
   }
 }
