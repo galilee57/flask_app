@@ -22,8 +22,7 @@
             bg-white backdrop-blur
             border-t border-gray-200
             pb-[env(safe-area-inset-bottom)]
-            lg:top-0 lg:bottom-auto lg:border-t-0 lg:border-b lg:pb-0
-            landscape:sm:hidden">
+            lg:top-0 lg:bottom-auto lg:border-t-0 lg:border-b lg:pb-0">
   <div class="relative mx-2 px-4">
     <div class="flex h-16 sm:h-20 items-center justify-between">
 
@@ -55,7 +54,7 @@
         </li>
         <div class="h-8 w-px bg-gray-300"></div>
         <li class="hover:text-primary-500">
-          <a href="{{ url_for('main.exploration') }}" class="nav-link">
+          <a href="{{ url_for('main.lab') }}" class="nav-link">
             Lab
           </a>
         </li>
@@ -110,7 +109,7 @@
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.index') }}" class="nav-link py-2">{{ t({"fr": "Accueil", "en": "Home"}) }}</a></li>
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.about') }}" class="nav-link py-2">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.experiences_menu') }}" class="nav-link py-2">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
-              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.exploration') }}" class="nav-link py-2">Lab</a></li>
+              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.lab') }}" class="nav-link py-2">Lab</a></li>
             </ul>
           </div>
 

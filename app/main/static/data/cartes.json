@@ -26,6 +26,16 @@
         "image": "projectPhaser.png",
         "type": 3,
         "categories": ["javascript", "jeu"],
+
+        "ui": {
+            "action": "banner",
+            "banner_text": {
+            "fr": "Disponible uniquement sur tablette",
+            "en": "Available on tablet only"
+            },
+            "banner_classes": "bg-orange-500 text-white"
+        },
+
         "resources": [
             {"label": "Phaser Official Website", "url": "https://phaser.io/"},
             {"label": "Phaser Tutorials", "url": "https://phaser.io/learn"}

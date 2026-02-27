@@ -1,11 +1,11 @@
-
 {% extends "base.html" %}
 {% from "components/typography.html" import hero %}
+{% from "components/card_project.html" import project_card %}
 
 {% block title %}LAB{% endblock %}
 
 {% block content %}
-<div class=" p-8 mb-16 lg:mb-8 min-h-screen">
+<div class="p-8 mb-16 lg:mb-8 min-h-screen">
 
   {{ hero(
     t({"fr": "LAB", "en": "LAB"}),
@@ -15,110 +15,13 @@
     })
   ) }}
 
-  <!-- Grille des cartes (remplie en JS) -->
-  <div id="cartes-grid"
-       class="flex gap-6 overflow-x-auto pb-4
-            snap-x snap-mandatory">
+  <div
+    id="cartes-grid"
+    class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory"
+  >
+    {% for c in cartes %}
+      {{ project_card(c, g.lang) }}
+    {% endfor %}
   </div>
 </div>
-
-<script>
-  // On expose la langue.
-  const CURRENT_LANG = "{{ g.lang }}";
-  const IMAGE_BASE = "{{ url_for('static', filename='images/') }}";
-
-  // Il faut recréer la fonction de traduction en JS.
-  function t(translations) {
-    return translations[CURRENT_LANG] 
-        || Object.values(translations)[0] 
-        || "";
-  }
-
-  function starsHtml(note) {
-    const n = parseInt(note || 0, 10);
-    let s = "";
-    for (let i = 1; i <= 5; i++) {
-      s += (i <= n) ? '<span class="text-warning">&#9733;</span>'
-                    : '<span class="text-secondary">&#9734;</span>';
-    }
-    return s;
-  }
-
-  function badgeList(categories) {
-    if (!Array.isArray(categories) || categories.length === 0) return "";
-    return `
-      <div class="mb-2">
-        ${categories.map(c => `<span class="badge bg-secondary me-1">${c}</span>`).join("")}
-      </div>`;
-  }
-
-  // ---- Carte avec bouton ----
-  function carteCard(c) {
-    const imgSrc = IMAGE_BASE + (c.image || "");
-    const titre = c.titre || "";
-    const desc  = c.description || "";
-    const descEn = c.description_en || "";
-    const note  = c.type || 0;
-    const projetUrl = `/projects/${c.id}`;
-
-    return `
-      <div class="flex-none snap-start w-80 sm:w-96">
-        <div class="flex h-full w-full flex-col rounded-xl 
-      bg-linear-to-b from-primary-400 to-primary-100 
-      border-neutral-700 
-      hover:from-secondary-700 hover:to-secondary-100
-      hover:border-secondary-500 hover:border-4 transition duration-300
-      text-center shadow">
-          <img
-            src="${imgSrc}"
-            class="h-80 w-full object-cover p-3 rounded-3xl"
-            alt="${titre}"
-            loading="lazy"
-          />
-
-          <div class="flex flex-1 flex-col gap-2 p-4">
-            <h5 class="text-xl font-semibold leading-snug">${titre}</h5>
-
-            <div>${starsHtml(note)}</div>
-
-            <p class="text-lg text-neutral-800 flex-1">
-              <p class="text-lg text-neutral-800 flex-1">
-                ${t({
-                  fr: c.description.fr || "",
-                  en: c.description.en || ""
-                })}
-              </p>
-            </p>
-          </div>
-
-          <div class="mt-auto p-4 pt-0">
-            <button
-              class="rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium 
-              text-white transition hover:bg-primary-700 shadow
-              focus:outline-none focus:ring-2 focus:ring-blue-400"
-              onclick="window.location.href='${projetUrl}'"
-            >
-              See more
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  
-  // ---- Utilise bien carteCard(c) ici ----
-  async function loadCartes() {
-    try {
-      const res = await fetch("/data/cartes", { headers: { "Accept": "application/json" }});
-      if (!res.ok) throw new Error(`Erreur HTTP ${res.status}`);
-      const cartes = await res.json();
-
-      const grid = document.getElementById("cartes-grid");
-      grid.innerHTML = cartes.map(carteCard).join(""); // <-- clé
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  loadCartes();
-</script>
 {% endblock %}

@@ -1,0 +1,93 @@
+{% macro project_card(c, lang='fr') %}
+  {# --- Champs --- #}
+  {% set id_ = c.get('id', '') %}
+  {% set titre = c.get('titre', '') %}
+  {% set image = c.get('image', '') %}
+  {% set note = (c.get('type', 0) | int) %}
+  {% set categories = c.get('categories', []) %}
+  {% set projet_url = c.get('projetUrl') or ('/projects/' ~ id_) %}
+
+  {# Description {fr,en} #}
+  {% set desc_obj = c.get('description', {}) %}
+  {% set desc = desc_obj.get(lang) or desc_obj.get('fr') or desc_obj.get('en') or '' %}
+
+  {% set img_src = url_for('static', filename='images/' ~ image) %}
+
+  {% set ui = c.get('ui', {}) %}
+  {% set action = ui.get('action', 'button') %}
+  {% set banner_text_obj = ui.get('banner_text', {}) %}
+  {% set banner_text = banner_text_obj.get(lang) or banner_text_obj.get('fr') or '' %}
+  {% set banner_classes = ui.get('banner_classes', 'bg-gray-500 text-white') %}
+
+  <div class="flex-none snap-start w-80 sm:w-96">
+    <div class="flex h-full w-full flex-col rounded-xl
+      bg-linear-to-b from-primary-400 to-primary-100
+      border-neutral-700
+      hover:from-secondary-700 hover:to-secondary-100
+      hover:border-secondary-500 hover:border-4 transition duration-300
+      text-center shadow">
+
+      <img
+        src="{{ img_src }}"
+        class="h-80 w-full object-cover p-3 rounded-3xl"
+        alt="{{ titre }}"
+        loading="lazy"
+      />
+
+      <div class="flex flex-1 flex-col gap-2 p-4">
+        <h5 class="text-xl font-semibold leading-snug">{{ titre }}</h5>
+
+        <div>
+          {% for i in range(1, 6) %}
+            {% if i <= note %}
+              <span class="text-warning">&#9733;</span>
+            {% else %}
+              <span class="text-secondary">&#9734;</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if categories %}
+          <div class="mb-2">
+            {% for cat in categories %}
+              <span class="badge bg-secondary me-1">{{ cat }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <p class="text-lg text-neutral-800 flex-1">
+          {{ desc }}
+        </p>
+      </div>
+
+      <div class="mt-auto p-4 pt-0">
+
+        {# --- MOBILE : banner visible, bouton caché --- #}
+        {% if banner_text %}
+          <div class="sm:hidden rounded-2xl px-4 py-2 text-sm font-semibold text-center {{ banner_classes }}">
+            {{ banner_text }}
+          </div>
+          <a
+          href="{{ projet_url }}"
+          class="hidden sm:inline-block rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
+                text-white transition hover:bg-primary-700 shadow"
+        >
+          See more
+        </a>
+        {% else %}
+
+        {# --- DESKTOP (>= sm) : bouton visible --- #}
+        <a
+          href="{{ projet_url }}"
+          class="rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
+                text-white transition hover:bg-primary-700 shadow"
+        >
+          See more
+        </a>
+
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+{% endmacro %}
