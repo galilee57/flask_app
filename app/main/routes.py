@@ -70,9 +70,6 @@ def lab():
     # {% for c in cartes %} {{ project_card(c, g.lang) }} {% endfor %}
     return render_template("exploration.html", cartes=cartes)
 
-    # Si tu veux absolument réutiliser exploration.html, remplace par:
-    # return render_template("exploration.html", cartes=cartes)
-
 
 # Test CSS static file serving
 @bp.route("/debug")

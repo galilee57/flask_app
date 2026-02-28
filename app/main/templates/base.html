@@ -6,188 +6,63 @@
 
 <!DOCTYPE html>
 <html lang="{{ current_lang() }}">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Mon App{% endblock %}</title>
+  <title>{% block title %}PORTEFOLIO{% endblock %}</title>
 
   <!-- Tailwind compilé -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+
+  <!-- Css spécifique -->
   {% block css %}{% endblock %}
 </head>
+
 <body class="bg-white font-secondary">
 
-<!-- NAVBAR -->
-<nav class="fixed inset-x-0 bottom-0 top-auto z-50
-            bg-white backdrop-blur
-            border-t border-gray-200
-            pb-[env(safe-area-inset-bottom)]
-            lg:top-0 lg:bottom-auto lg:border-t-0 lg:border-b lg:pb-0">
-  <div class="relative mx-2 px-4">
-    <div class="flex h-16 sm:h-20 items-center justify-between">
+  <!-- NAVBAR -->
+  {% include "components/layout/nav.html" %}
 
-      <!-- LOGO -->
-      <a href="{{ url_for('main.index') }}" class="flex items-center">
-        <img src="{{ url_for('static', filename='fonts/logo.png') }}"
-             alt="Logo"
-             class="h-16 sm:h-20 w-auto hover:brightness-130 transition">
-      </a>
+  <!-- CONTENU -->
+  <main class="pb-24 lg:pt-20 lg:pb-0">
+    {% block content %}{% endblock %}
+  </main>
 
-      <!-- MENU DESKTOP -->
-      <ul class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex text-xl font-bold items-center gap-3">
-        <li class="hover:text-primary-500">
-          <a href="{{ url_for('main.index') }}" class="nav-link">
-            {{ t({"fr": "Accueil", "en": "Home"}) }}
-          </a>
-        </li>
-        <div class="h-8 w-px bg-gray-300"></div>
-        <li class="hover:text-primary-500">
-          <a href="{{ url_for('main.about') }}" class="nav-link">
-            {{ t({"fr": "A propos", "en": "About"}) }}
-          </a>
-        </li>
-        <div class="h-8 w-px bg-gray-300"></div>
-        <li class="hover:text-primary-500">
-          <a href="{{ url_for('main.experiences_menu') }}" class="nav-link">
-            {{ t({"fr": "Pro", "en": "Skills"}) }}
-          </a>
-        </li>
-        <div class="h-8 w-px bg-gray-300"></div>
-        <li class="hover:text-primary-500">
-          <a href="{{ url_for('main.lab') }}" class="nav-link">
-            Lab
-          </a>
-        </li>
-      </ul>
+  <!-- JS Spécifique -->
+  {% block js %}{% endblock %}
 
-      <!-- DROITE : RÉSEAUX + LANGUES + MENU MOBILE -->
-      <div class="flex items-center gap-2">
+  <!--  Resources -->
+  {% if resources %}
+    {% include "components/layout/resources.html" %}
+  {% endif %}
 
-        <!-- Réseaux -->
-        <a href="https://www.linkedin.com/in/emmanuel-fix-32ba1798"
-          target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/linkedin.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
-        </a>
-        <a href="https://medium.com/@emmanuelfix"
-          target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/medium.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
-        </a>
-        <a href="https://github.com/galilee57/flask_app/tree/d98a8b8f18083ddaef306fb488267f8b579a2a9a"
-          target="_blank" rel="noopener noreferrer">
-          <img src="{{ url_for('static', filename='fonts/github.png') }}" 
-              class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition">
-        </a>
+  <!-- Footer -->
+  {% include "components/layout/footer.html" %}
 
-        <div class="h-8 w-px bg-gray-300"></div>
+  <!-- JS MENU MOBILE -->
+  <script>
+    (() => {
+      const btn = document.getElementById("mobileMenuBtn");
+      const menu = document.getElementById("mobileMenu");
+      const openIcon = document.getElementById("iconOpen");
+      const closeIcon = document.getElementById("iconClose");
 
-        <!-- Langues -->
-        <a href="{{ request.path }}?lang=fr"><img src="{{ url_for('static', filename='fonts/french.png') }}" class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition"></a>
-        <a href="{{ request.path }}?lang=en"><img src="{{ url_for('static', filename='fonts/english.png') }}" class="h-7 sm:h-8 w-7 sm:w-8 hover:brightness-130 transition"></a>
+      const toggle = (open) => {
+        menu.classList.toggle("hidden", !open);
+        openIcon.classList.toggle("hidden", open);
+        closeIcon.classList.toggle("hidden", !open);
+      };
 
-        <!-- MENU MOBILE -->
-        <div class="relative lg:hidden">
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        toggle(menu.classList.contains("hidden"));
+      });
 
-          <!-- Bouton -->
-          <button id="mobileMenuBtn"
-                  class="ml-1 rounded-lg p-2 text-gray-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500">
-            <svg id="iconOpen" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-            <svg id="iconClose" class="hidden h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-
-          <!-- Dropdown -->
-          <div id="mobileMenu"
-                  class="absolute right-0 bottom-full mb-2 hidden z-50 w-50 rounded-2xl
-                  border border-gray-200 bg-white shadow-lg text-3xl font-bold
-                  lg:bottom-auto lg:top-full lg:mb-0 lg:mt-2">
-            <ul class="p-4 text-gray-900">
-              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.index') }}" class="nav-link py-2">{{ t({"fr": "Accueil", "en": "Home"}) }}</a></li>
-              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.about') }}" class="nav-link py-2">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
-              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.experiences_menu') }}" class="nav-link py-2">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
-              <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.lab') }}" class="nav-link py-2">Lab</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- CONTENU -->
-<main class="lg:pt-20 lg:pb-0">
-  {% block content %}{% endblock %}
-</main>
-
-<!-- JS -->
-{% block js %}{% endblock %}
-
-<!--  Resources -->
-{% if resources %}
-<section class="bg-secondary-100 lg:pb-8">
-  <div class="mx-auto max-w-6xl px-4">
-    <h2 class="text-center text-xl sm:text-2xl font-bold text-secondary-900 p-4">
-      {{ t({"fr": "Ressources", "en": "Resources"}) }}
-    </h2>
-
-    <ul class="mx-auto grid max-w-4xl gap-3
-               grid [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))] gap-4">
-      {% for resource in resources %}
-      <li class="flex justify-center">
-        <a
-          href="{{ resource.url }}"
-          target="_blank"
-          rel="noopener"
-          class="inline-flex w-full max-w-md items-center justify-center
-                 rounded-3xl border border-secondary-700
-                 bg-secondary-600 px-6 py-3
-                 font-secondary text-lg sm:text-xl text-slate-900 shadow-sm
-                 transition hover:bg-secondary-700"
-        >
-          {{ resource.label }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-
-<!-- Footer -->
-<footer class="bg-white text-center text-sm p-4 mb-16 lg:mb-0 z-0">
-  &copy; 2026 - Emmanuel Fix.
-  <br class="block sm:hidden" />
-  {{ t({"fr": " Conçu avec Flask et Tailwind CSS.", "en": " Built with Flask and Tailwind CSS."}) }}
-</footer>
-
-<!-- JS MENU MOBILE -->
-<script>
-  (() => {
-    const btn = document.getElementById("mobileMenuBtn");
-    const menu = document.getElementById("mobileMenu");
-    const openIcon = document.getElementById("iconOpen");
-    const closeIcon = document.getElementById("iconClose");
-
-    const toggle = (open) => {
-      menu.classList.toggle("hidden", !open);
-      openIcon.classList.toggle("hidden", open);
-      closeIcon.classList.toggle("hidden", !open);
-    };
-
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      toggle(menu.classList.contains("hidden"));
-    });
-
-    document.addEventListener("click", () => toggle(false));
-    menu.addEventListener("click", e => e.stopPropagation());
-  })();
-</script>
+      document.addEventListener("click", () => toggle(false));
+      menu.addEventListener("click", e => e.stopPropagation());
+    })();
+  </script>
 
 </body>
 </html>

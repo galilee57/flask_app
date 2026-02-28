@@ -308,6 +308,9 @@
   .-z-10 {
     z-index: calc(10 * -1);
   }
+  .-z-60 {
+    z-index: calc(60 * -1);
+  }
   .z-0 {
     z-index: 0;
   }
@@ -319,6 +322,9 @@
   }
   .z-60 {
     z-index: 60;
+  }
+  .z-100 {
+    z-index: 100;
   }
   .container {
     width: 100%;
