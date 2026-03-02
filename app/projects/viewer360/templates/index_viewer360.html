@@ -1,53 +1,69 @@
-{# app/projects/viewer360/templates/index_viewer360.html #}
 {% extends "base.html" %}
 {% from "components/typography.html" import hero %}
 
 {% block title %}360° IMAGE VIEWER{% endblock %}
 
-{% block css %}
-<link rel="stylesheet"
-      href="{{ url_for('viewer360.static',
-                       filename='css/projet_360viewer.css') }}">
-{% endblock %}
+{% block css %}{% endblock %}
 
 {% block content %}
-<div class="bg-gray-100 p-8 font-primary">
-  {% call hero("360° IMAGE VIEWER", "Explore 360° images interactively!") %}
-        {{ info_modal(
-            id="test",
-            title=md_meta_i18n("docs/projects/viewer360", "title"),
-            text=md_page_i18n("docs/projects/viewer360"),
-            button_label="Infos"
-        ) }}
+<div class="min-h-dvh bg-gray-50 font-primary">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    {% call hero("360° IMAGE VIEWER", "Explore 360° images interactively!") %}
+      {{ info_modal(
+          id="test",
+          title=md_meta_i18n("docs/projects/viewer360", "title"),
+          text=md_page_i18n("docs/projects/viewer360"),
+          button_label="Infos"
+      ) }}
     {% endcall %}
 
-  <div id="app">
-    <aside id="sidebar">
-      <div id="topbar">
-        <label for="select">Choisir une image</label>
-        <select id="select"></select>
-      </div>
-      <div class="grid" id="grid"></div>
-    </aside>
+    <!-- Layout: sidebar + viewer -->
+    <div id="app" class="mt-6 grid h-[calc(100dvh-14rem)] grid-cols-1 gap-4 lg:grid-cols-[320px_1fr]">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div class="border-b border-gray-200 p-4">
+          <label for="select" class="block text-sm font-medium text-gray-700">
+            Choisir une image
+          </label>
+          <select
+            id="select"
+            class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm
+                   focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+          ></select>
+        </div>
 
-    <main id="viewer">
-      <div id="canvas-holder"></div>
-      <div id="loading">Chargement…</div>
-    </main>
+        <div class="p-4">
+          <div id="grid" class="grid grid-cols-2 gap-3"></div>
+        </div>
+      </aside>
+
+      <!-- Viewer -->
+      <main id="viewer" class="relative min-h-[400px] overflow-hidden rounded-xl border border-gray-200 bg-black shadow-sm">
+        <div id="canvas-holder" class="absolute inset-0 h-full w-full"></div>
+        <div
+          id="loading"
+          class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                 rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white backdrop-blur"
+        >
+          Chargement…
+        </div>
+      </main>
+    </div>
   </div>
 </div>
 {% endblock %}
 
 {% block js %}
 <!-- THREE global (UMD) -->
-<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+<script src="{{ url_for('viewer360.static', filename='vendor/three/three.min.js') }}"></script>
+<script src="{{ url_for('viewer360.static', filename='vendor/three/OrbitControls.js') }}"></script>
 
 <script>
   // URL de l’API générée par Flask (correcte même si le prefix change)
   const API_IMAGES_URL = "{{ url_for('viewer360.api_images') }}";
 </script>
 
-<script src="{{ url_for('viewer360.static',
-                         filename='js/projet_360viewer.js') }}"></script>
+<script src="{{ url_for('viewer360.static', filename='js/projet_360viewer.js') }}"></script>
+<script src="{{ url_for('viewer360.static', filename='js/marzupino.js') }}"></script>
+
 {% endblock %}

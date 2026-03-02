@@ -81,7 +81,7 @@
             "fr": "Automate cellulaire de Conway en 3D.",
             "en": "Conway's cellular automaton in 3D."
         },
-        "published": true,
+        "published": false,
         "image": "projectGameOfLife3D.png",
         "type": 4,
         "categories": ["javascript", "simulateurs"],
