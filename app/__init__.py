@@ -6,6 +6,7 @@ from app.config import get_config
 from .blueprints import register_blueprints
 from pathlib import Path
 import os, json, logging
+from .extensions.cartes import get_carte_by_id
 
 
 def create_app(config_name: str | None = None) -> Flask:
@@ -46,10 +47,20 @@ def create_app(config_name: str | None = None) -> Flask:
 
     # ------- Footer resources: basé sur g.project_id (Option A) -------
     @app.context_processor
-    def inject_footer_resources():
-        project_id = getattr(g, "project_id", None)
-        card = app.config["PROJECT_CARDS_BY_ID"].get(str(project_id)) if project_id else None
-        resources = card.get("resources", []) if card else []
-        return {"resources": resources}
+    def inject_project_resources():
+        path = request.path
+
+        if path.startswith("/projects/"):
+            project_id = path.split("/")[2]
+
+            card = get_carte_by_id(project_id)
+
+            if card:
+                return {
+                    "resources": card.get("resources", []),
+                    "project_card": card
+                }
+
+        return {"resources": []}
 
     return app

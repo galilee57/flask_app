@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}ALGORITHME A*{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 min-h-screen">
+  {% call hero(
+    t({
+        "fr": "ALGORITHME A*",
+        "en": "ALGORITHM A*"
+    }), t({
+        "fr": "Modèle d'algorithme de recherche de chemin",
+        "en": "Model of pathfinding algorithm"
+    })) %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/a_star", "title"),
+            text=md_page_i18n("docs/projects/a_star"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
+</div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('projet_test.static', filename='js/projet_a_star.js') }}"></script>
+{% endblock %}

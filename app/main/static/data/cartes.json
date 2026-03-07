@@ -140,7 +140,6 @@
         "image": "projectMarey.jpg",
         "type": 3,
         "categories": ["D3.js", "SQLAlchemy", "javascript"],
-        "projetUrl": "/projects/charts/",
         "resources": [
             {"label": "Marey Diagram – Wikipedia", "url": "https://en.wikipedia.org/wiki/Marey_diagram"},
             {"label": "D3.js Official Website", "url": "https://d3js.org/"},
@@ -158,7 +157,26 @@
         "image": "project360.jpeg",
         "type": 3,
         "categories": ["Three.js", "Insta360"],
-        "projetUrl": "/projects/viewer360/"
+        "resources": [
+            {"label": "Marzipano Official Website", "url": "https://www.marzipano.net/"},
+            {"label": "Insta360 Official Website", "url": "https://www.insta360.com/"}
+        ]
+      },
+      {
+        "id": "a_star",
+        "titre": "Algorithme A*",
+        "description": {
+            "fr": "Modèle d'algorithme de recherche de chemin.",
+            "en": "Model of pathfinding algorithm."
+        },
+        "published": false,
+        "image": "projectAStar.jpg",
+        "type": 3,
+        "categories": ["ai", "algorithmes"],
+        "resources": [
+            {"label": "A* Search Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/A*_search_algorithm"},
+            {"label": "Pathfinding Visualizer", "url": "https://clementmihailescu.github.io/Pathfinding-Visualizer/"}
+        ]
       },
       {
         "id": "projet_test",

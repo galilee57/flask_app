@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 
-from flask import current_app, jsonify, render_template, url_for
+from flask import current_app, jsonify, render_template, url_for, abort
 from . import bp
 
 
@@ -22,7 +22,6 @@ def load_cartes() -> list[dict]:
     chemin = Path(bp.root_path) / "static" / "data" / "cartes.json"
     with chemin.open(encoding="utf-8") as f:
         return json.load(f)
-
 
 def filter_published_if_prod(cartes: list[dict]) -> list[dict]:
     is_prod = (
