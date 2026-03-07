@@ -153,7 +153,7 @@
             "fr": "Visionneuse de photos à 360° avec Three.js.",
             "en": "360° photo viewer with Three.js."
         },
-        "published": false,
+        "published": true,
         "image": "project360.jpeg",
         "type": 3,
         "categories": ["Three.js", "Insta360"],
