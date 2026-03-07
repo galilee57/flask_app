@@ -170,7 +170,7 @@
             "en": "Model of pathfinding algorithm."
         },
         "published": false,
-        "image": "projectAStar.jpg",
+        "image": "projectAstar.jpg",
         "type": 3,
         "categories": ["ai", "algorithmes"],
         "resources": [
