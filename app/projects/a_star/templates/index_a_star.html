@@ -19,11 +19,29 @@
             button_label="Infos"
         ) }}
     {% endcall %}
-</div>
 
+    <div class="mt-4">
+        {{ button("Mélanger", variant="first", id="shuffleBtn") }}
+        {{ button("Résoudre", variant="third", id="solveBtn") }}
+        {{ button("Afficher l'arbre de recherche", variant="second", id="showTreeBtn") }}
+    </div>
+
+    <div id="board" class="mt-4 mx-auto grid w-[350px] grid-cols-3 gap-2 rounded-xl bg-slate-300 p-4">
+        <!-- Le plateau de jeu sera généré ici par JavaScript -->
+    </div>
+    <div id="message" class="mt-4 text-center text-red-500 font-bold">
+        <!-- Les messages d'erreur seront affichés ici -->
+    </div>
+    <div 
+    id="tree"
+    class="hidden flex-col gap-4 transition-all duration-300 mt-8 mx-auto w-full max-w-8xl"
+    ></div>
 </div>
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('projet_test.static', filename='js/projet_a_star.js') }}"></script>
+<script>
+    const SOLVE_URL = "{{ url_for('a_star.solve') }}";
+</script>
+<script src="{{ url_for('a_star.static', filename='js/projet_a_star.js') }}"></script>
 {% endblock %}
