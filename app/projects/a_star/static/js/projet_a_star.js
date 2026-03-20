@@ -325,11 +325,11 @@ function showTree() {
     if (isHidden) {
         treeContainer.classList.remove("hidden");
         treeContainer.classList.add("flex", "flex-col");
-        showTreeBtn.textContent = "Masquer l'arbre de recherche";
+        showTreeBtn.textContent = "Masquer l'arbre";
     } else {
         treeContainer.classList.add("hidden");
         treeContainer.classList.remove("flex");
-        showTreeBtn.textContent = "Afficher l'arbre de recherche";
+        showTreeBtn.textContent = "Afficher l'arbre";
     }
 }
 

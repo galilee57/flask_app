@@ -20,10 +20,10 @@
         ) }}
     {% endcall %}
 
-    <div class="mt-4">
+    <div class="flex justify-center gap-4 mt-4">
         {{ button("Mélanger", variant="first", id="shuffleBtn") }}
-        {{ button("Résoudre", variant="third", id="solveBtn") }}
-        {{ button("Afficher l'arbre de recherche", variant="second", id="showTreeBtn") }}
+        {{ button("Résoudre", variant="second", id="solveBtn") }}
+        {{ button("Afficher l'arbre", variant="third", id="showTreeBtn") }}
     </div>
 
     <div id="board" class="mt-4 mx-auto grid w-[350px] grid-cols-3 gap-2 rounded-xl bg-slate-300 p-4">
