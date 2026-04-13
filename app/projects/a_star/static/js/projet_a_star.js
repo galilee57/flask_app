@@ -1,12 +1,22 @@
 let state = [1, 2, 3, 4, 5, 6, 7, 8, 0];
 let isAnimating = false;
-
 const board = document.getElementById("board");
 const message = document.getElementById("message");
 const shuffleBtn = document.getElementById("shuffleBtn");
 const solveBtn = document.getElementById("solveBtn");
 const treeContainer = document.getElementById("tree");
 const showTreeBtn = document.getElementById("showTreeBtn");
+
+let lastSolution = [];
+let lastInitialState = null;
+const replayBtn = document.getElementById("replayBtn");
+
+let editMode = false;
+let selectedTile = null;
+let availableTiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const editBtn = document.getElementById("editBtn");
+const validateBtn = document.getElementById("validateBtn");
+const tilePicker = document.getElementById("tilePicker");
 
 function renderBoard() {
     if (!board) return;
@@ -15,11 +25,24 @@ function renderBoard() {
 
     state.forEach((value, index) => {
         const tile = document.createElement("div");
-
         tile.className =
             "flex h-[100px] w-[100px] items-center justify-center rounded-lg text-3xl font-bold select-none transition";
 
-        if (value === 0) {
+        if (value === null) {
+            tile.classList.add(
+                "cursor-pointer",
+                "border-2",
+                "border-dashed",
+                "border-slate-400",
+                "bg-slate-50",
+                "text-slate-300"
+            );
+            tile.textContent = "?";
+
+            if (editMode) {
+                tile.addEventListener("click", () => placeTile(index));
+            }
+        } else if (value === 0) {
             tile.classList.add(
                 "border-2",
                 "border-dashed",
@@ -27,19 +50,26 @@ function renderBoard() {
                 "bg-white"
             );
             tile.textContent = "";
+
+            if (editMode) {
+                tile.addEventListener("click", () => removeTile(index));
+                tile.classList.add("cursor-pointer");
+            }
         } else {
             tile.classList.add(
-                "cursor-pointer",
                 "border",
                 "border-slate-300",
                 "bg-slate-50",
                 "text-slate-800",
-                "shadow-sm",
-                "hover:bg-slate-100"
+                "shadow-sm"
             );
             tile.textContent = value;
 
-            if (!isAnimating) {
+            if (editMode) {
+                tile.addEventListener("click", () => removeTile(index));
+                tile.classList.add("cursor-pointer");
+            } else if (!isAnimating) {
+                tile.classList.add("cursor-pointer", "hover:bg-slate-100");
                 tile.addEventListener("click", () => moveTile(index));
             }
         }
@@ -93,6 +123,12 @@ function shuffleBoard() {
             : "Taquin aléatoire non résoluble.";
     }
 
+    show(solveBtn);
+    show(replayBtn);
+    show(showTreeBtn);
+
+    hide(validateBtn);
+
     clearTree();
     renderBoard();
 }
@@ -141,15 +177,20 @@ async function solvePuzzle() {
         if (!data.solvable) {
             if (message) message.textContent = "Ce taquin n'est pas résoluble.";
             clearTree();
+            lastSolution = [];
+            lastInitialState = null;
             return;
         }
+
+        lastInitialState = [...state];
+        lastSolution = data.solution || [];
 
         if (message) {
             message.textContent = `Solution trouvée en ${data.moves} coups.`;
         }
 
         renderTree(data.tree_nodes || []);
-        animateSolution(data.solution || []);
+        animateSolution(lastSolution);
     } catch (error) {
         console.error(error);
         if (message) message.textContent = "Erreur lors de la résolution.";
@@ -333,8 +374,153 @@ function showTree() {
     }
 }
 
+function replaySolution() {
+    if (isAnimating) return;
+
+    if (!lastSolution || lastSolution.length === 0) {
+        if (message) message.textContent = "Aucun scénario à rejouer.";
+        return;
+    }
+
+    state = [...lastInitialState];
+    renderBoard();
+    animateSolution(lastSolution);
+}
+
+// --- Mode édition et fonctions associées ---
+
+function startEditMode() {
+    if (isAnimating) return;
+    
+    editMode = true;
+
+    show(validateBtn);
+    hide(solveBtn);
+    hide(replayBtn);
+    hide(showTreeBtn);
+
+    selectedTile = null;
+    state = [null, null, null, null, null, null, null, null, null];
+    availableTiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    if (message) {
+        message.textContent = "Mode édition : sélectionnez une case, puis une valeur.";
+    }
+
+    clearTree();
+    renderTilePicker();
+    renderBoard();
+}
+
+function renderTilePicker() {
+    if (!tilePicker) return;
+
+    tilePicker.innerHTML = "";
+    tilePicker.classList.remove("hidden");
+    tilePicker.classList.add("flex");
+
+    availableTiles.forEach(value => {
+        const tile = document.createElement("button");
+        tile.type = "button";
+        tile.className =
+            "flex h-12 w-12 items-center justify-center rounded-lg border bg-white text-lg font-bold shadow-sm";
+
+        if (selectedTile === value) {
+            tile.classList.add("ring-2", "ring-blue-500");
+        }
+
+        tile.textContent = value === 0 ? "□" : value;
+
+        tile.addEventListener("click", () => {
+            selectedTile = value;
+            renderTilePicker();
+        });
+
+        tilePicker.appendChild(tile);
+    });
+}
+
+function placeTile(index) {
+    if (!editMode || selectedTile === null) return;
+    if (state[index] !== null) return;
+
+    state[index] = selectedTile;
+    availableTiles = availableTiles.filter(value => value !== selectedTile);
+    selectedTile = null;
+
+    renderTilePicker();
+    renderBoard();
+}
+
+function removeTile(index) {
+    if (!editMode) return;
+
+    const value = state[index];
+    if (value === null) return;
+
+    availableTiles.push(value);
+    availableTiles.sort((a, b) => a - b);
+
+    state[index] = null;
+
+    if (selectedTile === value) {
+        selectedTile = null;
+    }
+
+    renderTilePicker();
+    renderBoard();
+}
+
+function validateCustomBoard() {
+    if (!editMode) return;
+
+    const isComplete = state.every(value => value !== null);
+
+    if (!isComplete) {
+        if (message) {
+            message.textContent = "Complète d'abord les 9 cases.";
+        }
+        return;
+    }
+
+    editMode = false;
+
+    hide(validateBtn);
+    show(solveBtn);
+    show(replayBtn);
+    show(showTreeBtn);
+
+    selectedTile = null;
+
+    if (tilePicker) {
+        tilePicker.innerHTML = "";
+        tilePicker.classList.add("hidden");
+        tilePicker.classList.remove("flex");
+    }
+
+    if (message) {
+        message.textContent = isSolvable(state)
+            ? "Plateau personnalisé prêt. Ce taquin est résoluble."
+            : "Plateau personnalisé prêt. Ce taquin n'est pas résoluble.";
+    }
+
+    renderBoard();
+}
+
+// Helpers pour masquer les boutons et éléments en mode édition
+function show(el) {
+    el?.classList.remove("hidden");
+}
+
+function hide(el) {
+    el?.classList.add("hidden");
+}
+
 if (shuffleBtn) shuffleBtn.addEventListener("click", shuffleBoard);
 if (solveBtn) solveBtn.addEventListener("click", solvePuzzle);
 if (showTreeBtn) showTreeBtn.addEventListener("click", showTree);
+if (replayBtn) replayBtn.addEventListener("click", replaySolution);
+if (editBtn) editBtn.addEventListener("click", startEditMode);
+if (validateBtn) validateBtn.addEventListener("click", validateCustomBoard);
 
 renderBoard();

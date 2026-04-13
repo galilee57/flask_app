@@ -20,22 +20,42 @@
         ) }}
     {% endcall %}
 
-    <div class="flex justify-center gap-4 mt-4">
-        {{ button("Mélanger", variant="first", id="shuffleBtn") }}
-        {{ button("Résoudre", variant="second", id="solveBtn") }}
-        {{ button("Afficher l'arbre", variant="third", id="showTreeBtn") }}
+    <div class="flex flex-col items-center sm:flex-row gap-8">
+
+        <div class="flex flex-col">
+            <!-- Conteneur pour le sélecteur de tuiles en mode édition -->
+            <div id="tilePicker" class="hidden mt-4 grid grid-cols-3 gap-2 justify-items-center bg-slate-200 p-2 rounded-lg w-fit mx-auto"></div>
+
+            <div id="board" class="mt-4 mx-auto grid w-[350px] grid-cols-3 gap-2 rounded-xl bg-slate-300 p-4">
+                <!-- Le plateau de jeu sera généré ici par JavaScript -->
+            </div>
+            <div id="message" class="mt-4 text-center text-red-500 font-bold">
+                <!-- Les messages d'erreur seront affichés ici -->
+            </div>
+            
+        </div>
+
+        <div class="flex flex-col justify-center gap-3 w-48">
+            
+            {{ button("Éditer le plateau", variant="first", id="editBtn") }}
+            {{ button("Valider", variant="third", id="validateBtn", extra_class="hidden") }}
+            <br>
+            {{ button("Mélanger", variant="first", id="shuffleBtn") }}
+            {{ button("Résoudre", variant="third", id="solveBtn", extra_class="hidden") }}
+            {{ button("Rejouer", variant="second", id="replayBtn", extra_class="hidden") }}
+            {{ button("Afficher l'arbre", variant="second", id="showTreeBtn", extra_class="hidden") }}
+
+        </div>
+    
     </div>
 
-    <div id="board" class="mt-4 mx-auto grid w-[350px] grid-cols-3 gap-2 rounded-xl bg-slate-300 p-4">
-        <!-- Le plateau de jeu sera généré ici par JavaScript -->
-    </div>
-    <div id="message" class="mt-4 text-center text-red-500 font-bold">
-        <!-- Les messages d'erreur seront affichés ici -->
-    </div>
     <div 
-    id="tree"
-    class="hidden flex-col gap-4 transition-all duration-300 mt-8 mx-auto w-full max-w-8xl"
-    ></div>
+            id="tree"
+            class="hidden flex-col gap-4 transition-all duration-300 mt-8 mx-auto w-full max-w-8xl"
+            ></div>
+
+    </div>
+
 </div>
 {% endblock %}
 

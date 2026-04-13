@@ -12,7 +12,7 @@
 
   {% if href %}
     <a href="{{ href }}"
-       class="{{ v }} {{ extra_class }}{{ disabled_cls if disabled else '' }}"
+       class="{{ v }} {{ extra_class }} {{ disabled_cls if disabled else '' }}"
        {% if id %}id="{{ id }}"{% endif %}
        {% if data_action %}data-action="{{ data_action }}"{% endif %}
        {% if disabled %}aria-disabled="true" tabindex="-1"{% endif %}>
@@ -20,7 +20,7 @@
     </a>
   {% else %}
     <button 
-            class="{{ v }} {{ extra_class }}{{ disabled_cls if disabled else '' }}"
+            class="{{ v }} {{ extra_class }} {{ disabled_cls if disabled else '' }}"
             {% if id %}id="{{ id }}"{% endif %}
             {% if data_action %}data-action="{{ data_action }}"{% endif %}
             {% if disabled %}disabled{% endif %}>
