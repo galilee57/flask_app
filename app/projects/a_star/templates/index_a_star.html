@@ -37,13 +37,13 @@
 
         <div class="flex flex-col justify-center gap-3 w-48">
             
-            {{ button("Éditer le plateau", variant="first", id="editBtn") }}
-            {{ button("Valider", variant="third", id="validateBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Éditer le plateau", "en": "Edit Board" }), variant="first", id="editBtn") }}
+            {{ button(t({ "fr": "Valider", "en": "Validate" }), variant="third", id="validateBtn", extra_class="hidden") }}
             <br>
-            {{ button("Mélanger", variant="first", id="shuffleBtn") }}
-            {{ button("Résoudre", variant="third", id="solveBtn", extra_class="hidden") }}
-            {{ button("Rejouer", variant="second", id="replayBtn", extra_class="hidden") }}
-            {{ button("Afficher l'arbre", variant="second", id="showTreeBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Mélanger", "en": "Shuffle" }), variant="first", id="shuffleBtn") }}
+            {{ button(t({ "fr": "Résoudre", "en": "Solve" }), variant="third", id="solveBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Rejouer", "en": "Replay" }), variant="second", id="replayBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Afficher l'arbre", "en": "Show Tree" }), variant="second", id="showTreeBtn", extra_class="hidden") }}
 
         </div>
     
