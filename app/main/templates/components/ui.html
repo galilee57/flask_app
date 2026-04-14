@@ -8,7 +8,7 @@
     "third": base ~ " bg-white text-primary-700 border border-primary-700 hover:bg-primary-200 focus:ring-primary-200"
   }[variant] %}
 
-  {% set disabled_cls = "opacity-60 cursor-not-allowed pointer-events-none" %}
+  {% set disabled_cls = " opacity-60 cursor-not-allowed pointer-events-none" %}
 
   {% if href %}
     <a href="{{ href }}"
@@ -20,10 +20,10 @@
     </a>
   {% else %}
     <button 
-            class="{{ v }} {{ extra_class }} {{ disabled_cls if disabled else '' }}"
-            {% if id %}id="{{ id }}"{% endif %}
-            {% if data_action %}data-action="{{ data_action }}"{% endif %}
-            {% if disabled %}disabled{% endif %}>
+        class="{{ v }} {{ extra_class }} {{ disabled_cls if disabled else '' }}"
+        {% if id %}id="{{ id }}"{% endif %}
+        {% if data_action %}data-action="{{ data_action }}"{% endif %}
+        {% if disabled %}disabled{% endif %}>
       {{ label }}
     </button>
   {% endif %}

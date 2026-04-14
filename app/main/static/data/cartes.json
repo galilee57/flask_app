@@ -169,7 +169,7 @@
             "fr": "Modèle d'algorithme de recherche de chemin.",
             "en": "Model of pathfinding algorithm."
         },
-        "published": false,
+        "published": true,
         "image": "projectAstar.jpg",
         "type": 3,
         "categories": ["ai", "algorithmes"],

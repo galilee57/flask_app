@@ -231,8 +231,8 @@ function animateSolution(solution) {
 function formatState(state) {
     const display = state.map(value => (value === 0 ? " " : value));
     return `${display[0]} ${display[1]} ${display[2]}
-${display[3]} ${display[4]} ${display[5]}
-${display[6]} ${display[7]} ${display[8]}`;
+            ${display[3]} ${display[4]} ${display[5]}
+            ${display[6]} ${display[7]} ${display[8]}`;
 }
 
 function clearTree() {
