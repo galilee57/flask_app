@@ -179,6 +179,22 @@
         ]
       },
       {
+        "id": "sudoku",
+        "titre": "Sudoku Solver",
+        "description": {
+            "fr": "Résolveur de Sudoku développé avec Flask.",
+            "en": "Sudoku solver developed with Flask."
+        },
+        "published": false,
+        "image": "projectSudoku.jpg",
+        "type": 5,
+        "categories": ["flask", "python"],
+        "resources": [
+            {"label": "Flask Official Website", "url": "https://flask.palletsprojects.com/"},
+            {"label": "A Sudoku Solver Algorithm in Python", "url": "https://www.geeksforgeeks.org/sudoku-solver-python-backtracking-2/"}
+        ]
+    },
+      {
         "id": "projet_test",
         "titre": "Projet Test",
         "description": {

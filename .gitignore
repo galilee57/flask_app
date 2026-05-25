@@ -1,5 +1,8 @@
 .venv/
 
+# Git ignore file for a Flask project
+archives/
+
 # Python
 __pycache__/
 *.py[cod]

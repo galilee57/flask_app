@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}SUDOKU SOLVER{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 min-h-screen">
+  {% call hero("SUDOKU SOLVER", "Résolvez vos grilles de Sudoku en un clin d'œil") %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/sudoku", "title"),
+            text=md_page_i18n("docs/projects/sudoku"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
+
+<div class="flex flex-col items-center sm:flex-row gap-8">
+
+    <div class="flex flex-col">
+
+        <div id="sudoku-board" class="mt-6 grid grid-cols-9 w-fit">
+            <!-- Le plateau de jeu sera généré ici par JavaScript -->
+        </div>
+        
+    </div>
+
+    <div class="flex flex-col justify-center gap-3 w-48">
+
+        <div class="flex items-center gap-6 mt-4">
+
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                type="radio"
+                name="difficulty"
+                value="30"
+                class="accent-green-600"
+                checked
+                />
+                <span>{{ t({ "fr": "Facile", "en": "Easy" }) }}</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                type="radio"
+                name="difficulty"
+                value="40"
+                class="accent-yellow-600"
+                    />
+                    <span>{{ t({ "fr": "Moyen", "en": "Medium" }) }}</span>
+                </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                type="radio"
+                name="difficulty"
+                value="50"
+                class="accent-red-600"
+                />
+                <span>{{ t({ "fr": "Difficile", "en": "Hard" }) }}</span>
+            </label>
+
+        </div>
+
+            {{ button(t({ "fr": "Mélanger", "en": "Shuffle" }), variant="first", id="shuffleBtn") }}
+            {{ button(t({ "fr": "Résoudre", "en": "Solve" }), variant="third", id="solveBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Masquer", "en": "Hide" }), variant="second", id="hideBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Animer", "en": "Animate" }), variant="second", id="animateBtn", extra_class="hidden") }}
+            {{ button(t({ "fr": "Etape +", "en": "Step +" }), variant="second", id="stepBtn", extra_class="hidden") }}
+
+            <div class="flex items-center gap-3 mt-4">
+                <label class="font-medium">{{ t({"fr": "Vitesse : ", "en": "Speed : "}) }}</label>
+                <span id="speedValue">80 ms</span>
+            </div>
+            <div class="flex items-center gap-3 mt-1">
+                <input
+                    id="speedSlider"
+                    type="range"
+                    min="10"
+                    max="500"
+                    value="80"
+                    class="w-48"
+                />
+
+                
+            </div>
+
+            <div class="flex items-center gap-3 mt-4">
+
+                <input
+                    id="stepModeToggle"
+                    type="checkbox"
+                    class="w-5 h-5 accent-orange-600 cursor-pointer"
+                />
+
+                <label class="font-medium">
+                    {{ t({"fr": "Mode pas à pas", "en": "Step-by-step mode"}) }}
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+    <div 
+            id="tree"
+            class="hidden flex-col gap-4 transition-all duration-300 mt-8 mx-auto w-full max-w-8xl"
+            ></div>
+
+    </div>
+
+</div>
+
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('sudoku.static', filename='js/sudoku.js') }}"></script>
+{% endblock %}
