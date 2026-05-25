@@ -185,7 +185,7 @@
             "fr": "Résolveur de Sudoku développé avec Flask.",
             "en": "Sudoku solver developed with Flask."
         },
-        "published": false,
+        "published": true,
         "image": "projectSudoku.jpg",
         "type": 5,
         "categories": ["flask", "python"],
