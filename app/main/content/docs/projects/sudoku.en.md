@@ -5,49 +5,37 @@ summary: English Version
 
 # 🧠 Sudoku Solving Algorithms
 
-Unlike the sliding puzzle problem — where the final state is already known — the important aspect here is not the path itself, but the final solution.  
-However, choosing the right algorithm remains fundamental in order to optimize:
+Unlike the sliding puzzle — where the final state is known in advance — what matters here is not the path itself, but the final solution.
 
-- performance,
-- implementation complexity,
-- search efficiency.
+However, the choice of algorithm remains fundamental in order to optimize:
+• performance,
+• implementation complexity,
+• exploration quality.
 
 ---
 
 # 🧬 Genetic Approach
 
-Genetic algorithms are particularly well suited for Sudoku solving.
+The genetic algorithm is a particularly suitable approach.
 
-The main idea is to:
+The principle consists of:
+• generating candidates by filling empty cells,
+• evaluating their quality through a cost function,
+• applying mutations whenever combinations fail.
 
-1. generate candidate solutions by filling empty cells,
-2. evaluate them using a cost function,
-3. apply mutations whenever combinations fail.
-
-The cost function evaluates:
-
-- row conflicts,
-- column conflicts,
-- subgrid conflicts,
-- overall grid consistency.
+The cost function measures the number of conflicts and validates rows, columns, and subgrids.
 
 ---
 
-# ⚠️ The Local Optima Problem
+# ⚠️ The Local Optimum Problem
 
-One of the main difficulties in Sudoku — especially when very few digits are initially provided — is the presence of local optima.
+The main difficulty of Sudoku — especially when very few numbers are initially known — lies in the existence of local optima.
 
-These configurations appear promising but prevent the algorithm from progressing toward the global solution.
+These configurations may appear promising but prevent the algorithm from progressing toward the global solution. The challenge is therefore to balance:
+• **Exploration**: randomness, discovery of new paths, diversity
+• **Exploitation**: deterministic behavior, preservation of the best candidates, optimization
 
-The challenge is therefore to balance:
-
-| Exploration            | Exploitation                      |
-| ---------------------- | --------------------------------- |
-| Random behavior        | Deterministic behavior            |
-| Discovery of new paths | Preservation of strong candidates |
-| Diversity              | Optimization                      |
-
-Exploitation makes it possible to preserve promising candidates that can later be reused whenever the search becomes blocked.
+Exploitation makes it possible to preserve promising candidates and return to them if the search becomes stuck.
 
 ---
 
@@ -56,56 +44,49 @@ Exploitation makes it possible to preserve promising candidates that can later b
 The implemented algorithm also supports **local backtracking**.
 
 This means it can:
+• step backward,
+• abandon an unpromising branch,
+• restart from a better candidate.
 
-- step backward,
-- abandon unpromising branches,
-- restart from stronger candidates.
-
-This hybrid strategy avoids **naive backtracking**, which is notoriously slow because it exhaustively explores every possible path.
+This hybrid approach avoids **naive backtracking**, which is particularly slow because it systematically explores every possible path.
 
 ---
 
-# 🎯 Heuristic Selection
+# 🎯 Selection Heuristic
 
-The algorithm first searches for:
+The algorithm begins by searching for:
+• the cell with the best heuristic,
+• meaning the most constrained cell.
 
-> the cell with the best heuristic,
-> namely the most constrained cell.
-
-This strategy drastically reduces the search space.
+This strategy significantly reduces the number of possibilities to explore.
 
 ---
 
 # 🧪 Hybridization of Methods
 
-The approach combines multiple techniques:
-
-- heuristics,
-- genetic generation,
-- elitism,
-- mutations,
-- local backtracking.
+The implemented approach combines several techniques:
+• heuristics,
+• genetic generation,
+• elitism,
+• mutations,
+• local backtracking.
 
 The genetic mechanism works as follows:
 
-1. generate multiple candidates,
-2. preserve the best individuals (_elitism_),
-3. cross the strongest candidates,
-4. introduce random genomes to maintain diversity.
+• generation of multiple candidates,
+• preservation of the best individuals (_elitism_),
+• crossover between the best candidates,
+• introduction of random genomes to maintain diversity.
 
-Maintaining diversity is essential to avoid local optima.
+This diversity is essential to avoid local optima.
 
 ---
 
 # 🧩 Sudoku Specificity
 
-Sudoku has a particularly challenging property:
-
-> a single incorrect digit may invalidate the entire grid.
-
-This creates very deep local minima that are difficult to escape.
+Sudoku has an important characteristic: a single error in one cell can invalidate the entire grid.
+This creates very deep local minima that are difficult to escape from.
 
 The problem therefore becomes both:
-
-- a search problem,
-- and a balance problem between exploration and exploitation.
+• a search problem,
+• and a balance problem between exploration and exploitation.

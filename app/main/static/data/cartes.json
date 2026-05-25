@@ -190,8 +190,8 @@
         "type": 5,
         "categories": ["flask", "python"],
         "resources": [
-            {"label": "Flask Official Website", "url": "https://flask.palletsprojects.com/"},
-            {"label": "A Sudoku Solver Algorithm in Python", "url": "https://www.geeksforgeeks.org/sudoku-solver-python-backtracking-2/"}
+            {"label": "Genetic Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/Genetic_algorithm"},
+            {"label": "Backtracking – Wikipedia", "url": "https://en.wikipedia.org/wiki/Backtracking#:~:text=Backtracking%20is%20a%20class%20of,cannot%20possibly%20be%20completed%20to"}
         ]
     },
       {
