@@ -4,7 +4,11 @@
 
 {% block content %}
 <div class="bg-white p-8 min-h-screen">
-  {% call hero("SUDOKU SOLVER", "Algorithme génétique et backtracking") %}
+  {% call hero("SUDOKU SOLVER", 
+        t({
+        "fr": "Algorithme génétique et backtracking",
+        "en": "Genetic Algorithm and Backtracking"
+        })) %}
         {{ info_modal(
             id="test",
             title=md_meta_i18n("docs/projects/sudoku", "title"),
