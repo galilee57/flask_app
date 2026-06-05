@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}CONNECT FOUR{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 min-h-screen">
+  {% call hero(
+        t({
+            "fr": "PUISSANCE 4",
+            "en": "CONNECT FOUR"
+        }), 
+        t({
+            "fr": "Algorithme MinMax et déterminisme",
+            "en": "MinMax Algorithm and Determinism"
+        })
+    ) %}
+        {{ info_modal(
+            id="test",
+            title=md_meta_i18n("docs/projects/connect_four", "title"),
+            text=md_page_i18n("docs/projects/connect_four"),
+            button_label="Infos"
+        ) }}
+    {% endcall %}
+
+    <div class="flex flex-col items-center">
+        <div id="controls" class="mb-2"></div>
+
+        <div id="connectFour-board"
+             class="w-fit bg-blue-600 p-4 rounded-lg">
+        </div>
+
+        <div class="flex justify-center gap-12 mt-4 w-full">
+            <div>
+                <div class="rounded-full bg-red-500 text-white p-2"
+                 id="player1-count"></div>
+                <input type="radio" name="player1" id="human1" checked>
+                    <label for="human1">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
+                <input type="radio" name="player1" id="ai1">
+                        <label for="ai1">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
+            </div>
+
+            <div>
+                <div class="rounded-full bg-yellow-300 text-gray-800 p-2"
+                 id="player2-count"></div>
+                <input type="radio" name="player2" id="human2">
+                    <label for="human2">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
+                <input type="radio" name="player2" id="ai2" checked>
+                    <label for="ai2">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
+            </div>
+        </div>
+        <div class="flex justify-center mt-4 w-full">
+            {{ button(t({ "fr": "Rejouer", "en": "Play again" }), variant="second", id="resetGame") }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('connect_four.static', filename='js/connect_four.js') }}"></script>
+{% endblock %}

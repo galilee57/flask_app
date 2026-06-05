@@ -15,6 +15,7 @@ from .projects.projet_test import bp as projet_test_bp
 from .projects.a_star import bp as a_star_bp
 from .projects.sudoku import bp as sudoku_bp
 from .experiences import bp as experiences_bp
+from .projects.connect_four import bp as connect_four_bp
 
 
 def register_blueprints(app: Flask) -> None:
@@ -38,6 +39,7 @@ def register_blueprints(app: Flask) -> None:
         (projet_test_bp, "/projects/projet_test"),
         (a_star_bp, "/projects/a_star"),
         (sudoku_bp, "/projects/sudoku"),
+        (connect_four_bp, "/projects/connect_four"),
         (experiences_bp, "/experiences")
     ]
 

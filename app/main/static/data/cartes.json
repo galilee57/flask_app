@@ -193,7 +193,23 @@
             {"label": "Genetic Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/Genetic_algorithm"},
             {"label": "Backtracking – Wikipedia", "url": "https://en.wikipedia.org/wiki/Backtracking#:~:text=Backtracking%20is%20a%20class%20of,cannot%20possibly%20be%20completed%20to"}
         ]
-    },
+      },
+      {
+        "id": "connect_four",
+        "titre": "PUISSANCE 4",
+        "description": {
+            "fr": "Algorithme MinMax et déterminisme",
+            "en": "MinMax Algorithm and Determinism"
+        },
+        "published": false,
+        "image": "projectConnectFour.jpg",
+        "type": 3,
+        "categories": ["ai", "algorithmes"],
+        "resources": [
+            {"label": "MinMax Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/Minimax"},
+            {"label": "Connect Four – Wikipedia", "url": "https://en.wikipedia.org/wiki/Connect_Four"}
+        ]
+      },
       {
         "id": "projet_test",
         "titre": "Projet Test",
