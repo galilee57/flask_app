@@ -1,5 +1,7 @@
 const controls = document.getElementById("controls");
 let currentPlayer = 1;
+let isAITurnRunning = false;
+let gameOver = false;
 
 const BASE_GRID = [
     [0, 0, 0, 0, 0, 0, 0],
@@ -9,6 +11,14 @@ const BASE_GRID = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0]
 ];
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function switchPlayer() {
+    currentPlayer = currentPlayer === 1 ? 2 : 1;
+}
 
 function renderGrid(grid) {
     const container = document.getElementById("connectFour-board");
@@ -20,15 +30,15 @@ function renderGrid(grid) {
 
         for (let j = 0; j < 7; j++) {
             const cell = document.createElement("div");
-            cell.classList.add("w-8", "h-8", "sm:w-12", "sm:h-12", "border", "border-gray-400", "rounded-full", "mx-2", "my-2");
+            cell.classList.add(
+                "w-8", "h-8", "sm:w-12", "sm:h-12",
+                "border", "border-gray-400", "rounded-full",
+                "mx-2", "my-2"
+            );
 
-            if (grid[i][j] === 1) {
-                cell.classList.add("bg-red-500");
-            } else if (grid[i][j] === 2) {
-                cell.classList.add("bg-yellow-300");
-            } else {
-                cell.classList.add("bg-white");
-            }
+            if (grid[i][j] === 1) cell.classList.add("bg-red-500");
+            else if (grid[i][j] === 2) cell.classList.add("bg-yellow-300");
+            else cell.classList.add("bg-white");
 
             row.appendChild(cell);
         }
@@ -38,13 +48,11 @@ function renderGrid(grid) {
 }
 
 function countPieces(grid) {
-    let count = { 1: 21, 2: 21 };
+    const count = { 1: 21, 2: 21 };
 
     for (const row of grid) {
         for (const cell of row) {
-            if (cell === 1 || cell === 2) {
-                count[cell]--;
-            }
+            if (cell === 1 || cell === 2) count[cell]--;
         }
     }
 
@@ -53,22 +61,14 @@ function countPieces(grid) {
 
 function showPiecesCount() {
     const count = countPieces(BASE_GRID);
-
     const player1 = document.getElementById("player1-count");
     const player2 = document.getElementById("player2-count");
 
     player1.textContent = `Player 1: ${count[1]}`;
     player2.textContent = `Player 2: ${count[2]}`;
 
-    player1.classList.remove("font-bold");
-    player2.classList.remove("font-bold");
-
-    // Le joueur en attente de jouer est affiché en gras
-    if (currentPlayer === 1) {
-        player1.classList.add("font-bold");
-    } else {
-        player2.classList.add("font-bold");
-    }
+    player1.classList.toggle("font-bold", currentPlayer === 1);
+    player2.classList.toggle("font-bold", currentPlayer === 2);
 }
 
 function playMove(grid, column, player) {
@@ -82,7 +82,6 @@ function playMove(grid, column, player) {
 }
 
 function checkWin(grid, player) {
-    // Check horizontal, vertical, and diagonal for a win
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 7; j++) {
             if (
@@ -98,7 +97,10 @@ function checkWin(grid, player) {
     return false;
 }
 
-// Get player types from the checkboxes
+function isGridFull(grid) {
+    return grid[0].every(cell => cell !== 0);
+}
+
 function getPlayerTypes() {
     return {
         1: document.getElementById("human1").checked ? "human" : "ai",
@@ -106,78 +108,109 @@ function getPlayerTypes() {
     };
 }
 
-// Request Flask backend to calculate AI move (not implemented yet)
+function getAIType() {
+    return document.querySelector('input[name="aiType"]:checked').value;
+}
+
 async function getAIMove(grid, player, type = "easy") {
     const response = await fetch("/projects/connect_four/api/ai-move", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            grid: grid,
-            player: player,
-            type: type
-        })
+        body: JSON.stringify({ grid, player, type })
     });
 
     const data = await response.json();
     return data.column;
-
-    console.log("Calling AI...", {
-        grid,
-        player,
-        type
-    });
 }
 
-// Create column buttons and add event listeners
+function endGame(message) {
+    gameOver = true;
+    renderGrid(BASE_GRID);
+    showPiecesCount();
+    alert(message);
+}
+
+async function playTurn(column) {
+    if (gameOver) return false;
+
+    if (!playMove(BASE_GRID, column, currentPlayer)) {
+        alert("Column is full!");
+        return false;
+    }
+
+    renderGrid(BASE_GRID);
+
+    if (checkWin(BASE_GRID, currentPlayer)) {
+        endGame(`Player ${currentPlayer} wins!`);
+        return false;
+    }
+
+    if (isGridFull(BASE_GRID)) {
+        endGame("Draw!");
+        return false;
+    }
+
+    switchPlayer();
+    showPiecesCount();
+
+    return true;
+}
+
+// Fonction pour gérer les tours de l'IA de manière asynchrone 
+// et éviter les conflits avec les actions humaines
+async function playAITurnsIfNeeded() {
+    if (isAITurnRunning || gameOver) return;
+
+    isAITurnRunning = true;
+
+    while (!gameOver && getPlayerTypes()[currentPlayer] === "ai") {
+        await sleep(700);
+
+        const aiColumn = await getAIMove(
+            BASE_GRID,
+            currentPlayer,
+            getAIType()
+        );
+
+        if (aiColumn === null || aiColumn === undefined) {
+            endGame("No available moves.");
+            break;
+        }
+
+        await playTurn(aiColumn);
+    }
+
+    isAITurnRunning = false;
+}
+
+// Création des boutons de contrôle pour chaque colonne
 for (let column = 0; column < 7; column++) {
     const button = document.createElement("button");
     button.textContent = "▼";
     button.dataset.column = column;
-    button.classList.add("column-button", "w-8", "h-8", "sm:w-12", "sm:h-12", "border", "border-gray-400", "rounded-full", "mx-2", "my-2");
-    
-    button.addEventListener("click", () => {
-        /// Coup du joueur courant
-        if (!playMove(BASE_GRID, column, currentPlayer)) {
-            alert("Column is full!");
-            return;
+
+    button.classList.add(
+        "column-button",
+        "w-8", "h-8", "sm:w-12", "sm:h-12",
+        "hover:bg-gray-200",
+        "border", "border-gray-400", "rounded-full",
+        "mx-2", "my-2"
+    );
+
+    button.addEventListener("click", async () => {
+        if (gameOver) return;
+        if (isAITurnRunning) return;
+        if (getPlayerTypes()[currentPlayer] === "ai") return;
+
+        const success = await playTurn(column);
+
+        if (success) {
+            await playAITurnsIfNeeded();
         }
-        renderGrid(BASE_GRID);
-
-        if (checkWin(BASE_GRID, currentPlayer)) {
-            alert(`Player ${currentPlayer} wins!`);
-            return;
-        }
-
-        // Changement de joueur
-        currentPlayer = currentPlayer === 1 ? 2 : 1;
-        showPiecesCount();
-
-        // Before asking the next player to play, check if it's an AI or a human
-        playerTypes = getPlayerTypes();
-        
-        // Si le prochain joueur est une IA, demander son coup
-        if (playerTypes[currentPlayer] === "ai") {
-            getAIMove(BASE_GRID, currentPlayer).then(aiColumn => {
-                if (!playMove(BASE_GRID, aiColumn, currentPlayer)) {
-                    alert("AI chose a full column!");
-                    return;
-                }
-                renderGrid(BASE_GRID);
-
-                if (checkWin(BASE_GRID, currentPlayer)) {
-                    alert(`Player ${currentPlayer} wins!`);
-                    return;
-                }
-
-                // Changement de joueur
-                currentPlayer = currentPlayer === 1 ? 2 : 1;
-                showPiecesCount();
-            });
-        }   
     });
-    
+
     controls.appendChild(button);
 }
 
@@ -187,14 +220,19 @@ function resetGame() {
             BASE_GRID[i][j] = 0;
         }
     }
+
     currentPlayer = 1;
+    gameOver = false;
+    isAITurnRunning = false;
+
     renderGrid(BASE_GRID);
     showPiecesCount();
+    playAITurnsIfNeeded();
 }
 
-// Add event listener to reset button
 document.getElementById("resetGame").addEventListener("click", resetGame);
 
-// Initial render
+// Initialisation du jeu
 renderGrid(BASE_GRID);
 showPiecesCount();
+playAITurnsIfNeeded();

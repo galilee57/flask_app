@@ -362,6 +362,21 @@
       max-width: 96rem;
     }
   }
+  .m-1 {
+    margin: calc(var(--spacing) * 1);
+  }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
+  .m-4 {
+    margin: calc(var(--spacing) * 4);
+  }
+  .m-6 {
+    margin: calc(var(--spacing) * 6);
+  }
+  .m-8 {
+    margin: calc(var(--spacing) * 8);
+  }
   .mx-2 {
     margin-inline: calc(var(--spacing) * 2);
   }
@@ -787,6 +802,9 @@
   .gap-12 {
     gap: calc(var(--spacing) * 12);
   }
+  .gap-16 {
+    gap: calc(var(--spacing) * 16);
+  }
   .gap-\[2px\] {
     gap: 2px;
   }
@@ -1028,6 +1046,9 @@
   }
   .bg-primary-200 {
     background-color: var(--color-primary-200);
+  }
+  .bg-primary-300 {
+    background-color: var(--color-primary-300);
   }
   .bg-primary-600 {
     background-color: var(--color-primary-600);
@@ -1625,6 +1646,13 @@
       }
     }
   }
+  .hover\:bg-gray-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-200);
+      }
+    }
+  }
   .hover\:bg-primary-200 {
     &:hover {
       @media (hover: hover) {
@@ -1860,6 +1888,11 @@
   .max-\[600px\]\:text-\[20px\] {
     @media (width < 600px) {
       font-size: 20px;
+    }
+  }
+  .sm\:m-2 {
+    @media (width >= 40rem) {
+      margin: calc(var(--spacing) * 2);
     }
   }
   .sm\:mt-12 {

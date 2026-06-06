@@ -1,5 +1,7 @@
 from . import bp
 from flask import render_template, jsonify, request
+from .ai import minmax, get_valid_columns
+import math
 import json
 import random
 import time
@@ -19,25 +21,29 @@ def ai_move():
 
     time.sleep(0.5)  # Simulate thinking time
 
-    if not grid or player not in [1, 2]:
-        return jsonify({
-            "column": None,
-            "error": "Invalid input"
-        }), 400
+    if ai_type == "easy":
+        valid_columns = get_valid_columns(grid)
+        column = random.choice(valid_columns) if valid_columns else None
 
-    available_columns = []
+    elif ai_type == "medium":
+        column, score = minmax(
+            grid, 
+            depth=4, 
+            alpha=-math.inf, 
+            beta=math.inf, 
+            maximizing=True, 
+            ai_player=player
+        )
 
-    for column in range(7):
-        if grid[0][column] == 0:
-            available_columns.append(column)
-
-    if not available_columns:
-        return jsonify({
-            "column": None,
-            "error": "No available columns"
-        }), 400
-
-    column = random.choice(available_columns)
+    elif ai_type == "hard":
+        column, score = minmax(
+            grid, 
+            depth=6, 
+            alpha=-math.inf, 
+            beta=math.inf, 
+            maximizing=True, 
+            ai_player=player
+        )
 
     return jsonify({
         "column": column,

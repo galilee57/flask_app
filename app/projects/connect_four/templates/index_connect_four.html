@@ -23,33 +23,59 @@
     {% endcall %}
 
     <div class="flex flex-col items-center">
+
         <div id="controls" class="mb-2"></div>
 
         <div id="connectFour-board"
              class="w-fit bg-blue-600 p-4 rounded-lg">
         </div>
 
-        <div class="flex justify-center gap-12 mt-4 w-full">
-            <div>
-                <div class="rounded-full bg-red-500 text-white p-2"
-                 id="player1-count"></div>
-                <input type="radio" name="player1" id="human1" checked>
-                    <label for="human1">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
-                <input type="radio" name="player1" id="ai1">
-                        <label for="ai1">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
-            </div>
+        <div class="mt-4 border border-gray-400 bg-secondary-200 rounded-lg">
 
-            <div>
-                <div class="rounded-full bg-yellow-300 text-gray-800 p-2"
-                 id="player2-count"></div>
-                <input type="radio" name="player2" id="human2">
-                    <label for="human2">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
-                <input type="radio" name="player2" id="ai2" checked>
-                    <label for="ai2">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
+            <div class="flex justify-center gap-2 mt-2">
+                <div class="border border-gray-400 bg-primary-300 p-2 m-1 sm:m-2 rounded-lg gap-2">
+                    <div class="rounded-full bg-red-500 border border-gray-400 text-white p-2"
+                    id="player1-count"></div>
+                    <div class="mt-2 gap-2 flex items-center"> 
+                        <input type="radio" name="player1" id="human1" checked>
+                            <label for="human1">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
+                        <input type="radio" name="player1" id="ai1">
+                                <label for="ai1">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center mt-4 w-full">
+                    {{ button(t({ "fr": "Rejouer", "en": "Play again" }), variant="first", id="resetGame") }}
+                </div>
+
+                <div class="border border-gray-400 bg-primary-300 p-2 m-1 sm:m-2 rounded-lg gap-2">
+                    <div class="rounded-full bg-yellow-300 border border-gray-400 text-gray-800 p-2"
+                    id="player2-count"></div>
+                    <div class="mt-2 gap-2 flex items-center">
+                        <input type="radio" name="player2" id="human2">
+                            <label for="human2">{{ t({ "fr": "Humain", "en": "Human" }) }}</label>
+                        <input type="radio" name="player2" id="ai2" checked>
+                            <label for="ai2">{{ t({ "fr": "IA", "en": "AI" }) }}</label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex justify-center mt-4 w-full">
-            {{ button(t({ "fr": "Rejouer", "en": "Play again" }), variant="second", id="resetGame") }}
+    
+            <div class="m-4">
+                <div class="flex justify-center font-semibold">
+                    {{ t({ "fr": "Niveau de l'IA", "en": "AI Level" }) }}
+                </div>
+
+                    <input type="radio" name="aiType" id="easy" value="easy" checked>
+                    <label for="easy">{{ t({ "fr": "Aléatoire", "en": "Random" }) }}</label>
+
+                    <input type="radio" name="aiType" id="medium" value="medium">
+                    <label for="medium">{{ t({ "fr": "Minimax simple", "en": "Simple Minimax" }) }}</label>
+
+                    <input type="radio" name="aiType" id="hard" value="hard">
+                    <label for="hard">{{ t({ "fr": "Minimax optimisé", "en": "Optimized Minimax" }) }}</label>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
