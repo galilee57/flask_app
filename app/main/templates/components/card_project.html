@@ -19,7 +19,7 @@
   {% set banner_text = banner_text_obj.get(lang) or banner_text_obj.get('fr') or '' %}
   {% set banner_classes = ui.get('banner_classes', 'bg-gray-500 text-white') %}
 
-  <div class="flex-none snap-start w-80 sm:w-96">
+  <div class="flex-none snap-start w-80 sm:w-96 h-[520px]">
     <div class="flex h-full w-full flex-col rounded-xl
       bg-linear-to-b from-primary-400 to-primary-100
       border-neutral-700
@@ -47,7 +47,7 @@
           {% endfor %}
         </div>
 
-        <p class="text-lg text-neutral-800 flex-1">
+        <p class="text-lg text-neutral-800 min-h-[4rem]">
           {{ desc }}
         </p>
       </div>

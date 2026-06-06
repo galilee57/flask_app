@@ -557,6 +557,21 @@
   .h-\[100px\] {
     height: 100px;
   }
+  .h-\[420px\] {
+    height: 420px;
+  }
+  .h-\[520px\] {
+    height: 520px;
+  }
+  .h-\[550px\] {
+    height: 550px;
+  }
+  .h-\[600px\] {
+    height: 600px;
+  }
+  .h-\[620px\] {
+    height: 620px;
+  }
   .h-full {
     height: 100%;
   }
@@ -568,6 +583,9 @@
   }
   .min-h-1\/4-screen {
     min-height: var(--spacing-1\/4-screen);
+  }
+  .min-h-\[4rem\] {
+    min-height: 4rem;
   }
   .min-h-\[64px\] {
     min-height: 64px;
@@ -1232,6 +1250,9 @@
   }
   .pr-24 {
     padding-right: calc(var(--spacing) * 24);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
   }
   .pb-3 {
     padding-bottom: calc(var(--spacing) * 3);

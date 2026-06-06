@@ -9,7 +9,7 @@
         "published": true,
         "image": "projectMusculation.jpg",
         "type": 5,
-        "categories": ["musculation", "fitness"],
+        "categories": ["musculation"],
         "resources": [
                 {"label": "Exrx.net – Exercise & Muscle Directory", "url": "https://exrx.net/Lists/Directory"},
                 {"label": "Wger Workout Manager", "url": "https://wger.de/en/software/api"}
@@ -25,7 +25,7 @@
         "published": true,
         "image": "projectPhaser.png",
         "type": 3,
-        "categories": ["javascript", "jeu"],
+        "categories": ["javascript", "game"],
 
         "ui": {
             "action": "banner",
@@ -51,7 +51,7 @@
         "published": true,
         "image": "projectMemory.jpg",
         "type": 3,
-        "categories": ["javascript", "animation"],
+        "categories": ["javascript", "game"],
         "resources": [
             {"label": "MDN Web Docs – JavaScript Guide", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"},
             {"label": "Domestika - Introduction to JavaScript Programming", "url": "https://www.domestika.org/en/courses/390-introduction-to-javascript-programming"}
@@ -67,7 +67,7 @@
         "published": true,
         "image": "projectGameOfLife.png",
         "type": 3,
-        "categories": ["javascript", "simulateurs"],
+        "categories": ["javascript", "simulation"],
         "resources": [
             {"label": "Game of Life – Wikipedia", "url": "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"},
             {"label": "ConwayLife.com – The Game of Life Wiki", "url": "https://conwaylife.com/wiki/Main_Page"},
@@ -84,7 +84,7 @@
         "published": false,
         "image": "projectGameOfLife3D.png",
         "type": 4,
-        "categories": ["javascript", "simulateurs"],
+        "categories": ["javascript", "simulation"],
         "resources": [
             {"label": "Three.js Official Website", "url": "https://threejs.org/"},
             {"label": "An example of 3D Game of Life", "url": "https://www.youtube.com/watch?v=moMow2bR5aU"}
@@ -100,7 +100,7 @@
         "published": true,
         "image": "projectFlags.jpg",
         "type": 1,
-        "categories": ["javascript", "api"],
+        "categories": ["javascript", "web"],
         "resources": [
             {"label": "REST Countries API", "url": "https://restcountries.com/"}
             ]
@@ -139,7 +139,7 @@
         "published": false,
         "image": "projectMarey.jpg",
         "type": 3,
-        "categories": ["D3.js", "SQLAlchemy", "javascript"],
+        "categories": ["web", "javascript"],
         "resources": [
             {"label": "Marey Diagram – Wikipedia", "url": "https://en.wikipedia.org/wiki/Marey_diagram"},
             {"label": "D3.js Official Website", "url": "https://d3js.org/"},
@@ -156,7 +156,7 @@
         "published": true,
         "image": "project360.jpeg",
         "type": 3,
-        "categories": ["Three.js", "Insta360"],
+        "categories": ["web", "Insta360"],
         "resources": [
             {"label": "Marzipano Official Website", "url": "https://www.marzipano.net/"},
             {"label": "Insta360 Official Website", "url": "https://www.insta360.com/"}
@@ -172,7 +172,7 @@
         "published": true,
         "image": "projectAstar.jpg",
         "type": 3,
-        "categories": ["ai", "algorithmes"],
+        "categories": ["ai", "algorithms", "game"],
         "resources": [
             {"label": "A* Search Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/A*_search_algorithm"},
             {"label": "Pathfinding Visualizer", "url": "https://clementmihailescu.github.io/Pathfinding-Visualizer/"}
@@ -188,7 +188,7 @@
         "published": true,
         "image": "projectSudoku.jpg",
         "type": 5,
-        "categories": ["flask", "python"],
+        "categories": ["ai", "algorithms", "game"],
         "resources": [
             {"label": "Genetic Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/Genetic_algorithm"},
             {"label": "Backtracking – Wikipedia", "url": "https://en.wikipedia.org/wiki/Backtracking#:~:text=Backtracking%20is%20a%20class%20of,cannot%20possibly%20be%20completed%20to"}
@@ -201,10 +201,10 @@
             "fr": "Algorithme MinMax et déterminisme",
             "en": "MinMax Algorithm and Determinism"
         },
-        "published": false,
+        "published": true,
         "image": "projectConnectFour.jpg",
         "type": 3,
-        "categories": ["ai", "algorithmes"],
+        "categories": ["ai", "algorithms", "game"],
         "resources": [
             {"label": "MinMax Algorithm – Wikipedia", "url": "https://en.wikipedia.org/wiki/Minimax"},
             {"label": "Connect Four – Wikipedia", "url": "https://en.wikipedia.org/wiki/Connect_Four"}

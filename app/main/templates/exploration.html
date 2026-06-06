@@ -15,13 +15,57 @@
     })
   ) }}
 
+  <div class="flex gap-2 mb-6">
+
+  {# Bouton fixe #}
+  <div class="shrink-0">
+    {{ button("Tous", variant="first", data_action="all") }}
+  </div>
+
+  {# Boutons défilables #}
+  <div class="flex gap-2 overflow-x-auto pb-2 whitespace-nowrap">
+    {{ button("AI", variant="third", data_action="ai") }}
+    {{ button("Musculation", variant="third", data_action="musculation") }}
+    {{ button("Web", variant="third", data_action="web") }}
+    {{ button("API", variant="third", data_action="api") }}
+    {{ button("Game", variant="third", data_action="game") }}
+    {{ button("JavaScript", variant="third", data_action="javascript") }}
+  </div>
+
+</div>
+
   <div
     id="cartes-grid"
-    class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory"
-  >
+    class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory">
     {% for c in cartes %}
+    <div
+      class="carte-wrapper"
+      data-categories="{{ c.categories | join(',') }}">
       {{ project_card(c, g.lang) }}
+    </div>
     {% endfor %}
   </div>
 </div>
+<script>
+  document.querySelectorAll("[data-action]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filtre = btn.dataset.action.toLowerCase();
+
+      document.querySelectorAll(".carte-wrapper").forEach(carte => {
+        const categories = carte.dataset.categories
+          .split(",")
+          .map(c => c.trim().toLowerCase());
+
+        console.log(categories);  
+
+        const afficher =
+          filtre === "all" ||
+          categories.includes(filtre);
+
+        carte.classList.toggle("hidden", !afficher);
+      });
+    });
+  });
+
+</script>
 {% endblock %}
