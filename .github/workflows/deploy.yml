@@ -159,3 +159,16 @@ jobs:
           curl --fail-with-body --silent --show-error --request POST \
             "https://${PA_HOST}/api/v0/user/${PA_USERNAME}/webapps/${PA_STAGING_DOMAIN}/reload/" \
             -H "Authorization: Token ${PA_API_TOKEN}"
+
+      - name: Verify staging health
+        shell: bash
+        run: |
+          set -euo pipefail
+          if curl --fail --silent --show-error --output /dev/null "https://${PA_STAGING_DOMAIN}/"; then
+            exit 0
+          fi
+
+          echo "Staging health check failed; recent staging error log follows." >&2
+          ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" \
+            "tail -n 80 /var/log/${PA_STAGING_DOMAIN}.error.log" || true
+          exit 1
