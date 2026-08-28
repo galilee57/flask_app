@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid4
 
@@ -27,7 +27,7 @@ class TodoService:
             "id": str(uuid4()),
             "text": command.text,
             "done": False,
-            "created_at": datetime.now(UTC).isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
         tasks.append(task)
         self.repository.save(tasks)
