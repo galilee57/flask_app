@@ -31,6 +31,12 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ADMIN_API_TOKEN = os.getenv("ADMIN_API_TOKEN")
     REQUIRE_ADMIN_API_TOKEN = True
+    MAX_CONTENT_LENGTH = 1 * 1024 * 1024
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SECURE = False
+    TODOLIST_DATA_PATH = None
+    PATTERN_STORAGE_DIR = None
 
     # Flask-FlatPages
     FLATPAGES_ROOT = str(BASE_DIR / "main/content")
@@ -49,6 +55,7 @@ class DevConfig(Config):
 class ProdConfig(Config):
     DEBUG = False
     ENV = "production"
+    SESSION_COOKIE_SECURE = True
     API_BASE_URL = "/projects/todolist"      # même domaine que Flask en prod
 
 class TestingConfig(Config):
@@ -60,12 +67,15 @@ class TestingConfig(Config):
     REQUIRE_ADMIN_API_TOKEN = True
 
 def get_config(name: str | None = None):
-    """Retourne la classe de config selon le nom (development/production)."""
+    """Return an explicit configuration, defaulting to the safe production mode."""
     if not name:
-        name = os.getenv("FLASK_CONFIG", "development")
+        name = os.getenv("FLASK_CONFIG", "production")
     mapping = {
         "development": DevConfig,
         "production": ProdConfig,
         "testing": TestingConfig,
     }
-    return mapping.get(name, ProdConfig)
+    try:
+        return mapping[name]
+    except KeyError as exc:
+        raise ValueError(f"Configuration Flask inconnue: {name}") from exc

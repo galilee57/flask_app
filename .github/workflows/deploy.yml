@@ -1,54 +1,144 @@
-name: Deploy Flask to PythonAnywhere
+name: Deploy staging to PythonAnywhere
 
 on:
   push:
     branches:
-      - main
+      - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pythonanywhere-staging
+  cancel-in-progress: false
 
 jobs:
+  quality:
+    name: Python quality gate
+    runs-on: ubuntu-latest
+    env:
+      FLASK_CONFIG: testing
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Compile Python sources
+        run: python -m compileall app tests
+
+      - name: Run test suite
+        run: python -m pytest -q
+
+      - name: Require exactly one Alembic migration head
+        shell: bash
+        run: |
+          set -euo pipefail
+          migration_output="$(python -m flask --app wsgi db heads)"
+          printf '%s\n' "${migration_output}"
+          head_count="$(awk '/^[0-9a-f]+ \(head\)$/ { count++ } END { print count + 0 }' <<<"${migration_output}")"
+
+          if [[ "${head_count}" -ne 1 ]]; then
+            echo "Expected exactly one Alembic migration head; found ${head_count}." >&2
+            exit 1
+          fi
+
   deploy-staging:
+    name: Deploy staging
     runs-on: ubuntu-latest
+    needs: quality
     environment: staging
+    env:
+      PA_HOST: www.pythonanywhere.com
+      PA_USERNAME: ${{ secrets.PA_USERNAME }}
+      PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+      PA_STAGING_DOMAIN: ${{ secrets.PA_STAGING_DOMAIN }}
+      PA_PRODUCTION_DOMAIN: Galilee57.pythonanywhere.com
+      PA_SSH_PRIVATE_KEY: ${{ secrets.PA_SSH_PRIVATE_KEY }}
 
     steps:
-      - name: Deploy staging
-        env:
-          PA_USERNAME: ${{ secrets.PA_USERNAME }}
-          PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+      - name: Read staging configuration
+        id: pythonanywhere
+        shell: bash
         run: |
-          curl -X POST \
-            "https://www.pythonanywhere.com/api/v0/user/$PA_USERNAME/consoles/" \
-            -H "Authorization: Token $PA_API_TOKEN" \
-            --data-urlencode "executable=bash" \
-            --data-urlencode "arguments=/home/$PA_USERNAME/deploy_staging.sh"
+          set -euo pipefail
 
-      - name: Reload staging
-        uses: jensvog/pythonanywhere-webapp-reload-action@v1
-        with:
-          username: ${{ secrets.PA_USERNAME }}
-          api-token: ${{ secrets.PA_API_TOKEN }}
-          domain-name: ${{ secrets.PA_STAGING_DOMAIN }}
+          webapp_config="$(curl --fail-with-body --silent --show-error \
+            "https://${PA_HOST}/api/v0/user/${PA_USERNAME}/webapps/${PA_STAGING_DOMAIN}/" \
+            -H "Authorization: Token ${PA_API_TOKEN}")"
 
-  deploy-production:
-    runs-on: ubuntu-latest
-    needs: deploy-staging
-    environment: production
+          app_dir="$(jq --raw-output --exit-status \
+            '.source_directory | select(type == "string" and length > 0)' \
+            <<<"${webapp_config}")"
+          virtualenv_dir="$(jq --raw-output --exit-status \
+            '.virtualenv_path | select(type == "string" and length > 0)' \
+            <<<"${webapp_config}")"
 
-    steps:
-      - name: Deploy production
-        env:
-          PA_USERNAME: ${{ secrets.PA_USERNAME }}
-          PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+          production_config="$(curl --fail-with-body --silent --show-error \
+            "https://${PA_HOST}/api/v0/user/${PA_USERNAME}/webapps/${PA_PRODUCTION_DOMAIN}/" \
+            -H "Authorization: Token ${PA_API_TOKEN}")"
+          production_app_dir="$(jq --raw-output --exit-status \
+            '.source_directory | select(type == "string" and length > 0)' \
+            <<<"${production_config}")"
+
+          if [[ "${app_dir}" == "${production_app_dir}" ]]; then
+            echo "Staging and production share the same source directory; deployment stopped." >&2
+            exit 1
+          fi
+
+          printf 'app_dir=%s\n' "${app_dir}" >> "${GITHUB_OUTPUT}"
+          printf 'virtualenv_dir=%s\n' "${virtualenv_dir}" >> "${GITHUB_OUTPUT}"
+
+      - name: Configure SSH deployment key
+        shell: bash
         run: |
-          curl -X POST \
-            "https://www.pythonanywhere.com/api/v0/user/$PA_USERNAME/consoles/" \
-            -H "Authorization: Token $PA_API_TOKEN" \
-            --data-urlencode "executable=bash" \
-            --data-urlencode "arguments=/home/$PA_USERNAME/deploy_prod.sh"
+          set -euo pipefail
+          install --directory --mode=700 ~/.ssh
+          printf '%s\n' "${PA_SSH_PRIVATE_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts
 
-      - name: Reload production
-        uses: jensvog/pythonanywhere-webapp-reload-action@v1
-        with:
-          username: ${{ secrets.PA_USERNAME }}
-          api-token: ${{ secrets.PA_API_TOKEN }}
-          domain-name: ${{ secrets.PA_PROD_DOMAIN }}
+      - name: Update staging checkout and database
+        env:
+          APP_DIR: ${{ steps.pythonanywhere.outputs.app_dir }}
+          VIRTUALENV_DIR: ${{ steps.pythonanywhere.outputs.virtualenv_dir }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_env="APP_DIR=$(printf '%q' "${APP_DIR}") VIRTUALENV_DIR=$(printf '%q' "${VIRTUALENV_DIR}")"
+
+          ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          cd "${APP_DIR}"
+          git fetch --prune origin staging
+
+          if git show-ref --verify --quiet refs/heads/staging; then
+            git switch staging
+          else
+            git switch --track --create staging origin/staging
+          fi
+
+          git pull --ff-only origin staging
+          "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements.txt
+          "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
+          REMOTE
+
+      - name: Reload staging web app
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --request POST \
+            "https://${PA_HOST}/api/v0/user/${PA_USERNAME}/webapps/${PA_STAGING_DOMAIN}/reload/" \
+            -H "Authorization: Token ${PA_API_TOKEN}"

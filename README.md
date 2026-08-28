@@ -9,6 +9,27 @@ flask --app wsgi --debug run
 
 # Déploiement PythonAnywhere
 
+## Staging (GitHub Actions)
+
+Seule la branche `staging` est déployée automatiquement sur
+`staging-Galilee57.pythonanywhere.com`. La branche `main` et l'application
+`Galilee57.pythonanywhere.com` ne sont jamais visées par ce workflow.
+
+Les secrets de l'environnement GitHub `staging` requis sont :
+
+```text
+PA_USERNAME
+PA_API_TOKEN
+PA_STAGING_DOMAIN
+PA_SSH_PRIVATE_KEY
+```
+
+`PA_SSH_PRIVATE_KEY` correspond à une clé de déploiement dédiée. Sa clé publique
+doit être ajoutée dans `~/.ssh/authorized_keys` du compte PythonAnywhere. Le
+workflow lit ensuite le répertoire source et le virtualenv de l'application de
+staging via l'API, met à jour le checkout `staging`, applique les migrations,
+puis demande le rechargement de cette seule web app.
+
 La configuration de production est pilotée par les variables d'environnement, jamais par
 des valeurs commitées :
 
@@ -54,6 +75,13 @@ blueprints basic folder are defined with a generic path '/project/<project_name>
 Each folder contents its own templates and static files.
 init.py defines the folder like a blueprint and imports routes.
 routes.py defines routes from the folder.
+
+# API documentation
+
+The bilingual API reference is available in:
+
+- `app/main/content/docs/api/api.fr.md`
+- `app/main/content/docs/api/api.en.md`
 
 # Environements management
 

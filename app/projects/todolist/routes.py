@@ -1,42 +1,18 @@
 from . import bp
 from app.security import require_admin_api_token
-from flask import render_template, jsonify, current_app, request
+from flask import current_app, render_template, jsonify, request
 from pathlib import Path
-from typing import List, Dict, Any
-from uuid import uuid4
-from datetime import datetime
-import json
+from .repository import TodoRepository
+from .schemas import TodoValidationError, parse_create_todo, parse_update_todo
+from .services import TodoNotFoundError, TodoService
 
 
-def _tasks_file() -> Path:
-    data_dir = Path(current_app.instance_path) / "data"
-    data_dir.mkdir(parents=True, exist_ok=True)
-    return data_dir / "todolist.json"
-
-
-def load_tasks() -> List[Dict[str, Any]]:
-    path = _tasks_file()
-    try:
-        text = path.read_text(encoding="utf-8")
-        return json.loads(text) if text.strip() else []
-    except FileNotFoundError:
-        return []
-    except json.JSONDecodeError:
-        try:
-            bad_path = path.with_suffix(path.suffix + ".bad")
-            if path.exists():
-                path.rename(bad_path)
-        except Exception:
-            pass
-        return []
-
-
-def save_tasks(tasks: List[Dict[str, Any]]) -> None:
-    """Écriture atomique pour éviter les fichiers corrompus."""
-    path = _tasks_file()
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8")
-    tmp.replace(path)  # atomic move sur OS modernes
+def _todo_service() -> TodoService:
+    configured_path = current_app.config.get("TODOLIST_DATA_PATH")
+    path = Path(configured_path) if configured_path else Path(current_app.instance_path) / "data" / "todolist.json"
+    repositories = current_app.extensions.setdefault("todo_repositories", {})
+    repository = repositories.setdefault(path, TodoRepository(path))
+    return TodoService(repository)
 
 
 @bp.get("/")
@@ -46,8 +22,7 @@ def home():
 
 @bp.get("/api/todolist")
 def get_todos():
-    tasks = load_tasks()
-    return jsonify(tasks), 200
+    return jsonify(_todo_service().list()), 200
 
 
 @bp.post("/api/todolist")
@@ -57,21 +32,11 @@ def create_todo():
     Body JSON attendu: {"text": "..."} (ou "task": "...")
     Réponse: la tâche créée (201).
     """
-    payload = request.get_json(silent=True) or {}
-    text = (payload.get("text") or payload.get("task") or "").strip()
-    if not text or len(text) > 500:
-        return jsonify({"error": "Le champ 'text' est requis et limité à 500 caractères."}), 400
-
-    tasks = load_tasks()
-    new_task = {
-        "id": str(uuid4()),
-        "text": text,
-        "done": False,
-        "created_at": datetime.utcnow().isoformat() + "Z",
-    }
-    tasks.append(new_task)
-    save_tasks(tasks)
-    return jsonify(new_task), 201
+    try:
+        task = _todo_service().create(parse_create_todo(request.get_json(silent=True)))
+    except TodoValidationError as exc:
+        return jsonify({"error": str(exc)}), 400
+    return jsonify(task), 201
 
 @bp.delete("/api/todolist/<task_id>")
 @require_admin_api_token
@@ -80,12 +45,10 @@ def delete_todo(task_id):
     Supprime une tâche par son ID.
     Réponse: 204 si succès, 404 si la tâche n'existe pas.
     """
-    tasks = load_tasks()
-    updated_tasks = [task for task in tasks if task["id"] != task_id]
-    if len(updated_tasks) == len(tasks):
+    try:
+        _todo_service().delete(task_id)
+    except TodoNotFoundError:
         return jsonify({"error": "Tâche non trouvée."}), 404
-
-    save_tasks(updated_tasks)
     return '', 204
 
 @bp.put("/api/todolist/<task_id>")
@@ -96,20 +59,10 @@ def update_todo(task_id):
     Body JSON attendu: {"text": "...", "done": true/false}
     Réponse: la tâche mise à jour (200) ou 404 si la tâche n'existe pas.
     """
-    payload = request.get_json(silent=True) or {}
-    text = payload.get("text")
-    done = payload.get("done")
-
-    tasks = load_tasks()
-    for task in tasks:
-        if task["id"] == task_id:
-            if text is not None:
-                if not isinstance(text, str) or not (text := text.strip()) or len(text) > 500:
-                    return jsonify({"error": "Le champ 'text' est invalide."}), 400
-                task["text"] = text
-            if isinstance(done, bool):
-                task["done"] = done
-            save_tasks(tasks)
-            return jsonify(task), 200
-
-    return jsonify({"error": "Tâche non trouvée."}), 404
+    try:
+        task = _todo_service().update(task_id, parse_update_todo(request.get_json(silent=True)))
+    except TodoValidationError as exc:
+        return jsonify({"error": str(exc)}), 400
+    except TodoNotFoundError:
+        return jsonify({"error": "Tâche non trouvée."}), 404
+    return jsonify(task), 200

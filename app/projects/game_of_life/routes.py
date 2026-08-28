@@ -1,20 +1,29 @@
-from . import bp
-import os
 import json
-from flask import render_template, jsonify, request, session
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+
+from flask import current_app, render_template, jsonify, request, session
+from app.security import require_admin_api_token
+
+from . import bp
 from .game_of_life import GameOfLife
 from .patterns import PATTERNS
 
-# Folder to stock grids
-BASE_DIR = os.path.dirname(__file__)
-PATTERNS_DIR = os.path.join(BASE_DIR, 'static', 'patterns')
-os.makedirs(PATTERNS_DIR, exist_ok=True)
+def _patterns_dir() -> Path:
+    configured_path = current_app.config.get("PATTERN_STORAGE_DIR")
+    path = (
+        Path(configured_path)
+        if configured_path
+        else Path(current_app.instance_path) / "data" / "patterns"
+    )
+    path.mkdir(parents=True, exist_ok=True)
+    return path
 
-def _pattern_path(name: str) -> str:
+def _pattern_path(name: str) -> Path:
     safe = "".join(c for c in name if c.isalnum() or c in (' ', '_', '-')).rstrip()
-    if not safe:
-        safe = "pattern"
-    return os.path.join(PATTERNS_DIR, f"{safe}.json")
+    if not safe or len(safe) > 80:
+        raise ValueError("Nom de motif invalide")
+    return _patterns_dir() / f"{safe}.json"
 
 def apply_pattern(game, name: str, row: int, col: int):
     pattern = PATTERNS.get(name)
@@ -107,6 +116,7 @@ def clear():
     return jsonify(success=True, grid=game.to_list())
 
 @bp.post("/save")
+@require_admin_api_token
 def save_pattern():
     game = _get_game()
     data = request.get_json(silent=True) or {}
@@ -114,10 +124,15 @@ def save_pattern():
     if not name:
         return jsonify(ok=False, error="Missing name"), 400
 
-    path = _pattern_path(name)
+    try:
+        path = _pattern_path(name)
+    except ValueError as exc:
+        return jsonify(ok=False, error=str(exc)), 400
     payload = {"name": name, "grid": game.to_list()}
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(payload, f)
+    with NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as temporary_file:
+        json.dump(payload, temporary_file)
+        temporary_path = Path(temporary_file.name)
+    temporary_path.replace(path)
 
     return jsonify(ok=True)
 
@@ -128,11 +143,14 @@ def load_pattern():
     if not name:
         return jsonify(ok=False, error="Missing name"), 400
 
-    path = _pattern_path(name)
-    if not os.path.exists(path):
+    try:
+        path = _pattern_path(name)
+    except ValueError as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+    if not path.exists():
         return jsonify(ok=False, error="Pattern not found"), 404
 
-    with open(path, "r", encoding="utf-8") as f:
+    with path.open("r", encoding="utf-8") as f:
         payload = json.load(f)
 
     grid_list = payload.get("grid")
@@ -146,7 +164,7 @@ def load_pattern():
 
 @bp.get("/saved")
 def list_saved():
-    files = [f[:-5] for f in os.listdir(PATTERNS_DIR) if f.endswith(".json")]
+    files = [path.stem for path in _patterns_dir().glob("*.json")]
     return jsonify(patterns=sorted(files))
 
 @bp.post("/pattern")

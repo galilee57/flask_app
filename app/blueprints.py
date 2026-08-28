@@ -1,5 +1,8 @@
 # app/blueprints.py
-from flask import Flask
+from collections.abc import Iterable
+from typing import NamedTuple
+
+from flask import Blueprint, Flask
 
 from .main import bp as main_bp
 from .projects.todolist import bp as todolist_bp
@@ -16,33 +19,47 @@ from .projects.a_star import bp as a_star_bp
 from .projects.sudoku import bp as sudoku_bp
 from .experiences import bp as experiences_bp
 from .projects.connect_four import bp as connect_four_bp
+from .projects.snake import bp as snake_bp
+
+
+class BlueprintRegistration(NamedTuple):
+    blueprint: Blueprint
+    url_prefix: str
+
+
+BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
+    BlueprintRegistration(main_bp, "/"),
+    BlueprintRegistration(todolist_bp, "/projects/todolist"),
+    BlueprintRegistration(countries_bp, "/projects/countries"),
+    BlueprintRegistration(memory_bp, "/projects/memory"),
+    BlueprintRegistration(musculation_bp, "/projects/musculation"),
+    BlueprintRegistration(phaser_bp, "/projects/phaser"),
+    BlueprintRegistration(charts_bp, "/projects/charts"),
+    BlueprintRegistration(game_of_life_bp, "/projects/game_of_life"),
+    BlueprintRegistration(game_of_life_3d_bp, "/projects/game_of_life_3d"),
+    BlueprintRegistration(viewer_360_bp, "/projects/viewer360"),
+    BlueprintRegistration(projet_test_bp, "/projects/projet_test"),
+    BlueprintRegistration(a_star_bp, "/projects/a_star"),
+    BlueprintRegistration(sudoku_bp, "/projects/sudoku"),
+    BlueprintRegistration(connect_four_bp, "/projects/connect_four"),
+    BlueprintRegistration(snake_bp, "/projects/snake"),
+    BlueprintRegistration(experiences_bp, "/experiences"),
+)
+
+
+def iter_blueprints() -> Iterable[BlueprintRegistration]:
+    """Return every explicit application route registration in a stable order."""
+    return BLUEPRINT_REGISTRY
 
 
 def register_blueprints(app: Flask) -> None:
-    """Enregistre tous les blueprints de l'application via une boucle."""
+    """Register the explicit blueprint registry and import migration models."""
 
     # Importer les modèles pour créer les tables
-    from .projects.musculation import models as muscu_models
-    from .projects.charts import models as charts_models
+    from .projects.charts import models as _charts_models
+    from .projects.musculation import models as _muscu_models
 
-    blueprints = [
-        (main_bp, "/"),
-        (todolist_bp, "/projects/todolist"),
-        (countries_bp, "/projects/countries"),
-        (memory_bp, "/projects/memory"),
-        (musculation_bp, "/projects/musculation"),
-        (phaser_bp, "/projects/phaser"),
-        (charts_bp, "/projects/charts"),
-        (game_of_life_bp, "/projects/game_of_life"),
-        (game_of_life_3d_bp, "/projects/game_of_life_3d"),
-        (viewer_360_bp, "/projects/viewer360"),
-        (projet_test_bp, "/projects/projet_test"),
-        (a_star_bp, "/projects/a_star"),
-        (sudoku_bp, "/projects/sudoku"),
-        (connect_four_bp, "/projects/connect_four"),
-        (experiences_bp, "/experiences")
-    ]
-
-    # Enregistrement via une boucle
-    for bp, prefix in blueprints:
-        app.register_blueprint(bp, url_prefix=prefix)
+    for registration in iter_blueprints():
+        app.register_blueprint(
+            registration.blueprint, url_prefix=registration.url_prefix
+        )

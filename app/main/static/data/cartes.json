@@ -211,6 +211,22 @@
         ]
       },
       {
+        "id": "snake",
+        "titre": "Snake Game",
+        "description": {
+            "fr": "Jeu du Snake et Apprentissage par Neurones",
+            "en": "Snake game and Neural Networks."
+        },
+        "published": true,
+        "image": "projectSnake.jpg",
+        "type": 5,
+        "categories": ["game", "ai"],
+        "resources": [
+            {"label": "Snake Game – Wikipedia", "url": "https://en.wikipedia.org/wiki/Snake_(video_game)"},
+            {"label": "Pygame Official Website", "url": "https://www.pygame.org/"}
+        ]
+      },
+      {
         "id": "projet_test",
         "titre": "Projet Test",
         "description": {
