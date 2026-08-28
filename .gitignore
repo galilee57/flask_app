@@ -11,6 +11,10 @@ __pycache__/
 .venv/
 venv/
 
+# Local environment and JavaScript dependencies
+.env
+node_modules/
+
 # Flask runtime
 instance/
 *.db
