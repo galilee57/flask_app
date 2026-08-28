@@ -2,11 +2,11 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Répertoires robustes (pas de chemins relatifs)
 BASE_DIR = Path(__file__).resolve().parent           # .../flask_app/app
 PROJECT_DIR = BASE_DIR.parent                        # .../flask_app
+load_dotenv(PROJECT_DIR / ".env")
+
 INSTANCE_DIR = Path(
     os.environ.get("FLASK_INSTANCE_PATH", PROJECT_DIR / "instance")
 ).expanduser().resolve()  # .../flask_app/instance

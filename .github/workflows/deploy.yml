@@ -66,6 +66,7 @@ jobs:
       PA_STAGING_DOMAIN: ${{ secrets.PA_STAGING_DOMAIN }}
       PA_PRODUCTION_DOMAIN: Galilee57.pythonanywhere.com
       PA_SSH_PRIVATE_KEY: ${{ secrets.PA_SSH_PRIVATE_KEY }}
+      STAGING_SECRET_KEY: ${{ secrets.STAGING_SECRET_KEY }}
 
     steps:
       - name: Read staging configuration
@@ -116,9 +117,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if [[ -z "${STAGING_SECRET_KEY}" ]]; then
+            echo "The staging environment secret STAGING_SECRET_KEY is required." >&2
+            exit 1
+          fi
+
+          staging_secret_b64="$(printf '%s' "${STAGING_SECRET_KEY}" | base64 | tr -d '\n')"
           remote_env="APP_DIR=$(printf '%q' "${APP_DIR}") VIRTUALENV_DIR=$(printf '%q' "${VIRTUALENV_DIR}")"
 
-          ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s" <<'REMOTE'
+          {
+          cat <<'REMOTE_PRELUDE'
           set -euo pipefail
 
           cd "${APP_DIR}"
@@ -135,9 +143,14 @@ jobs:
           fi
 
           git pull --ff-only origin staging
+REMOTE_PRELUDE
+          printf "printf '%%s' %q | base64 --decode > .env\n" "${staging_secret_b64}"
+          cat <<'REMOTE_EPILOGUE'
+          chmod 600 .env
           "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements.txt
           "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
-          REMOTE
+REMOTE_EPILOGUE
+          } | ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s"
 
       - name: Reload staging web app
         shell: bash
