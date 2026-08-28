@@ -143,13 +143,13 @@ jobs:
           fi
 
           git pull --ff-only origin staging
-REMOTE_PRELUDE
+          REMOTE_PRELUDE
           printf "printf '%%s' %q | base64 --decode > .env\n" "${staging_secret_b64}"
           cat <<'REMOTE_EPILOGUE'
           chmod 600 .env
           "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements.txt
           "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
-REMOTE_EPILOGUE
+          REMOTE_EPILOGUE
           } | ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s"
 
       - name: Reload staging web app
