@@ -7,7 +7,7 @@ class SnakeStat(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    mode = db.Column(db.String(20), nullable=False)  
+    mode = db.Column(db.String(20), nullable=False)
     # human, astar, astar_nn
 
     score = db.Column(db.Integer, nullable=False)

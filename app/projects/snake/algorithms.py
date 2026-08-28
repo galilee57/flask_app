@@ -32,7 +32,7 @@ def reconstruct_path(came_from, current):
 def path_to_direction(path):
     if len(path) < 2:
         return None
-    
+
     x1, y1 = path[0]
     x2, y2 = path[1]
 
@@ -44,7 +44,7 @@ def path_to_direction(path):
         return "down"
     if y2 < y1:
         return "up"
-    
+
     return None
 
 def astar(start, goal, grid_w, grid_h, obstacles):
@@ -64,7 +64,7 @@ def astar(start, goal, grid_w, grid_h, obstacles):
 
         if current == goal:
             return reconstruct_path(came_from, current)
-        
+
         for neighbor in get_neighbors(current, grid_w, grid_h):
             if neighbor in obstacles:
                 continue
