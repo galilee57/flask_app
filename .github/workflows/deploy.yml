@@ -170,5 +170,5 @@ jobs:
 
           echo "Staging health check failed; recent staging error log follows." >&2
           ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" \
-            "tail -n 120 /var/log/${PA_STAGING_DOMAIN}.error.log" || true
+            "tail -n 120 /var/log/staging-galilee57.pythonanywhere.com.error.log" || true
           exit 1
