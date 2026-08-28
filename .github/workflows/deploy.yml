@@ -122,7 +122,7 @@ jobs:
             exit 1
           fi
 
-          staging_secret_b64="$(printf '%s' "${STAGING_SECRET_KEY}" | base64 | tr -d '\n')"
+          staging_secret_b64="$(printf 'SECRET_KEY=%s\n' "${STAGING_SECRET_KEY}" | base64 | tr -d '\n')"
           remote_env="APP_DIR=$(printf '%q' "${APP_DIR}") VIRTUALENV_DIR=$(printf '%q' "${VIRTUALENV_DIR}")"
 
           {
