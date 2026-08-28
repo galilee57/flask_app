@@ -130,6 +130,10 @@ jobs:
             git switch --track --create staging origin/staging
           fi
 
+          if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git stash push --include-untracked --message "pre-deploy-staging-$(date -u +%Y%m%dT%H%M%SZ)"
+          fi
+
           git pull --ff-only origin staging
           "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements.txt
           "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
