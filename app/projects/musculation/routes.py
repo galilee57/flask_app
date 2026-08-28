@@ -3,6 +3,7 @@ from flask import jsonify, render_template, request
 from .forms import ExerciseForm, WorkoutPlanForm
 from .models import Programme, ProgrammeExercice
 from app.extensions import db
+from app.security import enforce_admin_api_token
 from . import bp
 from pathlib import Path
 import json
@@ -58,6 +59,36 @@ def coeffs_for_reps(reps: int, max_reps: int, values: list[dict]) -> dict:
         'endurance': chosen.get('endurance', 0.0)
     }
 
+
+def validate_programme_payload(payload):
+    """Validate and normalize input before creating a database transaction."""
+    if not isinstance(payload, dict):
+        return None, None, "JSON manquant ou invalide"
+
+    name = payload.get("name")
+    exercices = payload.get("exercices")
+    if not isinstance(name, str) or not (name := name.strip()) or len(name) > 100:
+        return None, None, "Le champ 'name' est obligatoire et limité à 100 caractères"
+    if not isinstance(exercices, list) or not 1 <= len(exercices) <= 100:
+        return None, None, "La liste 'exercices' doit contenir entre 1 et 100 exercices"
+
+    normalized = []
+    for exercice in exercices:
+        if not isinstance(exercice, dict):
+            return None, None, "Chaque exercice doit être un objet JSON"
+        exercice_id = exercice.get("exercice_id")
+        try:
+            reps = int(exercice.get("reps"))
+            weight = int(exercice.get("weight"))
+        except (TypeError, ValueError):
+            return None, None, "Les répétitions et le poids doivent être des entiers"
+        if not isinstance(exercice_id, str) or not (exercice_id := exercice_id.strip()) or len(exercice_id) > 200:
+            return None, None, "Chaque exercice doit avoir un 'exercice_id' valide"
+        if not 1 <= reps <= 500 or not 0 <= weight <= 1_000:
+            return None, None, "Les répétitions ou le poids sont hors limites"
+        normalized.append({"exercice_id": exercice_id, "reps": reps, "weight": weight})
+    return name, normalized, None
+
 # --- Definition des routes --- #
 @bp.get("/")
 def home():
@@ -87,19 +118,10 @@ def create_programme():
     """
     Crée un nouveau programme à partir d'un JSON envoyé par le front.
     """
-    data = request.get_json()  # équivalent à request.json
-
-    if not data:
-        return jsonify({"error": "JSON manquant"}), 400
-
-    name = data.get("name")
-    exercices_data = data.get("exercices", [])
-
-    if not name:
-        return jsonify({"error": "Le champ 'name' est obligatoire"}), 400
-
-    if not isinstance(exercices_data, list) or len(exercices_data) == 0:
-        return jsonify({"error": "La liste 'exercices' doit contenir au moins un exercice"}), 400
+    enforce_admin_api_token()
+    name, exercices_data, error = validate_programme_payload(request.get_json(silent=True))
+    if error:
+        return jsonify({"error": error}), 400
 
     # 1) Créer le programme
     programme = Programme(name=name)
@@ -108,19 +130,11 @@ def create_programme():
 
     # 2) Créer les lignes d'exercices
     for ex in exercices_data:
-        exercice_id = ex.get("exercice_id")
-        reps = ex.get("reps")
-        weight = ex.get("weight")
-
-        if not exercice_id or reps is None:
-            # on pourrait aussi simplement ignorer les exercices mal formés
-            return jsonify({"error": "Chaque exercice doit avoir 'exercise_name' et 'reps'"}), 400
-
         pe = ProgrammeExercice(
             programme_id=programme.id,
-            exercice_id=exercice_id,
-            reps=reps,
-            weight=weight
+            exercice_id=ex["exercice_id"],
+            reps=ex["reps"],
+            weight=ex["weight"],
         )
         db.session.add(pe)
 
@@ -181,18 +195,10 @@ def programme_detail(programme_id):
 
     # --------- PUT ---------
     if request.method == "PUT":
-        payload = request.get_json()
-        if not payload:
-            return jsonify({"error": "JSON manquant"}), 400
-
-        name = payload.get("name")
-        exercices_data = payload.get("exercices", [])
-
-        if not name:
-            return jsonify({"error": "Le champ 'name' est obligatoire"}), 400
-
-        if not isinstance(exercices_data, list) or len(exercices_data) == 0:
-            return jsonify({"error": "La liste 'exercices' doit contenir au moins un exercice"}), 400
+        enforce_admin_api_token()
+        name, exercices_data, error = validate_programme_payload(request.get_json(silent=True))
+        if error:
+            return jsonify({"error": error}), 400
 
         # 1) mettre à jour le nom
         programme.name = name
@@ -202,18 +208,11 @@ def programme_detail(programme_id):
 
         # 3) recréer les nouvelles
         for ex in exercices_data:
-            exercice_id = ex.get("exercice_id")
-            reps = ex.get("reps")
-            weight = ex.get("weight")
-
-            if exercice_id is None or reps is None or weight is None:
-                return jsonify({"error": "Chaque exercice doit avoir 'exercice_id', 'reps' et 'weight'"}), 400
-
             pe = ProgrammeExercice(
                 programme_id=programme.id,
-                exercice_id=exercice_id,
-                reps=int(reps),
-                weight=int(weight),
+                exercice_id=ex["exercice_id"],
+                reps=ex["reps"],
+                weight=ex["weight"],
             )
             db.session.add(pe)
 
@@ -222,6 +221,7 @@ def programme_detail(programme_id):
 
     # --------- DELETE ---------
     if request.method == "DELETE":
+        enforce_admin_api_token()
         db.session.delete(programme)
         db.session.commit()
         return jsonify({"success": True, "message": "Programme supprimé"}), 200

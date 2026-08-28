@@ -2,6 +2,7 @@ from datetime import datetime, date, time as dtime
 from flask import Blueprint, request, render_template
 from flask_restful import Api, Resource, abort
 from app.extensions import db
+from app.security import enforce_admin_api_token
 from .models import Station, Train
 import re
 from . import bp
@@ -59,10 +60,20 @@ class StationList(Resource):
     def get(self):
         return {"items": [station_dto(s) for s in Station.query.order_by(Station.km)]}
     def post(self):
-        d = request.get_json(force=True)
+        enforce_admin_api_token()
+        d = request.get_json(silent=True)
+        if not isinstance(d, dict):
+            abort(400, message="JSON invalide")
         if not {"name", "km"} <= d.keys():
             abort(400, message="Champs 'name' et 'km' requis")
-        s = Station(name=d["name"], km=float(d["km"]))
+        try:
+            name = str(d["name"]).strip()
+            km = float(d["km"])
+        except (TypeError, ValueError):
+            abort(400, message="Nom ou kilométrage invalide")
+        if not name or len(name) > 120:
+            abort(400, message="Nom de station invalide")
+        s = Station(name=name, km=km)
         db.session.add(s)
         db.session.commit()
         return station_dto(s), 201
@@ -74,18 +85,28 @@ class TrainList(Resource):
             q = q.filter(Train.date == parse_date(request.args["date"]))
         return {"items": [train_dto(t) for t in q.order_by(Train.date, Train.id)]}
     def post(self):
-        d = request.get_json(force=True)
+        enforce_admin_api_token()
+        d = request.get_json(silent=True)
+        if not isinstance(d, dict):
+            abort(400, message="JSON invalide")
         required = {"name","color","date","station_depart_id","station_arrivee_id","heure_depart","heure_arrivee"}
         if not required <= d.keys():
             abort(400, message=f"Champs manquants: {', '.join(sorted(required - d.keys()))}")
+        try:
+            name = str(d["name"]).strip()
+            color = str(d["color"]).strip()
+            departure_id = int(d["station_depart_id"])
+            arrival_id = int(d["station_arrivee_id"])
+        except (TypeError, ValueError):
+            abort(400, message="Données de train invalides")
+        if not name or len(name) > 120 or not re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+            abort(400, message="Nom ou couleur de train invalide")
+        if departure_id == arrival_id or not db.session.get(Station, departure_id) or not db.session.get(Station, arrival_id):
+            abort(400, message="Stations de départ et d'arrivée invalides")
         t = Train(
-            name=d["name"],
-            color=d["color"],
-            date=parse_date(d["date"]),
-            station_depart_id=int(d["station_depart_id"]),
-            station_arrivee_id=int(d["station_arrivee_id"]),
-            heure_depart=parse_time(d["heure_depart"]),
-            heure_arrivee=parse_time(d["heure_arrivee"]),
+            name=name, color=color, date=parse_date(d["date"]),
+            station_depart_id=departure_id, station_arrivee_id=arrival_id,
+            heure_depart=parse_time(d["heure_depart"]), heure_arrivee=parse_time(d["heure_arrivee"]),
         )
         db.session.add(t)
         db.session.commit()

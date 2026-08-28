@@ -1,4 +1,5 @@
 from . import bp
+from app.security import require_admin_api_token
 from flask import render_template, jsonify, current_app, request
 from pathlib import Path
 from typing import List, Dict, Any
@@ -8,10 +9,8 @@ import json
 
 
 def _tasks_file() -> Path:
-    root = Path(current_app.root_path)
-    data_dir = root / "projects" / "todolist" / "static" / "data"
+    data_dir = Path(current_app.instance_path) / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
-    print(f"Data directory: {data_dir}")
     return data_dir / "todolist.json"
 
 
@@ -48,12 +47,11 @@ def home():
 @bp.get("/api/todolist")
 def get_todos():
     tasks = load_tasks()
-    print(f"Loaded {len(tasks)} tasks")
-    print(_tasks_file())
     return jsonify(tasks), 200
 
 
 @bp.post("/api/todolist")
+@require_admin_api_token
 def create_todo():
     """
     Body JSON attendu: {"text": "..."} (ou "task": "...")
@@ -61,8 +59,8 @@ def create_todo():
     """
     payload = request.get_json(silent=True) or {}
     text = (payload.get("text") or payload.get("task") or "").strip()
-    if not text:
-        return jsonify({"error": "Le champ 'text' est requis."}), 400
+    if not text or len(text) > 500:
+        return jsonify({"error": "Le champ 'text' est requis et limité à 500 caractères."}), 400
 
     tasks = load_tasks()
     new_task = {
@@ -76,6 +74,7 @@ def create_todo():
     return jsonify(new_task), 201
 
 @bp.delete("/api/todolist/<task_id>")
+@require_admin_api_token
 def delete_todo(task_id):
     """
     Supprime une tâche par son ID.
@@ -90,6 +89,7 @@ def delete_todo(task_id):
     return '', 204
 
 @bp.put("/api/todolist/<task_id>")
+@require_admin_api_token
 def update_todo(task_id):
     """
     Met à jour une tâche par son ID.
@@ -104,7 +104,9 @@ def update_todo(task_id):
     for task in tasks:
         if task["id"] == task_id:
             if text is not None:
-                task["text"] = text.strip()
+                if not isinstance(text, str) or not (text := text.strip()) or len(text) > 500:
+                    return jsonify({"error": "Le champ 'text' est invalide."}), 400
+                task["text"] = text
             if isinstance(done, bool):
                 task["done"] = done
             save_tasks(tasks)

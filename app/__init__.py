@@ -22,9 +22,21 @@ def create_app(config_name: str | None = None) -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
 
+    if app.config["ENV"] == "production" and not app.config.get("SECRET_KEY"):
+        raise RuntimeError("SECRET_KEY doit être défini en production.")
+
     app.logger.setLevel(logging.INFO)
-    app.logger.info("ENV=%s FLASK_CONFIG=%s", app.config.get("ENV"), os.environ.get("FLASK_CONFIG"))
-    app.logger.info("DB=%s", app.config.get("SQLALCHEMY_DATABASE_URI"))
+    app.logger.info("Application configured for %s", app.config["ENV"])
+
+    @app.after_request
+    def add_security_headers(response):
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        response.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+        response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        response.headers.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+        if app.config["ENV"] == "production":
+            response.headers.setdefault("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+        return response
 
     pages = FlatPages(app)
     init_i18n(app, pages, languages=("en", "fr"), default_lang="fr")

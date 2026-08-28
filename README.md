@@ -7,6 +7,32 @@ source nenv/bin/activate
 
 flask --app wsgi --debug run
 
+# Déploiement PythonAnywhere
+
+La configuration de production est pilotée par les variables d'environnement, jamais par
+des valeurs commitées :
+
+```bash
+export FLASK_CONFIG=production
+export SECRET_KEY='une-cle-aleatoire-longue-et-privee'
+export ADMIN_API_TOKEN='un-jeton-prive-pour-les-ecritures-admin'
+export DATABASE_URL='sqlite:////home/Galilee57/flask_app/instance/database.db'
+```
+
+Dans le fichier WSGI PythonAnywhere, définir `FLASK_CONFIG=production` avant
+`create_app()`. À chaque déploiement :
+
+```bash
+git pull
+pip install -r requirements.txt
+flask --app wsgi db upgrade
+```
+
+Les API qui modifient les données partagées requièrent, en production, l'en-tête HTTP
+`X-Admin-Token`. Les routes `/debug`, `/map` et `/files-map` retournent désormais 404.
+Les tâches Todo sont enregistrées dans `instance/data/todolist.json`, pas dans les assets
+publics.
+
 # Console pythonAnyWhere (utiliser celle à partir de l'env dans Web Menu)
 
 git pull

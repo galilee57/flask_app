@@ -22,29 +22,42 @@ def _db_uri_from_env(default_path: Path) -> str:
     return f"sqlite:///{default_path.resolve()}"
 
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY", "dev-key")
+    SECRET_KEY = os.getenv("SECRET_KEY")
     DEBUG = False
     TESTING = False
+    ENV = "production"
     API_BASE_URL = ""                        # utilisé par tes templates
     SQLALCHEMY_DATABASE_URI = _db_uri_from_env(INSTANCE_DIR / "database.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ADMIN_API_TOKEN = os.getenv("ADMIN_API_TOKEN")
+    REQUIRE_ADMIN_API_TOKEN = True
 
     # Flask-FlatPages
     FLATPAGES_ROOT = str(BASE_DIR / "main/content")
     FLATPAGES_EXTENSION = ".md"
     FLATPAGES_MARKDOWN_EXTENSIONS = ["fenced_code", "codehilite", "tables", "toc", "smarty"]
-    FLATPAGES_AUTO_RELOAD = True
+    FLATPAGES_AUTO_RELOAD = False
 
 class DevConfig(Config):
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev-key")
     DEBUG = True
     ENV = "development"
+    REQUIRE_ADMIN_API_TOKEN = False
+    FLATPAGES_AUTO_RELOAD = True
     API_BASE_URL = "http://127.0.0.1:5000/projects/todolist"
 
 class ProdConfig(Config):
     DEBUG = False
     ENV = "production"
-    SQLALCHEMY_DATABASE_URI = "sqlite:////home/Galilee57/flask_app/instance/database.db"
     API_BASE_URL = "/projects/todolist"      # même domaine que Flask en prod
+
+class TestingConfig(Config):
+    SECRET_KEY = "test-secret-key"
+    TESTING = True
+    ENV = "testing"
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
+    ADMIN_API_TOKEN = "test-admin-token"
+    REQUIRE_ADMIN_API_TOKEN = True
 
 def get_config(name: str | None = None):
     """Retourne la classe de config selon le nom (development/production)."""
@@ -53,5 +66,6 @@ def get_config(name: str | None = None):
     mapping = {
         "development": DevConfig,
         "production": ProdConfig,
+        "testing": TestingConfig,
     }
     return mapping.get(name, ProdConfig)

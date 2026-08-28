@@ -24,5 +24,10 @@ class ProgrammeExercice(db.Model):
     exercice_id = db.Column(db.String(200), nullable=False)
     reps = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
+
+    __table_args__ = (
+        db.CheckConstraint("reps > 0", name="ck_programme_exercices_reps_positive"),
+        db.CheckConstraint("weight >= 0", name="ck_programme_exercices_weight_nonnegative"),
+    )
     
     programme = db.relationship('Programme', back_populates='exercices')

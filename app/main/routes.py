@@ -73,6 +73,8 @@ def lab():
 # Test CSS static file serving
 @bp.route("/debug")
 def debug():
+    if not current_app.debug:
+        abort(404)
     return f"""
     <p>Test du CSS :</p>
     <p><a href='{url_for("main.static", filename="css/style.css")}'>Ouvrir style.css</a></p>
@@ -82,12 +84,16 @@ def debug():
 # Print all application routes in the browser
 @bp.route("/map")
 def map_urls():
+    if not current_app.debug:
+        abort(404)
     return "<br>".join(str(r) for r in current_app.url_map.iter_rules())
 
 
 # Liste tous les fichiers sous app/, formaté comme /dossier/sousdossier/fichier.ext
 @bp.route("/files-map")
 def files_map():
+    if not current_app.debug:
+        abort(404)
     base_dir = current_app.root_path  # pointe sur .../app
     ignore_dirs = {"__pycache__", ".venv", ".git", ".mypy_cache", ".idea", ".pytest_cache"}
     ignore_ext = {".pyc"}
