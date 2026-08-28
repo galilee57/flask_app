@@ -170,5 +170,5 @@ jobs:
 
           echo "Staging health check failed; recent staging error log follows." >&2
           ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" \
-            "find /var/log -maxdepth 1 -type f -iname '*staging*' -exec sh -c 'echo === \\"\$1\\"; tail -n 80 \\"\$1\\"' _ {} \\;" || true
+            "find /var/log -maxdepth 1 -type f -iname '*staging*' -print0 | xargs -0 -r -n 1 tail -n 80" || true
           exit 1
