@@ -168,7 +168,7 @@ jobs:
             exit 0
           fi
 
-          echo "Staging health check failed; staging log files follow." >&2
+          echo "Staging health check failed; recent staging error log follows." >&2
           ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" \
-            "find /var/log -maxdepth 1 -type f -iname '*staging*' -printf '%f\n'" || true
+            "tail -n 120 /var/log/${PA_STAGING_DOMAIN}.error.log" || true
           exit 1
