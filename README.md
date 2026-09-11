@@ -1,11 +1,42 @@
-# Environnement de développement : nenv
+# Environnement de développement local
 
-source nenv/bin/activate
-(ou conda activate nenv)
+Depuis le répertoire du projet (Python 3.14 testé) :
 
-# Lancement de l'appli en mode debuger
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip check
+python -m pytest -q
+```
 
-flask --app wsgi --debug run
+Un environnement virtuel doit être recréé après un changement de Mac ou de
+chemin du projet ; il ne suffit pas de restaurer son dossier depuis iCloud.
+
+La couverture, l'isolation et les commandes détaillées des tests sont documentées
+dans [tests/README.md](tests/README.md).
+
+## Tailwind CSS
+
+Installer Node.js et npm sur macOS avec `brew install node`, puis :
+
+```bash
+npm ci
+npm run build:css
+```
+
+Pendant les modifications de styles, lancer `npm run watch:css` dans un second
+terminal pour recompiler automatiquement le CSS.
+
+## Lancement du portfolio
+
+```bash
+source .venv/bin/activate
+FLASK_CONFIG=development flask --app wsgi --debug run
+```
+
+Ouvrir http://127.0.0.1:5000. Pour une base locale neuve, appliquer les migrations
+avec `FLASK_CONFIG=development flask --app wsgi db upgrade` avant le lancement.
 
 # Déploiement PythonAnywhere
 

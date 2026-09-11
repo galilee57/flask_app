@@ -1,12 +1,14 @@
 {
   "name": "flask_app-bp",
   "version": "1.0.0",
-  "description": "source nenv/bin/activate (ou conda activate nenv)",
+  "description": "Portfolio Flask et compilation Tailwind CSS",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
+    "build:css": "tailwindcss -i input.css -o app/main/static/css/output.css",
+    "watch:css": "tailwindcss -i input.css -o app/main/static/css/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

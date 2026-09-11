@@ -12,10 +12,12 @@ Flask-SQLAlchemy>=3.1
 SQLAlchemy>=2.0
 Flask-Migrate>=4.0
 Flask-WTF>=1.2
+WTForms>=3.0
 Flask-RESTful>=0.3.10,<0.4
 
 # Markdown + Meta parsing
 Markdown>=3.5
+Pygments>=2.15
 PyYAML>=6.0
 python-frontmatter>=1.0.0
 
