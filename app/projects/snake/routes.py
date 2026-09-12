@@ -1,7 +1,8 @@
 import click
 
 from . import bp
-from flask import render_template, jsonify, request, current_app
+from flask import render_template, jsonify, request, current_app, session
+from werkzeug.local import LocalProxy
 from .snake_game import Game
 from .algorithms import astar, path_to_direction
 from app.extensions import db
@@ -16,7 +17,26 @@ DIRECTIONS = {
     "right": {"x": 1, "y": 0},
 }
 
-game = Game()
+def _get_game():
+    if "portfolio.snake" not in request.environ:
+        instance = Game()
+        stored = session.get("snake_game")
+        if stored:
+            for key in ("fruit", "snake", "direction", "score", "game_over",
+                        "steps_since_fruit", "total_steps", "message"):
+                setattr(instance, key, stored[key])
+        request.environ["portfolio.snake"] = instance
+    return request.environ["portfolio.snake"]
+
+
+game = LocalProxy(_get_game)
+
+
+@bp.after_request
+def save_game(response):
+    if "portfolio.snake" in request.environ and response.status_code < 400:
+        session["snake_game"] = request.environ["portfolio.snake"].to_dict()
+    return response
 
 
 @bp.get("/")

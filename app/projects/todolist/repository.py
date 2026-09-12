@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import fcntl
+from contextlib import contextmanager
 from pathlib import Path
 from threading import RLock
 from typing import Any
@@ -33,3 +35,14 @@ class TodoRepository:
                 json.dumps(tasks, ensure_ascii=False, indent=2), encoding="utf-8"
             )
             temporary_path.replace(self.path)
+
+
+    @contextmanager
+    def transaction(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self._lock, self.path.with_suffix(self.path.suffix + ".lock").open("a") as handle:
+            fcntl.flock(handle, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle, fcntl.LOCK_UN)

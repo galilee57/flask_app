@@ -39,12 +39,3 @@ def client(app):
 @pytest.fixture()
 def admin_headers():
     return {"X-Admin-Token": "test-admin-token"}
-
-
-@pytest.fixture(autouse=True)
-def reset_snake_game():
-    from app.projects.snake.routes import game
-
-    game.reset()
-    yield
-    game.reset()

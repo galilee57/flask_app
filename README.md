@@ -1,3 +1,10 @@
+# Déploiements Docker
+
+La préparation Azure ACR / Container Apps, Vercel et Docker Compose est documentée
+[dans infra/README.md](infra/README.md). Les fichiers Docker n'incluent aucune donnée
+locale ni secret. Appliquer la nouvelle migration avant de redémarrer un hébergement
+existant ; importer explicitement les anciens JSON avec `storage-import`.
+
 # Environnement de développement local
 
 Depuis le répertoire du projet (Python 3.14 testé) :
@@ -5,7 +12,7 @@ Depuis le répertoire du projet (Python 3.14 testé) :
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.lock -r requirements-dev.txt
 python -m pip check
 python -m pytest -q
 ```
@@ -76,7 +83,7 @@ Dans le fichier WSGI PythonAnywhere, définir `FLASK_CONFIG=production` avant
 
 ```bash
 git pull
-pip install -r requirements.txt
+pip install -r requirements.lock
 flask --app wsgi db upgrade
 ```
 
@@ -114,21 +121,10 @@ The bilingual API reference is available in:
 - `app/main/content/docs/api/api.fr.md`
 - `app/main/content/docs/api/api.en.md`
 
-# Environements management
+# Configuration WSGI
 
-An environment variable has been defined and is managed in config.py: APP_ENV
-wgsi.py of Pythonanywhere set its as prod.
-Use export APP_ENV=dev before flask run.
-
-# In pythonAnyWhere : this code in wsgi.py to define ENV_VARIABLE
-
-import sys, os
-project_path = '/home/Galilee57/flask_app' # <- respecte bien la casse !
-if project_path not in sys.path:
-sys.path.append(project_path)
-
-from app import create_app
-application = create_app()
+Utiliser `FLASK_CONFIG=production` avant de charger `wsgi:app` et fournir les variables
+privées documentées ci-dessus. `APP_ENV` n'est plus utilisé.
 
 # Link the environement nenv (in web page) :
 

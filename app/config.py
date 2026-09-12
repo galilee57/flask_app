@@ -11,13 +11,15 @@ INSTANCE_DIR = Path(
     os.environ.get("FLASK_INSTANCE_PATH", PROJECT_DIR / "instance")
 ).expanduser().resolve()  # .../flask_app/instance
 LOGS_DIR = PROJECT_DIR / "logs"
-INSTANCE_DIR.mkdir(parents=True, exist_ok=True)
-LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 def _db_uri_from_env(default_path: Path) -> str:
     """DATABASE_URL si présent (Postgres, MySQL, etc.), sinon SQLite dans instance/."""
     url = os.getenv("DATABASE_URL")
     if url:    # ex: "sqlite:////home/USER/flask_app/instance/charts.db" ou postgres://...
+        if url.startswith("postgres://"):
+            url = "postgresql+psycopg://" + url[len("postgres://"):]
+        elif url.startswith("postgresql://"):
+            url = "postgresql+psycopg://" + url[len("postgresql://"):]
         return url
     return f"sqlite:///{default_path.resolve()}"
 
@@ -35,8 +37,12 @@ class Config:
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = False
-    TODOLIST_DATA_PATH = None
-    PATTERN_STORAGE_DIR = None
+    TODOLIST_DATA_PATH = os.getenv("TODOLIST_DATA_PATH")
+    PATTERN_STORAGE_DIR = os.getenv("PATTERN_STORAGE_DIR")
+    SNAKE_DQN_PATH = os.getenv("SNAKE_DQN_PATH")
+    SESSION_TTL_SECONDS = 86400
+    SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
+    CONTAINER_MODE = os.getenv("CONTAINER_MODE") == "true"
 
     # Flask-FlatPages
     FLATPAGES_ROOT = str(BASE_DIR / "main/content")

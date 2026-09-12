@@ -42,7 +42,7 @@ def encode_state(game):
 
 
 def checkpoint_path(app):
-    return Path(app.config.get("SNAKE_DQN_PATH", Path(app.instance_path) / "snake_dqn.npz"))
+    return Path(app.config.get("SNAKE_DQN_PATH") or Path(app.instance_path) / "snake_dqn.npz")
 
 
 class DQN:

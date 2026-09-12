@@ -29,6 +29,7 @@ def upgrade():
                 "exercice_id",
                 existing_type=columns["exercice_id"]["type"],
                 type_=sa.String(length=200),
+                postgresql_using="exercice_id::varchar(200)",
                 existing_nullable=False,
             )
         if "exercice_name" in columns:
@@ -60,5 +61,6 @@ def downgrade():
                 "exercice_id",
                 existing_type=columns["exercice_id"]["type"],
                 type_=sa.Integer(),
+                postgresql_using="exercice_id::integer",
                 existing_nullable=False,
             )

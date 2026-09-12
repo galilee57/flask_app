@@ -8,6 +8,8 @@ from uuid import uuid4
 from threading import Lock
 from dataclasses import dataclass, field
 import time
+import base64
+import numpy as np
 
 
 # --- Store en mémoire : 1 univers = 1 GameOfLife3D + lock + version
@@ -18,7 +20,7 @@ class Universe:
     lock: Lock = field(default_factory=Lock)
     updated_at: float = field(default_factory=time.time)
 
-UNIVERSES: dict[str, Universe] = {}
+
 
 
 def _new_universe(*, shape=(48, 48, 48), rule_b=(5,), rule_s=(5, 6, 7), density=0.05, torus=True, seed=None) -> tuple[str, Universe]:
@@ -27,13 +29,23 @@ def _new_universe(*, shape=(48, 48, 48), rule_b=(5,), rule_s=(5, 6, 7), density=
         game=GameOfLife3D(shape=shape, rule_b=rule_b, rule_s=rule_s, density=density, torus=torus, seed=seed),
         version=0,
     )
-    UNIVERSES[uid] = u
+    request.environ["portfolio.gol_universe"] = (uid, u)
     return uid, u
 
 
 def _get_or_create_universe() -> tuple[str, Universe]:
     uid = session.get("gol_uid")
-    u = UNIVERSES.get(uid) if uid else None
+    cached = request.environ.get("portfolio.gol_universe")
+    if cached and cached[0] == uid:
+        return cached
+    stored = session.get("gol_universe")
+    u = None
+    if uid and stored:
+        game = GameOfLife3D(**stored["config"])
+        bits = np.frombuffer(base64.b64decode(stored["grid"]), dtype=np.uint8)
+        game.grid = np.unpackbits(bits, count=int(np.prod(game.shape))).reshape(game.shape).astype(bool)
+        u = Universe(game=game, version=stored["version"])
+        request.environ["portfolio.gol_universe"] = (uid, u)
     if u is None:
         uid, u = _new_universe()
         session["gol_uid"] = uid
@@ -131,3 +143,14 @@ def update_config():
     session["gol_version"] = u.version
 
     return _json_state(uid, u)
+
+@bp.after_request
+def save_universe(response):
+    cached = request.environ.get("portfolio.gol_universe")
+    if cached and response.status_code < 400:
+        uid, universe = cached
+        session["gol_universe"] = {
+            "config": universe.game.config(), "version": universe.version,
+            "grid": base64.b64encode(np.packbits(universe.game.grid).tobytes()).decode("ascii"),
+        }
+    return response

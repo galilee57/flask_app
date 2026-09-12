@@ -9,6 +9,9 @@ from .services import TodoNotFoundError, TodoService
 
 def _todo_service() -> TodoService:
     configured_path = current_app.config.get("TODOLIST_DATA_PATH")
+    if not configured_path:
+        from .sql_service import SQLTodoService
+        return SQLTodoService()
     path = Path(configured_path) if configured_path else Path(current_app.instance_path) / "data" / "todolist.json"
     repositories = current_app.extensions.setdefault("todo_repositories", {})
     repository = repositories.setdefault(path, TodoRepository(path))

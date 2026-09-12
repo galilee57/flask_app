@@ -4,6 +4,9 @@ from tempfile import NamedTemporaryFile
 
 from flask import current_app, render_template, jsonify, request, session
 from app.security import require_admin_api_token
+from app.extensions import db
+from app.runtime_models import SavedPattern
+from sqlalchemy import select
 
 from . import bp
 from .game_of_life import GameOfLife
@@ -19,11 +22,14 @@ def _patterns_dir() -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path
 
-def _pattern_path(name: str) -> Path:
+def _safe_name(name: str) -> str:
     safe = "".join(c for c in name if c.isalnum() or c in (' ', '_', '-')).rstrip()
     if not safe or len(safe) > 80:
         raise ValueError("Nom de motif invalide")
-    return _patterns_dir() / f"{safe}.json"
+    return safe
+
+def _pattern_path(name: str) -> Path:
+    return _patterns_dir() / f"{_safe_name(name)}.json"
 
 def apply_pattern(game, name: str, row: int, col: int):
     pattern = PATTERNS.get(name)
@@ -125,10 +131,28 @@ def save_pattern():
         return jsonify(ok=False, error="Missing name"), 400
 
     try:
-        path = _pattern_path(name)
+        safe = _safe_name(name)
     except ValueError as exc:
         return jsonify(ok=False, error=str(exc)), 400
     payload = {"name": name, "grid": game.to_list()}
+    if not current_app.config.get("PATTERN_STORAGE_DIR"):
+        if db.engine.dialect.name in ("postgresql", "sqlite"):
+            if db.engine.dialect.name == "postgresql":
+                from sqlalchemy.dialects.postgresql import insert
+            else:
+                from sqlalchemy.dialects.sqlite import insert
+            statement = insert(SavedPattern).values(name=safe, payload=payload)
+            db.session.execute(statement.on_conflict_do_update(
+                index_elements=[SavedPattern.name], set_={"payload": payload}))
+        else:
+            pattern = db.session.get(SavedPattern, safe)
+            if pattern is None:
+                pattern = SavedPattern(name=safe)
+                db.session.add(pattern)
+            pattern.payload = payload
+        db.session.commit()
+        return jsonify(ok=True)
+    path = _pattern_path(name)
     with NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as temporary_file:
         json.dump(payload, temporary_file)
         temporary_path = Path(temporary_file.name)
@@ -144,14 +168,20 @@ def load_pattern():
         return jsonify(ok=False, error="Missing name"), 400
 
     try:
-        path = _pattern_path(name)
+        safe = _safe_name(name)
     except ValueError as exc:
         return jsonify(ok=False, error=str(exc)), 400
-    if not path.exists():
-        return jsonify(ok=False, error="Pattern not found"), 404
-
-    with path.open("r", encoding="utf-8") as f:
-        payload = json.load(f)
+    if not current_app.config.get("PATTERN_STORAGE_DIR"):
+        pattern = db.session.get(SavedPattern, safe)
+        if pattern is None:
+            return jsonify(ok=False, error="Pattern not found"), 404
+        payload = pattern.payload
+    else:
+        path = _pattern_path(name)
+        if not path.exists():
+            return jsonify(ok=False, error="Pattern not found"), 404
+        with path.open("r", encoding="utf-8") as f:
+            payload = json.load(f)
 
     grid_list = payload.get("grid")
     if not grid_list:
@@ -164,6 +194,8 @@ def load_pattern():
 
 @bp.get("/saved")
 def list_saved():
+    if not current_app.config.get("PATTERN_STORAGE_DIR"):
+        return jsonify(patterns=list(db.session.scalars(select(SavedPattern.name).order_by(SavedPattern.name))))
     files = [path.stem for path in _patterns_dir().glob("*.json")]
     return jsonify(patterns=sorted(files))
 

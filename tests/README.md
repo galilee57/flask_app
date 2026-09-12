@@ -11,7 +11,7 @@ Exécuter les commandes depuis la racine du projet :
 ```bash
 python3 -m venv .venv  # uniquement si l'environnement n'existe pas encore
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.lock -r requirements-dev.txt
 python -m pip check
 python -m pytest -q
 ```

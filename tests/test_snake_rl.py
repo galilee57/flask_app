@@ -47,12 +47,11 @@ def test_training_saves_loadable_model(tmp_path):
 
 
 def test_rl_missing_model_and_security(client, admin_headers, tmp_path):
-    from app.projects.snake.routes import game
     client.application.config['SNAKE_DQN_PATH'] = str(tmp_path / 'model.npz')
-    game.reset()
+    client.post("/projects/snake/api/reset")
     assert client.post('/projects/snake/api/rl/move').status_code == 409
     DQN().save(tmp_path / 'model.npz')
-    before = game.to_dict()
+    before = client.get("/projects/snake/api/state").get_json()
     assert client.post('/projects/snake/api/rl/move?record=true').status_code == 403
-    assert game.to_dict() == before
+    assert client.get("/projects/snake/api/state").get_json() == before
     assert client.post('/projects/snake/api/rl/move', headers=admin_headers).status_code == 200

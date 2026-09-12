@@ -38,6 +38,7 @@ def upgrade():
             batch_op.alter_column('exercice_id',
                    existing_type=columns['exercice_id']['type'],
                    type_=sa.String(length=200),
+                postgresql_using="exercice_id::varchar(200)",
                    existing_nullable=False)
         if 'exercice_name' in columns:
             batch_op.drop_column('exercice_name')
@@ -55,6 +56,7 @@ def downgrade():
             batch_op.alter_column('exercice_id',
                    existing_type=columns['exercice_id']['type'],
                    type_=sa.Integer(),
+                postgresql_using="exercice_id::integer",
                    existing_nullable=False)
 
     if 'snake_stats' in inspector.get_table_names():

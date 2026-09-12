@@ -5,6 +5,15 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid4
+from functools import wraps
+
+
+def filesystem_transaction(method):
+    @wraps(method)
+    def wrapped(self, *args, **kwargs):
+        with self.repository.transaction():
+            return method(self, *args, **kwargs)
+    return wrapped
 
 from .repository import TodoRepository
 from .schemas import CreateTodo, UpdateTodo
@@ -21,6 +30,7 @@ class TodoService:
     def list(self) -> list[dict[str, Any]]:
         return self.repository.list()
 
+    @filesystem_transaction
     def create(self, command: CreateTodo) -> dict[str, Any]:
         tasks = self.repository.list()
         task = {
@@ -33,6 +43,7 @@ class TodoService:
         self.repository.save(tasks)
         return task
 
+    @filesystem_transaction
     def update(self, task_id: str, command: UpdateTodo) -> dict[str, Any]:
         tasks = self.repository.list()
         for task in tasks:
@@ -45,6 +56,7 @@ class TodoService:
                 return task
         raise TodoNotFoundError(task_id)
 
+    @filesystem_transaction
     def delete(self, task_id: str) -> None:
         tasks = self.repository.list()
         updated_tasks = [task for task in tasks if task.get("id") != task_id]

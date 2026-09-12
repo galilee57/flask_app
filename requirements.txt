@@ -24,12 +24,9 @@ python-frontmatter>=1.0.0
 # FlatPages
 Flask-FlatPages>=0.7
 
-# Optionnel mais utile pour rechargement automatic
-watchdog>=4.0.0
-
 # HTTP client
 requests>=2.31.0
 numpy>=1.26
 
-# Tests
-pytest>=8.0
+gunicorn>=23,<24
+psycopg[binary]>=3.3,<4

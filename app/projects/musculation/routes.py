@@ -13,7 +13,6 @@ import json
 def _data_file(filename: str) -> Path:
     root = Path(bp.root_path)
     data_dir = root / "static" / "data"
-    data_dir.mkdir(parents=True, exist_ok=True)
     return data_dir / filename
 
 # Load exercices from a JSON file

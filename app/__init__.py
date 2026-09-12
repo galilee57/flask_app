@@ -1,6 +1,9 @@
 from flask import Flask
 from app.extensions import db, migrate
-from app.config import get_config
+from pathlib import Path
+import os
+
+from app.config import get_config, INSTANCE_DIR
 from .blueprints import register_blueprints
 from .factory import (
     configure_content,
@@ -17,6 +20,7 @@ def create_app(config_name: str | None = None) -> Flask:
         template_folder="main/templates",
         static_folder="main/static",
         instance_relative_config=True,
+        instance_path=str(Path(os.getenv("FLASK_INSTANCE_PATH", INSTANCE_DIR)).resolve()),
     )
 
     app.config.from_object(get_config(config_name))
@@ -26,6 +30,17 @@ def create_app(config_name: str | None = None) -> Flask:
 
     if app.config["ENV"] == "production" and not app.config.get("SECRET_KEY"):
         raise RuntimeError("SECRET_KEY doit être défini en production.")
+
+    if app.config["CONTAINER_MODE"]:
+        if not os.getenv("DATABASE_URL") or not app.config["SQLALCHEMY_DATABASE_URI"].startswith("postgresql"):
+            raise RuntimeError("Les conteneurs nécessitent DATABASE_URL PostgreSQL.")
+        if not app.config.get("ADMIN_API_TOKEN"):
+            raise RuntimeError("ADMIN_API_TOKEN doit être défini pour les conteneurs.")
+        if app.config.get("TODOLIST_DATA_PATH") or app.config.get("PATTERN_STORAGE_DIR"):
+            raise RuntimeError("Le stockage local partagé est interdit en mode conteneur.")
+
+    from .deployment import configure_deployment
+    configure_deployment(app)
 
     configure_logging(app)
     register_security_headers(app)
