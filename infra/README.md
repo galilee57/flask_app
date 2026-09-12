@@ -2,9 +2,11 @@
 
 Le conteneur sert `wsgi:app` avec Gunicorn sur `0.0.0.0:$PORT` (8080 par défaut).
 Le build compile Tailwind puis copie uniquement Python et les assets dans l'image finale.
-Python 3.14 est commun à Docker, aux fichiers de dépendances verrouillées et à la CI.
+Docker et sa CI utilisent Python 3.14 ; PythonAnywhere et sa CI conservent Python 3.10.
 `requirements.txt` déclare les dépendances directes ; `requirements.lock` fixe les versions
-résolues. Les outils de développement sont dans `requirements-dev.txt`.
+résolues pour Python 3.14. `requirements-python310.lock` verrouille séparément les
+dépendances de PythonAnywhere, notamment NumPy 2.2.6. Les outils de développement sont
+dans `requirements-dev.txt`.
 
 ## Local avec Docker Compose
 

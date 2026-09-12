@@ -47,6 +47,10 @@ avec `FLASK_CONFIG=development flask --app wsgi db upgrade` avant le lancement.
 
 # Déploiement PythonAnywhere
 
+PythonAnywhere utilise ici Python 3.10 : installer `requirements-python310.lock`.
+Le fichier `requirements.lock` est réservé à Python 3.14 (Mac et Docker).
+Conserver le virtualenv PythonAnywhere existant ; le workflow teste désormais Python 3.10.
+
 ## Staging (GitHub Actions)
 
 Seule la branche `staging` est déployée automatiquement sur
@@ -83,7 +87,7 @@ Dans le fichier WSGI PythonAnywhere, définir `FLASK_CONFIG=production` avant
 
 ```bash
 git pull
-pip install -r requirements.lock
+pip install -r requirements-python310.lock
 flask --app wsgi db upgrade
 ```
 
