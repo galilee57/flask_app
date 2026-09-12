@@ -5,6 +5,7 @@
   {% set image = c.get('image', '') %}
   {% set note = (c.get('type', 0) | int) %}
   {% set categories = c.get('categories', []) %}
+  {% set made_by = c.get('made_by') %}
   {% set projet_url = c.get('projetUrl') or ('/projects/' ~ id_) %}
 
   {# Description {fr,en} #}
@@ -27,12 +28,28 @@
       hover:border-secondary-500 hover:border-4 transition duration-300
       text-center shadow">
 
-      <img
-        src="{{ img_src }}"
-        class="h-76 w-full object-cover p-3 rounded-3xl"
-        alt="{{ titre }}"
-        loading="lazy"
-      />
+      <div style="position: relative;">
+        <img
+          src="{{ img_src }}"
+          class="h-76 w-full object-cover p-3 rounded-3xl"
+          alt="{{ titre }}"
+          loading="lazy"
+        />
+        {% if made_by in ['Human made', 'AI made'] %}
+          {% set made_by_label = t({
+            'fr': 'Codé avec Codex',
+            'en': 'AI made'
+          }) if made_by == 'AI made' else t({
+            'fr': 'Codé manuellement',
+            'en': 'Human made'
+          }) %}
+          <span
+            class="rounded-3xl px-4 py-2 text-sm font-medium text-white shadow"
+            style="position: absolute; bottom: 1.5rem; right: 1.5rem; background-color: var({{ '--color-primary-600' if made_by == 'AI made' else '--color-secondary-800' }});"
+            title="{{ made_by_label }}"
+          >{{ made_by_label }}</span>
+        {% endif %}
+      </div>
 
       <div class="flex flex-1 flex-col gap-2 p-4">
         <h5 class="text-xl font-semibold leading-snug">{{ titre }}</h5>

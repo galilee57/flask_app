@@ -1,18 +1,47 @@
-html, body {
-      margin: 0;
-      background-size: cover;
-      transition: background-image 0.5s ease;
-    }
-
-.input-group-text {
-  background-color: #f8f9fa;
-  font-size: 1.2rem;
-}
-
-.input-group .btn {
-  height: auto;
-  display: flex;
+/* Layout is scoped to Snake and does not need a Tailwind rebuild. */
+.snake-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
+.snake-board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 13 / 8;
+  min-width: 0;
+}
+.snake-controls { min-width: 0; }
+.snake-speed-hint { width: 100%; font-size: 0.875rem; }
+.snake-statistics { min-width: 0; }
+@media (min-width: 1100px) {
+  .snake-layout { grid-template-columns: minmax(0, 1fr) 360px; }
+  .snake-statistics { grid-column: 1 / -1; }
+}
+
+/* Keyboard directions follow the isometric board axes. */
+.snake-key-hints { position: absolute; inset: 0; pointer-events: none; }
+.snake-key-hints[hidden] { display: none; }
+.snake-key {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: clamp(28px, 4vw, 44px);
+  height: clamp(28px, 4vw, 44px);
+  border: 1px solid #d1d5db;
+  border-bottom: 3px solid #9ca3af;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b05;
+  font: bold clamp(20px, 3vw, 30px) / 1 sans-serif;
+  box-shadow: 0 2px 5px #00000012;
+}
+.snake-key-up { left: 78%; top: 15%; }
+.snake-key-right { left: 78%; top: 65%; }
+.snake-key-down { left: 22%; top: 65%; }
+.snake-key-left { left: 22%; top: 15%; }

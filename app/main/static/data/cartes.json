@@ -1,6 +1,7 @@
 [
     {
         "id": "musculation",
+        "made_by": "Human made",
         "titre": "Musculation",
         "description": {
             "fr": "Une application pour suivre votre programme de musculation.",
@@ -17,6 +18,7 @@
     },
     {
         "id": "phaser",
+        "made_by": "Human made",
         "titre": "Game avec Phaser",
         "description": {
             "fr": "Un jeu interactif développé avec le framework Phaser.",
@@ -43,6 +45,7 @@
     },
     {
         "id": "memory",
+        "made_by": "Human made",
         "titre": "Jeu de Memory avec JavaScript",
         "description": {
             "fr": "Un jeu de Memory développé dans un cours Domestika sur JavaScript.",
@@ -59,6 +62,7 @@
     },
     {
         "id": "game_of_life",
+        "made_by": "Human made",
         "titre": "Game of Life",
         "description": {
             "fr": "Automate cellulaire de Conway.",
@@ -76,6 +80,7 @@
     },
     {
         "id": "game_of_life_3d",
+        "made_by": "Human made",
         "titre": "Game of Life 3D",
         "description": {
             "fr": "Automate cellulaire de Conway en 3D.",
@@ -92,6 +97,7 @@
     },
     {
         "id": "countries",
+        "made_by": "Human made",
         "titre": "Flags",
         "description": {
             "fr": "Affichage de drapeaux depuis une API REST.",
@@ -107,6 +113,7 @@
     },
     {
         "id": "todolist",
+        "made_by": "Human made",
         "titre": "Todo List",
         "description": {
             "fr": "Une ToDo List avec changement d'image de fond.",
@@ -119,6 +126,7 @@
     },
     {
         "id": "arduino",
+        "made_by": "Human made",
         "titre": "Arduino API",
         "description": {
             "fr": "Réception de données depuis une API Arduino.",
@@ -131,6 +139,7 @@
     },
     {
         "id": "charts",
+        "made_by": "Human made",
         "titre": "Marey Diagram",
         "description": {
             "fr": "Gestion de base de données pour l'affichage de trains.",
@@ -148,6 +157,7 @@
       },
       {
         "id": "viewer360",
+        "made_by": "Human made",
         "titre": "Viewer 360",
         "description": {
             "fr": "Visionneuse de photos à 360° avec Three.js.",
@@ -164,6 +174,7 @@
       },
       {
         "id": "a_star",
+        "made_by": "Human made",
         "titre": "Algorithme A*",
         "description": {
             "fr": "Modèle d'algorithme de recherche de chemin.",
@@ -180,6 +191,7 @@
       },
       {
         "id": "sudoku",
+        "made_by": "Human made",
         "titre": "Sudoku Solver",
         "description": {
             "fr": "Résolveur de Sudoku développé avec Flask.",
@@ -196,6 +208,7 @@
       },
       {
         "id": "connect_four",
+        "made_by": "Human made",
         "titre": "PUISSANCE 4",
         "description": {
             "fr": "Algorithme MinMax et déterminisme",
@@ -212,6 +225,7 @@
       },
       {
         "id": "snake",
+        "made_by": "Human made",
         "titre": "Snake Game",
         "description": {
             "fr": "Jeu du Snake et Apprentissage par Neurones",
@@ -228,6 +242,7 @@
       },
       {
         "id": "projet_test",
+        "made_by": "Human made",
         "titre": "Projet Test",
         "description": {
             "fr": "Espace pour tester des fonctionnalités pour de futurs projets Flask.",
@@ -237,5 +252,22 @@
         "image": "projectTest.jpg",
         "type": 1,
         "categories": ["flask", "testing"]
-     }
+     },
+    {
+        "id": "tetris",
+        "made_by": "AI made",
+        "titre": "Tétris",
+        "description": {
+            "fr": "Un projet Tétris en cours de développement avec Flask.",
+            "en": "A Tetris project under development with Flask."
+        },
+        "published": true,
+        "image": "projectTetris.png",
+        "projetUrl": "/projects/tetris/",
+        "type": 1,
+        "categories": [
+            "flask",
+            "game"
+        ]
+    }
 ]

@@ -15,7 +15,7 @@ PUBLIC_PAGES = (
     "/projects/musculation/", "/projects/phaser/", "/projects/charts/",
     "/projects/game_of_life/", "/projects/game_of_life_3d/",
     "/projects/viewer360/", "/projects/projet_test/", "/projects/a_star/",
-    "/projects/sudoku/", "/projects/connect_four/", "/projects/snake/",
+    "/projects/tetris/", "/projects/sudoku/", "/projects/connect_four/", "/projects/snake/",
 )
 
 

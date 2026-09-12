@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}TETRIS{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('tetris.static', filename='css/tetris.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 min-h-screen">
+  {% if current_lang() == 'en' %}
+    {{ hero("TETRIS", "A space to develop the Tetris project with Flask.") }}
+  {% else %}
+    {{ hero("TÉTRIS", "Un espace pour développer le projet Tétris avec Flask.") }}
+  {% endif %}
+  <img class="tetris-preview" src="{{ url_for('static', filename='images/projectTetris.png') }}" alt="Tetris">
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('tetris.static', filename='js/tetris.js') }}"></script>
+{% endblock %}

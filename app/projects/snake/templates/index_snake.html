@@ -2,6 +2,10 @@
 
 {% block title %}SNAKE GAME{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('snake.static', filename='css/snake.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="bg-white p-8 min-h-screen">
     {% call hero(
@@ -22,13 +26,20 @@
         ) }}
     {% endcall %}
 
-    <div class="flex flex-col items-center mt-12">
-        <div class="relative w-[380px] sm:w-[600px] lg:w-[800px] h-[260px] sm:h-[400px] lg:h-[600px]">
+    <div class="snake-layout mt-12">
+        <div class="snake-board">
             <canvas id="game-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+            <div id="humanHints" class="snake-key-hints" aria-label="Touches de déplacement du serpent">
+                <kbd class="snake-key snake-key-up" aria-label="Flèche haut : vers le haut à droite">↑</kbd>
+                <kbd class="snake-key snake-key-right" aria-label="Flèche droite : vers le bas à droite">→</kbd>
+                <kbd class="snake-key snake-key-down" aria-label="Flèche bas : vers le bas à gauche">↓</kbd>
+                <kbd class="snake-key snake-key-left" aria-label="Flèche gauche : vers le haut à gauche">←</kbd>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-secondary-200 rounded-2xl p-4 mt-6">
-            <div class="flex p-2 gap-4 col-span-1 sm:col-span-2">
+        <div class="snake-controls bg-secondary-200 rounded-2xl p-4">
+        <div class="grid grid-cols-1 gap-4">
+            <div class="flex flex-wrap p-2 gap-4">
                 <label>
                     <input type="radio" name="gameMode" value="human" checked>
                     Human
@@ -41,20 +52,23 @@
 
                 <label>
                     <input type="radio" name="gameMode" value="astar_nn">
-                    AI (A* &amp; NN)
+                    AI (DQN / RL)
                 </label>
             </div>
 
-            <div class="flex items-center p-2 col-span-1 sm:col-span-2">
-                <div class="mr-2">Speed :</div>
+            <div class="flex flex-wrap items-center p-2 gap-2">
+                <label for="speedSlider">Vitesse :</label>
                 <input
                     id="speedSlider"
                     type="range"
-                    min="10"
-                    max="500"
-                    value="80"
+                    min="1"
+                    max="10"
+                    value="5"
+                    step="1"
                     class="w-48"
                 >
+                <output id="speedValue" for="speedSlider"></output>
+                <span class="snake-speed-hint">Lent à gauche · Rapide à droite</span>
             </div>
 
             <div>
@@ -70,25 +84,30 @@
             </div>
 
             <label>
-                <input type="radio" id="recordStats">
+                <input type="checkbox" id="recordStats">
                 Enregistrer les stats
             </label>
         </div>
 
-        <div class="flex mt-8 gap-2">
+        <div class="snake-buttons flex flex-wrap mt-6 gap-2">
             {{ button(t({ "fr": "Jouer", "en": "Play" }), variant="first", id="startGame") }}
             {{ button(t({ "fr": "Stop", "en": "Stop" }), variant="second", id="stopGame") }}
             {{ button(t({ "fr": "Reset", "en": "Reset" }), variant="third", id="resetGame") }}
         </div>
 
-        <div class="w-full max-w-3xl mx-auto mt-4 p-4 bg-white rounded-xl shadow">
-            <canvas id="statsChart" class="w-full h-80"></canvas>
+        </div>
+
+        <div class="snake-statistics w-full mx-auto mt-4 p-4 bg-white rounded-xl shadow">
+            <p id="statsStatus" role="status"></p>
+            <div class="relative h-80">
+                <canvas id="statsChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('snake.static', filename='js/snake.js') }}"></script>
 <script src="{{ url_for('snake.static', filename='js/chart.js') }}"></script>
+<script src="{{ url_for('snake.static', filename='js/snake.js') }}"></script>
 {% endblock %}

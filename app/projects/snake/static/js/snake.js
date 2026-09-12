@@ -14,6 +14,10 @@ let snake = [];
 let currentDirection = "right";
 let gameLoop = null;
 let isMoving = false;
+let statsChart = null;
+let displayedScore = 0;
+let statsLoading = false;
+let loopGeneration = 0;
 
 function resizeCanvas() {
   canvas.width = 1300;
@@ -233,10 +237,23 @@ async function moveSnakeAI() {
 }
 
 async function moveSnakeAstarNN() {
-  return moveSnakeAI();
+  const response = await fetch(`/projects/snake/api/rl/move?record=${isRecordingEnabled()}`, {
+    method: "POST"
+  });
+  const state = await response.json();
+  if (!response.ok) {
+    stopGame();
+    alert(state.error ?? "Erreur du réseau de neurones");
+    return;
+  }
+  applyState(state);
 }
 
 function applyState(state) {
+  if (state.score > displayedScore && isRecordingEnabled()) {
+    loadStatsCurve();
+  }
+  displayedScore = state.score ?? 0;
   fruit = state.fruit;
   snake = state.snake ?? [];
   currentDirection = state.direction ?? currentDirection;
@@ -269,7 +286,9 @@ window.addEventListener("keydown", event => {
 
   const newDirection = keyToDirection[event.key];
 
-  if (!newDirection) return;
+  if (!newDirection || getGameMode() !== "human") return;
+  if (["INPUT", "TEXTAREA", "SELECT"].includes(event.target?.tagName)) return;
+  event.preventDefault();
 
   if (oppositeDirections[currentDirection] !== newDirection) {
     currentDirection = newDirection;
@@ -288,19 +307,28 @@ function updateStats(state) {
   document.getElementById("totalSteps").textContent = state.total_steps ?? 0;
 }
 
-function startGame() {
-  if (gameLoop !== null) return;
+function getMoveDelay() {
+  const value = Number(document.getElementById("speedSlider").value);
+  const fraction = (Math.max(1, Math.min(10, value)) - 1) / 9;
+  // Human: 1,000 to 200 ms per move. AI: 500 to 40 ms.
+  const [slow, fast] = getGameMode() === "human" ? [1000, 200] : [500, 40];
+  return Math.round(slow - fraction * (slow - fast));
+}
 
-  const time = Number(document.querySelector("#speedSlider").value);
+function updateSpeedLabel() {
+  document.getElementById("humanHints").hidden = getGameMode() !== "human";
+  const delay = getMoveDelay();
+  document.getElementById("speedValue").textContent =
+    `${(1000 / delay).toFixed(1)} cases/s (${delay} ms)`;
+}
 
-  gameLoop = setInterval(async () => {
-    if (isMoving) return;
-
+function scheduleMove(generation, delay = getMoveDelay()) {
+  gameLoop = setTimeout(async () => {
+    if (generation !== loopGeneration) return;
     isMoving = true;
-
+    const started = performance.now();
     try {
       const mode = getGameMode();
-
       if (mode === "human") {
         await moveSnake(currentDirection);
       } else if (mode === "astar") {
@@ -308,17 +336,36 @@ function startGame() {
       } else if (mode === "astar_nn") {
         await moveSnakeAstarNN();
       }
+    } catch (error) {
+      console.error(error);
+      stopGame();
     } finally {
       isMoving = false;
+      if (generation === loopGeneration && gameLoop !== null) {
+        // No overlapping requests; respect the selected cadence including request time.
+        scheduleMove(generation, Math.max(0, getMoveDelay() - (performance.now() - started)));
+      }
     }
-  }, time);
+  }, delay);
+}
+
+function startGame() {
+  if (gameLoop !== null || isMoving) return;
+  scheduleMove(++loopGeneration);
 }
 
 function stopGame() {
-  if (gameLoop === null) return;
-
-  clearInterval(gameLoop);
+  ++loopGeneration;
+  clearTimeout(gameLoop);
   gameLoop = null;
+}
+
+function changeSpeed() {
+  updateSpeedLabel();
+  if (gameLoop !== null && !isMoving) {
+    clearTimeout(gameLoop);
+    scheduleMove(++loopGeneration);
+  }
 }
 
 async function resetGame() {
@@ -344,8 +391,15 @@ function isRecordingEnabled() {
 }
 
 async function loadStatsCurve() {
+    if (statsLoading) return;
+    statsLoading = true;
+    const status = document.getElementById("statsStatus");
+    try {
     const response = await fetch("/projects/snake/api/stats/curve");
+    if (!response.ok) throw new Error("Erreur chargement des statistiques");
     const data = await response.json();
+    if (!Array.isArray(data)) throw new Error("Statistiques invalides");
+    if (status) status.textContent = data.length ? "" : "Aucune statistique enregistrée pour le moment.";
 
     const modes = ["human", "astar", "astar_nn"];
 
@@ -353,7 +407,7 @@ async function loadStatsCurve() {
         const modeData = data.filter(item => item.mode === mode);
 
         return {
-            label: mode,
+            label: {human: "Human", astar: "A*", astar_nn: "DQN / RL"}[mode],
             data: modeData.map(item => ({
                 x: item.score,
                 y: item.avg_steps
@@ -365,12 +419,18 @@ async function loadStatsCurve() {
 
     const ctx = document.getElementById("statsChart");
 
-    new Chart(ctx, {
+    if (statsChart) {
+        statsChart.data.datasets = datasets;
+        statsChart.update();
+        return;
+    }
+    statsChart = new Chart(ctx, {
         type: "scatter",
         data: {
             datasets: datasets
         },
         options: {
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     title: {
@@ -390,14 +450,23 @@ async function loadStatsCurve() {
             }
         }
     });
+    } catch (error) {
+        console.error(error);
+        if (status) status.textContent = "Impossible de charger les statistiques. Recharge la page pour réessayer.";
+    } finally {
+        statsLoading = false;
+    }
 }
-
-loadStatsCurve();
 
 document.getElementById("startGame").addEventListener("click", startGame);
 document.getElementById("stopGame").addEventListener("click", stopGame);
 document.getElementById("resetGame").addEventListener("click", resetGame);
 
+document.getElementById("speedSlider").addEventListener("input", changeSpeed);
+document.querySelectorAll('input[name="gameMode"]').forEach(input => {
+  input.addEventListener("change", changeSpeed);
+});
+updateSpeedLabel();
 resizeCanvas();
 loadGameState();
 loadStatsCurve();

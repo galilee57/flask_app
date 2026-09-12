@@ -40,14 +40,48 @@ class Game:
         self.message = ""
         self.fruit = self.generate_fruit()
 
-    # Génération du fruit
-    def generate_fruit(self):
-        while True:
-            fruit = {
-                "x": random.randint(0, self.GRID_W - 1),
-                "y": random.randint(0, self.GRID_H - 1)
-            }
+    def next_head(self, direction):
+        dx, dy = {"up": (0, -1), "right": (1, 0),
+                  "down": (0, 1), "left": (-1, 0)}[direction]
+        return {"x": self.snake[0]["x"] + dx,
+                "y": self.snake[0]["y"] + dy}
 
-            # On empeche le fruit d'apparaitre sur le snake
-            if fruit not in self.snake:
-                return fruit
+    def danger(self, direction):
+        head = self.next_head(direction)
+        # Preserve the existing rule: the current tail is also an obstacle.
+        return (not 0 <= head["x"] < self.GRID_W
+                or not 0 <= head["y"] < self.GRID_H
+                or head in self.snake)
+
+    def step(self, direction):
+        """Apply one move; return the reward and episode termination."""
+        if self.game_over:
+            return 0.0, True
+        if self.danger(direction):
+            self.game_over = True
+            self.message = "GAME OVER : collision !"
+            return -10.0, True
+        self.direction = direction
+        head = self.next_head(direction)
+        self.snake.insert(0, head)
+        self.steps_since_fruit += 1
+        self.total_steps += 1
+        if head == self.fruit:
+            self.score += 1
+            self.steps_since_fruit = 0
+            self.fruit = self.generate_fruit()
+            if self.fruit is None:
+                self.game_over = True
+                self.message = "Bravo : plateau rempli !"
+            return 10.0, self.game_over
+        self.snake.pop()
+        return -0.01, False
+
+    def generate_fruit(self):
+        occupied = {(part["x"], part["y"]) for part in self.snake}
+        free = [(x, y) for y in range(self.GRID_H)
+                for x in range(self.GRID_W) if (x, y) not in occupied]
+        if not free:
+            return None
+        x, y = random.choice(free)
+        return {"x": x, "y": y}

@@ -346,9 +346,6 @@
   .z-50 {
     z-index: 50;
   }
-  .col-span-1 {
-    grid-column: span 1 / span 1;
-  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -436,9 +433,6 @@
   .mt-auto {
     margin-top: auto;
   }
-  .mr-2 {
-    margin-right: calc(var(--spacing) * 2);
-  }
   .mr-6 {
     margin-right: calc(var(--spacing) * 6);
   }
@@ -462,9 +456,6 @@
   }
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
-  }
-  .mb-12 {
-    margin-bottom: calc(var(--spacing) * 12);
   }
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
@@ -553,9 +544,6 @@
   .h-\[100px\] {
     height: 100px;
   }
-  .h-\[260px\] {
-    height: 260px;
-  }
   .h-\[520px\] {
     height: 520px;
   }
@@ -628,9 +616,6 @@
   .w-\[350px\] {
     width: 350px;
   }
-  .w-\[380px\] {
-    width: 380px;
-  }
   .w-auto {
     width: auto;
   }
@@ -645,9 +630,6 @@
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
-  }
-  .max-w-3xl {
-    max-width: var(--container-3xl);
   }
   .max-w-4\/5 {
     max-width: calc(4/5 * 100%);
@@ -1858,11 +1840,6 @@
       font-size: 20px;
     }
   }
-  .sm\:col-span-2 {
-    @media (width >= 40rem) {
-      grid-column: span 2 / span 2;
-    }
-  }
   .sm\:m-2 {
     @media (width >= 40rem) {
       margin: calc(var(--spacing) * 2);
@@ -1898,11 +1875,6 @@
       height: calc(var(--spacing) * 20);
     }
   }
-  .sm\:h-\[400px\] {
-    @media (width >= 40rem) {
-      height: 400px;
-    }
-  }
   .sm\:w-8 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 8);
@@ -1926,16 +1898,6 @@
   .sm\:w-96 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 96);
-    }
-  }
-  .sm\:w-\[600px\] {
-    @media (width >= 40rem) {
-      width: 600px;
-    }
-  }
-  .sm\:grid-cols-2 {
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   .sm\:grid-cols-3 {
@@ -2073,16 +2035,6 @@
   .lg\:hidden {
     @media (width >= 64rem) {
       display: none;
-    }
-  }
-  .lg\:h-\[600px\] {
-    @media (width >= 64rem) {
-      height: 600px;
-    }
-  }
-  .lg\:w-\[800px\] {
-    @media (width >= 64rem) {
-      width: 800px;
     }
   }
   .lg\:grid-cols-2 {

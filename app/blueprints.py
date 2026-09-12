@@ -20,6 +20,7 @@ from .projects.sudoku import bp as sudoku_bp
 from .experiences import bp as experiences_bp
 from .projects.connect_four import bp as connect_four_bp
 from .projects.snake import bp as snake_bp
+from .projects.tetris import bp as tetris_bp
 
 
 class BlueprintRegistration(NamedTuple):
@@ -43,6 +44,7 @@ BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
     BlueprintRegistration(sudoku_bp, "/projects/sudoku"),
     BlueprintRegistration(connect_four_bp, "/projects/connect_four"),
     BlueprintRegistration(snake_bp, "/projects/snake"),
+    BlueprintRegistration(tetris_bp, "/projects/tetris"),
     BlueprintRegistration(experiences_bp, "/experiences"),
 )
 

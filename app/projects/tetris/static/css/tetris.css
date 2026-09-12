@@ -1,0 +1,8 @@
+.tetris-preview {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 1rem;
+}
