@@ -195,3 +195,45 @@ Retrogaming : incarner un personnage qui nqvigue dqns un monde varié. Bien les 
 - Pacman
 - Configurateur 3D : https://sketchfab.com/3d-models/
 - Admin, healthy
+
+
+## Instance publique et brouillons privés
+
+Le catalogue `app/main/static/data/cartes.json` utilise `published: true` pour
+les projets publics. Les projets avec `published: false` (ou sans statut) sont
+réservés à l’admin : pages, API, fichiers du projet et image de carte dédiée.
+Le catalogue JSON statique complet est privé ; utiliser `/data/cartes` pour
+obtenir la liste adaptée au visiteur. Tout nouveau projet doit avoir une carte.
+
+Configurer `ADMIN_USERNAME` (identifiant, `admin` par défaut) et
+`ADMIN_PASSWORD_HASH` dans l’environnement de l’instance publique.
+Générer le hash localement sans écrire le mot de passe dans l’historique :
+
+```sh
+.venv/bin/python -c 'from getpass import getpass; from werkzeug.security import generate_password_hash; print(generate_password_hash(getpass("Mot de passe admin : ")))'
+```
+
+Cliquer sur le logo dans la navigation, puis saisir
+l’identifiant et le mot de passe sur `/admin` pour ouvrir une session de
+prévisualisation d’une heure. Une fois connecté, le logo ouvre le LAB et la déconnexion reste accessible
+dans le bandeau admin.
+Le LAB affiche alors aussi les brouillons ; la déconnexion ferme cet accès.
+La session admin ne remplace pas `X-Admin-Token` pour les écritures persistantes.
+Pour publier, modifier `published` dans le catalogue et déployer la modification
+par le workflow `staging` documenté. Il n’y a pas de bouton de publication dans
+cette première version et aucune migration de base de données n’est nécessaire.
+
+Pour les tests techniques locaux :
+
+```sh
+FLASK_CONFIG=development .venv/bin/flask --app wsgi --debug run
+.venv/bin/python -m pytest -q
+```
+
+Les brouillons nécessitent une connexion admin, y compris en développement local.
+Utiliser une base locale distincte, jamais la base de l’instance publique.
+Les fichiers placés dans les ressources statiques communes restent publics ;
+placer les ressources privées sous le répertoire statique du projet concerné.
+La configuration des instances hébergées n’est pas modifiée par cette évolution.
+Avant de retirer la seconde instance, valider cet accès sur staging puis préparer
+la bascule de l’instance publique via le workflow documenté.

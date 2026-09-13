@@ -31,6 +31,8 @@ class Config:
     API_BASE_URL = ""                        # utilisé par tes templates
     SQLALCHEMY_DATABASE_URI = _db_uri_from_env(INSTANCE_DIR / "database.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH")
     ADMIN_API_TOKEN = os.getenv("ADMIN_API_TOKEN")
     REQUIRE_ADMIN_API_TOKEN = True
     MAX_CONTENT_LENGTH = 1 * 1024 * 1024

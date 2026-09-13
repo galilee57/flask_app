@@ -52,6 +52,7 @@
       </div>
 
       <div class="flex flex-1 flex-col gap-2 p-4">
+        {% if not c.get('published', False) %}<span>Brouillon privé</span>{% endif %}
         <h5 class="text-xl font-semibold leading-snug">{{ titre }}</h5>
 
         <div>

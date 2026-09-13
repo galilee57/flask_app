@@ -40,6 +40,10 @@ class PageAssets(HTMLParser):
 @pytest.mark.parametrize("path", PUBLIC_PAGES)
 @pytest.mark.parametrize("language", ("fr", "en"))
 def test_public_page_and_local_assets_are_available(client, path, language):
+    project_id = path.split('/')[2] if path.startswith('/projects/') else None
+    if project_id and not client.application.config['PROJECT_CARDS_BY_ID'].get(project_id, {}).get('published', False):
+        assert client.get(path).status_code == 404
+        return
     response = client.get(path, query_string={"lang": language})
     assert response.status_code == 200, path
     assert response.mimetype == "text/html"

@@ -7,7 +7,9 @@
     <div class="flex h-16 sm:h-20 items-center justify-between">
 
       <!-- LOGO -->
-      <a href="{{ url_for('main.index') }}" class="flex items-center">
+      <a href="{{ url_for('main.lab') if is_admin else url_for('admin_login') }}"
+         class="flex items-center"
+         aria-label="{{ t({'fr': 'Voir les brouillons', 'en': 'View drafts'}) if is_admin else t({'fr': 'Connexion administrateur', 'en': 'Administrator sign in'}) }}">
         <img src="{{ url_for('static', filename='fonts/logo.png') }}"
              alt="Logo"
              class="h-16 sm:h-20 w-auto hover:brightness-130 transition">
@@ -42,6 +44,7 @@
 
       <!-- DROITE : RÉSEAUX + LANGUES + MENU MOBILE -->
       <div class="flex items-center gap-2">
+
 
         <!-- Réseaux -->
         <a href="https://www.linkedin.com/in/emmanuel-fix-32ba1798"
@@ -90,6 +93,7 @@
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.about') }}" class="nav-link py-2">{{ t({"fr": "A propos", "en": "About"}) }}</a></li>
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.experiences_menu') }}" class="nav-link py-2">{{ t({"fr": "Pro", "en": "Skills"}) }}</a></li>
               <li class="p-2 hover:text-primary-500"><a href="{{ url_for('main.lab') }}" class="nav-link py-2">Lab</a></li>
+
             </ul>
           </div>
 

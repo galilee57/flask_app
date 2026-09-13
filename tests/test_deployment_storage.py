@@ -37,7 +37,9 @@ def test_database_patterns_are_shared_and_loadable(app, client, admin_headers):
 def test_games_and_large_grids_survive_new_app_instance(tmp_path, monkeypatch):
     from app.config import TestingConfig
     monkeypatch.setattr(TestingConfig, "SQLALCHEMY_DATABASE_URI", f"sqlite:///{tmp_path / 'shared.db'}")
+    # Exercise runtime persistence independently of catalogue publication.
     first_app = create_app("testing")
+    first_app.config["PROJECT_CARDS_BY_ID"]["game_of_life_3d"]["published"] = True
     with first_app.app_context():
         db.create_all()
     first = first_app.test_client()
@@ -47,6 +49,7 @@ def test_games_and_large_grids_survive_new_app_instance(tmp_path, monkeypatch):
     cookie = first.get_cookie("session").value
     assert len(cookie) < 200
     other = create_app("testing").test_client()
+    other.application.config["PROJECT_CARDS_BY_ID"]["game_of_life_3d"]["published"] = True
     other.set_cookie("session", cookie)
     assert other.get(SNAKE_URL + "/state").json["total_steps"] == 1
     assert other.get("/projects/game_of_life_3d/state").json == universe

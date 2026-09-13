@@ -49,5 +49,7 @@ def create_app(config_name: str | None = None) -> Flask:
     register_blueprints(app)
     load_project_catalogue(app)
     register_project_context(app)
+    from .admin import configure_admin
+    configure_admin(app)
 
     return app

@@ -26,6 +26,15 @@
 
   <!-- CONTENU -->
   <main class="pb-24 lg:pt-20 lg:pb-0">
+    {% if is_admin %}
+    <aside class="p-4" style="background: #fff3cd;">
+      Mode admin · Les brouillons privés sont visibles.
+      <form action="{{ url_for('admin_logout') }}" method="post" style="display: inline;">
+        <input type="hidden" name="csrf_token" value="{{ admin_csrf_token() }}">
+        <button type="submit">Se déconnecter</button>
+      </form>
+    </aside>
+    {% endif %}
     {% block content %}{% endblock %}
   </main>
 

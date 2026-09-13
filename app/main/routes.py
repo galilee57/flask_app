@@ -23,14 +23,12 @@ def load_cartes() -> list[dict]:
     with chemin.open(encoding="utf-8") as f:
         return json.load(f)
 
-def filter_published_if_prod(cartes: list[dict]) -> list[dict]:
-    is_prod = (
-        os.getenv("FLASK_ENV") == "production"
-        or current_app.config.get("ENV") == "production"
-    )
-    if is_prod:
-        return [c for c in cartes if c.get("published", True)]
-    return cartes
+def filter_visible_projects(cartes: list[dict]) -> list[dict]:
+    from app.admin import can_view_drafts
+    if can_view_drafts():
+        return cartes
+    return [c for c in cartes if c.get("published", False)]
+
 
 
 # Home page
@@ -51,19 +49,19 @@ def experiences_menu():
 
 @bp.route("/exploration")
 def exploration():
-    return render_template("exploration.html")
+    return render_template("exploration.html", cartes=filter_visible_projects(load_cartes()))
 
 # Endpoint JSON: toutes les cartes
 @bp.route("/data/cartes")
 def cartes_json():
-    cartes = filter_published_if_prod(load_cartes())
+    cartes = filter_visible_projects(load_cartes())
     return jsonify(cartes)
 
 
 # Page LAB (rendu Jinja des cartes)
 @bp.route("/lab")
 def lab():
-    cartes = filter_published_if_prod(load_cartes())
+    cartes = filter_visible_projects(load_cartes())
 
     # Mets ici le template qui contient:
     # {% for c in cartes %} {{ project_card(c, g.lang) }} {% endfor %}
