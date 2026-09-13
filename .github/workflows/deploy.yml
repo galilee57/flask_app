@@ -66,7 +66,6 @@ jobs:
       PA_STAGING_DOMAIN: ${{ secrets.PA_STAGING_DOMAIN }}
       PA_PRODUCTION_DOMAIN: Galilee57.pythonanywhere.com
       PA_SSH_PRIVATE_KEY: ${{ secrets.PA_SSH_PRIVATE_KEY }}
-      STAGING_SECRET_KEY: ${{ secrets.STAGING_SECRET_KEY }}
 
     steps:
       - name: Read staging configuration
@@ -117,19 +116,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [[ -z "${STAGING_SECRET_KEY}" ]]; then
-            echo "The staging environment secret STAGING_SECRET_KEY is required." >&2
-            exit 1
-          fi
-
-          staging_secret_b64="$(printf 'SECRET_KEY=%s\n' "${STAGING_SECRET_KEY}" | base64 | tr -d '\n')"
           remote_env="APP_DIR=$(printf '%q' "${APP_DIR}") VIRTUALENV_DIR=$(printf '%q' "${VIRTUALENV_DIR}")"
 
           {
-          cat <<'REMOTE_PRELUDE'
+          cat <<'REMOTE_SCRIPT'
           set -euo pipefail
 
           cd "${APP_DIR}"
+          if [[ ! -f .env ]]; then
+            echo "Missing .env in staging source directory; configure it on PythonAnywhere first." >&2
+            exit 1
+          fi
+          chmod 600 .env
           git fetch --prune origin staging
 
           if git show-ref --verify --quiet refs/heads/staging; then
@@ -143,13 +141,22 @@ jobs:
           fi
 
           git pull --ff-only origin staging
-          REMOTE_PRELUDE
-          printf "printf '%%s' %q | base64 --decode > .env\n" "${staging_secret_b64}"
-          cat <<'REMOTE_EPILOGUE'
-          chmod 600 .env
           "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements-python310.lock
+          "${VIRTUALENV_DIR}/bin/python" - <<'PYTHON'
+          from dotenv import dotenv_values
+
+          values = dotenv_values(".env")
+          required = ("FLASK_CONFIG", "SECRET_KEY", "ADMIN_API_TOKEN", "DATABASE_URL")
+          missing = [name for name in required if not values.get(name)]
+          if missing:
+              raise SystemExit("Missing staging .env variables: " + ", ".join(missing))
+          if values["FLASK_CONFIG"] != "production":
+              raise SystemExit("Staging .env must use FLASK_CONFIG=production.")
+          if not values["DATABASE_URL"].startswith(("postgresql://", "postgresql+psycopg://", "postgres://")):
+              raise SystemExit("Staging .env must use a PostgreSQL DATABASE_URL.")
+          PYTHON
           "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
-          REMOTE_EPILOGUE
+          REMOTE_SCRIPT
           } | ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s"
 
       - name: Reload staging web app
@@ -164,7 +171,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if curl --fail --silent --show-error --output /dev/null "https://${PA_STAGING_DOMAIN}/"; then
+          if curl --fail --silent --show-error --output /dev/null "https://${PA_STAGING_DOMAIN}/health/ready"; then
             exit 0
           fi
 

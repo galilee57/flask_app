@@ -42,10 +42,7 @@
 
 {% block js %}
   <script>
-    // Construit l’URL complète de l’API selon APP_ENV (dev/prod)
-    // En dev: config['API_BASE_URL'] = "http://127.0.0.1:5000"
-    // En prod: config['API_BASE_URL'] = ""
-    window.API_BASE_URL = "{{ (config['API_BASE_URL'] or '') ~ '/api/todolist' }}";
+    window.API_BASE_URL = {{ url_for('todolist.get_todos') | tojson }};
   </script>
   <script>
     const BASE_URL = window.API_BASE_URL;

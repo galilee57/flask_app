@@ -37,6 +37,14 @@ terminal pour recompiler automatiquement le CSS.
 
 ## Lancement du portfolio
 
+L'application charge `.env` à la racine du projet. Sur Mac, utiliser
+`FLASK_CONFIG=development` et une base PostgreSQL locale :
+`DATABASE_URL=postgresql+psycopg://flask_app:MOT_DE_PASSE_LOCAL@127.0.0.1:5432/flask_app`.
+Encoder les caractères réservés du mot de passe dans l'URI. Installer et démarrer
+PostgreSQL 15 avec `brew install postgresql@15` puis
+`brew services start postgresql@15`. La base locale et son rôle `flask_app`
+doivent être créés avant les migrations. Les tests conservent leur base SQLite isolée.
+
 ```bash
 source .venv/bin/activate
 FLASK_CONFIG=development flask --app wsgi --debug run
@@ -72,6 +80,13 @@ workflow lit ensuite le répertoire source et le virtualenv de l'application de
 staging via l'API, met à jour le checkout `staging`, applique les migrations,
 puis demande le rechargement de cette seule web app.
 
+Créer le fichier `.env` dans le répertoire source de staging sur PythonAnywhere
+avant le premier déploiement, avec `FLASK_CONFIG=production`, `SECRET_KEY`
+(la clé propre à staging), `ADMIN_API_TOKEN` et `DATABASE_URL`.
+Le workflow conserve ce fichier, limite ses permissions à `600` et vérifie les
+variables requises avant les migrations, sans afficher leurs valeurs.
+Le secret GitHub `STAGING_SECRET_KEY` n'est plus utilisé.
+
 La configuration de production est pilotée par les variables d'environnement, jamais par
 des valeurs commitées :
 
@@ -79,11 +94,31 @@ des valeurs commitées :
 export FLASK_CONFIG=production
 export SECRET_KEY='une-cle-aleatoire-longue-et-privee'
 export ADMIN_API_TOKEN='un-jeton-prive-pour-les-ecritures-admin'
-export DATABASE_URL='sqlite:////home/Galilee57/flask_app/instance/database.db'
+export DATABASE_URL='postgresql+psycopg://flask_app:MOT_DE_PASSE_PA@Galilee57-5457.postgres.pythonanywhere-services.com:15457/flask_app'
 ```
 
 Dans le fichier WSGI PythonAnywhere, définir `FLASK_CONFIG=production` avant
 `create_app()`. À chaque déploiement :
+
+Le `.env` distant contient la connexion PythonAnywhere et la clé de session propre
+à l'environnement ; ne pas le remplacer par celui du Mac. Le workflow staging
+applique les migrations puis vérifie `/health/ready`, qui contrôle l'accès à la base.
+Les migrations créent les tables ; elles ne transfèrent pas les données SQLite
+existantes. Conserver les anciennes bases pour un éventuel import séparé.
+
+Pour récupérer une ancienne base SQLite, sauvegarder PostgreSQL puis utiliser :
+
+```bash
+flask --app wsgi sqlite-import --source /chemin/database.db --dry-run
+flask --app wsgi sqlite-import --source /chemin/database.db
+```
+
+L'import conserve les identifiants, les références et le fichier source. Il ignore
+les lignes identiques et annule toutes les insertions en cas de conflit ou de
+contrainte invalide. Les séquences PostgreSQL sont ajustées pour les futures
+insertions. La table de version Alembic et les sessions ne sont pas transférées.
+Exécuter la même commande sur PythonAnywhere avec sa propre configuration `.env`
+et une copie privée du fichier SQLite, après les migrations.
 
 ```bash
 git pull
@@ -93,8 +128,11 @@ flask --app wsgi db upgrade
 
 Les API qui modifient les données partagées requièrent, en production, l'en-tête HTTP
 `X-Admin-Token`. Les routes `/debug`, `/map` et `/files-map` retournent désormais 404.
-Les tâches Todo sont enregistrées dans `instance/data/todolist.json`, pas dans les assets
-publics.
+Les tâches Todo sont enregistrées dans la table PostgreSQL `todo`.
+Ne pas définir `TODOLIST_DATA_PATH` dans `.env` pour ce stockage SQL.
+Pour reprendre les anciennes tâches, lancer une fois
+`flask --app wsgi storage-import --todos app/projects/todolist/static/data/todolist.json`.
+Le fichier JSON source est conservé et n'est plus modifié par les actions de l'API.
 
 # Console pythonAnyWhere (utiliser celle à partir de l'env dans Web Menu)
 

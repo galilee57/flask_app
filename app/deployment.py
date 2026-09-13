@@ -115,6 +115,8 @@ def configure_deployment(app):
                 pool_timeout=10)
     from .storage_import import register_storage_import
     register_storage_import(app)
+    from .sqlite_import import register_sqlite_import
+    register_sqlite_import(app)
 
     @app.teardown_request
     def close_session_connection(error):

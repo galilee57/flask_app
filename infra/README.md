@@ -10,7 +10,8 @@ dans `requirements-dev.txt`.
 
 ## Local avec Docker Compose
 
-Créer `.env` depuis `.env.example` et remplacer les trois valeurs privées.
+Configurer le fichier `.env` à la racine du projet et remplacer les trois valeurs privées.
+L'application charge ce fichier via `app/config.py` ; Docker Compose le lit également.
 Utiliser un mot de passe PostgreSQL composé de caractères sûrs dans une URI
 (par exemple une valeur hexadécimale aléatoire), ou encoder ses caractères réservés.
 Ne jamais commiter `.env`.
