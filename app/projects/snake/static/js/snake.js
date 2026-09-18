@@ -14,8 +14,9 @@ let snake = [];
 let currentDirection = "right";
 let gameLoop = null;
 let isMoving = false;
-let statsChart = null;
-let displayedScore = 0;
+let finishedGame = null;
+let movementPromise = null;
+let isResetting = false;
 let statsLoading = false;
 let loopGeneration = 0;
 
@@ -157,8 +158,13 @@ async function loadGameState() {
   snake = state.snake ?? [];
   currentDirection = state.direction ?? currentDirection;
 
-  updateStats(state);
-  draw();
+  if (state.mode) {
+    const radio = document.querySelector(`input[name="gameMode"][value="${state.mode}"]`);
+    if (radio) radio.checked = true;
+    document.querySelectorAll('input[name="gameMode"]').forEach(input => { input.disabled = true; });
+  }
+  updateSpeedLabel();
+  applyState(state);
 }
 
 function drawObjects() {
@@ -205,15 +211,13 @@ function draw() {
 
 async function moveSnake(direction) {
   const mode = getGameMode();
-  const record = isRecordingEnabled();
 
-  const response = await fetch(`/projects/snake/api/move/${direction}/${mode}?record=${record}`, {
+  const response = await fetch(`/projects/snake/api/move/${direction}/${mode}`, {
     method: "POST"
   });
 
   if (!response.ok) {
-    console.error("Erreur déplacement");
-    return;
+    throw new Error("Erreur déplacement");
   }
 
   const state = await response.json();
@@ -221,15 +225,13 @@ async function moveSnake(direction) {
 }
 
 async function moveSnakeAI() {
-  const record = isRecordingEnabled();
 
-  const response = await fetch(`/projects/snake/api/ai/move?record=${record}`, {
+  const response = await fetch(`/projects/snake/api/ai/move`, {
     method: "POST"
   });
 
   if (!response.ok) {
-    console.error("Erreur de déplacement IA");
-    return;
+    throw new Error("Erreur de déplacement IA");
   }
 
   const state = await response.json();
@@ -237,7 +239,7 @@ async function moveSnakeAI() {
 }
 
 async function moveSnakeAstarNN() {
-  const response = await fetch(`/projects/snake/api/rl/move?record=${isRecordingEnabled()}`, {
+  const response = await fetch(`/projects/snake/api/rl/move`, {
     method: "POST"
   });
   const state = await response.json();
@@ -250,10 +252,6 @@ async function moveSnakeAstarNN() {
 }
 
 function applyState(state) {
-  if (state.score > displayedScore && isRecordingEnabled()) {
-    loadStatsCurve();
-  }
-  displayedScore = state.score ?? 0;
   fruit = state.fruit;
   snake = state.snake ?? [];
   currentDirection = state.direction ?? currentDirection;
@@ -263,7 +261,7 @@ function applyState(state) {
 
   if (state.game_over) {
     stopGame();
-    alert(state.message ?? "GAME OVER");
+    finishGame(state);
   }
 }
 
@@ -316,7 +314,10 @@ function getMoveDelay() {
 }
 
 function updateSpeedLabel() {
-  document.getElementById("humanHints").hidden = getGameMode() !== "human";
+  const human = getGameMode() === "human";
+  document.getElementById("humanHints").hidden = !human;
+  document.getElementById("recordControls").hidden = !human;
+  document.getElementById("recordStats").disabled = !human || gameLoop !== null;
   const delay = getMoveDelay();
   document.getElementById("speedValue").textContent =
     `${(1000 / delay).toFixed(1)} cases/s (${delay} ms)`;
@@ -330,17 +331,21 @@ function scheduleMove(generation, delay = getMoveDelay()) {
     try {
       const mode = getGameMode();
       if (mode === "human") {
-        await moveSnake(currentDirection);
+        movementPromise = moveSnake(currentDirection);
+        await movementPromise;
       } else if (mode === "astar") {
-        await moveSnakeAI();
+        movementPromise = moveSnakeAI();
+        await movementPromise;
       } else if (mode === "astar_nn") {
-        await moveSnakeAstarNN();
+        movementPromise = moveSnakeAstarNN();
+        await movementPromise;
       }
     } catch (error) {
       console.error(error);
       stopGame();
     } finally {
       isMoving = false;
+      movementPromise = null;
       if (generation === loopGeneration && gameLoop !== null) {
         // No overlapping requests; respect the selected cadence including request time.
         scheduleMove(generation, Math.max(0, getMoveDelay() - (performance.now() - started)));
@@ -350,7 +355,9 @@ function scheduleMove(generation, delay = getMoveDelay()) {
 }
 
 function startGame() {
-  if (gameLoop !== null || isMoving) return;
+  if (gameLoop !== null || isMoving || isResetting || finishedGame) return;
+  document.querySelectorAll('input[name="gameMode"]').forEach(input => { input.disabled = true; });
+  document.getElementById("recordStats").disabled = true;
   scheduleMove(++loopGeneration);
 }
 
@@ -369,93 +376,106 @@ function changeSpeed() {
 }
 
 async function resetGame() {
+  if (isResetting) return;
+  isResetting = true;
   stopGame();
-
+  if (movementPromise) await movementPromise.catch(() => {});
+  finishedGame = null;
+  document.getElementById("resultPanel").hidden = true;
   currentDirection = "right";
 
-  const response = await fetch("/projects/snake/api/reset", {
-    method: "POST"
-  });
-
-  if (!response.ok) {
-    console.error("Erreur reset");
-    return;
+  try {
+    const response = await fetch("/projects/snake/api/reset", {method: "POST"});
+    if (!response.ok) throw new Error("Réinitialisation impossible");
+    applyState(await response.json());
+    document.querySelectorAll('input[name="gameMode"]').forEach(input => { input.disabled = false; });
+    updateSpeedLabel();
+  } catch (error) {
+    document.getElementById("recordStatus").textContent = error.message;
+    document.getElementById("resultPanel").hidden = false;
+  } finally {
+    isResetting = false;
   }
-
-  const state = await response.json();
-  applyState(state);
 }
 
 function isRecordingEnabled() {
-  return document.getElementById("recordStats")?.checked ?? false;
+  return getGameMode() === "human" && (document.getElementById("recordStats")?.checked ?? false);
 }
 
-async function loadStatsCurve() {
-    if (statsLoading) return;
-    statsLoading = true;
-    const status = document.getElementById("statsStatus");
-    try {
-    const response = await fetch("/projects/snake/api/stats/curve");
-    if (!response.ok) throw new Error("Erreur chargement des statistiques");
-    const data = await response.json();
-    if (!Array.isArray(data)) throw new Error("Statistiques invalides");
-    if (status) status.textContent = data.length ? "" : "Aucune statistique enregistrée pour le moment.";
+async function saveFinishedGame(state) {
+  const response = await fetch("/projects/snake/api/results", {
+    method: "POST",
+    headers: {"Content-Type": "application/json",
+              "X-Admin-Token": document.getElementById("recordToken").value},
+    body: JSON.stringify({game_id: state.game_id})
+  });
+  if (!response.ok) throw new Error(response.status === 403
+    ? "Enregistrement refusé : renseigne le jeton administrateur puis réessaie."
+    : "Enregistrement impossible. Tu peux réessayer.");
+}
 
-    const modes = ["human", "astar", "astar_nn"];
+async function finishGame(state) {
+  if (finishedGame?.game_id === state.game_id) return;
+  finishedGame = state;
+  document.getElementById("resultPanel").hidden = false;
+  document.getElementById("gameSummary").textContent =
+    `${state.message || "Partie terminée"} Score : ${state.score} · Cases parcourues : ${state.total_steps}.`;
+  document.getElementById("retryRecord").hidden = true;
+  if (isRecordingEnabled()) await recordFinishedGame();
+  else document.getElementById("recordStatus").textContent = "Partie non enregistrée.";
+  await loadResults();
+}
 
-    const datasets = modes.map(mode => {
-        const modeData = data.filter(item => item.mode === mode);
+async function recordFinishedGame() {
+  const state = finishedGame;
+  if (!state) return;
+  const status = document.getElementById("recordStatus");
+  const button = document.getElementById("retryRecord");
+  button.disabled = true;
+  try {
+    await saveFinishedGame(state);
+    if (finishedGame !== state) return;
+    status.textContent = "Résultat enregistré.";
+    button.hidden = true;
+    await loadResults();
+  } catch (error) {
+    if (finishedGame !== state) return;
+    status.textContent = error.message;
+    button.hidden = false;
+  } finally {
+    button.disabled = false;
+  }
+}
 
-        return {
-            label: {human: "Human", astar: "A*", astar_nn: "DQN / RL"}[mode],
-            data: modeData.map(item => ({
-                x: item.score,
-                y: item.avg_steps
-            })),
-            showLine: true,
-            tension: 0.2
-        };
+async function loadResults() {
+  if (statsLoading) return;
+  statsLoading = true;
+  const status = document.getElementById("statsStatus");
+  const labels = {human: "Humain", astar: "IA (A*)", astar_nn: "IA + NN (DQN)"};
+  const reasons = {collision: "Collision", no_path: "Aucun chemin", board_full: "Plateau rempli",
+                   step_limit: "Limite de déplacements", no_progress: "Sans progression"};
+  try {
+    const response = await fetch("/projects/snake/api/results");
+    if (!response.ok) throw new Error("Chargement impossible");
+    const rows = await response.json();
+    const body = document.getElementById("resultsBody");
+    body.replaceChildren();
+    rows.forEach(result => {
+      const row = document.createElement("tr");
+      [labels[result.mode] || result.mode, result.score, result.total_steps,
+       reasons[result.end_reason] || result.end_reason].forEach(value => {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+      body.appendChild(row);
     });
-
-    const ctx = document.getElementById("statsChart");
-
-    if (statsChart) {
-        statsChart.data.datasets = datasets;
-        statsChart.update();
-        return;
-    }
-    statsChart = new Chart(ctx, {
-        type: "scatter",
-        data: {
-            datasets: datasets
-        },
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: "Score"
-                    },
-                    ticks: {
-                        stepSize: 1
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: "Nombre moyen de cases parcourues"
-                    }
-                }
-            }
-        }
-    });
-    } catch (error) {
-        console.error(error);
-        if (status) status.textContent = "Impossible de charger les statistiques. Recharge la page pour réessayer.";
-    } finally {
-        statsLoading = false;
-    }
+    status.textContent = rows.length ? "Résultats des parties terminées (100 dernières)." : "Aucune partie enregistrée.";
+  } catch (error) {
+    status.textContent = "Impossible de charger les résultats.";
+  } finally {
+    statsLoading = false;
+  }
 }
 
 document.getElementById("startGame").addEventListener("click", startGame);
@@ -464,9 +484,10 @@ document.getElementById("resetGame").addEventListener("click", resetGame);
 
 document.getElementById("speedSlider").addEventListener("input", changeSpeed);
 document.querySelectorAll('input[name="gameMode"]').forEach(input => {
-  input.addEventListener("change", changeSpeed);
+  input.addEventListener("change", () => { updateSpeedLabel(); resetGame(); });
 });
 updateSpeedLabel();
 resizeCanvas();
 loadGameState();
-loadStatsCurve();
+
+document.getElementById("retryRecord").addEventListener("click", recordFinishedGame);

@@ -6,7 +6,7 @@ from werkzeug.local import LocalProxy
 from .snake_game import Game
 from .algorithms import astar, path_to_direction
 from app.extensions import db
-from .models import SnakeStat
+from .models import SnakeStat, SnakeResult
 from app.security import enforce_admin_api_token
 from sqlalchemy import func
 
@@ -23,8 +23,9 @@ def _get_game():
         stored = session.get("snake_game")
         if stored:
             for key in ("fruit", "snake", "direction", "score", "game_over",
-                        "steps_since_fruit", "total_steps", "message"):
-                setattr(instance, key, stored[key])
+                        "steps_since_fruit", "total_steps", "message", "game_id", "mode"):
+                if key in stored:
+                    setattr(instance, key, stored[key])
         request.environ["portfolio.snake"] = instance
     return request.environ["portfolio.snake"]
 
@@ -62,15 +63,16 @@ def move_snake(direction, mode, record=None):
     if direction not in DIRECTIONS:
         return jsonify({"error": "Direction invalide"}), 400
 
-    previous_score = game.score
-    steps_to_fruit = game.steps_since_fruit + 1
+    mode = "human" if mode == "manual" else mode
+    if mode not in ("human", "astar", "astar_nn"):
+        return jsonify(error="Mode invalide."), 400
+    if game.mode is not None and game.mode != mode:
+        return jsonify(error="Réinitialise la partie pour changer de mode."), 409
+    game.mode = mode
     game.step(direction)
-    if record and game.score > previous_score:
-        db.session.add(SnakeStat(
-            mode=mode, score=game.score,
-            steps_since_fruit=steps_to_fruit, total_steps=game.total_steps,
-        ))
-        db.session.commit()
+    if not game.game_over and game.steps_since_fruit >= 100 * len(game.snake):
+        game.game_over = True
+        game.message = "Partie terminée : trop de déplacements sans fruit."
 
     return jsonify(game.to_dict())
 
@@ -104,7 +106,11 @@ def get_astar_path():
 
 @bp.post("/api/ai/move")
 def ai_move():
+    if game.mode not in (None, "astar"):
+        return jsonify(error="Réinitialise la partie pour changer de mode."), 409
     record = request.args.get("record", "false").lower() == "true"
+    if record:
+        enforce_admin_api_token()
 
     if game.game_over:
         return jsonify(game.to_dict())
@@ -118,7 +124,10 @@ def ai_move():
     )
 
     if not path:
-        return jsonify({"error": "Aucun chemin trouvé"}), 400
+        game.mode = "astar"
+        game.game_over = True
+        game.message = "Partie terminée : aucun chemin vers le fruit."
+        return jsonify(game.to_dict())
 
     direction = path_to_direction(path)
 
@@ -195,6 +204,57 @@ def rl_move():
 def train_snake(episodes, seed):
     """Train a DQN in independent games and save it in the instance folder."""
     from .rl import train, checkpoint_path
-    path = checkpoint_path(current_app)
+    from pathlib import Path
+    path = Path(current_app.config.get("SNAKE_DQN_PATH") or Path(current_app.instance_path) / "snake_dqn.npz")
     train(episodes, seed, path, report=click.echo)
     click.echo(f"Modèle enregistré : {path}")
+
+
+@bp.get("/api/results")
+def results():
+    rows = SnakeResult.query.order_by(SnakeResult.created_at.desc()).limit(100).all()
+    return jsonify([row.to_dict() for row in rows])
+
+
+@bp.post("/api/results")
+def record_result():
+    enforce_admin_api_token()
+    if not game.game_over or game.mode != "human":
+        return jsonify(error="Seule une partie humaine terminée peut être enregistrée."), 409
+    # A stale browser response must not record a different game after a reset.
+    payload = request.get_json(silent=True)
+    if not isinstance(payload, dict):
+        return jsonify(error="Corps JSON invalide."), 400
+    if payload.get("game_id") != game.game_id:
+        return jsonify(error="Cette partie n'est plus active."), 409
+    row = db.session.get(SnakeResult, game.game_id)
+    if row is None:
+        row = SnakeResult(id=game.game_id, mode="human", score=game.score,
+                          total_steps=game.total_steps,
+                          end_reason=("board_full" if game.fruit is None else
+                                      "no_progress" if game.steps_since_fruit >= 100 * len(game.snake)
+                                      else "collision"))
+        db.session.add(row)
+        db.session.commit()
+    return jsonify(row.to_dict())
+
+
+@bp.cli.command("snake-benchmark")
+@click.option("--seed", default=42, type=int)
+@click.option("--max-steps", default=10000, type=click.IntRange(1, 100000))
+@click.option("--dry-run", is_flag=True)
+def benchmark_snake(seed, max_steps, dry_run):
+    """Simulate one A* and one trained DQN game, then persist both atomically."""
+    from .benchmark import simulate_references
+    from .rl import checkpoint_path
+    try:
+        rows = simulate_references(checkpoint_path(current_app), seed, max_steps)
+    except (OSError, ValueError, KeyError) as exc:
+        raise click.ClickException("Modèle DQN absent ou invalide ; aucun résultat enregistré.") from exc
+    for row in rows:
+        click.echo(f"{row.mode}: score={row.score}, cases={row.total_steps}, fin={row.end_reason}")
+        if not dry_run and db.session.get(SnakeResult, row.id) is None:
+            db.session.add(row)
+    if not dry_run:
+        db.session.commit()
+    click.echo("Simulation sans écriture." if dry_run else "Résultats enregistrés (sans doublons).")

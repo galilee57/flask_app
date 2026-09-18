@@ -38,3 +38,32 @@ ne décrit pas tout le corps. Une bonne performance n'est pas garantie par
 1000 parties ; comparer plusieurs graines et les scores sans exploration à
 A* avant de conclure à une amélioration. Les statistiques existantes mesurent
 les étapes aux fruits, et ne constituent pas un bilan complet par partie.
+
+## Résultats de parties complètes
+
+Les nouvelles comparaisons utilisent `snake_result`. Les anciennes lignes de
+`snake_stats` (une ligne par fruit) restent conservées mais ne sont pas mélangées
+avec les résultats finaux. L'option d'enregistrement existe uniquement en mode
+humain ; le bilan et les comparaisons apparaissent à la fin de la partie.
+En production, enregistrer un résultat humain nécessite le jeton administrateur.
+Il n'est conservé que dans le champ du navigateur, jamais dans le stockage local.
+
+Après `flask --app wsgi db upgrade`, exécuter une fois :
+
+```sh
+flask --app wsgi snake snake-benchmark --seed 42
+```
+
+La commande joue une partie A* puis une partie DQN sans accès SQL pendant la
+simulation, puis enregistre les deux résultats dans une seule transaction.
+`--dry-run` permet de simuler sans écrire. Relancer la même référence n'ajoute
+pas de doublon. Le seed, l'empreinte du modèle DQN et le motif de fin sont conservés.
+Le nombre de déplacements n'inclut pas la tentative de collision, conformément
+au compteur historique du jeu. Les simulations s'arrêtent également après
+10 000 déplacements ou 100 × la longueur du serpent sans fruit : ces limites
+sont signalées dans le résultat, jamais présentées comme une collision.
+
+Le DQN entraîné localement est inclus sous `models/snake_dqn.npz` pour Railway.
+`SNAKE_DQN_PATH` reste prioritaire, puis le modèle de l'instance locale, puis
+le modèle inclus. L'entraînement par CLI écrit toujours dans le chemin explicite
+ou le dossier instance, sans écraser implicitement le modèle distribué.

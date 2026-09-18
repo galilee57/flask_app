@@ -1,11 +1,13 @@
 import random
+from uuid import uuid4
 
 class Game:
 
     GRID_W = 20
     GRID_H = 20
 
-    def __init__(self):
+    def __init__(self, rng=None):
+        self.rng = rng or random
         self.reset()
 
     # Modèle centralisé
@@ -22,10 +24,14 @@ class Game:
             "game_over": self.game_over,
             "steps_since_fruit": self.steps_since_fruit,
             "total_steps": self.total_steps,
-            "message": self.message
+            "message": self.message,
+            "game_id": self.game_id,
+            "mode": self.mode
         }
 
     def reset(self):
+        self.game_id = uuid4().hex
+        self.mode = None
         self.snake = [
             {"x": 5, "y": 5},
             {"x": 4, "y": 5},
@@ -83,5 +89,5 @@ class Game:
                 for x in range(self.GRID_W) if (x, y) not in occupied]
         if not free:
             return None
-        x, y = random.choice(free)
+        x, y = self.rng.choice(free)
         return {"x": x, "y": y}

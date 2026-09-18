@@ -10,4 +10,4 @@ def test_alembic_revision_graph_has_a_single_head():
     config.set_main_option("script_location", str(repository_root / "migrations"))
 
     script = ScriptDirectory.from_config(config)
-    assert tuple(script.get_heads()) == ("b728ad901ef2",)
+    assert tuple(script.get_heads()) == ("c90f214e7a31",)

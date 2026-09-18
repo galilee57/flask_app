@@ -42,7 +42,12 @@ def encode_state(game):
 
 
 def checkpoint_path(app):
-    return Path(app.config.get("SNAKE_DQN_PATH") or Path(app.instance_path) / "snake_dqn.npz")
+    configured = app.config.get("SNAKE_DQN_PATH")
+    if configured:
+        return Path(configured)
+    local = Path(app.instance_path) / "snake_dqn.npz"
+    bundled = Path(__file__).parent / "models" / "snake_dqn.npz"
+    return local if local.is_file() or not bundled.is_file() else bundled
 
 
 class DQN:

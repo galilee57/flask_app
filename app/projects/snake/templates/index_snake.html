@@ -52,7 +52,7 @@
 
                 <label>
                     <input type="radio" name="gameMode" value="astar_nn">
-                    AI (DQN / RL)
+                    AI + NN (DQN / RL)
                 </label>
             </div>
 
@@ -83,10 +83,11 @@
                 Total cases parcourues : <span id="totalSteps">0</span>
             </div>
 
-            <label>
-                <input type="checkbox" id="recordStats">
-                Enregistrer les stats
-            </label>
+            <div id="recordControls">
+                <label><input type="checkbox" id="recordStats"> Enregistrer ma partie à la fin</label>
+                <label for="recordToken">Jeton administrateur (pour enregistrer)</label>
+                <input id="recordToken" type="password" autocomplete="off" placeholder="X-Admin-Token">
+            </div>
         </div>
 
         <div class="snake-buttons flex flex-wrap mt-6 gap-2">
@@ -97,17 +98,21 @@
 
         </div>
 
-        <div class="snake-statistics w-full mx-auto mt-4 p-4 bg-white rounded-xl shadow">
+        <section id="resultPanel" hidden class="snake-statistics w-full mx-auto mt-4 p-4 bg-white rounded-xl shadow">
+            <h2>Bilan de la partie</h2>
+            <p id="gameSummary"></p>
+            <p id="recordStatus" role="status"></p>
+            <button id="retryRecord" type="button" hidden>Réessayer l'enregistrement</button>
+            <h3>Comparaison avec les parties enregistrées</h3>
+            <p>Les références IA sont simulées hors du jeu. Un résultat représente une partie complète.</p>
             <p id="statsStatus" role="status"></p>
-            <div class="relative h-80">
-                <canvas id="statsChart"></canvas>
-            </div>
-        </div>
+            <table><thead><tr><th>Mode</th><th>Score final</th><th>Cases parcourues</th><th>Fin de partie</th></tr></thead>
+                <tbody id="resultsBody"></tbody></table>
+        </section>
     </div>
 </div>
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('snake.static', filename='js/chart.js') }}"></script>
 <script src="{{ url_for('snake.static', filename='js/snake.js') }}"></script>
 {% endblock %}

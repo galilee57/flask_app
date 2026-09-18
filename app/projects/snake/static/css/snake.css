@@ -45,3 +45,13 @@
 .snake-key-right { left: 78%; top: 65%; }
 .snake-key-down { left: 22%; top: 65%; }
 .snake-key-left { left: 22%; top: 15%; }
+
+#recordControls[hidden], #resultPanel[hidden], #retryRecord[hidden] { display: none; }
+#recordControls label { display: block; margin-bottom: .5rem; }
+#recordToken { width: 100%; padding: .5rem; border: 1px solid #aaa; border-radius: .4rem; }
+#resultPanel { overflow-x: auto; }
+#resultPanel table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+#resultPanel th, #resultPanel td { text-align: left; padding: .65rem; border-bottom: 1px solid #ddd; }
+#resultPanel h2 { font-size: 1.4rem; font-weight: bold; }
+#resultPanel h3 { margin-top: 1rem; font-weight: bold; }
+#retryRecord { padding: .5rem 1rem; border: 1px solid #777; border-radius: .4rem; }
