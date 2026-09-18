@@ -22,7 +22,7 @@ let loopGeneration = 0;
 
 function resizeCanvas() {
   canvas.width = 1300;
-  canvas.height = 800;
+  canvas.height = 700;
   draw();
 }
 
@@ -38,7 +38,7 @@ function gridToIso(x, y) {
 function getIsoOffset() {
   return {
     x: canvas.width / 2,
-    y: 10
+    y: 42
   };
 }
 
@@ -288,10 +288,31 @@ window.addEventListener("keydown", event => {
   if (["INPUT", "TEXTAREA", "SELECT"].includes(event.target?.tagName)) return;
   event.preventDefault();
 
-  if (oppositeDirections[currentDirection] !== newDirection) {
-    currentDirection = newDirection;
-  }
+  chooseDirection(newDirection);
 });
+
+function chooseDirection(direction) {
+  if (getGameMode() !== "human" || finishedGame || isResetting) return;
+  if (oppositeDirections[currentDirection] !== direction) currentDirection = direction;
+}
+
+document.querySelectorAll('[data-direction]').forEach(button => {
+  button.addEventListener('click', () => chooseDirection(button.dataset.direction));
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && gameLoop !== null) stopGame("En pause : onglet masqué");
+});
+window.addEventListener('offline', () => stopGame("Connexion interrompue. Reprends quand le réseau est disponible."));
+
+function setPlayStatus(message, running = false) {
+  document.getElementById("playStatus").textContent = message;
+  document.getElementById("startGame").textContent = running ? "Pause" : "Jouer";
+  document.getElementById("startGame").disabled = Boolean(finishedGame) || isResetting;
+  document.querySelectorAll('[data-direction]').forEach(button => {
+    button.disabled = Boolean(finishedGame) || isResetting;
+  });
+}
 
 // --- GAME MANAGEMENT ---
 
@@ -317,6 +338,8 @@ function updateSpeedLabel() {
   const human = getGameMode() === "human";
   document.getElementById("humanHints").hidden = !human;
   document.getElementById("recordControls").hidden = !human;
+  document.querySelector(".snake-help").hidden = !human;
+  document.getElementById("recordTokenControls").hidden = !document.getElementById("recordStats").checked;
   document.getElementById("recordStats").disabled = !human || gameLoop !== null;
   const delay = getMoveDelay();
   document.getElementById("speedValue").textContent =
@@ -342,7 +365,7 @@ function scheduleMove(generation, delay = getMoveDelay()) {
       }
     } catch (error) {
       console.error(error);
-      stopGame();
+      stopGame("Connexion interrompue ou déplacement impossible. Réessaie avec Jouer.");
     } finally {
       isMoving = false;
       movementPromise = null;
@@ -355,16 +378,19 @@ function scheduleMove(generation, delay = getMoveDelay()) {
 }
 
 function startGame() {
+  if (gameLoop !== null) { stopGame(); return; }
   if (gameLoop !== null || isMoving || isResetting || finishedGame) return;
   document.querySelectorAll('input[name="gameMode"]').forEach(input => { input.disabled = true; });
   document.getElementById("recordStats").disabled = true;
   scheduleMove(++loopGeneration);
+  setPlayStatus("Partie en cours", true);
 }
 
-function stopGame() {
+function stopGame(message = "En pause") {
   ++loopGeneration;
   clearTimeout(gameLoop);
   gameLoop = null;
+  setPlayStatus(message);
 }
 
 function changeSpeed() {
@@ -395,6 +421,7 @@ async function resetGame() {
     document.getElementById("resultPanel").hidden = false;
   } finally {
     isResetting = false;
+    setPlayStatus(finishedGame ? "Partie terminée" : "Prêt à jouer");
   }
 }
 
@@ -417,6 +444,7 @@ async function saveFinishedGame(state) {
 async function finishGame(state) {
   if (finishedGame?.game_id === state.game_id) return;
   finishedGame = state;
+  setPlayStatus("Partie terminée — Recommencer pour rejouer");
   document.getElementById("resultPanel").hidden = false;
   document.getElementById("gameSummary").textContent =
     `${state.message || "Partie terminée"} Score : ${state.score} · Cases parcourues : ${state.total_steps}.`;
@@ -463,9 +491,10 @@ async function loadResults() {
     rows.forEach(result => {
       const row = document.createElement("tr");
       [labels[result.mode] || result.mode, result.score, result.total_steps,
-       reasons[result.end_reason] || result.end_reason].forEach(value => {
+       reasons[result.end_reason] || result.end_reason].forEach((value, index) => {
         const cell = document.createElement("td");
         cell.textContent = value;
+        cell.dataset.label = ["Mode", "Score final", "Cases parcourues", "Fin de partie"][index];
         row.appendChild(cell);
       });
       body.appendChild(row);
@@ -479,7 +508,7 @@ async function loadResults() {
 }
 
 document.getElementById("startGame").addEventListener("click", startGame);
-document.getElementById("stopGame").addEventListener("click", stopGame);
+document.getElementById("recordStats").addEventListener("change", updateSpeedLabel);
 document.getElementById("resetGame").addEventListener("click", resetGame);
 
 document.getElementById("speedSlider").addEventListener("input", changeSpeed);

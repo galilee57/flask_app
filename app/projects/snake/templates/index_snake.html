@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="bg-white p-8 min-h-screen">
+<div class="snake-page bg-white min-h-screen">
     {% call hero(
         t({
             "fr": "SNAKE ET NEURONES",
@@ -26,76 +26,50 @@
         ) }}
     {% endcall %}
 
-    <div class="snake-layout mt-12">
+    <div class="snake-layout">
         <div class="snake-board">
-            <canvas id="game-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
-            <div id="humanHints" class="snake-key-hints" aria-label="Touches de déplacement du serpent">
-                <kbd class="snake-key snake-key-up" aria-label="Flèche haut : vers le haut à droite">↑</kbd>
-                <kbd class="snake-key snake-key-right" aria-label="Flèche droite : vers le bas à droite">→</kbd>
-                <kbd class="snake-key snake-key-down" aria-label="Flèche bas : vers le bas à gauche">↓</kbd>
-                <kbd class="snake-key snake-key-left" aria-label="Flèche gauche : vers le haut à gauche">←</kbd>
-            </div>
+            <canvas role="img" aria-label="Plateau Snake en perspective isométrique" id="game-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
         </div>
-
-        <div class="snake-controls bg-secondary-200 rounded-2xl p-4">
-        <div class="grid grid-cols-1 gap-4">
-            <div class="flex flex-wrap p-2 gap-4">
-                <label>
-                    <input type="radio" name="gameMode" value="human" checked>
-                    Human
-                </label>
-
-                <label>
-                    <input type="radio" name="gameMode" value="astar">
-                    AI (A*)
-                </label>
-
-                <label>
-                    <input type="radio" name="gameMode" value="astar_nn">
-                    AI + NN (DQN / RL)
-                </label>
-            </div>
-
-            <div class="flex flex-wrap items-center p-2 gap-2">
-                <label for="speedSlider">Vitesse :</label>
-                <input
-                    id="speedSlider"
-                    type="range"
-                    min="1"
-                    max="10"
-                    value="5"
-                    step="1"
-                    class="w-48"
-                >
-                <output id="speedValue" for="speedSlider"></output>
-                <span class="snake-speed-hint">Lent à gauche · Rapide à droite</span>
-            </div>
-
-            <div>
-                Score : <span id="score">0</span>
-            </div>
-
-            <div>
-                Cases depuis dernier fruit : <span id="stepsSinceFruit">0</span>
-            </div>
-
-            <div>
-                Total cases parcourues : <span id="totalSteps">0</span>
-            </div>
-
-            <div id="recordControls">
-                <label><input type="checkbox" id="recordStats"> Enregistrer ma partie à la fin</label>
-                <label for="recordToken">Jeton administrateur (pour enregistrer)</label>
-                <input id="recordToken" type="password" autocomplete="off" placeholder="X-Admin-Token">
-            </div>
+        <div class="snake-toolbar">
+            <fieldset class="snake-modes">
+                <legend class="snake-sr-only">Mode de jeu</legend>
+                <label><input type="radio" name="gameMode" value="human" checked> Humain</label>
+                <label><input type="radio" name="gameMode" value="astar"> IA (A*)</label>
+                <label><input type="radio" name="gameMode" value="astar_nn"> IA + NN</label>
+            </fieldset>
+            <strong>Score : <span id="score">0</span></strong>
         </div>
-
-        <div class="snake-buttons flex flex-wrap mt-6 gap-2">
-            {{ button(t({ "fr": "Jouer", "en": "Play" }), variant="first", id="startGame") }}
-            {{ button(t({ "fr": "Stop", "en": "Stop" }), variant="second", id="stopGame") }}
-            {{ button(t({ "fr": "Reset", "en": "Reset" }), variant="third", id="resetGame") }}
-        </div>
-
+        <div class="snake-controls">
+            <div class="snake-buttons">
+                {{ button("Jouer", variant="first", id="startGame") }}
+                {{ button("Recommencer", variant="third", id="resetGame") }}
+            </div>
+            <p id="playStatus" role="status">Prêt à jouer</p>
+            <div id="humanHints" class="snake-pad" role="group" aria-label="Directions du serpent">
+                <button type="button" data-direction="left" aria-label="Aller en haut à gauche">↖</button>
+                <button type="button" data-direction="up" aria-label="Aller en haut à droite">↗</button>
+                <button type="button" data-direction="down" aria-label="Aller en bas à gauche">↙</button>
+                <button type="button" data-direction="right" aria-label="Aller en bas à droite">↘</button>
+            </div>
+            <p class="snake-help">Utilise les flèches tactiles ou celles du clavier.</p>
+            <details class="snake-settings">
+                <summary>Réglages et statistiques</summary>
+                <div class="snake-settings-content">
+                    <label for="speedSlider">Vitesse</label>
+                    <input id="speedSlider" type="range" min="1" max="10" value="5" step="1">
+                    <output id="speedValue" for="speedSlider"></output>
+                    <span class="snake-speed-hint">Lent à gauche · Rapide à droite</span>
+                    <p>Cases depuis dernier fruit : <span id="stepsSinceFruit">0</span></p>
+                    <p>Total cases parcourues : <span id="totalSteps">0</span></p>
+                    <div id="recordControls">
+                        <label><input type="checkbox" id="recordStats"> Enregistrer ma partie à la fin</label>
+                        <div id="recordTokenControls" hidden>
+                            <label for="recordToken">Jeton administrateur (pour enregistrer)</label>
+                            <input id="recordToken" type="password" autocomplete="off" placeholder="X-Admin-Token">
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
 
         <section id="resultPanel" hidden class="snake-statistics w-full mx-auto mt-4 p-4 bg-white rounded-xl shadow">

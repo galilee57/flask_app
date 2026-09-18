@@ -1,57 +1,62 @@
-/* Layout is scoped to Snake and does not need a Tailwind rebuild. */
-.snake-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-}
-.snake-board {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 13 / 8;
-  min-width: 0;
-}
-.snake-controls { min-width: 0; }
-.snake-speed-hint { width: 100%; font-size: 0.875rem; }
-.snake-statistics { min-width: 0; }
-@media (min-width: 1100px) {
-  .snake-layout { grid-template-columns: minmax(0, 1fr) 360px; }
-  .snake-statistics { grid-column: 1 / -1; }
-}
-
-/* Keyboard directions follow the isometric board axes. */
-.snake-key-hints { position: absolute; inset: 0; pointer-events: none; }
-.snake-key-hints[hidden] { display: none; }
-.snake-key {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  width: clamp(28px, 4vw, 44px);
-  height: clamp(28px, 4vw, 44px);
-  border: 1px solid #d1d5db;
-  border-bottom: 3px solid #9ca3af;
-  border-radius: 8px;
-  background: #fff;
-  color: #172b05;
-  font: bold clamp(20px, 3vw, 30px) / 1 sans-serif;
-  box-shadow: 0 2px 5px #00000012;
-}
-.snake-key-up { left: 78%; top: 15%; }
-.snake-key-right { left: 78%; top: 65%; }
-.snake-key-down { left: 22%; top: 65%; }
-.snake-key-left { left: 22%; top: 15%; }
-
-#recordControls[hidden], #resultPanel[hidden], #retryRecord[hidden] { display: none; }
+/* Snake keeps the site's bottom navigation and reserves its safe area. */
+.snake-page { padding: 12px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+.snake-page > .relative { padding-right: 88px; }
+.snake-page > .relative > .font-bold { font-size: clamp(1.2rem, 4vw, 2.5rem); }
+.snake-page > .relative > .font-primary { font-size: .875rem; margin-bottom: 12px; }
+.snake-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; width: 100%; max-width: 1440px; margin: 0 auto; align-items: start; }
+.snake-toolbar { grid-row: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.snake-modes { display: flex; flex-wrap: wrap; gap: 4px; }
+.snake-modes label { display: flex; align-items: center; gap: 6px; min-height: 48px; padding: 4px 8px; border-radius: 10px; background: #effbdc; cursor: pointer; }
+.snake-board { position: relative; width: 100%; aspect-ratio: 13 / 7; min-width: 0; }
+.snake-controls { min-width: 0; padding: 12px; border-radius: 16px; background: #daffa4; }
+.snake-buttons { display: flex; gap: 8px; }
+.snake-buttons button { flex: 1; min-width: 0; padding: 0 10px; font-size: .875rem; }
+.snake-page button:disabled { opacity: .55; cursor: default; }
+.snake-page button:focus-visible, .snake-page summary:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
+#playStatus { font-size: .875rem; margin: 8px 0; }
+.snake-pad { display: grid; grid-template-columns: repeat(2, minmax(48px, 80px)); gap: 8px; justify-content: center; }
+.snake-pad button { min-height: 52px; border: 1px solid #607b40; border-bottom-width: 3px; border-radius: 12px; background: white; font-size: 28px; touch-action: manipulation; user-select: none; }
+.snake-pad button:active { background: #bddf9a; }
+.snake-help { text-align: center; font-size: .8rem; margin-top: 8px; }
+.snake-settings { margin-top: 10px; border-top: 1px solid #9abb76; }
+.snake-settings summary { min-height: 48px; padding: 12px 0; cursor: pointer; }
+.snake-settings-content { display: grid; gap: 10px; }
+#speedSlider { width: 100%; min-height: 48px; }
+.snake-speed-hint { font-size: .875rem; }
 #recordControls label { display: block; margin-bottom: .5rem; }
-#recordToken { width: 100%; padding: .5rem; border: 1px solid #aaa; border-radius: .4rem; }
-#resultPanel { overflow-x: auto; }
+#recordControls > label { min-height: 48px; }
+#recordToken { width: 100%; font-size: 16px; padding: .75rem; border: 1px solid #777; border-radius: .4rem; }
+.snake-page [hidden] { display: none !important; }
+.snake-statistics { min-width: 0; scroll-margin-bottom: 90px; }
 #resultPanel table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-#resultPanel th, #resultPanel td { text-align: left; padding: .65rem; border-bottom: 1px solid #ddd; }
+#resultPanel th, #resultPanel td { text-align: left; padding: .65rem; border-bottom: 1px solid #ddd; overflow-wrap: anywhere; }
 #resultPanel h2 { font-size: 1.4rem; font-weight: bold; }
 #resultPanel h3 { margin-top: 1rem; font-weight: bold; }
-#retryRecord { padding: .5rem 1rem; border: 1px solid #777; border-radius: .4rem; }
+#retryRecord { min-height: 48px; padding: .5rem 1rem; border: 1px solid #777; border-radius: .4rem; }
+.snake-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 639px) {
+  #resultPanel thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  #resultPanel table, #resultPanel tbody { display: block; }
+  #resultPanel tr { display: block; border: 1px solid #d1d5db; border-radius: 12px; margin-bottom: 12px; padding: 6px; }
+  #resultPanel td { display: flex; justify-content: space-between; gap: 12px; border: 0; }
+  #resultPanel td::before { content: attr(data-label); font-weight: bold; flex-shrink: 0; }
+}
+@media (min-width: 768px) {
+  .snake-page { padding: 24px; }
+}
+@media (min-width: 1100px), (orientation: landscape) and (min-width: 640px) and (max-height: 600px) {
+  .snake-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+  .snake-toolbar { grid-column: 1 / -1; }
+  .snake-controls { grid-column: 2; grid-row: 2; }
+  .snake-board { grid-column: 1; grid-row: 2; }
+  .snake-statistics { grid-column: 1 / -1; }
+}
+@media (orientation: landscape) and (min-width: 640px) and (max-height: 600px) {
+  .snake-page { padding: 8px 12px; }
+  .snake-page > .relative > .font-primary { display: none; }
+  .snake-page > .relative { margin-bottom: 4px; }
+  .snake-layout { grid-template-columns: minmax(0, 1fr) 260px; gap: 8px; }
+  .snake-board { max-height: max(120px, calc(100dvh - 190px)); width: auto; max-width: 100%; justify-self: center; height: max(120px, calc(100dvh - 190px)); }
+  .snake-pad { grid-template-columns: repeat(4, minmax(48px, 1fr)); gap: 4px; }
+  .snake-help { display: none; }
+}
