@@ -5,3 +5,5 @@
 /* Include the shared layout so its responsive utilities keep precedence over hidden. */
 @source "../../../../main/templates/base.html";
 @source "../../../../main/templates/components/layout";
+
+@source "../../../../main/templates/components/info_modal.html";
