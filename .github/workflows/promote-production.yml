@@ -1,0 +1,123 @@
+name: Promote validated release to PythonAnywhere production
+on:
+  workflow_dispatch:
+    inputs:
+      inspect_only:
+        description: Inspect configuration without changing the application
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: pythonanywhere-production
+  cancel-in-progress: false
+jobs:
+  quality:
+    name: Python quality gate
+    runs-on: ubuntu-latest
+    env:
+      FLASK_CONFIG: testing
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-python310.lock -r requirements-dev.txt
+
+      - name: Compile Python sources
+        run: python -m compileall app tests
+
+      - name: Run test suite
+        run: python -m pytest -q
+
+      - name: Require exactly one Alembic migration head
+        shell: bash
+        run: |
+          set -euo pipefail
+          migration_output="$(python -m flask --app wsgi db heads)"
+          printf '%s\n' "${migration_output}"
+          head_count="$(awk '/^[0-9a-f]+ \(head\)$/ { count++ } END { print count + 0 }' <<<"${migration_output}")"
+
+          if [[ "${head_count}" -ne 1 ]]; then
+            echo "Expected exactly one Alembic migration head; found ${head_count}." >&2
+            exit 1
+          fi
+
+  production:
+    needs: quality
+    runs-on: ubuntu-latest
+    environment: staging
+    env:
+      PA_USERNAME: ${{ secrets.PA_USERNAME }}
+      PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+      PA_SSH_PRIVATE_KEY: ${{ secrets.PA_SSH_PRIVATE_KEY }}
+      STAGING_DOMAIN: ${{ secrets.PA_STAGING_DOMAIN }}
+      DOMAIN: Galilee57.pythonanywhere.com
+      RELEASE_SHA: a0e42a3e36603e2ac29a3753d6a25201e6e98172
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve application directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          for target in production staging; do
+            domain="$DOMAIN"
+            if [ "$target" = staging ]; then domain="$STAGING_DOMAIN"; fi
+            curl -fsS "https://www.pythonanywhere.com/api/v0/user/${PA_USERNAME}/webapps/${domain}/" -H "Authorization: Token ${PA_API_TOKEN}" > "$RUNNER_TEMP/$target.json"
+          done
+          python3 - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          prod = json.loads(Path(os.environ['RUNNER_TEMP'], 'production.json').read_text())
+          stage = json.loads(Path(os.environ['RUNNER_TEMP'], 'staging.json').read_text())
+          assert prod['source_directory'] != stage['source_directory'], 'Production and staging must have separate checkouts'
+          with open(os.environ['GITHUB_ENV'], 'a') as f:
+              for name, value in [('APP_DIR',prod['source_directory']),('STAGE_DIR',stage['source_directory']),('VIRTUALENV_DIR',prod['virtualenv_path']),('STAGE_VENV',stage['virtualenv_path'])]:
+                  assert value and '\n' not in value
+                  f.write(f'{name}={value}\n')
+          print('Production Python:', prod.get('python_version'))
+          print('Production source:', prod['source_directory'])
+          print('Production virtualenv:', prod['virtualenv_path'])
+          print('WSGI path:', prod.get('wsgi_configuration_file'))
+          print('Staging source:',stage['source_directory'])
+          PYTHON
+      - name: Configure existing deployment credentials
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$PA_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ssh.pythonanywhere.com >> ~/.ssh/known_hosts
+      - name: Inspect production and staging
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_env="APP_DIR=$(printf '%q' "$APP_DIR") STAGE_DIR=$(printf '%q' "$STAGE_DIR") STAGE_VENV=$(printf '%q' "$STAGE_VENV")"
+          ssh -o BatchMode=yes "$PA_USERNAME@ssh.pythonanywhere.com" "$remote_env bash -s" <<'REMOTE'
+          set -euo pipefail
+          for directory in "$APP_DIR" "$STAGE_DIR"; do
+            cd "$directory"
+            pwd
+            git log -1 --format='%h %s'
+            git status --short
+          done
+          "$STAGE_VENV/bin/python" - <<'PYTHON'
+          import os
+          from pathlib import Path
+          from dotenv import dotenv_values
+          prod=dotenv_values(Path(os.environ['APP_DIR'])/'.env')
+          stage=dotenv_values(Path(os.environ['STAGE_DIR'])/'.env')
+          for name in ['FLASK_CONFIG','SECRET_KEY','ADMIN_API_TOKEN','DATABASE_URL']:
+              print(name, 'production present:',bool(prod.get(name)), 'staging present:',bool(stage.get(name)), 'same:',prod.get(name)==stage.get(name))
+          print('Production uses PostgreSQL:', str(prod.get('DATABASE_URL','')).startswith(('postgres','postgresql')))
+          print('Staging uses PostgreSQL:', str(stage.get('DATABASE_URL','')).startswith(('postgres','postgresql')))
+          PYTHON
+          REMOTE
