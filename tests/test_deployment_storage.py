@@ -123,3 +123,51 @@ def test_docker_definitions_stay_identical():
     from pathlib import Path
     root = Path(__file__).resolve().parents[1]
     assert (root / "Dockerfile").read_bytes() == (root / "Dockerfile.vercel").read_bytes()
+
+
+def test_session_open_failure_preserves_original_error(app, monkeypatch):
+    import pytest
+
+    def unavailable_connection():
+        raise RuntimeError("session database unavailable")
+
+    monkeypatch.setattr(app.session_interface, "engine", lambda application: type(
+        "UnavailableEngine", (), {"connect": staticmethod(unavailable_connection)}
+    )())
+    cookie = app.session_interface.signer(app).dumps("a" * 64)
+    client = app.test_client()
+    client.set_cookie("session", cookie)
+    with pytest.raises(RuntimeError, match="session database unavailable"):
+        client.get("/")
+
+
+def test_session_connection_is_closed_when_view_raises(app):
+    import pytest
+    from flask import session
+
+    client = app.test_client()
+    connections = []
+
+    @app.get("/session-error")
+    def session_error():
+        connections.append(session.connection)
+        raise RuntimeError("view failed")
+
+    client.get("/?lang=en")
+    with pytest.raises(RuntimeError, match="view failed"):
+        client.get("/session-error")
+    assert connections and connections[0].closed
+
+
+def test_session_open_failure_returns_500_without_secondary_admin_error(app, monkeypatch, caplog):
+    app.config['PROPAGATE_EXCEPTIONS'] = False
+    monkeypatch.setattr(app.logger, 'disabled', False)
+
+    def fail_open(application, request):
+        raise RuntimeError('database unavailable before session opens')
+
+    monkeypatch.setattr(app.session_interface, 'open_session', fail_open)
+    response = app.test_client().get('/')
+    assert response.status_code == 500
+    assert 'database unavailable before session opens' in caplog.text
+    assert 'The session has not yet been opened' not in caplog.text

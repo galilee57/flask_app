@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}GPT FROM SCRATCH{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('gpt_from_scratch.static', filename='css/gpt_from_scratch.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="gpt-from-scratch bg-white p-8 min-h-screen">
+  {{ hero("GPT FROM SCRATCH", t({
+      'fr': 'Construire un modèle de langage pas à pas, codé manuellement.',
+      'en': 'Build a language model step by step, coded by hand.'
+  })) }}
+  <p>{{ t({
+      'fr': 'Projet en développement local sur Mac. Cet espace accueillera les premières expérimentations.',
+      'en': 'Project in local development on Mac. This space will host the first experiments.'
+  }) }}</p>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('gpt_from_scratch.static', filename='js/gpt_from_scratch.js') }}"></script>
+{% endblock %}

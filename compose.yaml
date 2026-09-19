@@ -4,25 +4,9 @@ x-app: &app
   environment:
     SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
     ADMIN_API_TOKEN: ${ADMIN_API_TOKEN:?Set ADMIN_API_TOKEN in .env}
-    DATABASE_URL: postgresql+psycopg://flask:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/flask
-  depends_on:
-    db:
-      condition: service_healthy
+    DATABASE_URL: ${DOCKER_DATABASE_URL:?Set DOCKER_DATABASE_URL in .env (Mac PostgreSQL via host.docker.internal)}
 
 services:
-  db:
-    image: postgres:17-alpine
-    environment:
-      POSTGRES_DB: flask
-      POSTGRES_USER: flask
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-    volumes:
-      - database:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U flask -d flask"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
   migrate:
     <<: *app
     command: ["flask", "--app", "wsgi", "db", "upgrade"]
@@ -31,8 +15,6 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      db:
-        condition: service_healthy
       migrate:
         condition: service_completed_successfully
     healthcheck:
@@ -40,5 +22,3 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-volumes:
-  database:

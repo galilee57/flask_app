@@ -254,6 +254,23 @@
         "categories": ["flask", "testing"]
      },
     {
+        "id": "gpt_from_scratch",
+        "made_by": "Human made",
+        "titre": "GPT from scratch",
+        "description": {
+            "fr": "Construire un modèle GPT pas à pas, codé manuellement. Projet en développement.",
+            "en": "Build a GPT model step by step, coded by hand. Project under development."
+        },
+        "published": false,
+        "image": "projectGPTFromScratch.svg",
+        "projetUrl": "/projects/gpt_from_scratch/",
+        "type": 1,
+        "categories": ["python", "ai", "deep learning"],
+        "resources": [
+            {"label": "Illustration : Neural network example — Wiso (domaine public)", "url": "https://commons.wikimedia.org/wiki/File:Neural_network_example.svg"}
+        ]
+    },
+    {
         "id": "tetris",
         "made_by": "AI made",
         "titre": "Tétris",
