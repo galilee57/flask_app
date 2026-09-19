@@ -143,9 +143,16 @@ jobs:
           git pull --ff-only origin staging
           "${VIRTUALENV_DIR}/bin/pip" install --disable-pip-version-check -r requirements-python310.lock
           "${VIRTUALENV_DIR}/bin/python" - <<'PYTHON'
-          from dotenv import dotenv_values
+          import os
+          import secrets
+          from dotenv import dotenv_values, set_key
 
           values = dotenv_values(".env")
+          if not values.get("ADMIN_API_TOKEN"):
+              set_key(".env", "ADMIN_API_TOKEN", secrets.token_urlsafe(48))
+              os.chmod(".env", 0o600)
+              values = dotenv_values(".env")
+              print("Initialized missing staging admin API token.")
           required = ("FLASK_CONFIG", "SECRET_KEY", "ADMIN_API_TOKEN", "DATABASE_URL")
           missing = [name for name in required if not values.get(name)]
           if missing:
