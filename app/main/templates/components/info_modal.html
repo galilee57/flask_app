@@ -1,4 +1,4 @@
-{% macro info_modal(id, title, text, button_label="Infos") %}
+{% macro info_modal(id, title, text, button_label="Infos", close_label="Fermer") %}
   {# IDs internes dérivés de `id` pour éviter les collisions #}
   {% set dialog_id = id ~ "-dialog" %}
   {% set open_id   = id ~ "-open" %}
@@ -42,7 +42,7 @@
             id="{{ close_id }}"
             type="button"
             class="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Fermer"
+            aria-label="{{ close_label }}"
           >
             <!-- Icône X -->
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

@@ -2,9 +2,14 @@
     'use strict';
     const {Game, SHAPES, heuristic, analyze, AIPlayback} = window.TetrisEngine;
     const $ = id => document.getElementById(id);
+    const messages = JSON.parse($('tetris-translations').textContent);
+    const locale = document.documentElement.lang === 'en' ? 'en-GB' : 'fr-FR';
+    const tr = (message, values = {}) => messages[message].replace(/\{(\w+)\}/g, (_, key) => values[key] ?? `{${key}}`);
+    const number = value => value.toLocaleString(locale);
+    const decimal = value => value.toLocaleString(locale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
     const colors = {I: '#67e8f9', J: '#818cf8', L: '#fb923c', O: '#fde047', S: '#4ade80', T: '#c084fc', Z: '#fb7185'};
     let game = new Game(), mode = 'human', state = 'ready', last = 0, elapsed = 0;
-    let policy = heuristic, agentName = 'Heuristique de démonstration';
+    let policy = heuristic, agentName = tr("Heuristique de démonstration");
     const speeds = {human: 1, ai: 3};
     let playback = null, analysis = null;
     const records = {human: 0, ai: 0};
@@ -49,49 +54,52 @@
         const matrix = SHAPES[game.next];
         next.save(); next.translate((112 - matrix.length * 22) / 2, 8);
         matrix.forEach((row, y) => row.forEach((v, x) => { if (v) cell(next, x, y, 22, game.next); })); next.restore();
-        $('next-piece').setAttribute('aria-label', `Prochaine pièce : ${game.next}`);
+        $('next-piece').setAttribute('aria-label', tr("Prochaine pièce : {piece}", {piece: game.next}));
     }
     function render() {
         saveBest();
-        $('score').textContent = game.score.toLocaleString('fr-FR'); $('lines').textContent = game.lines;
-        $('best').textContent = records[mode].toLocaleString('fr-FR');
-        $('play').textContent = state === 'running' ? 'Pause' : state === 'paused' ? 'Reprendre' : state === 'over' ? 'Rejouer' : 'Jouer';
-        $('state-label').textContent = {ready: 'Prêt', running: 'En jeu', paused: 'Pause', over: 'Terminé'}[state];
+        $('score').textContent = game.score.toLocaleString(locale); $('lines').textContent = game.lines;
+        $('best').textContent = records[mode].toLocaleString(locale);
+        $('play').textContent = state === 'running' ? tr("Pause") : state === 'paused' ? tr("Reprendre") : state === 'over' ? tr("Rejouer") : tr("Jouer");
+        $('state-label').textContent = {ready: tr("Prêt"), running: tr("En jeu"), paused: tr("Pause"), over: tr("Terminé")}[state];
         $('board-overlay').hidden = state === 'running' || (mode === 'ai' && state === 'paused' && $('ai-manual').checked);
-        $('overlay-title').textContent = state === 'over' ? 'Partie terminée' : state === 'paused' ? 'On fait une pause' : mode === 'ai' ? 'La machine est prête' : 'À toi de jouer';
-        $('overlay-description').textContent = state === 'over' ? `${game.score} points · Rejouer pour réessayer` : state === 'paused' ? 'Appuie sur Reprendre pour continuer' : 'Appuie sur Jouer pour commencer';
+        $('overlay-title').textContent = state === 'over' ? tr("Partie terminée") : state === 'paused' ? tr("On fait une pause") : mode === 'ai' ? tr("La machine est prête") : tr("À toi de jouer");
+        $('overlay-description').textContent = state === 'over' ? tr("{score} points · Rejouer pour réessayer", {score: number(game.score)}) : state === 'paused' ? tr("Appuie sur Reprendre pour continuer") : tr("Appuie sur Jouer pour commencer");
         document.querySelectorAll('[data-action]').forEach(button => { button.disabled = mode !== 'human' || state !== 'running'; });
         $('ai-step').disabled = mode !== 'ai' || !$('ai-manual').checked || state === 'over';
         draw();
     }
-    function reset(start = false) { saveBest(); game = new Game(); state = start ? 'running' : 'ready'; elapsed = 0; playback = null; analysis = null; $('ai-candidates').replaceChildren(); $('ai-phase').textContent = 'En attente d’une pièce.'; $('ai-reason').textContent = 'L’IA compare les placements possibles avant de déplacer la pièce.'; render(); }
+    function reset(start = false) { saveBest(); game = new Game(); state = start ? 'running' : 'ready'; elapsed = 0; playback = null; analysis = null; $('ai-candidates').replaceChildren(); $('ai-phase').textContent = tr("En attente d’une pièce."); $('ai-reason').textContent = tr("L’IA compare les placements possibles avant de déplacer la pièce."); render(); }
     function toggle() {
         if (state === 'ready' || state === 'over') reset(true);
         else { state = state === 'running' ? 'paused' : 'running'; elapsed = 0; render(); }
-        $('status').textContent = state === 'running' ? 'Partie en cours.' : 'Partie en pause.';
+        $('status').textContent = state === 'running' ? tr("Partie en cours.") : tr("Partie en pause.");
     }
     function finish() {
-        if (game.over) { state = 'over'; $('status').textContent = `Partie terminée : ${game.score} points, ${game.lines} lignes.`; }
+        if (game.over) { state = 'over'; $('status').textContent = tr("Partie terminée : {score} points, {lines} lignes.", {score: number(game.score), lines: number(game.lines)}); }
         render();
     }
     function act(action) { if (state !== 'running' || mode !== 'human') return; game.action(action); if (action === 'drop') elapsed = 0; finish(); }
+    $('tetris-info-open').addEventListener('click', () => {
+        if (state === 'running') { state = 'paused'; elapsed = 0; $('status').textContent = tr("Partie en pause."); render(); }
+    });
     $('play').addEventListener('click', () => { toggle(); $('tetris-board').focus({preventScroll: true}); });
-    $('restart').addEventListener('click', () => { reset(true); $('tetris-board').focus({preventScroll: true}); $('status').textContent = 'Nouvelle partie.'; });
+    $('restart').addEventListener('click', () => { reset(true); $('tetris-board').focus({preventScroll: true}); $('status').textContent = tr("Nouvelle partie."); });
     document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => act(button.dataset.action)));
     function describeAgent() {
         $('ai-inspector').hidden = mode !== 'ai';
         updateSpeed();
-        $('mode-label').textContent = mode === 'human' ? 'Mode humain' : 'Mode IA';
-        $('agent-description').textContent = mode === 'human' ? 'Clavier ou boutons tactiles. Changer de mode remet la partie à zéro.' : `${agentName}. Le réseau neuronal sera ajouté ultérieurement. Changer de mode remet la partie à zéro.`;
+        $('mode-label').textContent = mode === 'human' ? tr("Mode humain") : tr("Mode IA");
+        $('agent-description').textContent = mode === 'human' ? tr("Clavier ou boutons tactiles. Changer de mode remet la partie à zéro.") : tr("{agent}. Le réseau neuronal sera ajouté ultérieurement. Changer de mode remet la partie à zéro.", {agent: agentName});
     }
     document.querySelectorAll('[name="tetris-mode"]').forEach(input => input.addEventListener('change', () => {
-        saveBest(); mode = input.value; reset(); describeAgent(); $('status').textContent = 'Mode changé. Prêt à jouer.';
+        saveBest(); mode = input.value; reset(); describeAgent(); $('status').textContent = tr("Mode changé. Prêt à jouer.");
     }));
     function updateSpeed() {
         $('speed').value = speeds[mode];
-        $('speed-label').textContent = mode === 'ai' ? 'Vitesse IA' : 'Vitesse humain';
-        $('speed-value').textContent = mode === 'ai' ? `${(stepDelay() / 1000).toFixed(1)} s / étape` : `${speeds.human}×`;
-        $('speed-help').textContent = mode === 'ai' ? 'Un réglage indépendant : 2 s à 0,2 s par action. Le temps de lecture du choix est trois fois plus long.' : 'Règle la chute automatique des pièces. Le réglage IA est conservé séparément.';
+        $('speed-label').textContent = mode === 'ai' ? tr("Vitesse IA") : tr("Vitesse humain");
+        $('speed-value').textContent = mode === 'ai' ? tr("{seconds} s / étape", {seconds: decimal(stepDelay() / 1000)}) : `${speeds.human}×`;
+        $('speed-help').textContent = mode === 'ai' ? tr("Un réglage indépendant : 2 s à 0,2 s par action. Le temps de lecture du choix est trois fois plus long.") : tr("Règle la chute automatique des pièces. Le réglage IA est conservé séparément.");
     }
     function stepDelay() { return mode === 'human' ? 800 / speeds.human : 2200 - 200 * speeds.ai; }
     $('speed').addEventListener('input', () => { speeds[mode] = Number($('speed').value); updateSpeed(); elapsed = 0; });
@@ -107,46 +115,47 @@
                 analysis = policy === heuristic ? analyze(game.snapshot()) : null;
                 const actions = analysis ? analysis.best?.actions || ['drop'] : policy(game.snapshot());
                 playback = new AIPlayback(game, actions);
-                $('ai-phase').textContent = '1 · Comparaison et choix du placement';
+                $('ai-phase').textContent = tr("1 · Comparaison et choix du placement");
                 $('ai-candidates').replaceChildren();
                 if (analysis?.best) {
                     const best = analysis.best;
-                    $('ai-reason').textContent = `${analysis.candidates.length} placements distincts comparés. Choix : colonne ${best.column}, ${best.turns} rotation(s), valeur ${best.value.toFixed(1)}. ${best.lines} ligne(s), ${best.holes} trou(s), hauteur totale ${best.height}, relief ${best.roughness}.`;
+                    $('ai-reason').textContent = tr("{count} placements distincts comparés. Choix : colonne {column}, {turns} rotation(s), valeur {value}. {lines} ligne(s), {holes} trou(s), hauteur totale {height}, relief {roughness}.", {count: analysis.candidates.length, column: best.column, turns: best.turns, value: decimal(best.value), lines: best.lines, holes: best.holes, height: best.height, roughness: best.roughness});
                     for (const candidate of analysis.candidates.slice(0, 3)) {
                         const row = document.createElement('tr');
-                        for (const value of [`${candidate.column} / ${candidate.turns}`, candidate.lines, candidate.height, candidate.holes, candidate.roughness, candidate.value.toFixed(1)]) {
+                        for (const value of [`${candidate.column} / ${candidate.turns}`, candidate.lines, candidate.height, candidate.holes, candidate.roughness, decimal(candidate.value)]) {
                             const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
                         }
                         $('ai-candidates').append(row);
                     }
-                } else $('ai-reason').textContent = 'Agent personnalisé : actions affichées, critères de décision non fournis.';
+                } else $('ai-reason').textContent = tr("Agent personnalisé : actions affichées, critères de décision non fournis.");
             } else {
                 const action = playback.step();
-                $('ai-phase').textContent = {left: '2 · Déplacement à gauche', right: '2 · Déplacement à droite', rotate: '2 · Rotation horaire', descend: '3 · Descente vers la cible', lock: '4 · Pièce posée, résultat du choix', done: 'Placement terminé'}[action];
+                $('ai-phase').textContent = {left: tr("2 · Déplacement à gauche"), right: tr("2 · Déplacement à droite"), rotate: tr("2 · Rotation horaire"), descend: tr("3 · Descente vers la cible"), lock: tr("4 · Pièce posée, résultat du choix"), done: tr("Placement terminé")}[action];
             }
         } catch (error) {
             playback = null; analysis = null; state = 'paused';
-            $('status').textContent = 'Agent indisponible : vérifie sa politique avant de reprendre.';
+            $('status').textContent = tr("Agent indisponible : vérifie sa politique avant de reprendre.");
             console.error('Tetris AI:', error);
         }
     }
     document.addEventListener('keydown', event => {
+        if (!$('tetris-info-dialog').classList.contains('hidden')) return;
         if (event.target.closest('input, select, textarea, button, a, [contenteditable="true"]')) return;
         if (event.code === 'KeyP') { event.preventDefault(); if (!event.repeat) toggle(); return; }
         const action = {ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'rotate', ArrowDown: 'down', Space: 'drop'}[event.code];
         if (action && mode === 'human' && state === 'running') { event.preventDefault(); if (!event.repeat || ['left','right','down'].includes(action)) act(action); }
     });
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden && state === 'running') { state = 'paused'; elapsed = 0; $('status').textContent = 'Pause automatique : onglet masqué.'; render(); }
+        if (document.hidden && state === 'running') { state = 'paused'; elapsed = 0; $('status').textContent = tr("Pause automatique : onglet masqué."); render(); }
     });
     // NN extension: synchronous policy(snapshot) -> bounded list of legal action names.
     // A plan is animated action by action, then descends one cell per step.
     window.TetrisAI = {
-        setPolicy(fn, name = 'Agent personnalisé') {
-            if (typeof fn !== 'function') throw new TypeError('La politique doit être une fonction.');
+        setPolicy(fn, name = tr("Agent personnalisé")) {
+            if (typeof fn !== 'function') throw new TypeError(tr("La politique doit être une fonction."));
             policy = fn; agentName = String(name); reset(); describeAgent();
         },
-        resetPolicy() { policy = heuristic; agentName = 'Heuristique de démonstration'; reset(); describeAgent(); },
+        resetPolicy() { policy = heuristic; agentName = tr("Heuristique de démonstration"); reset(); describeAgent(); },
         getState() { return game.snapshot(); },
     };
     function frame(time) {
