@@ -1,8 +1,25 @@
-.tetris-preview {
-    display: block;
-    width: 100%;
-    max-width: 640px;
-    height: auto;
-    margin: 2rem auto;
-    border-radius: 1rem;
-}
+.tetris-page { background: #080f20; color: #e2e8f0; }
+.tetris-arena { background: radial-gradient(ellipse at top, #192b43, #10192b 65%); }
+.tetris-panel { padding: 1.25rem; background: #111c30; border: 1px solid #26344b; border-radius: 1rem; }
+.tetris-caption { font-size: .7rem; text-transform: uppercase; letter-spacing: .14em; color: #94a3b8; font-weight: 700; }
+.tetris-board-wrap { position: relative; width: min(100%, 300px); margin: auto; }
+#tetris-board { display: block; width: 100%; height: auto; background: #080f20; border: 1px solid #334155; border-radius: 6px; }
+#board-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; background: #080f20d9; text-align: center; padding: 1rem; pointer-events: none; }
+#board-overlay[hidden] { display: none; }
+#board-overlay strong { color: white; font-size: 1.5rem; }
+#board-overlay span { color: #94a3b8; font-size: .8rem; }
+.tetris-key { width: 44px; height: 44px; border: 1px solid #42536d; border-radius: 10px; background: #17253a; color: white; touch-action: manipulation; }
+.tetris-mode { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .65rem; border-radius: .6rem; border: 1px solid #334155; cursor: pointer; font-size: .85rem; }
+.tetris-mode:has(input:checked) { border-color: #67e8f9; background: #164e634d; color: #67e8f9; }
+.tetris-mode input { accent-color: #67e8f9; }
+.tetris-page button { cursor: pointer; }
+.tetris-page button:disabled { opacity: .35; cursor: default; }
+.tetris-page :focus-visible { outline: 2px solid #67e8f9; outline-offset: 4px; }
+
+#ai-inspector[hidden] { display: none; }
+#ai-step { width: auto; padding: 0 1rem; }
+.ai-table-wrap { overflow-x: auto; margin-top: 1rem; }
+.ai-table { width: 100%; font-size: .75rem; text-align: right; border-collapse: collapse; }
+.ai-table caption { text-align: left; color: #94a3b8; margin-bottom: .5rem; }
+.ai-table th, .ai-table td { padding: .5rem .3rem; border-bottom: 1px solid #334155; white-space: nowrap; }
+.ai-table tbody tr:first-child { color: #67e8f9; background: #164e6333; }

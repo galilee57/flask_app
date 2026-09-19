@@ -1,0 +1,7 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../../templates/index_tetris.html";
+/* Include the shared layout so its responsive utilities keep precedence over hidden. */
+@source "../../../../main/templates/base.html";
+@source "../../../../main/templates/components/layout";

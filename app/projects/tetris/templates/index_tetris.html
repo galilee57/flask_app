@@ -1,22 +1,74 @@
 {% extends "base.html" %}
-
-{% block title %}TETRIS{% endblock %}
-
+{% block title %}TÉTRIS · Humain & IA{% endblock %}
 {% block css %}
+<link rel="stylesheet" href="{{ url_for('tetris.static', filename='css/tailwind.css') }}">
 <link rel="stylesheet" href="{{ url_for('tetris.static', filename='css/tetris.css') }}">
 {% endblock %}
-
 {% block content %}
-<div class="bg-white p-8 min-h-screen">
-  {% if current_lang() == 'en' %}
-    {{ hero("TETRIS", "A space to develop the Tetris project with Flask.") }}
-  {% else %}
-    {{ hero("TÉTRIS", "Un espace pour développer le projet Tétris avec Flask.") }}
-  {% endif %}
-  <img class="tetris-preview" src="{{ url_for('static', filename='images/projectTetris.png') }}" alt="Tetris">
-</div>
-{% endblock %}
+<section id="tetris-app" class="tetris-page min-h-screen px-4 py-8 sm:px-8">
+  <div class="mx-auto max-w-5xl">
+    <header class="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div><p class="mb-2 text-xs font-bold uppercase tracking-widest text-cyan-300">Laboratoire de jeux · 01</p>
+      <h1 class="text-5xl font-black tracking-tight text-white">TÉTRIS<span class="text-cyan-300">.</span></h1>
+      <p class="mt-3 text-sm text-slate-400">Place. Aligne. Recommence. À toi de jouer, ou à la machine.</p></div>
+      <span class="rounded-full border border-slate-700 px-4 py-2 text-xs text-slate-300">10 colonnes × 20 lignes</span>
+    </header>
+    <div class="mx-auto flex max-w-2xl flex-col gap-4">
+        <section class="tetris-panel">
+          <h2 class="tetris-caption">Aux commandes</h2>
+          <fieldset class="mt-3 grid grid-cols-2 gap-2"><legend class="sr-only">Mode de jeu</legend>
+            <label class="tetris-mode"><input type="radio" name="tetris-mode" value="human" checked> Humain</label>
+            <label class="tetris-mode"><input type="radio" name="tetris-mode" value="ai"> IA</label>
+          </fieldset>
+          <p id="agent-description" class="mt-3 text-xs leading-relaxed text-slate-400">Clavier ou boutons tactiles. Changer de mode remet la partie à zéro.</p>
+        </section>
+      <div class="tetris-arena rounded-3xl border border-slate-700 p-4 sm:p-6">
+        <div class="mb-4 flex items-center justify-between text-xs uppercase tracking-widest text-slate-400"><span id="mode-label">Mode humain</span><span id="state-label">Prêt</span></div>
+        <section id="ai-inspector" class="tetris-panel mb-4" hidden aria-label="Explication du choix IA">
+          <h2 class="tetris-caption">Les choix de l’IA · heuristique</h2>
+          <p id="ai-phase" class="mt-3 text-sm text-cyan-300" role="status">En attente d’une pièce.</p>
+          <p id="ai-reason" class="mt-3 text-sm text-slate-300">L’IA compare les placements possibles avant de déplacer la pièce.</p>
+          <p class="mt-3 text-xs text-slate-400">La cible en pointillés indique le placement retenu. Les critères sont calculés après suppression des lignes.</p>
+          <div class="ai-table-wrap"><table class="ai-table"><caption>Les 3 meilleurs placements (valeur la plus élevée retenue)</caption><thead><tr><th>Col. / ↻</th><th>Lignes</th><th>Hauteur</th><th>Trous</th><th>Relief</th><th>Valeur</th></tr></thead><tbody id="ai-candidates"></tbody></table></div>
+          <details class="mt-3 text-xs text-slate-400"><summary>Comment la valeur est-elle calculée ?</summary><p>8 × lignes − 0,5 × hauteur totale − 7 × trous − 0,3 × relief. Une fin de partie coûte 10 000. La hauteur totale additionne les 10 colonnes ; un trou est une case vide sous un bloc ; le relief additionne les écarts entre colonnes voisines. Col. désigne la colonne gauche occupée (1–10), ↻ le nombre de rotations. À égalité, le premier placement exploré est conservé. Cette heuristique évalue uniquement la pièce courante, ce n’est pas encore un réseau neuronal.</p></details>
+          <label class="mt-3 flex items-center gap-2 text-sm"><input id="ai-manual" type="checkbox"> Avancer manuellement</label>
+          <button id="ai-step" class="tetris-key mt-3" type="button">Étape suivante</button>
+        </section>
+        <div class="tetris-board-wrap">
+          <canvas id="tetris-board" width="300" height="600" tabindex="0" aria-label="Plateau Tétris. Flèches pour déplacer et tourner, espace pour lâcher, P pour mettre en pause."></canvas>
+          <div id="board-overlay"><strong id="overlay-title">À toi de jouer</strong><span id="overlay-description">Appuie sur Jouer pour commencer</span></div>
+        </div>
+        <div class="mt-4 flex justify-center gap-2" role="group" aria-label="Commandes tactiles">
+          <button class="tetris-key" data-action="left" aria-label="Gauche">←</button><button class="tetris-key" data-action="rotate" aria-label="Tourner">↻</button><button class="tetris-key" data-action="right" aria-label="Droite">→</button><button class="tetris-key" data-action="down" aria-label="Descendre">↓</button><button class="tetris-key" data-action="drop" aria-label="Chute immédiate">⤓</button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-2 gap-2"><button id="play" class="rounded-xl bg-cyan-300 px-3 py-3 font-bold text-slate-950 hover:bg-cyan-200">Jouer</button><button id="restart" class="rounded-xl border border-slate-600 px-3 py-3 text-sm text-white hover:bg-slate-800">Recommencer</button></div>
+        <p id="status" class="text-sm text-slate-400" role="status" aria-live="polite">Prêt à jouer.</p>
+        <section class="tetris-panel flex items-center justify-between"><h2 class="tetris-caption">À suivre</h2><canvas id="next-piece" width="112" height="80" aria-label="Prochaine pièce"></canvas></section>
 
+        <section class="tetris-panel">
+          <h2 class="tetris-caption">Score</h2><p id="score" class="mt-1 text-5xl font-bold tabular-nums text-white">0</p>
+          <div class="mt-5 grid grid-cols-2 gap-3 text-sm"><div class="text-slate-400">Lignes<p id="lines" class="mt-1 text-xl font-bold text-white">0</p></div><div class="text-slate-400">Record du mode<p id="best" class="mt-1 text-xl font-bold text-cyan-300">0</p></div></div>
+          <p class="mt-3 text-xs text-slate-500">Record enregistré sur ce navigateur.</p>
+        </section>
+
+        <section class="tetris-panel"><div class="flex items-center justify-between"><label for="speed" id="speed-label" class="tetris-caption">Vitesse humain</label><output id="speed-value" for="speed" class="text-sm text-cyan-300">1×</output></div>
+          <input id="speed" class="mt-4 w-full accent-cyan-300" type="range" min="1" max="10" step="1" value="1">
+          <p id="speed-help" class="mt-3 text-xs text-slate-400">Règle la chute automatique des pièces.</p>
+          <div class="mt-1 flex justify-between text-xs text-slate-500"><span>Tranquille</span><span>Intense</span></div>
+        </section>
+
+      </div>
+    </div>
+    <div class="mt-6 grid gap-4 text-sm text-slate-400 sm:grid-cols-2">
+      <p><strong class="text-slate-200">Les commandes</strong><br>← → Déplacer · ↑ Tourner · ↓ Descendre<br>Espace Chute immédiate · P Pause</p>
+      <p><strong class="text-slate-200">Chaque ligne compte</strong><br>1 / 2 / 3 / 4 lignes : 100 / 300 / 500 / 800 points.<br>Descente manuelle : +1 par case, chute : +2.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
 {% block js %}
+<script src="{{ url_for('tetris.static', filename='js/engine.js') }}"></script>
 <script src="{{ url_for('tetris.static', filename='js/tetris.js') }}"></script>
 {% endblock %}
