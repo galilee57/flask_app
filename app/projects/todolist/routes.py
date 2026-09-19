@@ -1,5 +1,5 @@
 from . import bp
-from app.security import require_admin_api_token
+from app.core.security import require_admin_api_token
 from flask import current_app, render_template, jsonify, request
 from pathlib import Path
 from .repository import TodoRepository

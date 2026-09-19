@@ -1,6 +1,6 @@
 import pytest
 
-from app.config import ProdConfig, TestingConfig, get_config
+from app.core.config import ProdConfig, TestingConfig, get_config
 
 
 def test_unspecified_config_defaults_to_production(monkeypatch):

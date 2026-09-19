@@ -3,9 +3,9 @@ from app.extensions import db, migrate
 from pathlib import Path
 import os
 
-from app.config import get_config, INSTANCE_DIR
-from .blueprints import register_blueprints
-from .factory import (
+from app.core.config import get_config, INSTANCE_DIR
+from .core.blueprints import register_blueprints
+from .core.factory import (
     configure_content,
     configure_logging,
     load_project_catalogue,
@@ -39,7 +39,7 @@ def create_app(config_name: str | None = None) -> Flask:
         if app.config.get("TODOLIST_DATA_PATH") or app.config.get("PATTERN_STORAGE_DIR"):
             raise RuntimeError("Le stockage local partagé est interdit en mode conteneur.")
 
-    from .deployment import configure_deployment
+    from .core.deployment import configure_deployment
     configure_deployment(app)
 
     configure_logging(app)
@@ -49,7 +49,7 @@ def create_app(config_name: str | None = None) -> Flask:
     register_blueprints(app)
     load_project_catalogue(app)
     register_project_context(app)
-    from .admin import configure_admin
+    from .core.admin import configure_admin
     configure_admin(app)
 
     return app

@@ -24,7 +24,7 @@ def load_cartes() -> list[dict]:
         return json.load(f)
 
 def filter_visible_projects(cartes: list[dict]) -> list[dict]:
-    from app.admin import can_view_drafts
+    from app.core.admin import can_view_drafts
     if can_view_drafts():
         return cartes
     return [c for c in cartes if c.get("published", False)]

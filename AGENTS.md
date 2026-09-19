@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-The Flask application factory is in `app/__init__.py`; `wsgi.py` and `run.py` are entry points. Shared configuration, extensions, security helpers, and blueprint registration live directly under `app/`. Feature code is organized as blueprints in `app/projects/<project_name>/`, while portfolio pages are in `app/main/` and `app/experiences/`. Keep templates and static assets beside the blueprint that owns them. Bilingual FlatPages content uses paired `.fr.md` and `.en.md` files under `app/main/content/docs/`. Database migrations belong in `migrations/`; automated tests belong in `tests/`.
+The Flask application factory is in `app/__init__.py`; `wsgi.py` and `run.py` are entry points. Shared configuration, initialization, security helpers, admin, and blueprint registration live in `app/core/`. Shared persistence models and data import commands live in `app/storage/`. Extension instances and content helpers live in `app/extensions/`. Feature code is organized as blueprints in `app/projects/<project_name>/`, while portfolio pages are in `app/main/` and `app/experiences/`. Keep templates and static assets beside the blueprint that owns them. Bilingual FlatPages content uses paired `.fr.md` and `.en.md` files under `app/main/content/docs/`. Database migrations belong in `migrations/`; automated tests belong in `tests/`.
 
 ## Build, Test, and Development Commands
 

@@ -3,7 +3,7 @@ from flask import jsonify, render_template, request
 from .forms import ExerciseForm, WorkoutPlanForm
 from .models import Programme, ProgrammeExercice
 from app.extensions import db
-from app.security import enforce_admin_api_token
+from app.core.security import enforce_admin_api_token
 from . import bp
 from pathlib import Path
 import json

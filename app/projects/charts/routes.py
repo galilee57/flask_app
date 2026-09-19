@@ -2,7 +2,7 @@ from datetime import datetime, date, time as dtime
 from flask import Blueprint, request, render_template
 from flask_restful import Api, Resource, abort
 from app.extensions import db
-from app.security import enforce_admin_api_token
+from app.core.security import enforce_admin_api_token
 from .models import Station, Train
 import re
 from . import bp

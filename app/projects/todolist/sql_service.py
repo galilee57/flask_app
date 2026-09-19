@@ -3,7 +3,7 @@ from uuid import uuid4
 
 from sqlalchemy import select, update, delete
 from app.extensions import db
-from app.runtime_models import Todo
+from app.storage.runtime_models import Todo
 from .services import TodoNotFoundError
 
 

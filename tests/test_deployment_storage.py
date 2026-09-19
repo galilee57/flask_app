@@ -6,7 +6,7 @@ from sqlalchemy import inspect
 
 from app import create_app
 from app.extensions import db
-from app.config import ProdConfig
+from app.core.config import ProdConfig
 
 TODO_URL = "/projects/todolist/api/todolist"
 SNAKE_URL = "/projects/snake/api"
@@ -35,7 +35,7 @@ def test_database_patterns_are_shared_and_loadable(app, client, admin_headers):
 
 
 def test_games_and_large_grids_survive_new_app_instance(tmp_path, monkeypatch):
-    from app.config import TestingConfig
+    from app.core.config import TestingConfig
     monkeypatch.setattr(TestingConfig, "SQLALCHEMY_DATABASE_URI", f"sqlite:///{tmp_path / 'shared.db'}")
     # Exercise runtime persistence independently of catalogue publication.
     first_app = create_app("testing")
@@ -68,7 +68,7 @@ def test_cookie_tampering_does_not_load_another_visitor(client, app):
 
 
 def test_health_and_expired_session_cleanup(app, client):
-    from app.runtime_models import RuntimeSession
+    from app.storage.runtime_models import RuntimeSession
     assert client.get("/health/live").json == {"status": "ok"}
     assert client.get("/health/ready").status_code == 200
     db.session.add(RuntimeSession(id="expired", payload="{}", expires_at=1, version=1))
@@ -104,12 +104,12 @@ def test_import_is_idempotent_and_preserves_source(app, tmp_path):
     assert runner.invoke(args=["storage-import", "--todos", str(path)]).exit_code == 0
     assert "0 éléments" in runner.invoke(args=["storage-import", "--todos", str(path)]).output
     assert path.read_bytes() == before
-    from app.runtime_models import Todo
+    from app.storage.runtime_models import Todo
     assert db.session.get(Todo, "legacy").text == "preserved"
 
 
 def test_migrations_create_runtime_schema_and_allow_downgrade(tmp_path, monkeypatch):
-    from app.config import TestingConfig
+    from app.core.config import TestingConfig
     monkeypatch.setattr(TestingConfig, "SQLALCHEMY_DATABASE_URI", f"sqlite:///{tmp_path / 'migrations.db'}")
     with create_app("testing").app_context():
         upgrade()

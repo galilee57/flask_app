@@ -149,12 +149,27 @@ npx @tailwindcss/cli \
 
 # Structure de l'application
 
-app : init.py contents blueprints registrations
-blueprints basic folder are defined with a generic path '/project/<project_name>'
+```text
+app/
+├── __init__.py       # Fabrique Flask : create_app
+├── core/             # Configuration, initialisation, blueprints, admin, sécurité, i18n
+├── storage/          # Modèles partagés et commandes d'import des données
+├── extensions/       # Instances db/migrate et extensions de contenu
+├── main/             # Portfolio, contenu bilingue, templates et assets
+├── experiences/      # Pages des expériences
+├── projects/         # Un blueprint par projet
+└── static/           # Assets communs
+```
 
-Each folder contents its own templates and static files.
-init.py defines the folder like a blueprint and imports routes.
-routes.py defines routes from the folder.
+Chaque blueprint conserve ses routes, templates et fichiers statiques dans son
+propre dossier. Les projets sont enregistrés dans `app/core/blueprints.py`,
+généralement sous `/projects/<project_name>`. Leurs modèles métier restent auprès
+du projet ; les modèles de stockage partagés sont dans `app/storage/runtime_models.py`.
+
+Les paramètres sont définis dans `app/core/config.py`. Les points d'entrée
+`run.py` et `wsgi.py` utilisent toujours `from app import create_app`.
+Les instances SQLAlchemy et Flask-Migrate sont définies uniquement dans
+`app/extensions/__init__.py` et s'importent depuis `app.extensions`.
 
 # API documentation
 

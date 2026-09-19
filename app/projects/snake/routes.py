@@ -7,7 +7,7 @@ from .snake_game import Game
 from .algorithms import astar, path_to_direction
 from app.extensions import db
 from .models import SnakeStat, SnakeResult
-from app.security import enforce_admin_api_token
+from app.core.security import enforce_admin_api_token
 from sqlalchemy import func
 
 DIRECTIONS = {

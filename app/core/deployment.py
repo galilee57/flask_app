@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, delete, insert, select, text, update
 from flask.json.tag import TaggedJSONSerializer
 
 from app.extensions import db
-from app.runtime_models import RuntimeSession
+from app.storage.runtime_models import RuntimeSession
 
 
 class SharedSession(SecureCookieSession):
@@ -113,9 +113,9 @@ def configure_deployment(app):
             app.extensions["session_engine"] = create_engine(
                 db.engine.url, pool_pre_ping=True, pool_size=10, max_overflow=10,
                 pool_timeout=10)
-    from .storage_import import register_storage_import
+    from app.storage.storage_import import register_storage_import
     register_storage_import(app)
-    from .sqlite_import import register_sqlite_import
+    from app.storage.sqlite_import import register_sqlite_import
     register_sqlite_import(app)
 
     @app.teardown_request

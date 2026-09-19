@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import click
 from app.extensions import db
-from app.runtime_models import Todo, SavedPattern
+from app.storage.runtime_models import Todo, SavedPattern
 from app.projects.todolist.repository import TodoRepository
 from app.projects.game_of_life.routes import _safe_name
 

@@ -10,7 +10,7 @@ from typing import Any
 from flask import Flask, request
 from flask_flatpages import FlatPages
 
-from .extensions.cartes import get_carte_by_id
+from app.extensions.cartes import get_carte_by_id
 from .i18n_helpers import init_i18n
 
 

@@ -1,4 +1,4 @@
-from app.blueprints import BLUEPRINT_REGISTRY
+from app.core.blueprints import BLUEPRINT_REGISTRY
 
 
 def test_blueprint_registry_is_explicit_and_matches_registered_prefixes(app):

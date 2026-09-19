@@ -5,7 +5,7 @@ import pytest
 
 from app.extensions import db
 from app.projects.musculation.models import Programme, ProgrammeExercice
-from app.sqlite_import import import_sqlite
+from app.storage.sqlite_import import import_sqlite
 
 
 @pytest.fixture

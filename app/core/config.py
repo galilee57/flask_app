@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Répertoires robustes (pas de chemins relatifs)
-BASE_DIR = Path(__file__).resolve().parent           # .../flask_app/app
+BASE_DIR = Path(__file__).resolve().parent.parent           # .../flask_app/app
 PROJECT_DIR = BASE_DIR.parent                        # .../flask_app
 load_dotenv(PROJECT_DIR / ".env")
 

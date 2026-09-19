@@ -1,26 +1,26 @@
-# app/blueprints.py
+"""Central registry of application blueprints."""
 from collections.abc import Iterable
 from typing import NamedTuple
 
 from flask import Blueprint, Flask
 
-from .main import bp as main_bp
-from .projects.todolist import bp as todolist_bp
-from .projects.countries import bp as countries_bp
-from .projects.memory import bp as memory_bp
-from .projects.musculation import bp as musculation_bp
-from .projects.phaser import bp as phaser_bp
-from .projects.charts import bp as charts_bp
-from .projects.game_of_life import bp as game_of_life_bp
-from .projects.game_of_life_3d import bp as game_of_life_3d_bp
-from .projects.viewer360 import bp as viewer_360_bp
-from .projects.projet_test import bp as projet_test_bp
-from .projects.a_star import bp as a_star_bp
-from .projects.sudoku import bp as sudoku_bp
-from .experiences import bp as experiences_bp
-from .projects.connect_four import bp as connect_four_bp
-from .projects.snake import bp as snake_bp
-from .projects.tetris import bp as tetris_bp
+from app.main import bp as main_bp
+from app.projects.todolist import bp as todolist_bp
+from app.projects.countries import bp as countries_bp
+from app.projects.memory import bp as memory_bp
+from app.projects.musculation import bp as musculation_bp
+from app.projects.phaser import bp as phaser_bp
+from app.projects.charts import bp as charts_bp
+from app.projects.game_of_life import bp as game_of_life_bp
+from app.projects.game_of_life_3d import bp as game_of_life_3d_bp
+from app.projects.viewer360 import bp as viewer_360_bp
+from app.projects.projet_test import bp as projet_test_bp
+from app.projects.a_star import bp as a_star_bp
+from app.projects.sudoku import bp as sudoku_bp
+from app.experiences import bp as experiences_bp
+from app.projects.connect_four import bp as connect_four_bp
+from app.projects.snake import bp as snake_bp
+from app.projects.tetris import bp as tetris_bp
 
 
 class BlueprintRegistration(NamedTuple):
@@ -58,8 +58,8 @@ def register_blueprints(app: Flask) -> None:
     """Register the explicit blueprint registry and import migration models."""
 
     # Importer les modèles pour créer les tables
-    from .projects.charts import models as _charts_models
-    from .projects.musculation import models as _muscu_models
+    from app.projects.charts import models as _charts_models
+    from app.projects.musculation import models as _muscu_models
 
     for registration in iter_blueprints():
         app.register_blueprint(
