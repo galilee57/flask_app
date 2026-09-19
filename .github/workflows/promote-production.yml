@@ -121,3 +121,87 @@ jobs:
           print('Staging uses PostgreSQL:', str(stage.get('DATABASE_URL','')).startswith(('postgres','postgresql')))
           PYTHON
           REMOTE
+      - name: Promote pinned release and preserve production files
+        if: ${{ !inputs.inspect_only }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote_env="APP_DIR=$(printf '%q' "$APP_DIR") STAGE_DIR=$(printf '%q' "$STAGE_DIR") VIRTUALENV_DIR=$(printf '%q' "$VIRTUALENV_DIR") STAGE_VENV=$(printf '%q' "$STAGE_VENV") RELEASE_SHA=$(printf '%q' "$RELEASE_SHA")"
+          ssh -o BatchMode=yes "$PA_USERNAME@ssh.pythonanywhere.com" "$remote_env bash -s" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          cd "$APP_DIR"
+          backup_dir="$HOME/deployment-backups/production-$(date -u +%Y%m%dT%H%M%SZ)"
+          mkdir -p "$backup_dir"
+          export BACKUP_DIR="$backup_dir"
+          git rev-parse HEAD > "$backup_dir/previous-commit"
+          cp -p .env "$backup_dir/production.env"
+          cp -p .env "$backup_dir/prepared.env"
+          wsgi_file=/var/www/galilee57_pythonanywhere_com_wsgi.py
+          test -f "$wsgi_file"
+          cp -p "$wsgi_file" "$backup_dir/application_wsgi.py"
+          tar --exclude=.git --exclude=__pycache__ --exclude=.venv -czf "$backup_dir/source.tar.gz" .
+          "$STAGE_VENV/bin/python" - <<'PYTHON'
+          import os
+          from pathlib import Path
+          from dotenv import dotenv_values, set_key
+          env=Path(os.environ['BACKUP_DIR'])/'prepared.env'
+          prod=dotenv_values(env)
+          stage=dotenv_values(Path(os.environ['STAGE_DIR'])/'.env')
+          assert prod.get('DATABASE_URL') == stage.get('DATABASE_URL'), 'Database configuration changed since inspection'
+          assert stage.get('ADMIN_API_TOKEN'), 'Staging token missing'
+          if not prod.get('ADMIN_API_TOKEN'):
+              set_key(env, 'ADMIN_API_TOKEN', stage['ADMIN_API_TOKEN'])
+          values=dotenv_values(env)
+          assert values.get('FLASK_CONFIG') == 'production'
+          assert all(values.get(key) for key in ('SECRET_KEY','ADMIN_API_TOKEN','DATABASE_URL'))
+          PYTHON
+          git fetch origin main staging
+          git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+          test "$(git -C "$STAGE_DIR" rev-parse HEAD)" = "$RELEASE_SHA"
+          if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git stash push --include-untracked --message "pre-production-promotion-$(date -u +%Y%m%dT%H%M%SZ)"
+          fi
+          git switch --detach "$RELEASE_SHA"
+          cp "$backup_dir/prepared.env" .env
+          chmod 600 .env
+          "$VIRTUALENV_DIR/bin/pip" install --disable-pip-version-check -r requirements-python310.lock
+          # Production and staging share the already migrated database. Verify without changing it.
+          "$VIRTUALENV_DIR/bin/python" - <<'PYTHON'
+          from app import create_app
+          from app.extensions import db
+          from alembic.config import Config
+          from alembic.script import ScriptDirectory
+          from sqlalchemy import text
+          app=create_app('production')
+          with app.app_context():
+              config=Config('migrations/alembic.ini')
+              config.set_main_option('script_location', 'migrations')
+              expected=set(ScriptDirectory.from_config(config).get_heads())
+              actual=set(db.session.execute(text('SELECT version_num FROM alembic_version')).scalars())
+              assert actual == expected, 'Database revision must match the validated release'
+          client=app.test_client()
+          assert client.get('/health/ready').status_code == 200
+          response=client.get('/projects/tetris/')
+          assert response.status_code == 200 and b'ai-inspector' in response.data
+          PYTHON
+          "$VIRTUALENV_DIR/bin/python" - <<'PYTHON'
+          import os
+          from pathlib import Path
+          target=Path('/var/www/galilee57_pythonanywhere_com_wsgi.py')
+          source='import os\nimport sys\nsys.path.insert(0, '+repr(os.environ['APP_DIR'])+')\nos.environ["FLASK_CONFIG"] = "production"\nfrom wsgi import application\n'
+          target.write_text(source)
+          PYTHON
+          printf 'Production release: %s\nBackup directory: %s\n' "$RELEASE_SHA" "$backup_dir"
+          REMOTE
+      - name: Reload main application
+        if: ${{ !inputs.inspect_only }}
+        run: |
+          curl -fsS --request POST "https://www.pythonanywhere.com/api/v0/user/${PA_USERNAME}/webapps/${DOMAIN}/reload/" -H "Authorization: Token ${PA_API_TOKEN}"
+      - name: Verify main application
+        if: ${{ !inputs.inspect_only }}
+        run: |
+          set -euo pipefail
+          curl --retry 6 --retry-delay 5 --retry-all-errors -fsS "https://${DOMAIN}/health/ready"
+          curl -fsS "https://${DOMAIN}/projects/tetris/" -o "$RUNNER_TEMP/tetris.html"
+          grep -q 'ai-inspector' "$RUNNER_TEMP/tetris.html"

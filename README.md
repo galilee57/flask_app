@@ -252,3 +252,17 @@ placer les ressources privées sous le répertoire statique du projet concerné.
 La configuration des instances hébergées n’est pas modifiée par cette évolution.
 Avant de retirer la seconde instance, valider cet accès sur staging puis préparer
 la bascule de l’instance publique via le workflow documenté.
+
+## Promotion manuelle vers PythonAnywhere principal
+
+Le workflow `promote-production.yml` est uniquement déclenché manuellement depuis
+`main`. Il réutilise les accès PythonAnywhere de l'environnement GitHub `staging`.
+Par défaut, `inspect_only=true` compare les configurations sans afficher de secrets.
+Pour une promotion explicitement validée, `inspect_only=false` installe le commit
+`RELEASE_SHA` épinglé dans le workflow, qui doit être présent dans `main` et être
+exactement la version du checkout staging. Il sauvegarde le code, les données
+locales, le `.env` et le WSGI sous `~/deployment-backups/production-<date>/`, puis
+conserve les modifications locales dans un stash Git. Il préserve le `.env` de
+production et complète uniquement le jeton administrateur manquant depuis staging.
+La procédure vérifie que la base partagée est déjà migrée, sans appliquer de
+migration, puis recharge uniquement `Galilee57.pythonanywhere.com`.
