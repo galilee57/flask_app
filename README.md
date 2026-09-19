@@ -259,7 +259,7 @@ Le workflow `promote-production.yml` est uniquement déclenché manuellement dep
 `main`. Il réutilise les accès PythonAnywhere de l'environnement GitHub `staging`.
 Par défaut, `inspect_only=true` compare les configurations sans afficher de secrets.
 Pour une promotion explicitement validée, `inspect_only=false` installe le commit
-`RELEASE_SHA` épinglé dans le workflow, qui doit être présent dans `main` et être
+`RELEASE_SHA` figé à la révision du workflow lors de son déclenchement, qui doit être présent dans `main` et être
 exactement la version du checkout staging. Il sauvegarde le code, les données
 locales, le `.env` et le WSGI sous `~/deployment-backups/production-<date>/`, puis
 conserve les modifications locales dans un stash Git. Il préserve le `.env` de

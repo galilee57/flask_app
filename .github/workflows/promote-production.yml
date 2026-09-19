@@ -62,7 +62,7 @@ jobs:
       PA_SSH_PRIVATE_KEY: ${{ secrets.PA_SSH_PRIVATE_KEY }}
       STAGING_DOMAIN: ${{ secrets.PA_STAGING_DOMAIN }}
       DOMAIN: Galilee57.pythonanywhere.com
-      RELEASE_SHA: a0e42a3e36603e2ac29a3753d6a25201e6e98172
+      RELEASE_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
       - name: Resolve application directories
