@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ t({'fr': 'Découvrir le plus court chemin', 'en': 'Discover the shortest path'}) }}{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ url_for('shortest_path.static', filename='css/shortest_path.css') }}">{% endblock %}
+{% block content %}
+<section class="sp-page">
+  {% call hero(t({'fr': 'LE PLUS COURT CHEMIN', 'en': 'THE SHORTEST PATH'}), t({'fr': 'Explorer un graphe, comprendre A* et Dijkstra', 'en': 'Explore a graph, understand A* and Dijkstra'})) %}
+    {{ info_modal(id='shortest-path-info', title=md_meta_i18n('docs/projects/shortest_path', 'title'), text=md_page_i18n('docs/projects/shortest_path'), button_label=t({'fr': 'Infos', 'en': 'Info'}), close_label=t({'fr': 'Fermer', 'en': 'Close'})) }}
+  {% endcall %}
+  <div id="shortest-path-app" class="sp-layout" data-url="{{ url_for('shortest_path.solve') }}">
+    <section class="sp-board">
+      <div class="sp-heading"><span>{{ t({'fr': 'PROJET 02 · RECHERCHE', 'en': 'PROJECT 02 · SEARCH'}) }}</span><span>{{ t({'fr': 'Codé avec Codex', 'en': 'Coded with Codex'}) }}</span></div>
+      <svg id="sp-graph" viewBox="0 0 800 560" role="img" aria-label="{{ t({'fr': 'Graphe et progression de la recherche', 'en': 'Graph and search progress'}) }}"></svg>
+      <div class="sp-legend">
+        <span class="sp-start">● {{ t({'fr': 'Départ', 'en': 'Start'}) }}</span><span class="sp-goal">● {{ t({'fr': 'Arrivée', 'en': 'Goal'}) }}</span><span class="sp-frontier">● {{ t({'fr': 'À explorer', 'en': 'Frontier'}) }}</span><span class="sp-visited">● {{ t({'fr': 'Exploré', 'en': 'Visited'}) }}</span><span class="sp-path">━ {{ t({'fr': 'Chemin optimal', 'en': 'Optimal path'}) }}</span>
+      </div>
+    </section>
+    <aside class="sp-panel">
+      <h2>{{ t({'fr': 'Tracer un itinéraire', 'en': 'Find a route'}) }}</h2>
+      <label for="sp-dataset">{{ t({'fr': 'Graphe du livre', 'en': 'Book graph'}) }}</label>
+      <select id="sp-dataset">{% for size in datasets %}<option value="{{ size }}">{{ size }} {{ t({'fr': 'sommets', 'en': 'nodes'}) }}</option>{% endfor %}</select>
+      <label for="sp-algorithm">{{ t({'fr': 'Algorithme', 'en': 'Algorithm'}) }}</label>
+      <select id="sp-algorithm"><option value="astar">{{ t({'fr': 'A* · distance à vol d’oiseau', 'en': 'A* · straight-line distance'}) }}</option><option value="dijkstra">Dijkstra · h = 0</option></select>
+      <div class="sp-pair"><div><label for="sp-start">{{ t({'fr': 'Départ', 'en': 'Start'}) }}</label><select id="sp-start"></select></div><div><label for="sp-goal">{{ t({'fr': 'Arrivée', 'en': 'Goal'}) }}</label><select id="sp-goal"></select></div></div>
+      <div class="sp-actions"><button id="sp-play" type="button"></button><button id="sp-step" type="button">{{ t({'fr': 'Étape suivante', 'en': 'Next step'}) }}</button><button id="sp-reset" type="button">{{ t({'fr': 'Recommencer', 'en': 'Restart'}) }}</button></div>
+      <label for="sp-speed">{{ t({'fr': 'Délai entre étapes', 'en': 'Step interval'}) }}</label><select id="sp-speed"><option value="1000">1 s</option><option value="500" selected>0.5 s</option><option value="150">0.15 s</option></select>
+      <p id="sp-status" role="status" aria-live="polite"></p>
+      <dl class="sp-metrics"><div><dt>{{ t({'fr': 'Sommets explorés', 'en': 'Visited nodes'}) }}</dt><dd id="sp-count">0</dd></div><div><dt>{{ t({'fr': 'Coût du chemin', 'en': 'Path cost'}) }}</dt><dd id="sp-cost">—</dd></div></dl>
+      <p id="sp-scores" class="sp-scores">g = 0 · h = 0 · f = 0</p><p id="sp-route" class="sp-route"></p>
+      <p class="sp-help">{{ t({'fr': 'g : distance parcourue · h : estimation restante · f = g + h. Les distances utilisent les coordonnées du graphe, sans unité géographique.', 'en': 'g: distance travelled · h: remaining estimate · f = g + h. Distances use graph coordinates, without geographic units.'}) }}</p>
+    </aside>
+  </div>
+</section>
+<script id="sp-text" type="application/json">{{ t({'fr': {'play': 'Lancer', 'pause': 'Pause', 'ready': 'Prêt à explorer.', 'loading': 'Chargement du graphe…', 'error': 'Chargement impossible. Réessayez avec Recommencer.', 'done': 'Chemin optimal trouvé.', 'none': 'Aucun chemin ne relie ces sommets.', 'step': 'Sommet exploré : '}, 'en': {'play': 'Run', 'pause': 'Pause', 'ready': 'Ready to explore.', 'loading': 'Loading graph…', 'error': 'Could not load. Try Restart.', 'done': 'Optimal path found.', 'none': 'No path connects these nodes.', 'step': 'Visited node: '}}) | tojson }}</script>
+{% endblock %}
+{% block js %}<script src="{{ url_for('shortest_path.static', filename='js/shortest_path.js') }}" defer></script>{% endblock %}

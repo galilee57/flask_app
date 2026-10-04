@@ -269,5 +269,29 @@
             "flask",
             "game"
         ]
-    }
+    },
+{
+    "id": "shortest_path",
+    "made_by": "AI made",
+    "titre": "Shortest Path",
+    "description": {
+        "fr": "Découvrir le plus court chemin : explorer A* et Dijkstra pas à pas.",
+        "en": "Discover the shortest path: explore A* and Dijkstra step by step."
+    },
+    "published": true,
+    "image": "projectShortestPath.svg",
+    "projetUrl": "/projects/shortest_path/",
+    "type": 3,
+    "categories": [
+        "python",
+        "ai",
+        "algorithms"
+    ],
+    "resources": [
+        {
+            "label": "AI-book · Shortest_Path — IRIDIA / ULB (MIT)",
+            "url": "https://github.com/iridia-ulb/AI-book/tree/main/Shortest_Path"
+        }
+    ]
+}
 ]
