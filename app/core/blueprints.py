@@ -20,6 +20,7 @@ from app.projects.sudoku import bp as sudoku_bp
 from app.experiences import bp as experiences_bp
 from app.projects.connect_four import bp as connect_four_bp
 from app.projects.snake import bp as snake_bp
+from app.projects.snow_layers import bp as snow_layers_bp
 from app.projects.tetris import bp as tetris_bp
 from app.projects.shortest_path import bp as shortest_path_bp
 
@@ -45,6 +46,7 @@ BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
     BlueprintRegistration(sudoku_bp, "/projects/sudoku"),
     BlueprintRegistration(connect_four_bp, "/projects/connect_four"),
     BlueprintRegistration(snake_bp, "/projects/snake"),
+    BlueprintRegistration(snow_layers_bp, "/projects/snow_layers"),
     BlueprintRegistration(tetris_bp, "/projects/tetris"),
     BlueprintRegistration(shortest_path_bp, "/projects/shortest_path"),
     BlueprintRegistration(experiences_bp, "/experiences"),

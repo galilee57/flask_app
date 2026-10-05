@@ -163,6 +163,7 @@ jobs:
               raise SystemExit("Staging .env must use a PostgreSQL DATABASE_URL.")
           PYTHON
           "${VIRTUALENV_DIR}/bin/flask" --app wsgi db upgrade
+          "${VIRTUALENV_DIR}/bin/flask" --app wsgi snow-seed
           REMOTE_SCRIPT
           } | ssh -o BatchMode=yes "${PA_USERNAME}@ssh.pythonanywhere.com" "${remote_env} bash -s"
 

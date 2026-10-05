@@ -266,3 +266,14 @@ conserve les modifications locales dans un stash Git. Il préserve le `.env` de
 production et complète uniquement le jeton administrateur manquant depuis staging.
 La procédure vérifie que la base partagée est déjà migrée, sans appliquer de
 migration, puis recharge uniquement `Galilee57.pythonanywhere.com`.
+
+## Snow Layers sur staging et Railway
+
+La branche `staging` alimente PythonAnywhere staging et le service Railway
+`flask_app` (projet `renewed-freedom`). Chaque cible conserve sa propre base et
+ses secrets. Les étapes avant rechargement sont `flask --app wsgi db upgrade`,
+puis `flask --app wsgi snow-seed`. L’export météo public compressé est inclus
+dans le code ; les bases applicatives, sauvegardes et fichiers `.env` sont exclus.
+La commande de seed est transactionnelle et ne s’applique qu’une fois par
+empreinte. Vérifier ensuite `/health/ready`, `/projects/snow_layers/` et les
+API de saisons/comparaison (76 saisons attendues pour l’historique initial).

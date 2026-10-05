@@ -1,0 +1,19 @@
+{
+  "sha256": "d56df8e0a7d2cd3fde8b47ef966d110180b9c64adf26cdcc1a5d001b06292485",
+  "counts": {
+    "stations": 46,
+    "snow_sources": 1,
+    "snow_imports": 168,
+    "snow_daily_observations": 528770
+  },
+  "source": "Open-Meteo Archive / ERA5-Land",
+  "license": "CC BY 4.0",
+  "period": "1950-12-01/2026-04-30",
+  "months": [
+    12,
+    1,
+    2,
+    3,
+    4
+  ]
+}

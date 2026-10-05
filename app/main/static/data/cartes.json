@@ -294,4 +294,33 @@
         }
     ]
 }
+,
+{
+    "id": "snow_layers",
+    "made_by": "AI made",
+    "titre": "Snow Layers",
+    "description": {
+        "fr": "Explorer l’enneigement des massifs français, saison après saison.",
+        "en": "Explore snow depth across French mountain ranges, season by season."
+    },
+    "published": true,
+    "image": "projectSnowLayers.jpg",
+    "projetUrl": "/projects/snow_layers/",
+    "type": 3,
+    "categories": [
+        "python",
+        "data",
+        "visualisation"
+    ],
+    "resources": [
+        {
+            "label": "Open-Meteo · Historical Weather API",
+            "url": "https://open-meteo.com/en/docs/historical-weather-api"
+        },
+        {
+            "label": "Photo : Romain Malaunay · Unsplash",
+            "url": "https://unsplash.com/photos/cXrhDuOZBiI"
+        }
+    ]
+}
 ]

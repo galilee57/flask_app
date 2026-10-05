@@ -52,4 +52,9 @@ def create_app(config_name: str | None = None) -> Flask:
     from .core.admin import configure_admin
     configure_admin(app)
 
+    from app.storage.snow_import import register_snow_import
+    register_snow_import(app)
+    from app.storage.snow_seed import register_snow_seed
+    register_snow_seed(app)
+
     return app
