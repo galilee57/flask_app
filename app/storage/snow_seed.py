@@ -66,5 +66,10 @@ def register_snow_seed(app):
         try:
             imported = seed_history()
         except (ValueError, OSError, SQLAlchemyError, sqlite3.Error) as exc:
-            raise click.ClickException('Import météo annulé : vérifier migrations et export.') from exc
+            original = getattr(exc, 'orig', exc)
+            code = getattr(original, 'sqlstate', None) or getattr(original, 'sqlite_errorname', None) or getattr(original, 'errno', None)
+            detail = str(exc) if isinstance(exc, ValueError) else ''
+            raise click.ClickException(
+                f'Import météo annulé ({type(original).__name__}, code={code}). {detail}'
+            ) from exc
         click.echo('Historique météo importé et vérifié.' if imported else 'Historique météo déjà importé.')
