@@ -322,5 +322,29 @@
             "url": "https://unsplash.com/photos/cXrhDuOZBiI"
         }
     ]
+},
+{
+    "id": "gpt_from_scratch",
+    "made_by": "Human made",
+    "titre": "GPT from scratch",
+    "description": {
+        "fr": "Un GPT codé manuellement : génération de texte, choix du modèle et courbes d’entraînement.",
+        "en": "A hand-coded GPT: text generation, model selection and training curves."
+    },
+    "published": true,
+    "image": "projectGPTFromScratch.svg",
+    "projetUrl": "/projects/gpt_from_scratch/",
+    "type": 1,
+    "categories": [
+        "python",
+        "ai",
+        "deep learning"
+    ],
+    "resources": [
+        {
+            "label": "Neural network example — Wiso · Wikimedia Commons",
+            "url": "https://commons.wikimedia.org/wiki/File:Neural_network_example.svg"
+        }
+    ]
 }
 ]

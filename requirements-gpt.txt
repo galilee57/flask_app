@@ -1,0 +1,5 @@
+# Inference dependencies; install alongside requirements.txt or requirements.lock.
+torch==2.14.0
+tokenizers==0.22.2
+
+huggingface-hub>=0.16.4,<1

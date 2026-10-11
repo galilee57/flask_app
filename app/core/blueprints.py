@@ -17,6 +17,7 @@ from app.projects.viewer360 import bp as viewer_360_bp
 from app.projects.projet_test import bp as projet_test_bp
 from app.projects.a_star import bp as a_star_bp
 from app.projects.sudoku import bp as sudoku_bp
+from app.projects.gpt_from_scratch import bp as gpt_from_scratch_bp
 from app.experiences import bp as experiences_bp
 from app.projects.connect_four import bp as connect_four_bp
 from app.projects.snake import bp as snake_bp
@@ -44,6 +45,7 @@ BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
     BlueprintRegistration(projet_test_bp, "/projects/projet_test"),
     BlueprintRegistration(a_star_bp, "/projects/a_star"),
     BlueprintRegistration(sudoku_bp, "/projects/sudoku"),
+    BlueprintRegistration(gpt_from_scratch_bp, "/projects/gpt_from_scratch"),
     BlueprintRegistration(connect_four_bp, "/projects/connect_four"),
     BlueprintRegistration(snake_bp, "/projects/snake"),
     BlueprintRegistration(snow_layers_bp, "/projects/snow_layers"),

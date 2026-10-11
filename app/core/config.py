@@ -42,6 +42,7 @@ class Config:
     TODOLIST_DATA_PATH = os.getenv("TODOLIST_DATA_PATH")
     PATTERN_STORAGE_DIR = os.getenv("PATTERN_STORAGE_DIR")
     SNAKE_DQN_PATH = os.getenv("SNAKE_DQN_PATH")
+    GPT_MODELS_DIR = os.getenv("GPT_MODELS_DIR") or str(BASE_DIR / "projects/gpt_from_scratch/models")
     SESSION_TTL_SECONDS = 86400
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
     CONTAINER_MODE = os.getenv("CONTAINER_MODE") == "true"
