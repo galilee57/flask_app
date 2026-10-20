@@ -21,18 +21,17 @@
   {% set banner_text = banner_text_obj.get(lang) or banner_text_obj.get('fr') or '' %}
   {% set banner_classes = ui.get('banner_classes', 'bg-gray-500 text-white') %}
 
-  <div class="flex-none snap-start w-80 sm:w-96 h-[520px]">
-    <div class="flex h-full w-full flex-col rounded-xl
+  <div class="h-full min-w-0">
+    <div class="flex h-full w-full flex-col rounded-2xl border-2 border-transparent
       bg-linear-to-b from-primary-400 to-primary-100
-      border-neutral-700
       hover:from-secondary-700 hover:to-secondary-100
-      hover:border-secondary-500 hover:border-4 transition duration-300
+      hover:border-secondary-500 focus-within:border-secondary-500 transition-colors duration-200 motion-reduce:transition-none
       text-center shadow">
 
-      <div style="position: relative;">
+      <div class="relative p-2.5 pb-0">
         <img
           src="{{ img_src }}"
-          class="h-76 w-full object-cover p-3 rounded-3xl"
+          class="h-44 w-full rounded-xl object-cover lg:h-48"
           alt="{{ titre }}"
           loading="lazy"
         />
@@ -45,28 +44,27 @@
             'en': 'Human made'
           }) %}
           <span
-            class="rounded-3xl px-4 py-2 text-sm font-medium text-white shadow"
-            style="position: absolute; bottom: 1.5rem; right: 1.5rem; background-color: var({{ '--color-primary-600' if made_by == 'AI made' else '--color-secondary-800' }});"
+            class="absolute bottom-2 right-4 max-w-[calc(100%-2rem)] rounded-full px-3 py-1.5 text-xs font-medium text-white shadow {{ 'bg-primary-600' if made_by == 'AI made' else 'bg-secondary-800' }}"
             title="{{ made_by_label }}"
           >{{ made_by_label }}</span>
         {% endif %}
       </div>
 
       <div class="flex flex-1 flex-col gap-2 p-4">
-        {% if not c.get('published', False) %}<span>Brouillon privé</span>{% endif %}
-        <h5 class="text-xl font-semibold leading-snug">{{ titre }}</h5>
+        {% if not c.get('published', False) %}<span>{{ t({'fr': 'Brouillon privé', 'en': 'Private draft'}) }}</span>{% endif %}
+        <h2 data-project-title class="text-xl font-semibold leading-snug">{{ titre }}</h2>
 
-        <div>
+        <div class="text-primary-800" aria-label="{{ note }} / 5">
           {% for i in range(1, 6) %}
             {% if i <= note %}
-              <span class="text-warning">&#9733;</span>
+              <span aria-hidden="true">&#9733;</span>
             {% else %}
-              <span class="text-secondary">&#9734;</span>
+              <span aria-hidden="true">&#9734;</span>
             {% endif %}
           {% endfor %}
         </div>
 
-        <p class="text-lg text-neutral-800 min-h-[4rem]">
+        <p data-project-description class="text-base leading-relaxed text-neutral-800">
           {{ desc }}
         </p>
       </div>
@@ -80,20 +78,20 @@
           </div>
           <a
           href="{{ projet_url }}"
-          class="hidden sm:inline-block rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
-                text-white transition hover:bg-primary-700 shadow"
+          class="hidden min-h-11 items-center justify-center gap-2 sm:inline-flex rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
+                text-white transition hover:bg-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 shadow"
         >
-          See more
+          {{ t({'fr': 'Découvrir', 'en': 'Discover'}) }} <span aria-hidden="true">↗</span>
         </a>
         {% else %}
 
         {# --- DESKTOP (>= sm) : bouton visible --- #}
         <a
           href="{{ projet_url }}"
-          class="rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
-                text-white transition hover:bg-primary-700 shadow"
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-3xl bg-primary-600 px-4 py-2 text-sm font-medium
+                text-white transition hover:bg-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-800 shadow"
         >
-          See more
+          {{ t({'fr': 'Découvrir', 'en': 'Discover'}) }} <span aria-hidden="true">↗</span>
         </a>
 
         {% endif %}

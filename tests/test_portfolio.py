@@ -93,3 +93,21 @@ def test_markdown_code_highlighting_dependency_is_functional():
     html = markdown("```python\nprint('hello')\n```", extensions=["fenced_code", "codehilite"])
     assert 'class="codehilite"' in html
     assert "<span" in html, "Pygments must highlight code, not just wrap it"
+
+
+@pytest.mark.parametrize('language,placeholder,label', [
+    ('fr', 'Rechercher un projet…', 'Découvrir'),
+    ('en', 'Search projects…', 'Discover'),
+])
+def test_lab_search_and_responsive_catalogue(client, language, placeholder, label):
+    html = client.get('/lab', query_string={'lang': language}).get_data(as_text=True)
+    assert placeholder in html
+    assert label in html
+    assert 'id="lab-count"' in html
+    assert 'id="lab-empty"' in html
+    assert 'data-project-title' in html
+    assert 'md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4' in html
+    assert 'snap-mandatory' not in html
+    assert 'w-80' not in html
+    assert 'data-action="simulation"' in html
+    assert client.get('/static/js/lab.js').status_code == 200
