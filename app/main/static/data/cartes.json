@@ -254,6 +254,23 @@
         "categories": ["flask", "testing"]
      },
     {
+        "id": "gpt_from_scratch",
+        "made_by": "Human made",
+        "titre": "GPT from scratch",
+        "description": {
+            "fr": "Un GPT codé manuellement : génération de texte, choix du modèle et courbes d’entraînement.",
+            "en": "A hand-coded GPT: text generation, model selection and training curves."
+        },
+        "published": true,
+        "image": "projectGPTFromScratch.svg",
+        "projetUrl": "/projects/gpt_from_scratch/",
+        "type": 1,
+        "categories": ["python", "ai", "deep learning"],
+        "resources": [
+            {"label": "Neural network example — Wiso · Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Neural_network_example.svg"}
+        ]
+    },
+    {
         "id": "tetris",
         "made_by": "AI made",
         "titre": "Tétris",
@@ -269,5 +286,80 @@
             "flask",
             "game"
         ]
-    }
+    },
+{
+    "id": "shortest_path",
+    "made_by": "AI made",
+    "titre": "Shortest Path",
+    "description": {
+        "fr": "Découvrir le plus court chemin : explorer A* et Dijkstra pas à pas.",
+        "en": "Discover the shortest path: explore A* and Dijkstra step by step."
+    },
+    "published": true,
+    "image": "projectShortestPath.svg",
+    "projetUrl": "/projects/shortest_path/",
+    "type": 3,
+    "categories": [
+        "python",
+        "ai",
+        "algorithms"
+    ],
+    "resources": [
+        {
+            "label": "AI-book · Shortest_Path — IRIDIA / ULB (MIT)",
+            "url": "https://github.com/iridia-ulb/AI-book/tree/main/Shortest_Path"
+        }
+    ]
+}
+,
+{
+    "id": "snow_layers",
+    "made_by": "AI made",
+    "titre": "Snow Layers",
+    "description": {
+        "fr": "Explorer l’enneigement des massifs français, saison après saison.",
+        "en": "Explore snow depth across French mountain ranges, season by season."
+    },
+    "published": true,
+    "image": "projectSnowLayers.jpg",
+    "projetUrl": "/projects/snow_layers/",
+    "type": 3,
+    "categories": [
+        "python",
+        "data",
+        "visualisation"
+    ],
+    "resources": [
+        {
+            "label": "Open-Meteo · Historical Weather API",
+            "url": "https://open-meteo.com/en/docs/historical-weather-api"
+        },
+        {
+            "label": "Photo : Romain Malaunay · Unsplash",
+            "url": "https://unsplash.com/photos/cXrhDuOZBiI"
+        }
+    ]
+}
+,
+{
+    "id": "prey_predator",
+    "made_by": "AI made",
+    "titre": {
+        "fr": "Équilibre · Proies et prédateurs",
+        "en": "Balance · Prey and predators"
+    },
+    "description": {
+        "fr": "Explorez un écosystème vivant : proies, prédateurs, végétation et terriers.",
+        "en": "Explore a living ecosystem: prey, predators, vegetation and burrows."
+    },
+    "published": true,
+    "image": "projectPreyPredator.png",
+    "projetUrl": "/projects/prey_predator/",
+    "type": 3,
+    "categories": [
+        "simulation",
+        "javascript"
+    ],
+    "resources": []
+}
 ]

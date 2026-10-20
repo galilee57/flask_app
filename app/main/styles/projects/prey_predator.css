@@ -1,0 +1,229 @@
+/* prey_predator: Tailwind components; SVG paint rules remain explicit. */
+@layer components {
+#prey-predator-app * {
+  @apply [box-sizing:border-box];
+}
+#prey-predator-app button,#prey-predator-app input,#prey-predator-app select {
+  @apply [font:inherit];
+}
+#prey-predator-app button {
+  @apply cursor-pointer;
+}
+#prey-predator-app .eyebrow {
+  @apply text-[10px] tracking-[1.8px] uppercase text-[#738476];
+}
+#prey-predator-app h2 {
+  @apply [font:500_21px_'Space_Grotesk',sans-serif] [margin:4px_0];
+}
+#prey-predator-app .live {
+  @apply text-[11px] text-[#507951];
+}
+#prey-predator-app .live:before {
+  @apply mr-[7px] text-[#70a94d];
+  content:'●'
+}
+#prey-predator-app .metric {
+  @apply bg-[#fffdf6] [border:1px_solid_#dce3d5] rounded-[12px] [padding:13px_17px];
+}
+#prey-predator-app .metric small {
+  @apply block text-[#7b897b] text-[11px];
+}
+#prey-predator-app .metric strong {
+  @apply [font:500_29px_'Space_Grotesk'] block mt-1;
+}
+#prey-predator-app .metric span {
+  @apply text-[10px] text-[#7e8d7c];
+}
+#prey-predator-app .scene {
+  @apply relative bg-[#76ae4c] rounded-[16px] overflow-hidden [border:1px_solid_#d2ddc9] [box-shadow:0_8px_24px_#223e2910];
+}
+#prey-predator-app .scene canvas {
+  @apply block w-full [aspect-ratio:3/2] touch-none;
+}
+#prey-predator-app .scene-top {
+  @apply absolute top-[16px] left-[17px] flex gap-[7px] pointer-events-none;
+}
+#prey-predator-app .chip {
+  @apply text-[10px] tracking-[.4px] bg-[#fcfff0df] [padding:8px_11px] rounded-[7px];
+}
+#prey-predator-app .scene-hint {
+  @apply absolute bottom-[16px] left-[17px] text-white text-[10px];
+  text-shadow:0 1px 3px #234
+}
+#prey-predator-app button {
+  @apply [border:1px_solid_#d5dfce] rounded-[8px] [padding:9px_13px] bg-[#fffdf6] text-[#284535] text-[12px];
+}
+#prey-predator-app button:hover {
+  @apply bg-[#e5eedb];
+}
+#prey-predator-app button.primary {
+  @apply bg-[#254f3c] text-white [border-color:#254f3c];
+}
+#prey-predator-app select {
+  @apply bg-[#fffdf6] [border:1px_solid_#d5dfce] p-2 rounded-[8px] text-[#284535];
+}
+#prey-predator-app .panel {
+  @apply bg-[#fffdf6] [border:1px_solid_#dce3d5] rounded-[13px] p-[19px] mb-4;
+}
+#prey-predator-app .panel h3 {
+  @apply [font:500_16px_'Space_Grotesk'] [margin:0_0_17px];
+}
+#prey-predator-app .chart {
+  @apply w-full h-[145px] block;
+}
+#prey-predator-app .range-row {
+  @apply [margin:17px_0];
+}
+#prey-predator-app .range-head {
+  @apply flex justify-between text-[11px] text-[#63725f];
+}
+#prey-predator-app .range-head output {
+  @apply text-[#294b35] font-semibold;
+}
+#prey-predator-app input[type=range] {
+  @apply w-full accent-[#42694a] h-4.5 mt-[7px];
+}
+#prey-predator-app input[type=number] {
+  @apply w-full [border:1px_solid_#d4deca] rounded-[7px] p-[9px] bg-[#f5f7ee] text-[#294b35];
+}
+#prey-predator-app .note {
+  @apply text-[11px] leading-[1.65] text-[#7a8672];
+}
+#prey-predator-app .rule {
+  @apply flex gap-2.5 [margin:12px_0] text-[11px] leading-[1.5] text-[#6e7a68];
+}
+#prey-predator-app .rule b {
+  @apply text-[#294b35];
+}
+#prey-predator-app .rule i {
+  @apply not-italic text-[19px];
+}
+#prey-predator-app .inspect {
+  @apply text-[12px] leading-[1.9] text-[#6a7b66];
+}
+#prey-predator-app .inspect strong {
+  @apply text-[#254f3c];
+}
+#prey-predator-app .energy {
+  @apply h-1.5 bg-[#e7eada] rounded-[4px] mt-2 overflow-hidden;
+}
+#prey-predator-app .energy div {
+  @apply h-[100%] bg-[#82a85b];
+}
+#prey-predator-app .toggles {
+  @apply flex gap-3 text-[11px] text-[#65775d] [margin:10px_0];
+}
+#prey-predator-app #status {
+  @apply text-[11px] text-[#75846d];
+}
+#prey-predator-app .help {
+  @apply text-[11px] text-[#71816b] leading-[1.7];
+}
+@media(min-width:1500px) {
+  #prey-predator-app .scene canvas {
+  @apply max-h-[680px];
+}
+
+}
+@media(max-width:1000px) {
+#prey-predator-app .panel {
+  @apply mb-0;
+}
+
+}
+@media(max-width:600px) {
+#prey-predator-app .metric {
+  @apply p-2.5;
+}
+#prey-predator-app .metric strong {
+  @apply text-[23px];
+}
+#prey-predator-app .panel {
+  @apply mb-3.5;
+}
+#prey-predator-app .scene-hint {
+  @apply hidden;
+}
+
+}
+#prey-predator-app .chart-filters fieldset {
+  @apply [border:0] p-0 m-0 flex gap-3.5 flex-wrap text-[12px];
+}
+#prey-predator-app .chart-filters legend {
+  @apply text-[10px] text-[#7b897b] mb-2;
+}
+#prey-predator-app .chart-filters input {
+  @apply accent-[#42694a];
+}
+#prey-predator-app .time-slicers label {
+  @apply text-[11px] text-[#63725f];
+}
+#prey-predator-app .time-slicers output {
+  @apply [float:right];
+}
+#prey-predator-app .burrow-row {
+  @apply flex justify-between items-center gap-2 [padding:10px_0] [border-bottom:1px_solid_#e5eadc] text-[12px];
+}
+#prey-predator-app .burrow-row small {
+  @apply block text-[#7b897b] text-[10px] mt-1;
+}
+#prey-predator-app .burrow-row label {
+  @apply text-[10px] text-[#7b897b];
+}
+#prey-predator-app .burrow-row input {
+  @apply w-[62px] ml-1.5 p-1.5;
+}
+#prey-predator-app .scene-top {
+  @apply flex-wrap right-[12px];
+}
+
+
+.pp-page {
+  @apply [background:linear-gradient(180deg,#fff,#f0f8f7)] pb-8;
+}
+.pp-page>div:first-child {
+  @apply max-w-[1400px] m-auto [padding:2rem_5rem_0_1rem];
+}
+.pp-page>div:first-child>div:first-child {
+  @apply top-[2rem] right-[1rem];
+}
+
+#prey-predator-app {
+  @apply text-[#18322f];
+}
+#prey-predator-app .layout>section {
+  @apply min-w-0;
+}
+#prey-predator-app .panel,#prey-predator-app .metric {
+  @apply bg-white [border-color:#dce8e5] rounded-[1.25rem] [box-shadow:0_10px_35px_#173d3510];
+}
+#prey-predator-app button,#prey-predator-app select,#prey-predator-app input[type=number] {
+  @apply min-h-11;
+}
+#prey-predator-app input[type=range] {
+  @apply min-h-8;
+}
+#prey-predator-app :focus-visible {
+  @apply [outline:3px_solid_#b2781a] [outline-offset:3px];
+}
+#prey-predator-app .scene-top {
+  @apply top-[8px] left-[8px] gap-1;
+}
+#prey-predator-app .chip {
+  @apply p-[5px] text-[9px];
+}
+#prey-predator-app .metric strong {
+  @apply font-[inherit];
+}
+#prey-predator-app .scene canvas {
+  @apply max-h-[none];
+}
+#prey-predator-app .panel h3 {
+  @apply font-[inherit] font-semibold;
+}
+#prey-predator-app button.primary {
+  @apply [background:var(--color-primary-600,#167665)];
+}
+
+
+}

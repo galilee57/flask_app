@@ -1,0 +1,108 @@
+/* tetris: Tailwind components; SVG paint rules remain explicit. */
+@layer components {
+
+.tetris-arena  {
+  
+    @apply [background:radial-gradient(ellipse_at_top,_#192b43,_#10192b_65%)];
+   
+}
+
+#tetris-board  {
+  
+    @apply block w-full h-auto bg-[#080f20] [border:1px_solid_#334155] rounded-[6px];
+   
+}
+
+#board-overlay  {
+  
+    @apply absolute [inset:0] flex flex-col items-center justify-center gap-3 bg-[#080f20d9] text-center p-4 pointer-events-none;
+   
+}
+
+#board-overlay[hidden]  {
+  
+    @apply hidden;
+   
+}
+
+#board-overlay strong  {
+  
+    @apply text-white text-[1.5rem];
+   
+}
+
+#board-overlay span  {
+  
+    @apply text-slate-400 text-[.8rem];
+   
+}
+
+.tetris-mode  {
+  
+    @apply flex items-center justify-center gap-2 p-[.65rem] rounded-[.6rem] [border:1px_solid_#334155] cursor-pointer text-[.85rem];
+   
+}
+
+.tetris-mode:has(input:checked)  {
+  
+    @apply [border-color:#67e8f9] bg-[#164e634d] text-cyan-300;
+   
+}
+
+.tetris-mode input  {
+  
+    @apply accent-cyan-300;
+   
+}
+
+.tetris-page button  {
+  
+    @apply cursor-pointer;
+   
+}
+
+.tetris-page button:disabled  {
+  
+    @apply opacity-[.35] cursor-default;
+   
+}
+
+.tetris-page :focus-visible  {
+  
+    @apply [outline:2px_solid_#67e8f9] [outline-offset:4px];
+   
+}
+
+
+#ai-inspector[hidden]  {
+  
+    @apply hidden;
+   
+}
+
+#ai-step  {
+  
+    @apply w-auto [padding:0_1rem];
+   
+}
+
+.ai-table caption  {
+  
+    @apply text-left text-slate-400 mb-2;
+   
+}
+
+.ai-table th, .ai-table td  {
+  
+    @apply [padding:.5rem_.3rem] [border-bottom:1px_solid_#334155] whitespace-nowrap;
+   
+}
+
+.ai-table tbody tr:first-child  {
+  
+    @apply text-cyan-300 bg-[#164e6333];
+   
+}
+
+
+}

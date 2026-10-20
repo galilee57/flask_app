@@ -1,0 +1,56 @@
+/* gpt_from_scratch: Tailwind components; SVG paint rules remain explicit. */
+@layer components {
+.gpt-panel {
+  @apply [border:1px_solid_#d1d5db] rounded-[12px] p-6 bg-white min-w-0;
+}
+.gpt-panel h2 {
+  @apply text-[1.3rem] font-bold mb-4;
+}
+.gpt-panel p {
+  @apply text-gray-600 text-[.9rem] [margin:12px_0];
+}
+.gpt-panel label {
+  @apply block font-semibold mt-3;
+}
+.gpt-panel input,.gpt-panel select,.gpt-panel textarea {
+  @apply block w-full [border:1px_solid_#9ca3af] rounded-[6px] p-2.5 mt-1.5 bg-white;
+}
+.gpt-button {
+  @apply bg-gray-900 text-white rounded-[8px] [padding:12px_24px] mt-5;
+}
+.gpt-button:disabled {
+  @apply opacity-[.5];
+}
+.gpt-panel pre {
+  @apply whitespace-pre-wrap [overflow-wrap:anywhere] min-h-[220px] [font:inherit] leading-[1.7] bg-gray-50 p-4 rounded-[8px];
+}
+#gpt-prefix {
+  @apply text-gray-500;
+}
+#gpt-continuation {
+  @apply text-gray-900;
+}
+.gpt-train-key {
+  @apply text-blue-600;
+}
+.gpt-val-key {
+  @apply text-amber-600 ml-4;
+}
+#gpt-chart {
+  @apply w-full max-h-[340px];
+}
+.gpt-panel table {
+  @apply w-full text-[.85rem] text-right;
+}
+.gpt-panel th,.gpt-panel td {
+  @apply [padding:4px_12px] [border-bottom:1px_solid_#eee];
+}
+@media(max-width:800px) {
+.gpt-panel {
+  @apply p-4;
+}
+
+}
+
+
+}

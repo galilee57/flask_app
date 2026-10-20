@@ -11,8 +11,9 @@ FROM python:3.14-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
     FLASK_CONFIG=production CONTAINER_MODE=true FLASK_INSTANCE_PATH=/tmp/flask-instance PORT=8080
 WORKDIR /app
-COPY requirements.lock ./
-RUN pip install --no-cache-dir -r requirements.lock \
+COPY requirements.lock requirements-gpt.txt ./
+RUN pip install --no-cache-dir torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir -r requirements.lock -r requirements-gpt.txt \
     && groupadd --gid 10001 flask \
     && useradd --uid 10001 --gid flask --no-create-home flask
 COPY app ./app
