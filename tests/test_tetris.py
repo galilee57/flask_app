@@ -17,7 +17,10 @@ def test_tetris_game_controls_and_local_assets(client):
     html = response.get_data(as_text=True)
     for marker in ['id="tetris-board"', 'id="speed"', 'value="human"', 'value="ai"', 'id="score"']:
         assert marker in html
-    for asset in ['js/engine.js', 'js/tetris.js', 'css/tailwind.css', 'css/tetris.css']:
+    assert '/static/css/output.css' in html
+    assert '/static/css/tailwind.css' not in html
+    assert '/static/css/tetris.css' not in html
+    for asset in ['js/engine.js', 'js/tetris.js']:
         assert client.get('/projects/tetris/static/' + asset).status_code == 200
 
 

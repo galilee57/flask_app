@@ -1,0 +1,311 @@
+/* snow_layers: Tailwind components; SVG paint rules remain explicit. */
+@layer components {
+.snow-app .historical-band {
+  @apply opacity-[.55];
+  fill:#b9c7df
+}
+.snow-app .historical-mean {
+  fill:none;
+  stroke:#7d94ba;
+  stroke-width:2px;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+.snow-app .grid-line {
+  stroke:var(--color-line);
+  stroke-width:1px;
+  stroke-dasharray:3 5
+}
+.snow-app .axis-label {
+  @apply text-[12px];
+  fill:var(--color-muted)
+}
+.snow-app .area-path {
+  fill:url(#snow-gradient)
+}
+.snow-app .line-path {
+  fill:none;
+  stroke:var(--color-red);
+  stroke-width:4px;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+.snow-app .data-point {
+  fill:#fff;
+  stroke:var(--color-red);
+  stroke-width:3px
+}
+.snow-app .data-point:focus {
+  @apply [outline:none];
+  stroke:var(--color-ink);
+  stroke-width:4px
+}
+.snow-app .chart-tooltip {
+  @apply pointer-events-none z-[10] bg-[var(--color-ink)] [padding-inline:calc(var(--spacing)_*_2.5)] [padding-block:calc(var(--spacing)_*_2)] text-[var(--text-xs)] leading-[var(--tw-leading,var(--text-xs--line-height))] [--tw-font-weight:var(--font-weight-semibold)] [font-weight:var(--font-weight-semibold)] text-[var(--color-white)] whitespace-nowrap rounded-[7px] absolute;
+  transform:translate(-50%,calc(-100% - 10px))
+}
+.snow-app .chart-tooltip:after {
+  @apply [border-inline-style:var(--tw-border-style)] [border-inline-width:5px] [border-top-style:var(--tw-border-style)] [border-top-width:5px] [border-inline-color:#0000] [border-top-color:var(--color-ink)] ml-[-5px] absolute bottom-[-5px] left-[50%];
+  content:""
+}
+.snow-app .legend-season {
+  @apply bg-[var(--color-red)];
+}
+.snow-app .legend-mean {
+  @apply bg-[#7d94ba];
+}
+.snow-app .legend-band {
+  @apply bg-[#b9c7df];
+}
+.snow-app .station-info {
+  @apply flex-col items-stretch flex;
+}
+.snow-app .station-info h3 {
+  @apply mt-6.5;
+}
+.snow-app .station-controls, .snow-app .station-request {
+  @apply justify-between items-center gap-5 flex;
+}
+.snow-app .station-panel h2 {
+  @apply tracking-[.11em] mb-4.5 text-[.75rem];
+}
+.snow-app .station-panel h3 {
+  @apply [margin:0_0_6px] text-[1.3rem];
+}
+.snow-app .station-eyebrow {
+  @apply uppercase tracking-[.11em] text-[var(--color-red)] mb-2 text-[.75rem] font-bold;
+}
+.snow-app .station-panel label {
+  @apply gap-1.5 text-[.8rem] grid;
+}
+.snow-app .station-panel select {
+  @apply [border:1px_solid_var(--color-line)] max-w-[100%] text-[var(--color-ink)] bg-white rounded-[8px] p-2.5;
+}
+.snow-app #station-select {
+  @apply w-full;
+}
+.snow-app #station-map {
+  @apply z-[0] bg-[#edf0ed] rounded-[12px] h-[420px];
+}
+.snow-app .map-legend {
+  @apply text-[var(--color-muted)] flex-wrap gap-3.5 mt-2.5 text-[.75rem] flex;
+}
+.snow-app .map-legend span {
+  @apply items-center gap-1.5 inline-flex;
+}
+.snow-app .map-legend-dot {
+  @apply rounded-[50%] w-2.5 h-2.5;
+}
+.snow-app .map-legend-dot.low {
+  @apply bg-[#3d7d65];
+}
+.snow-app .map-legend-dot.mid {
+  @apply bg-[#d28a31];
+}
+.snow-app .map-legend-dot.high {
+  @apply bg-[#6b59a5];
+}
+.snow-app .station-note {
+  @apply text-[var(--color-muted)] [margin:12px_0] text-[.8rem] leading-[1.6];
+}
+.snow-app #import-form {
+  @apply gap-3 mt-6 grid;
+}
+.snow-app #import-form label {
+  @apply text-[#c8c8c8] gap-2 text-[.8rem] grid;
+}
+.snow-app .season-control {
+  @apply text-white cursor-pointer tracking-[-.04em] bg-[#292929] [border:1px_solid_#555] rounded-[8px] w-full min-w-0 mb-4.5 p-2.5 text-[1.35rem];
+  color-scheme:dark
+}
+.snow-app #request-status {
+  @apply text-[var(--color-muted)];
+}
+.snow-app #import-form :focus-visible, .snow-app .season-control:focus-visible {
+  @apply [outline-offset:3px] [outline:3px_solid_#ff7878];
+}
+.snow-app #import-button {
+  @apply [background:var(--color-red)] text-white cursor-pointer rounded-[8px] [padding:11px_16px] font-semibold;
+}
+.snow-app #import-button:disabled {
+  @apply opacity-[.5] cursor-wait;
+}
+.snow-app .station-pin {
+  @apply bg-[#696969] [border:2px_solid_#fff] rounded-[50%] w-4 h-4 [box-shadow:0_1px_4px_#0005];
+}
+.snow-app .station-pin.category-low {
+  @apply bg-[#3d7d65];
+}
+.snow-app .station-pin.category-mid {
+  @apply bg-[#d28a31];
+}
+.snow-app .station-pin.category-high {
+  @apply bg-[#6b59a5];
+}
+.snow-app .station-pin.selected {
+  @apply bg-[#d22] [border:3px_solid_#fff] [outline:3px_solid_#d22];
+}
+.snow-app .station-panel :focus-visible {
+  @apply [outline-offset:3px] [outline:3px_solid_#d22];
+}
+.snow-app .comparison-header {
+  @apply justify-between items-end gap-6 flex;
+}
+.snow-app .comparison-panel h2 {
+  @apply tracking-[.11em] [margin:0_0_24px] text-[.75rem];
+}
+.snow-app .comparison-stations {
+  @apply gap-3 grid;
+}
+.snow-app .comparison-stations label {
+  @apply gap-1.5 min-w-0 text-[.8rem] grid;
+}
+.snow-app .comparison-stations select {
+  @apply [border:1px_solid_var(--color-line)] w-full min-w-0 text-[var(--color-ink)] bg-white rounded-[8px] p-2.5;
+}
+.snow-app .comparison-toggles {
+  @apply [border-top:1px_solid_var(--color-line)] gap-3.5 mt-6 pt-6 text-[.75rem] grid;
+}
+.snow-app .toggle-label {
+  @apply text-[var(--color-muted)] uppercase tracking-[.08em] m-0 font-bold;
+}
+.snow-app .toggle-group {
+  @apply [border:1px_solid_var(--color-line)] rounded-[8px] min-w-0 m-0 p-2.5;
+}
+.snow-app .toggle-group legend {
+  @apply [padding:0_4px] font-semibold;
+}
+.snow-app .stat-buttons, .snow-app .station-toggles {
+  @apply gap-1.5 flex;
+}
+.snow-app .stat-buttons .stat-toggle, .snow-app .station-toggles .stat-toggle {
+  @apply [flex:1];
+}
+.snow-app .stat-toggle {
+  @apply text-[var(--color-muted)] cursor-pointer bg-[#efefec] [border:0] rounded-[5px] [padding:5px_7px];
+}
+.snow-app .stat-toggle.is-on {
+  @apply [background:var(--color-ink)] text-white;
+}
+.snow-app .category-basse .stat-toggle.is-on {
+  @apply bg-[#3d7d65];
+}
+.snow-app .category-moyenne .stat-toggle.is-on {
+  @apply bg-[#d28a31];
+}
+.snow-app .category-haute .stat-toggle.is-on {
+  @apply bg-[#6b59a5];
+}
+.snow-app #comparison-chart {
+  @apply w-full min-w-0 h-auto block overflow-visible;
+}
+.snow-app .comparison-grid-line {
+  stroke:var(--color-line);
+  stroke-width:1px;
+  stroke-dasharray:3 5
+}
+.snow-app .comparison-axis-label {
+  @apply text-[12px];
+  fill:var(--color-muted)
+}
+.snow-app .comparison-low, .snow-app .comparison-mid, .snow-app .comparison-high {
+  fill:none;
+  stroke-width:2px;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+.snow-app .comparison-low {
+  stroke:#3d7d65
+}
+.snow-app .comparison-mid {
+  stroke:#d28a31
+}
+.snow-app .comparison-high {
+  stroke:#6b59a5
+}
+.snow-app .comparison-min, .snow-app .comparison-max {
+  @apply opacity-[.55];
+  stroke-dasharray:2 4
+}
+.snow-app .comparison-mean {
+  @apply opacity-[.8];
+  stroke-width:3px
+}
+.snow-app .comparison-station {
+  fill:none;
+  stroke-width:4px;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+.snow-app .comparison-station.station-a {
+  stroke:var(--color-red)
+}
+.snow-app .comparison-station.station-b {
+  stroke:var(--color-ink);
+  stroke-dasharray:8 5
+}
+@media (max-width:720px) {
+.snow-app .station-controls, .snow-app .station-request {
+  @apply flex-col items-stretch gap-2;
+}
+.snow-app #station-select {
+  @apply w-full;
+}
+.snow-app #station-map {
+  @apply h-[350px] mt-3.5;
+}
+.snow-app #import-form {
+  @apply flex-wrap;
+}
+.snow-app .comparison-header, .snow-app .comparison-stations {
+  @apply flex-col items-stretch;
+}
+.snow-app .comparison-stations label {
+  @apply min-w-0;
+}
+.snow-app .comparison-toggles {
+  @apply flex-col items-start;
+}
+
+}
+
+
+.snow-app  {
+  @apply bg-[#f7f7f4] text-[#191919] [font-family:system-ui,sans-serif];
+   
+}
+
+.snow-app header  {
+  @apply flex-wrap gap-3;
+}
+
+.snow-app select, .snow-app button  {
+  @apply min-h-11 max-w-[100%];
+}
+
+.snow-app #station-map  {
+  @apply h-[300px];
+}
+
+.snow-app svg  {
+  @apply max-w-[100%];
+}
+
+.snow-app .station-note  {
+  @apply [overflow-wrap:anywhere];
+}
+
+.snow-app [hidden]  {
+  @apply hidden!;
+}
+
+@media(min-width:768px)  {
+
+ .snow-app #station-map  {
+  @apply h-[420px];
+}
+
+
+}
+
+}

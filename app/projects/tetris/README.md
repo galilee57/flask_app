@@ -22,7 +22,7 @@ node --test tests/tetris_engine.test.cjs
 Les styles Tailwind 4 sont compilés localement, sans CDN. Après modification du template :
 
 ```sh
-npx @tailwindcss/cli -i app/projects/tetris/static/css/input.css -o app/projects/tetris/static/css/tailwind.css --minify
+npm run build:css
 ```
 
 ## Futur réseau neuronal

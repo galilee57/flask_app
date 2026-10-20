@@ -1,5 +1,14 @@
 
 @import "tailwindcss";
+@import "./app/main/styles/projects/shortest_path.css";
+@import "./app/main/styles/projects/gpt_from_scratch.css";
+@import "./app/main/styles/projects/prey_predator.css";
+@import "./app/main/styles/projects/tetris.css";
+@import "./app/main/styles/projects/snow_layers.css";
+
+/* Scan templates and dynamically rendered controls explicitly. */
+@source "./app/main/templates";
+@source "./app/projects";
 
 @font-face {
   font-family: "EB Garamond";
@@ -104,4 +113,13 @@
   --spacing-1\/2-screen: 50vw;
 
   --nav-height: 20rem;
+}
+/* Snow Layers palette used by its Tailwind utilities and chart. */
+@theme {
+  --color-ink: #191919;
+  --color-muted: #696969;
+  --color-snow: #f7f7f4;
+  --color-line: #dfdfdb;
+  --color-paper: #ffffff;
+  --color-red: #dd2222;
 }

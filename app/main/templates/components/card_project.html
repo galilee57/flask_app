@@ -1,7 +1,8 @@
 {% macro project_card(c, lang='fr') %}
   {# --- Champs --- #}
   {% set id_ = c.get('id', '') %}
-  {% set titre = c.get('titre', '') %}
+  {% set titre_obj = c.get('titre', '') %}
+  {% set titre = t(titre_obj) if titre_obj is mapping else titre_obj %}
   {% set image = c.get('image', '') %}
   {% set note = (c.get('type', 0) | int) %}
   {% set categories = c.get('categories', []) %}
