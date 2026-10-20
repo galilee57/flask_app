@@ -10,10 +10,15 @@ from werkzeug.security import check_password_hash
 
 def is_admin():
     from flask import current_app
+    try:
+        opened_session = session._get_current_object()
+    except (AssertionError, RuntimeError):
+        # Error responses can run before Flask has opened a session.
+        return False
     return (
-        session.get("admin_until", 0) > time.time()
-        and session.get("admin_username") == current_app.config.get("ADMIN_USERNAME")
-        and session.get("admin_hash") == sha256((current_app.config.get("ADMIN_PASSWORD_HASH") or "").encode()).hexdigest()
+        opened_session.get("admin_until", 0) > time.time()
+        and opened_session.get("admin_username") == current_app.config.get("ADMIN_USERNAME")
+        and opened_session.get("admin_hash") == sha256((current_app.config.get("ADMIN_PASSWORD_HASH") or "").encode()).hexdigest()
         and bool(current_app.config.get("ADMIN_PASSWORD_HASH"))
     )
 

@@ -4,7 +4,7 @@ import secrets
 import time
 
 import click
-from flask import session, jsonify
+from flask import g, jsonify
 from flask.sessions import SessionInterface, SecureCookieSession
 from itsdangerous import BadSignature, URLSafeSerializer
 from sqlalchemy import create_engine, delete, insert, select, text, update
@@ -58,9 +58,11 @@ class DatabaseSessionInterface(SessionInterface):
                 return SharedSession()
             result = SharedSession(self.serializer.loads(row["payload"]), sid, row["version"])
             result.connection = connection
+            g.database_session = result
             return result
         except Exception:
             connection.close()
+            app.logger.exception("Database session could not be opened")
             raise
 
     def save_session(self, app, session, response):
@@ -103,6 +105,7 @@ class DatabaseSessionInterface(SessionInterface):
             if connection is not None:
                 connection.close()
             session.connection = None
+            g.pop("database_session", None)
 
 
 def configure_deployment(app):
@@ -120,10 +123,11 @@ def configure_deployment(app):
 
     @app.teardown_request
     def close_session_connection(error):
-        connection = getattr(session, "connection", None)
-        if connection is not None:
-            connection.close()
-            session.connection = None
+        # Session opening can fail before Flask binds the session proxy.
+        opened_session = g.pop("database_session", None)
+        if opened_session is not None and opened_session.connection is not None:
+            opened_session.connection.close()
+            opened_session.connection = None
 
     @app.get("/health/live")
     def live():

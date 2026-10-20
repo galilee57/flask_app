@@ -2,7 +2,6 @@
 {% block title %}Snow Layers · Lab{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="{{ url_for('snow_layers.static', filename='css/snow_layers.css') }}">
 {% endblock %}
 {% block content %}<div class="snow-app" data-api="{{ url_for('snow_layers.stations') }}" data-import="{{ 'true' if can_import else 'false' }}">
     <div class="mx-auto w-[min(1180px,calc(100%-40px))] pb-16 pt-6 max-[720px]:w-[calc(100%-28px)]">
@@ -21,13 +20,13 @@
         <h1 class="mb-6 text-[clamp(2.65rem,6vw,5.8rem)] leading-[.93] tracking-[-.075em]" id="page-title">SNOW LAYERS<br><em class="font-serif font-normal tracking-[-.06em] text-red">Evolution de l'enneigement</em></h1>
       </section>
 
-      <section class="snow-layout station-layout" aria-labelledby="station-heading">
-        <div class="station-panel">
+      <section class="snow-layout station-layout grid grid-cols-1 gap-[18px] md:grid-cols-[minmax(0,2fr)_minmax(280px,.8fr)] mb-6" aria-labelledby="station-heading">
+        <div class="station-panel min-w-0 rounded-[18px] border border-[#dfdfdb] bg-white p-[18px] md:p-[26px]">
           <h2 id="station-heading" class="station-eyebrow">Choisir la station à étudier</h2>
           <div id="station-map" aria-label="Carte des stations de ski françaises"></div>
           <p id="map-status" class="station-note" role="status">Chargement de la carte…</p>
         </div>
-        <aside class="station-panel station-info" aria-label="Informations de la station">
+        <aside class="station-panel station-info min-w-0 rounded-[18px] border border-[#dfdfdb] bg-white p-[18px] md:p-[26px]" aria-label="Informations de la station">
           <label for="station-select" class="station-eyebrow">Station à étudier</label>
           <select id="station-select" disabled><option>Chargement…</option></select>
           <h3 id="selected-station">Station</h3>
@@ -39,7 +38,7 @@
         </aside>
       </section>
 
-      <section class="snow-layout" aria-label="Suivi de l'enneigement">
+      <section class="snow-layout grid grid-cols-1 gap-[18px] md:grid-cols-[minmax(0,2fr)_minmax(280px,.8fr)]" aria-label="Suivi de l'enneigement">
         <div class="rounded-[18px] border border-line bg-paper p-[30px] max-[720px]:p-[22px]">
           <div class="flex items-start justify-between gap-[18px] max-[720px]:flex-col">
             <div>
@@ -87,13 +86,13 @@
         </aside>
       </section>
 
-      <section class="snow-layout comparison-layout" aria-labelledby="comparison-heading">
-        <div class="comparison-panel">
+      <section class="snow-layout comparison-layout grid grid-cols-1 gap-[18px] md:grid-cols-[minmax(0,2fr)_minmax(280px,.8fr)] mt-[42px]" aria-labelledby="comparison-heading">
+        <div class="comparison-panel min-w-0 rounded-[18px] border border-[#dfdfdb] bg-white p-[18px] md:p-[26px]">
           <h2 id="comparison-heading" class="station-eyebrow">Comparer les altitudes</h2>
-        <div class="comparison-chart-wrap"><svg id="comparison-chart" viewBox="0 0 1000 430" role="img" aria-labelledby="comparison-chart-title comparison-chart-desc"><title id="comparison-chart-title">Comparaison des hauteurs de neige par saison</title><desc id="comparison-chart-desc">Moyenne hivernale de deux stations avec les statistiques des catégories d'altitude.</desc><g id="comparison-grid"></g><g id="comparison-series"></g><g id="comparison-axis"></g></svg></div>
+        <div class="comparison-chart-wrap overflow-x-auto"><svg id="comparison-chart" viewBox="0 0 1000 430" role="img" aria-labelledby="comparison-chart-title comparison-chart-desc"><title id="comparison-chart-title">Comparaison des hauteurs de neige par saison</title><desc id="comparison-chart-desc">Moyenne hivernale de deux stations avec les statistiques des catégories d'altitude.</desc><g id="comparison-grid"></g><g id="comparison-series"></g><g id="comparison-axis"></g></svg></div>
         <p id="comparison-status" class="station-note" role="status">Chargement de la comparaison…</p>
         </div>
-        <aside class="comparison-panel comparison-settings" aria-label="Réglages de la comparaison">
+        <aside class="comparison-panel comparison-settings min-w-0 rounded-[18px] border border-[#dfdfdb] bg-white p-[18px] md:p-[26px]" aria-label="Réglages de la comparaison">
           <div class="comparison-stations">
             <p class="station-eyebrow">Stations à comparer</p>
             <label for="compare-a">Station 1<select id="compare-a"></select></label>

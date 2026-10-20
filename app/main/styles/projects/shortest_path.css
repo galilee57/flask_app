@@ -1,0 +1,131 @@
+/* shortest_path: Tailwind components; SVG paint rules remain explicit. */
+@layer components {
+.sp-page {
+  @apply [background:linear-gradient(180deg,#fff,#f0f8f7)] min-h-[80vh] pb-[3rem];
+}
+.sp-board,.sp-panel {
+  @apply [border:1px_solid_#dce8e5] rounded-[1.5rem] [box-shadow:0_10px_35px_#173d3510] overflow-hidden;
+}
+.sp-board {
+  @apply bg-[#102d32] text-[#d8edeb] [align-self:start];
+}
+.sp-board svg {
+  @apply w-full h-auto block;
+}
+.sp-start {
+  @apply text-[#5ee0ad];
+}
+.sp-goal {
+  @apply text-[#fb9b88];
+}
+.sp-frontier {
+  @apply text-[#f4cb69];
+}
+.sp-visited {
+  @apply text-[#79b9d0];
+}
+.sp-path {
+  @apply text-white;
+}
+.sp-panel {
+  @apply p-[1.4rem] bg-white;
+}
+.sp-panel h2 {
+  @apply text-[1.25rem] font-bold [margin:0_0_1.2rem] text-[#173d35];
+}
+.sp-panel label {
+  @apply block text-[.8rem] font-semibold [margin:1rem_0_.4rem];
+}
+.sp-panel select {
+  @apply w-full p-[.65rem] [border:1px_solid_#cadbd6] rounded-[.65rem] bg-[#f7fbfa] text-[#173d35] min-h-11;
+}
+.sp-metrics {
+  @apply grid [grid-template-columns:1fr_1fr] gap-[.8rem];
+}
+.sp-actions button {
+  @apply [padding:.7rem_.9rem] rounded-[.7rem] bg-[#e8f2ef] text-[#214f44] text-[.85rem] min-h-11 cursor-pointer;
+}
+.sp-actions #sp-play {
+  @apply [background:var(--color-primary-600,#167665)] text-white;
+}
+.sp-actions button:disabled {
+  @apply opacity-[.45] cursor-default;
+}
+.sp-panel :focus-visible {
+  @apply [outline:3px_solid_#b2781a] [outline-offset:3px];
+}
+#sp-status {
+  @apply text-[.9rem] [margin:1.25rem_0] min-h-[2.7em];
+}
+.sp-metrics {
+  @apply [padding:1rem_0] [border-top:1px_solid_#e1eae7];
+}
+.sp-metrics dt {
+  @apply text-[.75rem] text-[#54685f];
+}
+.sp-metrics dd {
+  @apply text-[1.6rem] font-bold text-[#173d35];
+}
+.sp-scores,.sp-route {
+  @apply text-[.8rem] [overflow-wrap:anywhere] [margin:.7rem_0];
+}
+.sp-help {
+  @apply text-[.78rem] leading-[1.6] text-[#586e65];
+}
+.edge {
+  stroke:#59737a;
+  stroke-width:1.5
+}
+.path-edge {
+  stroke:white;
+  stroke-width:4
+}
+.node {
+  stroke:#102d32;
+  stroke-width:2
+}
+.node.idle {
+  fill:#a4babd
+}
+.node.visited {
+  fill:#79b9d0
+}
+.node.frontier {
+  fill:#f4cb69
+}
+.node.path {
+  fill:white
+}
+.node.start {
+  fill:#5ee0ad
+}
+.node.goal {
+  fill:#fb9b88
+}
+.node.current {
+  stroke:white;
+  stroke-width:3
+}
+.node-label {
+  @apply [font:12px_sans-serif] [text-anchor:middle];
+  fill:#edf7f5;
+  paint-order:stroke;
+  stroke:#102d32;
+  stroke-width:3px
+}
+@media(max-width:850px) {
+.sp-panel {
+  @apply w-full;
+}
+
+}
+
+.sp-page>div:first-child {
+  @apply max-w-[1240px] [margin:0_auto] [padding:2rem_6rem_0_1.25rem];
+}
+.sp-page>div:first-child>div:first-child {
+  @apply top-[2rem] right-[1.25rem];
+}
+
+
+}

@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-prey-predator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && esbuild src/main.ts --bundle --format=esm --target=es2022 --outfile=static/js/prey_predator.js",
+    "test": "node --import tsx --test tests/*.test.ts"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

@@ -35,6 +35,23 @@ npm run build:css
 Pendant les modifications de styles, lancer `npm run watch:css` dans un second
 terminal pour recompiler automatiquement le CSS.
 
+## Docker avec la base PostgreSQL du Mac
+
+Les conteneurs utilisent la même base que le développement, sans déplacer ses
+fichiers. Dans `.env`, conserver `DATABASE_URL` avec `127.0.0.1` pour les commandes
+sur le Mac et définir `DOCKER_DATABASE_URL` avec les mêmes identifiants, port et
+nom de base, en remplaçant uniquement l’hôte par `host.docker.internal`.
+
+```dotenv
+DOCKER_DATABASE_URL=postgresql+psycopg://flask_app:MOT_DE_PASSE_LOCAL@host.docker.internal:5432/flask_app
+```
+
+PostgreSQL sur le Mac doit être démarré. Lancer `docker compose up -d --build web`
+pour appliquer les migrations puis démarrer l’application sur
+http://localhost:8080. Aucun conteneur PostgreSQL ni montage de son répertoire
+de données n’est nécessaire. Les écritures et migrations concernent la base de
+développement existante.
+
 ## Lancement du portfolio
 
 L'application charge `.env` à la racine du projet. Sur Mac, utiliser

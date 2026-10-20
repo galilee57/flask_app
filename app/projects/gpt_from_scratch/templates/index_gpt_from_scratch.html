@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}GPT FROM SCRATCH{% endblock %}
-{% block css %}<link rel="stylesheet" href="{{ url_for('gpt_from_scratch.static', filename='css/gpt_from_scratch.css') }}">{% endblock %}
+{% block css %}{% endblock %}
 {% block content %}
-<div class="gpt-from-scratch bg-white p-8 min-h-screen">
+<div class="gpt-from-scratch bg-white min-h-screen mx-auto max-w-[1440px] p-4 min-[801px]:p-8">
 {% call hero("GPT FROM SCRATCH", t({'fr':'Un modèle de langage codé manuellement, du code aux premiers textes.', 'en':'A hand-coded language model, from code to generated text.'})) %}
 {{ info_modal(id="gpt-info", title=md_meta_i18n("docs/projects/gpt_from_scratch", "title"), text=md_page_i18n("docs/projects/gpt_from_scratch"), button_label=t({'fr':'Infos','en':'About'}), close_label=t({'fr':'Fermer','en':'Close'})) }}
 {% endcall %}
 <div id="gpt-demo" data-models="{{ url_for('gpt_from_scratch.models') }}" data-generate="{{ url_for('gpt_from_scratch.generate') }}">
-<div class="gpt-grid">
+<div class="gpt-grid grid grid-cols-1 gap-6 min-[801px]:grid-cols-2">
 <form id="gpt-form" class="gpt-panel">
 <h2>{{ t({'fr':'Expérimenter','en':'Experiment'}) }}</h2>
 <label for="gpt-model">{{ t({'fr':'Modèle','en':'Model'}) }}</label><select id="gpt-model" required></select>
@@ -15,7 +15,7 @@
 <label for="gpt-prompt">{{ t({'fr':'Texte de départ','en':'Prompt'}) }}</label>
 <textarea id="gpt-prompt" rows="5" maxlength="1000" required>il etait une fois </textarea>
 <p>{{ t({'fr':'Le modèle prolonge votre texte. Un token est un caractère ou un fragment de texte selon le modèle. Les modèles actuels sont entraînés en français ; les modèles anglais seront identifiés séparément.','en':'The model continues your text. A token is a character or a text fragment, depending on the model. Current models are trained on French text; future English models will be labeled separately.'}) }}</p>
-<div class="gpt-controls">
+<div class="gpt-controls grid grid-cols-1 gap-3 min-[801px]:grid-cols-3">
 <label>{{ t({'fr':'Température','en':'Temperature'}) }}<input id="gpt-temperature" type="number" min="0.1" max="2" step="0.1" value="0.8" required></label>
 <label>{{ t({'fr':'Tokens à générer','en':'New tokens'}) }}<input id="gpt-tokens" type="number" min="1" max="500" value="200" required></label>
 <label>{{ t({'fr':'Graine aléatoire','en':'Random seed'}) }}<input id="gpt-seed" type="number" min="0" max="2147483647" value="42" required></label>
@@ -24,7 +24,7 @@
 </form>
 <section class="gpt-panel"><h2>{{ t({'fr':'Génération','en':'Generation'}) }}</h2><p id="gpt-status" role="status" aria-live="polite"></p><pre id="gpt-output"><span id="gpt-prefix"></span><span id="gpt-continuation"></span></pre></section>
 </div>
-<section class="gpt-panel gpt-training"><h2>{{ t({'fr':'Courbes d’entraînement','en':'Training curves'}) }}</h2>
+<section class="gpt-panel gpt-training mt-6"><h2>{{ t({'fr':'Courbes d’entraînement','en':'Training curves'}) }}</h2>
 <p><span class="gpt-train-key">● {{ t({'fr':'Entraînement','en':'Training'}) }}</span> <span class="gpt-val-key">● Validation</span></p>
 <svg id="gpt-chart" viewBox="0 0 800 300" role="img" aria-label="{{ t({'fr':'Perte selon le nombre d’étapes','en':'Loss by training step'}) }}"></svg>
 <p>{{ t({'fr':'Axe horizontal : étapes · Axe vertical : perte (entropie croisée). Le repère indique le meilleur checkpoint évalué. Les pertes de corpus différents ne constituent pas un classement direct de qualité.','en':'Horizontal axis: steps · Vertical axis: loss (cross entropy). The marker indicates the best evaluated checkpoint. Losses on different corpora are not a direct quality ranking.'}) }}</p>

@@ -9,5 +9,3 @@ To add an experiment, copy `best_model.pt`, `config.json` and `metrics.csv` into
 The catalog exposes only explicit public fields, never checkpoint contents or local paths. POST `/api/generate` is a read-only computation with bounded prompt, temperature, seed and output length. Persistent-write admin authorization remains unchanged.
 
 The production Docker image installs the pinned PyTorch CPU wheel and tokenizers. No GPU runtime is required. Existing generic dependency lock files remain unchanged; inference dependencies are pinned separately in requirements-gpt.txt.
-
-Release checkpoints contain only inference tensors, architecture, tokenizer and checkpoint step/loss. Optimizer state and machine-local training metadata have been removed. The PythonAnywhere staging workflow installs the CPU wheel before the application dependencies.
