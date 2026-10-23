@@ -1,0 +1,5 @@
+title: Diagnostic de positionnement professionnel
+
+Les rôles proposés sont Industrial AI, Agentic AI et AI Solutions Engineering. Le référentiel éditorial versionné organise des observations : il ne constitue pas un standard de recrutement. Chaque constat exige une URL, un extrait exact, une date de consultation et une confiance justifiée. La confirmation humaine atteste la consultation de la preuve. Aucune collecte automatique ne vérifie le contenu. Une information manquante reste non documentée.
+
+Le module est privé sous session administrateur. Les écritures de production exigent aussi le jeton administrateur, conservé uniquement en mémoire dans la page. Les instantanés publics figés exposent seulement des effectifs de références documentées et vérifiées par critère. Les groupes inférieurs à cinq sont masqués ; aucun nom, URL ou extrait n’est exporté. Le corpus est manuel et non représentatif. Les effectifs ne mesurent pas les compétences et ne produisent aucun percentile. Avant publication, vérifier les profils dupliqués et les possibilités de réidentification.

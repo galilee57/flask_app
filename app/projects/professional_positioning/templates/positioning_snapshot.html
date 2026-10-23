@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% block title %}{{ t({'fr':'Couverture documentaire du corpus','en':'Corpus evidence coverage'}) }}{% endblock %}{% block content %}
+{{ hero(t({'fr':'COUVERTURE DOCUMENTAIRE','en':'EVIDENCE COVERAGE'}), roles[payload.role]) }}
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+<section class="pp-card"><p>{{ t({'fr':'Corpus sélectionné manuellement, non représentatif du marché. Ces effectifs décrivent la documentation vérifiée, pas un niveau de compétence ni un classement.', 'en':'Manually selected corpus, not representative of the market. These counts describe verified documentation, not skill levels or rankings.'}) }}</p><p>{{ t({'fr':'Référentiel éditorial, version','en':'Editorial rubric, version'}) }} {{ payload.rubric_version }} · {{ t({'fr':'Seuil de diffusion : cinq références par critère. Les effectifs masqués ne sont pas nuls.', 'en':'Disclosure threshold: five references per criterion. Suppressed counts are not zero.'}) }}</p></section>
+<p>{{ t({'fr':'Années de consultation des preuves','en':'Evidence consultation years'}) }}: {{ payload.observation_years|join('–') }}</p><p>{{ t({'fr':'Instantané généré le','en':'Snapshot generated on'}) }} {{ payload.generated_on }}</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-4">{% for key, fr, en in criteria %}{% set row = payload.rows|selectattr('criterion','equalto',key)|first %}<article class="pp-card"><h2 class="text-xl">{{ t({'fr':fr,'en':en}) }}</h2><p class="text-4xl font-semibold text-primary-700 my-4">{{ row.count if row.count is not none else '—' }}</p><p>{{ t({'fr':'Références avec un constat vérifié','en':'References with a verified assessment'}) if row.count is not none else t({'fr':'Effectif masqué','en':'Count suppressed'}) }}</p></article>{% endfor %}</div>
+{% if preview %}<section class="pp-card"><p>{{ t({'fr':'Aperçu privé : seuls les agrégats ci-dessus seront publics. Confirmez après examen du risque de reconnaissance.', 'en':'Private preview: only the aggregates above will be public. Confirm after reviewing recognition risk.'}) }}</p><input id="pp-token" type="password" autocomplete="off" class="pp-input" aria-label="{{ t({'fr':'Jeton administrateur','en':'Administrator token'}) }}"><p id="pp-status" role="status"></p><form data-api="{{ url_for('professional_positioning.publish', identifier=snapshot.id) }}">{{ button(t({'fr': 'Publier cet instantané', 'en': 'Publish this snapshot'})) }}</form>{% if snapshot.published_at %}<form class="mt-4" data-api="{{ url_for('professional_positioning.withdraw', identifier=snapshot.id) }}">{{ button(t({'fr':'Retirer la publication','en':'Withdraw publication'}), variant='third') }}</form>{% endif %}</section>
+<script>
+(() => {
+ const text = {{ t({'fr': {'error': 'Opération refusée. Vérifiez les champs, la session et le jeton.', 'ok': 'Enregistré.', 'date': 'Date invalide.'}, 'en': {'error': 'Request refused. Check fields, session and token.', 'ok': 'Saved.', 'date': 'Invalid date.'}})|tojson }};
+ document.querySelectorAll('form[data-api]').forEach(form => form.addEventListener('submit', async event => {
+  event.preventDefault();
+  const status = document.getElementById('pp-status');
+  const submit = form.querySelector('button');
+  submit.disabled = true;
+  try {
+   const data = Object.fromEntries(new FormData(form));
+   if (data.consulted_at) data.consulted_at = new Date(data.consulted_at).toISOString();
+   const response = await fetch(form.dataset.api, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Admin-Token': document.getElementById('pp-token').value}, body: JSON.stringify(data)});
+   if (!response.ok) throw new Error();
+   const result = await response.json();
+   if (result.url) window.location.assign(result.url); else window.location.reload();
+  } catch (_) { status.textContent = text.error; } finally { submit.disabled = false; }
+ }));
+})();
+</script>
+{% endif %}</div>{% endblock %}

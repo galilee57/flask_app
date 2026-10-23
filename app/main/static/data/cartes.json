@@ -361,5 +361,24 @@
         "javascript"
     ],
     "resources": []
+},
+{
+    "id": "professional_positioning",
+    "made_by": "AI made",
+    "titre": {
+        "fr": "Positionnement professionnel",
+        "en": "Professional positioning"
+    },
+    "description": {
+        "fr": "Diagnostic privé fondé sur des preuves et infographies agrégées.",
+        "en": "Private evidence-based diagnostic and aggregate infographics."
+    },
+    "published": false,
+    "image": "professional_positioning.svg",
+    "type": 5,
+    "categories": [
+        "ai"
+    ],
+    "resources": []
 }
 ]

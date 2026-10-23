@@ -4,6 +4,8 @@ from typing import NamedTuple
 
 from flask import Blueprint, Flask
 
+from app.projects.professional_positioning import bp as positioning_bp, public_bp as positioning_public_bp
+from app.projects.professional_positioning import models as _positioning_models
 from app.main import bp as main_bp
 from app.projects.todolist import bp as todolist_bp
 from app.projects.countries import bp as countries_bp
@@ -34,6 +36,8 @@ class BlueprintRegistration(NamedTuple):
 
 BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
     BlueprintRegistration(main_bp, "/"),
+    BlueprintRegistration(positioning_bp, "/projects/professional_positioning"),
+    BlueprintRegistration(positioning_public_bp, "/positioning"),
     BlueprintRegistration(todolist_bp, "/projects/todolist"),
     BlueprintRegistration(countries_bp, "/projects/countries"),
     BlueprintRegistration(memory_bp, "/projects/memory"),

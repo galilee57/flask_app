@@ -1,0 +1,78 @@
+{% extends "positioning_private.html" %}
+{% macro state_label(status) -%}
+{{ t({'fr': {'demonstrated':'Démontré dans le périmètre consulté','claimed':'Déclaré / décrit','not_documented':'Non documenté','not_assessable':'Non évaluable','todo':'À faire','in_progress':'En cours','done':'Terminé'}[status], 'en': {'demonstrated':'Demonstrated within reviewed scope','claimed':'Stated / described','not_documented':'Undocumented','not_assessable':'Not assessable','todo':'To do','in_progress':'In progress','done':'Done'}[status]}) }}
+{%- endmacro %}
+{% block workspace %}
+<section class="pp-card space-y-3">
+  <h1 class="text-2xl sm:text-3xl font-semibold">{{ item.title }}</h1>
+  <p>{{ t({'fr':'AI Solutions Engineering · Diagnostic privé et mémoire de travail','en':'AI Solutions Engineering · Private diagnostic and working memory'}) }}</p>
+  <p class="text-sm">{{ run.created_at.isoformat() }} UTC · {{ run.actor }}</p><p>{{ t({'fr':'Apports mémoire examinés dans cette version','en':'Memory contributions reviewed in this revision'}) }}: {{ run.memory_entry_ids|length }}</p>
+  <div class="flex flex-wrap gap-3">
+    {{ button(t({'fr':'Comparaison','en':'Comparison'}), href='#comparison', variant='second') }}
+    {{ button(t({'fr':'Plan d’action','en':'Action plan'}), href='#actions', variant='second') }}
+    {{ button(t({'fr':'Mémoire','en':'Memory'}), href='#memory', variant='second') }}
+    {{ button(t({'fr':'Sources','en':'Sources'}), href='#sources', variant='second') }}
+  </div>
+</section>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <section class="pp-card"><p class="text-3xl font-semibold text-primary-700">{{ references|length }}</p><p>{{ t({'fr':'Portfolios de référence consultés','en':'Reference portfolios reviewed'}) }}</p></section>
+  <section class="pp-card"><p class="text-3xl font-semibold text-primary-700">{{ runs|length }}</p><p>{{ t({'fr':'Versions conservées','en':'Preserved revisions'}) }}</p></section>
+  <section class="pp-card"><p class="text-3xl font-semibold text-primary-700">{{ actions|selectattr('status','equalto','done')|list|length }} / {{ actions|length }}</p><p>{{ t({'fr':'Actions terminées (suivi manuel)','en':'Completed actions (manual tracking)'}) }}</p></section>
+</div>
+<section class="pp-card space-y-3">
+  <h2 class="text-2xl">{{ t({'fr':'Lecture du positionnement','en':'Positioning assessment'}) }}</h2>
+  {% for paragraph in run.summary %}<p>{{ t(paragraph) }}</p>{% endfor %}
+  <details class="border-t border-neutral-200 pt-3"><summary class="cursor-pointer min-h-12">{{ t({'fr':'Périmètre et limites','en':'Scope and limitations'}) }}</summary><p>{{ item.context }}</p>{% for limit in run.limitations %}<p class="my-2">{{ t(limit) }}</p>{% endfor %}</details>
+</section>
+<section class="pp-card space-y-3">
+  <h2 class="text-2xl">{{ t({'fr':'Historique des analyses','en':'Analysis history'}) }}</h2>
+  <p>{{ t({'fr':'Les commentaires et actions sont la mémoire courante ; les constats ci-dessous appartiennent à la version sélectionnée.','en':'Comments and actions are the current working memory; findings below belong to the selected revision.'}) }}</p>
+  {% for revision in runs %}<p><a class="underline text-primary-700 break-all" href="{{ url_for('professional_positioning.dashboard', identifier=item.id, run=revision.id) }}">{{ revision.created_at.isoformat() }} UTC · {{ revision.actor }}</a>{% if revision.id == run.id %} · {{ t({'fr':'Version affichée','en':'Selected revision'}) }}{% endif %}</p>{% endfor %}
+</section>
+<section id="comparison" class="space-y-4 scroll-mt-8">
+  <h2 class="text-2xl">{{ t({'fr':'Compétences et projets : comparaison documentée','en':'Skills and projects: sourced comparison'}) }}</h2>
+  <p>{{ t({'fr':'Les effectifs comptent les portfolios qui décrivent le critère, une fois par personne. Ils ne mesurent ni maîtrise, ni percentile, ni représentativité du marché.','en':'Counts include portfolios describing the criterion, once per person. They do not measure proficiency, percentiles or market prevalence.'}) }}</p>
+  {% for row in comparison %}
+  <article class="pp-card grid grid-cols-1 lg:grid-cols-2 gap-5" id="criterion-{{ row.criterion.key }}">
+    <div class="min-w-0"><h3 class="text-xl font-semibold">{{ t(row.criterion.label) }}</h3><p class="text-sm text-neutral-600">{{ t(row.criterion.definition) }}</p><p class="font-semibold mt-3">{{ state_label(row.target.status) }}</p><p>{{ t(row.target.finding) }}</p><p class="text-sm my-2">{{ t({'fr':'Confiance','en':'Confidence'}) }}: {{ t({'fr':{'low':'faible','medium':'moyenne','high':'élevée'}[row.target.confidence], 'en':row.target.confidence}) }} · {{ t(row.target.confidence_reason) }}</p><a class="underline text-primary-700" href="#review-{{ target.review.id }}">{{ t({'fr':'Voir mes preuves et le périmètre consulté','en':'See my evidence and reviewed scope'}) }}</a>
+    {% if old_status.get(row.criterion.key) and old_status[row.criterion.key] != row.target.status %}<p class="mt-2">{{ t({'fr':'Évolution depuis la version précédente','en':'Change since previous revision'}) }}: {{ state_label(old_status[row.criterion.key]) }} → {{ state_label(row.target.status) }}</p>{% endif %}</div>
+    <div class="min-w-0"><p class="text-3xl font-semibold text-primary-700">{{ row.count }} / {{ row.total }}</p><p>{{ t({'fr':'Références décrivant ce critère dans le corpus','en':'References describing this criterion in the corpus'}) }}</p><p class="text-sm">{{ t({'fr':'Non évaluables','en':'Not assessable'}) }}: {{ row.unassessable }}</p><details class="mt-3"><summary class="cursor-pointer min-h-12">{{ t({'fr':'Quels portfolios ?','en':'Which portfolios?'}) }}</summary><ul class="space-y-2">{% for reference in row.positive %}<li><a class="underline text-primary-700" href="#review-{{ reference.review.id }}">{{ reference.profile.name }}</a> · {{ reference.review.role_label }}</li>{% endfor %}</ul></details></div>
+  </article>
+  {% endfor %}
+</section>
+<section id="actions" class="pp-card space-y-4 scroll-mt-8">
+  <h2 class="text-2xl">{{ t({'fr':'Plan d’action','en':'Action plan'}) }}</h2>
+  <p>{{ t({'fr':'Terminer une action ne change pas automatiquement le diagnostic. Ajoute une preuve puis demande à Codex une nouvelle analyse.','en':'Completing an action does not automatically change the diagnostic. Add evidence and ask Codex for a new analysis.'}) }}</p>
+  {% for action in actions %}<article class="border border-neutral-200 rounded-xl p-4 space-y-2"><h3 class="font-semibold">{{ action.title }}</h3><p>{{ action.body }}</p><p>{{ action.criterion }} · {{ t({'fr':{'high':'Priorité haute','medium':'Priorité moyenne','low':'Priorité basse'}[action.priority], 'en':{'high':'High priority','medium':'Medium priority','low':'Low priority'}[action.priority]}) }}</p><form data-api="{{ url_for('professional_positioning.change_action', identifier=action.id) }}"><label>{{ t({'fr':'Statut','en':'Status'}) }}<select class="pp-input" name="status">{% for value in ['todo','in_progress','done'] %}<option value="{{ value }}" {% if action.status == value %}selected{% endif %}>{{ state_label(value) }}</option>{% endfor %}</select></label>{{ button(t({'fr':'Mettre à jour','en':'Update'}), variant='second') }}</form></article>{% endfor %}
+  <details><summary class="cursor-pointer min-h-12">{{ t({'fr':'Ajouter une action','en':'Add an action'}) }}</summary><form data-api="{{ url_for('professional_positioning.add_action', identifier=item.id) }}"><label>{{ t({'fr':'Titre','en':'Title'}) }}<input class="pp-input" name="title" maxlength="200" required></label><label>{{ t({'fr':'Critère','en':'Criterion'}) }}<select class="pp-input" name="criterion">{% for c in run.rubric %}<option value="{{ c.key }}">{{ t(c.label) }}</option>{% endfor %}</select></label><label>{{ t({'fr':'Action et preuve attendue','en':'Action and expected evidence'}) }}<textarea class="pp-input" name="body" required rows="3"></textarea></label><label>{{ t({'fr':'Priorité','en':'Priority'}) }}<select class="pp-input" name="priority"><option value="high">{{ t({'fr':'Haute','en':'High'}) }}</option><option value="medium" selected>{{ t({'fr':'Moyenne','en':'Medium'}) }}</option><option value="low">{{ t({'fr':'Basse','en':'Low'}) }}</option></select></label>{{ button(t({'fr':'Ajouter','en':'Add'})) }}</form></details>
+</section>
+<section id="memory" class="pp-card space-y-4 scroll-mt-8">
+  <h2 class="text-2xl">{{ t({'fr':'Commentaires, preuves et mémoire','en':'Comments, evidence and memory'}) }}</h2>
+  <p>{{ t({'fr':'Les apports sont conservés sans écraser les analyses. Une preuve ajoutée reste à examiner lors de la prochaine analyse.','en':'Contributions are preserved without overwriting analyses. Added evidence remains pending review in the next analysis.'}) }}</p>
+  <form data-api="{{ url_for('professional_positioning.add_memory', identifier=item.id) }}">
+    <input type="hidden" name="run_id" value="{{ run.id }}">
+    <label>{{ t({'fr':'Type d’apport','en':'Contribution type'}) }}<select class="pp-input" name="kind"><option value="comment">{{ t({'fr':'Commentaire','en':'Comment'}) }}</option><option value="evidence">{{ t({'fr':'Preuve apportée','en':'Supplied evidence'}) }}</option></select></label>
+    <label>{{ t({'fr':'Critère concerné','en':'Related criterion'}) }}<select class="pp-input" name="criterion"><option value="">{{ t({'fr':'Général','en':'General'}) }}</option>{% for c in run.rubric %}<option value="{{ c.key }}">{{ t(c.label) }}</option>{% endfor %}</select></label>
+    <label>{{ t({'fr':'Ton commentaire ou explication','en':'Your comment or explanation'}) }}<textarea name="body" class="pp-input" rows="4" required></textarea></label>
+    <p class="text-sm">{{ t({'fr':'Pour une preuve, complète les trois champs suivants. Date dans ton fuseau local.','en':'For evidence, complete the following three fields. Date in your local time zone.'}) }}</p>
+    <label>{{ t({'fr':'URL de la preuve','en':'Evidence URL'}) }}<input type="url" name="url" class="pp-input"></label>
+    <label>{{ t({'fr':'Extrait exact','en':'Exact excerpt'}) }}<textarea name="excerpt" class="pp-input" rows="2"></textarea></label>
+    <label>{{ t({'fr':'Date de consultation','en':'Consultation date'}) }}<input type="datetime-local" name="consulted_at" class="pp-input"></label>
+    {{ button(t({'fr':'Conserver dans la mémoire','en':'Save to memory'})) }}
+  </form>
+  {% for entry in memory %}<article class="border-t border-neutral-200 pt-4"><p class="text-sm">{{ entry.created_at.isoformat() }} UTC · {{ entry.actor }} · {{ entry.criterion or t({'fr':'Général','en':'General'}) }} · {{ t({'fr':{'comment':'Commentaire','evidence':'Preuve apportée, à examiner','status_change':'Changement de statut'}[entry.kind], 'en':{'comment':'Comment','evidence':'Supplied evidence, pending review','status_change':'Status change'}[entry.kind]}) }}</p><p class="whitespace-pre-wrap break-words">{{ entry.body }}</p>{% if entry.evidence %}<a class="underline break-all" rel="noopener noreferrer" href="{{ entry.evidence.url }}" target="_blank">{{ entry.evidence.url }}</a><blockquote class="border-l-4 border-primary-200 pl-3">{{ entry.evidence.excerpt }}</blockquote><p>{{ entry.evidence.consulted_at }}</p>{% endif %}</article>{% else %}<p>{{ t({'fr':'Aucun commentaire pour le moment.','en':'No comments yet.'}) }}</p>{% endfor %}
+</section>
+<section id="sources" class="pp-card space-y-4 scroll-mt-8">
+  <h2 class="text-2xl">{{ t({'fr':'Analyses individuelles et sources d’origine','en':'Individual reviews and original sources'}) }}</h2>
+  {% for entry in reviews %}
+  <details class="border border-neutral-200 rounded-xl p-4" id="review-{{ entry.review.id }}">
+    <summary class="cursor-pointer min-h-12 font-semibold break-words">{{ entry.profile.name }} · {{ entry.review.role_label }} · {{ t({'fr':{'target':'Mon portfolio','exact':'Métier explicite','adjacent':'Métier voisin'}[entry.review.comparability], 'en':{'target':'My portfolio','exact':'Explicit role','adjacent':'Adjacent role'}[entry.review.comparability]}) }}</summary>
+    <a class="underline text-primary-700 break-all" href="{{ entry.review.origin_url }}" target="_blank" rel="noopener noreferrer">{{ entry.review.origin_url }}</a>
+    <p class="my-3">{{ entry.review.scope }}</p>
+    {% for c in run.rubric %}{% set o = entry.observations[c.key] %}<div class="border-t border-neutral-200 py-3"><h3 class="font-semibold">{{ t(c.label) }} · {{ state_label(o.status) }}</h3><p>{{ t(o.finding) }}</p><p class="text-sm">{{ t({'fr':'Confiance','en':'Confidence'}) }}: {{ t({'fr':{'low':'faible','medium':'moyenne','high':'élevée'}[o.confidence], 'en':o.confidence}) }} · {{ t(o.confidence_reason) }}</p><p>{% for source in entry.review.sources if source.key in o.source_keys %}<a class="underline text-primary-700 mr-3" href="#source-{{ entry.review.id }}-{{ source.key }}">{{ t({'fr':'Preuve','en':'Evidence'}) }} {{ source.key }}</a>{% endfor %}</p></div>{% endfor %}
+    <h3 class="font-semibold text-xl mt-4">{{ t({'fr':'Extraits et dates','en':'Excerpts and dates'}) }}</h3>
+    {% for source in entry.review.sources %}<article id="source-{{ entry.review.id }}-{{ source.key }}" class="border-t border-neutral-200 py-3 min-w-0"><p class="font-semibold">{{ source.key }}</p><a class="underline break-all text-primary-700" href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.url }}</a><blockquote class="border-l-4 border-primary-200 pl-3 whitespace-pre-wrap">{{ source.excerpt }}</blockquote><p class="text-sm">{{ source.consulted_at }} · {{ source.method }} · {{ t({'fr':{'self_report':'Déclaration de l’auteur','artifact':'Artefact consulté','scope':'Périmètre de recherche'}[source.kind], 'en':{'self_report':'Author statement','artifact':'Reviewed artifact','scope':'Review scope'}[source.kind]}) }}</p></article>{% endfor %}
+  </details>
+  {% endfor %}
+</section>
+{% endblock %}

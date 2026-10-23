@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ t({'fr': 'Diagnostic professionnel privé', 'en': 'Private professional diagnostic'}) }}{% endblock %}
+{% block content %}
+{% call hero(t({'fr': 'POSITIONNEMENT PROFESSIONNEL', 'en': 'PROFESSIONAL POSITIONING'}), t({'fr': 'Un diagnostic privé, fondé sur des preuves', 'en': 'A private evidence-based diagnostic'})) %}
+{{ info_modal('positioning-info', md_meta_i18n('docs/projects/professional_positioning', 'title'), md_page_i18n('docs/projects/professional_positioning'), button_label=t({'fr':'Méthode','en':'Method'}), close_label=t({'fr':'Fermer','en':'Close'})) }}
+{% endcall %}
+<div class="mx-auto max-w-6xl px-4 py-6 space-y-6">
+<section class="pp-card"><label for="pp-token">{{ t({'fr':'Jeton administrateur pour les écritures en production (gardé uniquement dans cette page)', 'en':'Administrator token for production writes (kept only on this page)'}) }}</label><input id="pp-token" type="password" autocomplete="off" class="pp-input"><p id="pp-status" role="status" aria-live="polite"></p></section>
+{% block workspace %}{% endblock %}
+</div>
+
+<script>
+(() => {
+ const text = {{ t({'fr': {'error': 'Opération refusée. Vérifiez les champs, la session et le jeton.', 'ok': 'Enregistré.', 'date': 'Date invalide.'}, 'en': {'error': 'Request refused. Check fields, session and token.', 'ok': 'Saved.', 'date': 'Invalid date.'}})|tojson }};
+ document.querySelectorAll('form[data-api]').forEach(form => form.addEventListener('submit', async event => {
+  event.preventDefault();
+  const status = document.getElementById('pp-status');
+  const submit = form.querySelector('button');
+  submit.disabled = true;
+  try {
+   const data = Object.fromEntries(new FormData(form));
+   if (data.consulted_at) data.consulted_at = new Date(data.consulted_at).toISOString();
+   const response = await fetch(form.dataset.api, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Admin-Token': document.getElementById('pp-token').value}, body: JSON.stringify(data)});
+   if (!response.ok) throw new Error();
+   const result = await response.json();
+   if (result.url) window.location.assign(result.url); else window.location.reload();
+  } catch (_) { status.textContent = text.error; } finally { submit.disabled = false; }
+ }));
+})();
+</script>
+{% endblock %}
