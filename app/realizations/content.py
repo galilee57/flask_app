@@ -1,5 +1,6 @@
 """Editable bilingual sources for the realizations catalogue and case studies."""
 from pathlib import Path
+import json
 import re
 import unicodedata
 
@@ -9,6 +10,7 @@ from markdown import markdown
 
 
 CONTENT_DIR = Path(__file__).resolve().parents[1] / "main/content/docs/realizations"
+IMAGE_MANIFEST = Path(__file__).resolve().parent / "static/images/responsive/manifest.json"
 THEMES = {
     "industry": {"fr": "Industrie & exploitation", "en": "Industry & operations"},
     "data": {"fr": "Données & IA", "en": "Data & AI"},
@@ -23,6 +25,7 @@ VIEWS = ("selection", "all", "professional", "personal")
 def load_projects(language):
     """Read on each request so Markdown edits need no application restart."""
     skill_registry = yaml.safe_load((CONTENT_DIR / "skills.yml").read_text(encoding="utf-8"))
+    image_manifest = json.loads(IMAGE_MANIFEST.read_text()) if IMAGE_MANIFEST.exists() else {}
     projects = []
     for source_path in sorted(CONTENT_DIR.glob("*.fr.md")):
         if ".short." in source_path.name:
@@ -51,6 +54,8 @@ def load_projects(language):
             project["images"] = selected.get("images", [])
             project["related_ids"] = selected.get("related_ids", [])
         project["summary"] = project.get("summary") or ""
+        project["images"] = [dict(image, responsive=image_manifest.get(image["file"]))
+                             for image in project.get("images", [])]
         project["skills"] = project.get("skills") or []
         project["year"] = project.get("year")
         project["skill_labels"] = [

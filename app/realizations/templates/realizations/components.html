@@ -1,3 +1,12 @@
+{% macro responsive_image(image, card=False, opening=False) %}
+<picture class="contents">
+  {% if image.responsive %}
+  <source type="image/webp" srcset="{% for variant in image.responsive.variants if not card or variant.width <= 960 %}{{ url_for('realizations.static', filename='images/' ~ variant.file) }} {{ variant.width }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="{% if card %}(min-width: 1280px) 360px, (min-width: 768px) calc((100vw - 7rem) / 2), calc(100vw - 4.5rem){% elif opening %}(min-width: 1152px) 1088px, calc(100vw - 4rem){% else %}(min-width: 1024px) 700px, calc(100vw - 4rem){% endif %}">
+  {% endif %}
+  <img src="{{ url_for('realizations.static', filename='images/' ~ image.file) }}" alt="{{ '' if card else image.alt }}" class="{{ 'h-full min-w-0 flex-1 object-contain p-5' if card else 'max-h-[28rem] max-w-full object-contain' }}" decoding="async" {% if card or not opening %}loading="lazy"{% endif %}{% if image.responsive %} width="{{ image.responsive.width }}" height="{{ image.responsive.height }}"{% endif %}>
+</picture>
+{% endmacro %}
+
 {% macro project_card(project, themes, show_all=False) %}
 <article class="realizations-card" data-project data-display-version="{{ project.display_version }}" data-year="{{ project.year if project.year is not none else '' }}" data-skills="{{ project.skills | join(' ') }}" data-origin="{{ project.origin }}" data-featured="{{ 'true' if project.featured else 'false' }}" data-themes="{{ project.themes | join(' ') }}" data-search="{{ project.search | default(project.title ~ ' ' ~ project.summary) }}" {% if not show_all and not project.visible %}hidden{% endif %}>
   {% set cover = namespace(present=false) %}
@@ -9,7 +18,7 @@
   <div class="realizations-cover bg-primary-50" aria-hidden="true">
   {% endif %}
     {% for image in project.images if 'ouverture' in image.emplacements %}
-    <img src="{{ url_for('realizations.static', filename='images/' ~ image.file) }}" alt="" class="h-full min-w-0 flex-1 object-contain p-5" loading="lazy">
+    {{ responsive_image(image, card=True) }}
     {% endfor %}
   {% if project.detail %}</a>{% else %}</div>{% endif %}
   {% else %}
@@ -40,7 +49,7 @@
 {% macro case_image(image, opening=False) %}
 <figure class="min-w-0 overflow-hidden rounded-2xl border border-primary-100 bg-white">
   <div class="flex items-center justify-center {% if image.id in ['jupiter', 'saturne'] %}bg-black{% else %}bg-primary-50/40{% endif %} p-4 sm:p-6">
-    <img src="{{ url_for('realizations.static', filename='images/' ~ image.file) }}" alt="{{ image.alt }}" class="max-h-[28rem] max-w-full object-contain" {% if not opening %}loading="lazy"{% endif %}>
+    {{ responsive_image(image, opening=opening) }}
   </div>
   <figcaption class="p-4 text-sm leading-6 text-neutral-600">{% if image.nature | default('') == 'illustration' %}<span class="font-semibold text-primary-700">{{ t({'fr': 'Illustration · ', 'en': 'Illustration · '}) }}</span>{% endif %}{{ image.legende }}</figcaption>
 </figure>

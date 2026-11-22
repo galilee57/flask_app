@@ -65,3 +65,16 @@ Modifier ensuite un texte français appelle une relecture de sa traduction angla
 ## Illustrations complémentaires
 
 Les [six illustrations ajoutées le 22 novembre 2026](visuals/README.md) sont rangées par projet dans `app/realizations/static/images/generated/`. Les briefs conservent les prompts exacts, la provenance et les fichiers retenus. Les légendes et alternatives sont éditables dans les fiches longues FR/EN. Les médias des variantes courtes restent indépendants.
+
+## Miniatures et images adaptées aux écrans
+
+Les originaux restent dans leurs dossiers. Les cartes utilisent des variantes WebP de 320, 640 et 960 px ; les études peuvent aussi utiliser 1440 px. Le navigateur choisit la taille avec `srcset` et `sizes`, et les médias hors écran sont chargés à la demande. Les variantes restent protégées par la session admin, comme les originaux.
+
+Après un ajout ou une modification d’image, reconstruire les variantes avec Python 3.11 ou plus récent :
+
+```sh
+pip install -r requirements-images.txt
+python scripts/build_realization_images.py
+```
+
+Le script conserve les proportions et l’orientation, ne grossit pas les petites images et préserve les originaux. Les SVG restent vectoriels. Le dossier `app/realizations/static/images/responsive/` et son manifeste doivent être inclus dans le commit. Aucune bibliothèque d’image supplémentaire n’est nécessaire au serveur. La conversion utilise [Pillow](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp).

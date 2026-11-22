@@ -332,3 +332,27 @@ def test_gallery_requires_a_distinct_additional_raster_image(language, title, ex
     sections = content.case_sections(project)
     assert any(section['title'] == title for section in sections) is visible
     assert sections[0]['title'] == 'Context'
+
+
+@pytest.mark.parametrize('language', ['fr', 'en'])
+def test_responsive_images_are_available_only_to_admin(admin_client, client, language):
+    import json
+
+    manifest = json.loads(content.IMAGE_MANIFEST.read_text())
+    project = next(p for p in content.load_projects(language) if p['id'] == 'PP020')
+    image = project['images'][0]
+    variants = manifest[image['file']]['variants']
+    assert [variant['width'] for variant in variants] == [320, 640, 960, 1440]
+    url = '/realizations/static/images/' + variants[1]['file']
+    # Separate unauthenticated client must not receive a private thumbnail.
+    with admin_client.application.test_client() as public:
+        assert public.get(url).status_code == 404
+    response = admin_client.get(url)
+    assert response.status_code == 200
+    assert response.mimetype == 'image/webp'
+    html = admin_client.get('/realizations/', query_string={'lang': language}).get_data(as_text=True)
+    assert 'type="image/webp"' in html
+    assert url in html
+    assert 'decoding="async"' in html
+    assert '960w' in html
+    assert '1440w' not in html  # Cards never request full-size detail variants.
