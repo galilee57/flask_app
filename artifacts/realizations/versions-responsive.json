@@ -1,0 +1,125 @@
+{
+  "checks": [
+    {
+      "mode": "long",
+      "lang": "fr",
+      "width": 390,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 747,
+      "missingAnchors": []
+    },
+    {
+      "mode": "long",
+      "lang": "fr",
+      "width": 768,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 747,
+      "missingAnchors": []
+    },
+    {
+      "mode": "long",
+      "lang": "fr",
+      "width": 1280,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 747,
+      "missingAnchors": []
+    },
+    {
+      "mode": "long",
+      "lang": "en",
+      "width": 390,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 654,
+      "missingAnchors": []
+    },
+    {
+      "mode": "long",
+      "lang": "en",
+      "width": 768,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 654,
+      "missingAnchors": []
+    },
+    {
+      "mode": "long",
+      "lang": "en",
+      "width": 1280,
+      "overflow": false,
+      "version": "long",
+      "images": 2,
+      "words": 654,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "fr",
+      "width": 390,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 117,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "fr",
+      "width": 768,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 117,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "fr",
+      "width": 1280,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 117,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "en",
+      "width": 390,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 98,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "en",
+      "width": 768,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 98,
+      "missingAnchors": []
+    },
+    {
+      "mode": "short",
+      "lang": "en",
+      "width": 1280,
+      "overflow": false,
+      "version": "short",
+      "images": 0,
+      "words": 98,
+      "missingAnchors": []
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,368 @@
+{
+  "report": [
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences_menu",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/astronomy",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "fr",
+      "route": "experiences/projects/3d-printing",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences_menu",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 2
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/astronomy",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 320,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 390,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 640,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 768,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 1024,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    },
+    {
+      "lang": "en",
+      "route": "experiences/projects/3d-printing",
+      "width": 1280,
+      "overflow": false,
+      "missingImages": [],
+      "missingAnchors": [],
+      "h1s": 1,
+      "visibleCards": 1
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "interactions": "passed",
+  "keyboard": "Dialog focus trapped in both directions; Escape closes and restores focus"
+}

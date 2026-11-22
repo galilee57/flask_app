@@ -1,0 +1,188 @@
+[
+  {
+    "lang": "fr",
+    "width": 390,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "lang": "fr",
+    "width": 768,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "lang": "fr",
+    "width": 1280,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 768,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 1280,
+    "overflow": false,
+    "images": [
+      {
+        "src": "/realizations/static/images/generated/pp019/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p071/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p072/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/p073/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp018/illustration-v1.jpg",
+        "loaded": true
+      },
+      {
+        "src": "/realizations/static/images/generated/pp020/illustration-v1.jpg",
+        "loaded": true
+      }
+    ]
+  }
+]

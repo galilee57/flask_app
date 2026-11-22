@@ -1,4 +1,4 @@
-{% macro hero(title, subtitle=None) %}
+{% macro hero(title, subtitle=None, heading=False) %}
   <div class="relative mt-2 pr-24">
 
     {# Slot top-right optionnel #}
@@ -8,9 +8,10 @@
       </div>
     {% endif %}
 
-    <div class="text-3xl sm:text-5xl lg:text-6xl text-primary-800 font-bold font-secondary">
+    {% set title_tag = "h1" if heading else "div" %}
+    <{{ title_tag }} class="text-3xl sm:text-5xl lg:text-6xl text-primary-800 font-bold font-secondary">
       {{ title }}
-    </div>
+    </{{ title_tag }}>
 
     {% if subtitle %}
       <div class="text-sm font-primary sm:text-2xl mb-10 mt-2">

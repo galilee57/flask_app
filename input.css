@@ -1,5 +1,6 @@
 
 @import "tailwindcss";
+@import "./app/main/styles/projects/realizations.css";
 @import "./app/main/styles/projects/professional_positioning.css";
 @import "./app/main/styles/projects/shortest_path.css";
 @import "./app/main/styles/projects/gpt_from_scratch.css";
@@ -10,6 +11,8 @@
 /* Scan templates and dynamically rendered controls explicitly. */
 @source "./app/main/templates";
 @source "./app/projects";
+@source "./app/realizations/templates";
+@source "./app/realizations/static/js";
 
 @font-face {
   font-family: "EB Garamond";

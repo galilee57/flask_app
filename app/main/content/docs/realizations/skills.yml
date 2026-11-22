@@ -1,0 +1,183 @@
+engineering:
+  fr: Ingénierie
+  en: Engineering
+mechanical_engineering:
+  fr: Ingénierie mécanique
+  en: Mechanical engineering
+process_engineering:
+  fr: Ingénierie des procédés
+  en: Process engineering
+maintenance:
+  fr: Maintenance industrielle
+  en: Industrial maintenance
+reliability:
+  fr: Fiabilité des équipements
+  en: Equipment reliability
+production_management:
+  fr: Pilotage de production
+  en: Production management
+quality:
+  fr: Maîtrise de la qualité
+  en: Quality management
+risk_management:
+  fr: Gestion des risques
+  en: Risk management
+safety:
+  fr: Sécurité des interventions
+  en: Operational safety
+management:
+  fr: Management
+  en: Management
+leadership:
+  fr: Leadership
+  en: Leadership
+project_management:
+  fr: Gestion de projet
+  en: Project management
+strategy:
+  fr: Stratégie
+  en: Strategy
+financial_management:
+  fr: Pilotage économique
+  en: Financial management
+negotiation:
+  fr: Négociation
+  en: Negotiation
+change_management:
+  fr: Conduite du changement
+  en: Change management
+training:
+  fr: Formation
+  en: Training
+communication:
+  fr: Communication
+  en: Communication
+technical_writing:
+  fr: Rédaction technique
+  en: Technical writing
+continuous_improvement:
+  fr: Amélioration continue
+  en: Continuous improvement
+lean:
+  fr: Optimisation des flux
+  en: Flow optimisation
+capacity_planning:
+  fr: Planification industrielle
+  en: Industrial planning
+industrial_trials:
+  fr: Essais et qualification industriels
+  en: Industrial testing and qualification
+metrology:
+  fr: Métrologie
+  en: Metrology
+modeling_simulation:
+  fr: Modélisation et simulation
+  en: Modelling and simulation
+software_development:
+  fr: Développement logiciel
+  en: Software development
+web_development:
+  fr: Développement web
+  en: Web development
+mobile_development:
+  fr: Développement mobile
+  en: Mobile development
+software_architecture:
+  fr: Architecture logicielle
+  en: Software architecture
+api_integration:
+  fr: Intégration d’API
+  en: API integration
+devops:
+  fr: Déploiement et exploitation logicielle
+  en: Software deployment and operations
+software_testing:
+  fr: Tests et validation logicielle
+  en: Software testing and validation
+version_control:
+  fr: Gestion de versions
+  en: Version control
+ai:
+  fr: Intelligence artificielle
+  en: Artificial intelligence
+machine_learning:
+  fr: Machine Learning
+  en: Machine Learning
+computer_vision:
+  fr: Vision par ordinateur
+  en: Computer vision
+generative_ai:
+  fr: IA générative
+  en: Generative AI
+agentic_ai:
+  fr: IA agentique
+  en: Agentic AI
+data_analysis:
+  fr: Analyse de données
+  en: Data analysis
+data_engineering:
+  fr: Ingénierie des données
+  en: Data engineering
+big_data:
+  fr: Big Data
+  en: Big Data
+business_intelligence:
+  fr: Business Intelligence
+  en: Business Intelligence
+automation:
+  fr: Automatisation
+  en: Automation
+low_code:
+  fr: Développement Low-Code
+  en: Low-Code development
+document_engineering:
+  fr: Gestion des connaissances
+  en: Knowledge management
+privacy:
+  fr: Maîtrise des flux de données sensibles
+  en: Sensitive data flow management
+electronics:
+  fr: Électronique
+  en: Electronics
+iot:
+  fr: Objets connectés
+  en: Internet of Things
+prototyping:
+  fr: Prototypage
+  en: Prototyping
+cad:
+  fr: Conception 3D
+  en: 3D design
+digital_fabrication:
+  fr: Fabrication numérique
+  en: Digital fabrication
+image_processing:
+  fr: Traitement d’images
+  en: Image processing
+audiovisual:
+  fr: Photographie et audiovisuel
+  en: Photography and audiovisual
+psychology:
+  fr: Psychologie et relations humaines
+  en: Psychology and interpersonal relations
+self_learning:
+  fr: Apprentissage autonome
+  en: Independent learning
+self_discipline:
+  fr: Discipline personnelle
+  en: Self-discipline
+music:
+  fr: Pratique musicale
+  en: Musical practice
+editorial_content:
+  fr: Rédaction et édition
+  en: Writing and editing
+needs_analysis:
+  fr: Analyse des besoins
+  en: Requirements analysis
+ux_design:
+  fr: Conception d’interfaces
+  en: Interface design
+thermal_engineering:
+  fr: Ingénierie thermique
+  en: Thermal engineering

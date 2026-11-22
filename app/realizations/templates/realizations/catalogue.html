@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
+{% from "components/info_modal.html" import info_modal %}
+{% from "realizations/components.html" import project_card with context %}
+{% block title %}{{ t({'fr': 'Projets & réalisations', 'en': 'Projects & work'}) }} · Emmanuel Fix{% endblock %}
+{% block content %}
+<div class="realizations mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-12 lg:py-16">
+  <header class="grid items-start gap-6 lg:grid-cols-[1.7fr_1fr] lg:gap-12">
+    <div class="realizations-hero">
+      <p class="mb-5 text-xs font-bold uppercase tracking-widest text-primary-600">{{ t({'fr': 'Emmanuel Fix · Portfolio', 'en': 'Emmanuel Fix · Portfolio'}) }}</p>
+      {{ hero(t({'fr': 'Projets & réalisations', 'en': 'Projects & work'}), t({'fr': 'Comprendre un problème, construire une solution et la faire fonctionner.', 'en': 'Understand a problem, build a solution and make it work.'}), heading=True) }}
+      <div class="flex flex-wrap items-center gap-3">
+        {{ button(t({'fr': 'Explorer les projets', 'en': 'Explore projects'}), href='#catalogue') }}
+        {{ info_modal('realizations-info', t({'fr': 'À propos de cette sélection', 'en': 'About this selection'}), md_html_i18n('docs/projects/realizations') | striptags, button_label=t({'fr': 'À propos', 'en': 'About'}), close_label=t({'fr': 'Fermer', 'en': 'Close'})) }}
+      </div>
+    </div>
+    <aside class="rounded-3xl border border-secondary-200 bg-secondary-50 p-6 sm:p-8">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-secondary-800">{{ t({'fr': 'Du terrain au logiciel', 'en': 'From the field to software'}) }}</p>
+      <h2 class="text-2xl font-bold leading-tight text-primary-800">{{ t({'fr': 'Une même démarche, des terrains différents.', 'en': 'One approach, different environments.'}) }}</h2>
+      <p class="mt-4 text-sm leading-7 text-secondary-900">{{ t({'fr': 'Industrie, données, applications et fabrication : des projets professionnels et personnels pour montrer les choix, les compétences et les réalisations.', 'en': 'Industry, data, applications and fabrication: professional and personal projects that show decisions, skills and results.'}) }}</p>
+      <div class="mt-6 flex flex-wrap gap-2" aria-label="{{ t({'fr': 'Démarche', 'en': 'Approach'}) }}">
+        {% for step in [t({'fr': 'Comprendre', 'en': 'Understand'}), t({'fr': 'Concevoir', 'en': 'Design'}), t({'fr': 'Réaliser', 'en': 'Build'})] %}
+        <span class="rounded-full bg-white px-3 py-2 text-xs font-semibold text-secondary-900">{{ '%02d'|format(loop.index) }} · {{ step }}</span>
+        {% endfor %}
+      </div>
+    </aside>
+  </header>
+
+  <section id="catalogue" class="mt-12 scroll-mt-28 sm:mt-16" aria-labelledby="catalogue-title">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <p class="mb-2 text-xs font-bold uppercase tracking-widest text-primary-600">{{ t({'fr': 'Explorer', 'en': 'Explore'}) }}</p>
+        <h2 id="catalogue-title" class="text-2xl font-bold text-primary-800 sm:text-3xl">{{ t({'fr': 'Des idées aux réalisations', 'en': 'From ideas to results'}) }}</h2>
+      </div>
+      <p id="realizations-count" class="text-sm text-neutral-600" role="status" aria-live="polite" aria-atomic="true">{{ result_count }} {{ t({'fr': 'projet(s)', 'en': 'project(s)'}) }}</p>
+    </div>
+    <form id="realizations-filters" method="get" action="{{ url_for('realizations.preview') }}#catalogue" class="mb-8 space-y-5 rounded-3xl border border-primary-100 bg-primary-50/40 p-4 sm:p-6">
+      <input type="hidden" name="view" value="all">
+      <div class="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
+        <div>
+          <label for="realizations-search" class="mb-2 block text-sm font-semibold text-primary-900">{{ t({'fr': 'Rechercher', 'en': 'Search'}) }}</label>
+          <input id="realizations-search" type="search" name="q" value="{{ query }}" maxlength="200" placeholder="{{ t({'fr': 'Un projet, une compétence…', 'en': 'A project, a skill…'}) }}" class="realizations-input">
+        </div>
+        <div>
+          <label for="realizations-theme" class="mb-2 block text-sm font-semibold text-primary-900">{{ t({'fr': 'Thème', 'en': 'Theme'}) }}</label>
+          <div class="relative">
+          <select id="realizations-theme" name="theme" class="realizations-input appearance-none pr-10">
+            <option value="">{{ t({'fr': 'Tous les thèmes', 'en': 'All themes'}) }}</option>
+            {% for key, label in themes.items() %}<option value="{{ key }}" {% if theme == key %}selected{% endif %}>{{ t(label) }}</option>{% endfor %}
+          </select>
+          <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-800" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 7.5 5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+        </div>
+        {{ button(t({'fr': 'Filtrer', 'en': 'Filter'}), variant='third') }}
+      </div>
+    </form>
+    <div id="realizations-grid" class="realizations-grid" data-view="{{ view }}">
+      {% for project in projects %}{{ project_card(project, themes) }}{% endfor %}
+    </div>
+    <div id="realizations-empty" class="rounded-3xl border border-primary-100 bg-primary-50 p-8 text-center" {% if result_count %}hidden{% endif %}>
+      <h3 class="text-xl font-bold text-primary-800">{{ t({'fr': 'Aucun projet ne correspond à ces critères.', 'en': 'No projects match these filters.'}) }}</h3>
+      <p class="mt-2 text-neutral-600">{{ t({'fr': 'Essayez un autre thème ou élargissez la sélection.', 'en': 'Try another theme or broaden your selection.'}) }}</p>
+      <a id="realizations-reset" class="mt-5 inline-flex min-h-11 items-center font-semibold text-primary-700 underline underline-offset-4" href="{{ url_for('realizations.preview', view='all') }}#catalogue">{{ t({'fr': 'Afficher tous les projets', 'en': 'Show all projects'}) }}</a>
+    </div>
+  </section>
+
+  <section class="mt-14 border-t border-primary-100 pt-8" aria-labelledby="domains-title">
+    <h2 id="domains-title" class="text-xl font-bold text-primary-800">{{ t({'fr': 'Approfondir par domaine', 'en': 'Explore by field'}) }}</h2>
+    <p class="mt-2 text-sm text-neutral-600">{{ t({'fr': 'Retrouvez les présentations de mon expérience technique.', 'en': 'Read more about my technical experience.'}) }}</p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      {% for endpoint, label in [('machine_learning', t({'fr': 'ML & IA', 'en': 'ML & AI'})), ('big_data', 'Big Data'), ('web_design', 'Web'), ('power_platform', t({'fr': 'Automatisation', 'en': 'Automation'})), ('deep_learning', 'Deep Learning'), ('fablab', 'Fablab')] %}
+      {{ button(label, href=url_for('experiences.' ~ endpoint), variant='third', extra_class='text-sm') }}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block js %}
+<script id="realizations-messages" type="application/json">{{ t({'fr': {'one': '{count} projet', 'many': '{count} projets'}, 'en': {'one': '{count} project', 'many': '{count} projects'}}) | tojson }}</script>
+<script src="{{ url_for('realizations.static', filename='js/realizations.js') }}" defer></script>
+{% endblock %}

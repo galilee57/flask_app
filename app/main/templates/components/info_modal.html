@@ -9,10 +9,11 @@
   <button
     id="{{ open_id }}"
     type="button"
-    class="inline-flex items-center gap-2 rounded-lg 
+    class="inline-flex min-h-11 items-center gap-2 rounded-lg
         bg-secondary-700 px-3 py-2 shadow hover:bg-secondary-800 border border-secondary-600 
         text-sm font-medium text-white font-secondary
         focus:outline-none focus:ring-2 focus:ring-blue-500"
+    aria-expanded="false"
     aria-haspopup="dialog"
     aria-controls="{{ dialog_id }}"
   >
@@ -41,7 +42,7 @@
           <button
             id="{{ close_id }}"
             type="button"
-            class="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="min-h-11 min-w-11 rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="{{ close_label }}"
           >
             <!-- Icône X -->
@@ -72,12 +73,14 @@
 
       function openDialog() {
         dialog.classList.remove("hidden");
+        openBtn.setAttribute("aria-expanded", "true");
         closeBtn.focus();
         document.body.classList.add("overflow-hidden");
       }
 
       function closeDialog() {
         dialog.classList.add("hidden");
+        openBtn.setAttribute("aria-expanded", "false");
         openBtn.focus();
         document.body.classList.remove("overflow-hidden");
       }
@@ -87,8 +90,20 @@
       backdrop.addEventListener("click", closeDialog);
 
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !dialog.classList.contains("hidden")) {
-          closeDialog();
+        if (dialog.classList.contains("hidden")) return;
+        if (e.key === "Escape") closeDialog();
+        if (e.key === "Tab") {
+          const controls = [...dialog.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]')]
+            .filter(el => !el.disabled && el.getClientRects().length);
+          const first = controls[0];
+          const last = controls[controls.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
         }
       });
     })();

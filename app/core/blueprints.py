@@ -21,6 +21,7 @@ from app.projects.gpt_from_scratch import bp as gpt_from_scratch_bp
 from app.projects.a_star import bp as a_star_bp
 from app.projects.sudoku import bp as sudoku_bp
 from app.experiences import bp as experiences_bp
+from app.realizations import bp as realizations_bp
 from app.projects.connect_four import bp as connect_four_bp
 from app.projects.snake import bp as snake_bp
 from app.projects.snow_layers import bp as snow_layers_bp
@@ -58,6 +59,7 @@ BLUEPRINT_REGISTRY: tuple[BlueprintRegistration, ...] = (
     BlueprintRegistration(shortest_path_bp, "/projects/shortest_path"),
     BlueprintRegistration(prey_predator_bp, "/projects/prey_predator"),
     BlueprintRegistration(experiences_bp, "/experiences"),
+    BlueprintRegistration(realizations_bp, "/realizations"),
 )
 
 

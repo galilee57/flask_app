@@ -1,0 +1,764 @@
+{
+  "projects": 84,
+  "variants": 336,
+  "pending": [],
+  "failures": [],
+  "records": [
+    {
+      "id": "P001",
+      "slug": "p001",
+      "french_words": 700,
+      "english_words": 611,
+      "short_french_words": 72,
+      "short_english_words": 60,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P002",
+      "slug": "p002",
+      "french_words": 1065,
+      "english_words": 856,
+      "short_french_words": 84,
+      "short_english_words": 74,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P003",
+      "slug": "p003",
+      "french_words": 1268,
+      "english_words": 1064,
+      "short_french_words": 97,
+      "short_english_words": 74,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P004",
+      "slug": "p004",
+      "french_words": 920,
+      "english_words": 712,
+      "short_french_words": 87,
+      "short_english_words": 74,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P005",
+      "slug": "p005",
+      "french_words": 1184,
+      "english_words": 995,
+      "short_french_words": 97,
+      "short_english_words": 77,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P006",
+      "slug": "p006",
+      "french_words": 1435,
+      "english_words": 1227,
+      "short_french_words": 100,
+      "short_english_words": 83,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P007",
+      "slug": "p007",
+      "french_words": 855,
+      "english_words": 704,
+      "short_french_words": 96,
+      "short_english_words": 79,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P012",
+      "slug": "p012",
+      "french_words": 972,
+      "english_words": 873,
+      "short_french_words": 90,
+      "short_english_words": 80,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P013",
+      "slug": "p013",
+      "french_words": 1200,
+      "english_words": 990,
+      "short_french_words": 134,
+      "short_english_words": 103,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P014",
+      "slug": "p014",
+      "french_words": 1306,
+      "english_words": 1132,
+      "short_french_words": 89,
+      "short_english_words": 81,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P015",
+      "slug": "p015",
+      "french_words": 730,
+      "english_words": 611,
+      "short_french_words": 64,
+      "short_english_words": 55,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P016",
+      "slug": "p016",
+      "french_words": 791,
+      "english_words": 660,
+      "short_french_words": 69,
+      "short_english_words": 64,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P017",
+      "slug": "p017",
+      "french_words": 1528,
+      "english_words": 1343,
+      "short_french_words": 109,
+      "short_english_words": 92,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P018",
+      "slug": "p018",
+      "french_words": 606,
+      "english_words": 495,
+      "short_french_words": 113,
+      "short_english_words": 87,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P019",
+      "slug": "p019",
+      "french_words": 672,
+      "english_words": 548,
+      "short_french_words": 111,
+      "short_english_words": 97,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P020",
+      "slug": "p020",
+      "french_words": 875,
+      "english_words": 728,
+      "short_french_words": 61,
+      "short_english_words": 53,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P021",
+      "slug": "p021",
+      "french_words": 742,
+      "english_words": 630,
+      "short_french_words": 81,
+      "short_english_words": 68,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P024",
+      "slug": "p024",
+      "french_words": 627,
+      "english_words": 542,
+      "short_french_words": 109,
+      "short_english_words": 92,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P025",
+      "slug": "p025",
+      "french_words": 469,
+      "english_words": 392,
+      "short_french_words": 59,
+      "short_english_words": 53,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P026",
+      "slug": "p026",
+      "french_words": 554,
+      "english_words": 462,
+      "short_french_words": 112,
+      "short_english_words": 91,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P028",
+      "slug": "p028",
+      "french_words": 863,
+      "english_words": 769,
+      "short_french_words": 63,
+      "short_english_words": 53,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P029",
+      "slug": "p029",
+      "french_words": 280,
+      "english_words": 264,
+      "short_french_words": 52,
+      "short_english_words": 46,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P030",
+      "slug": "p030",
+      "french_words": 499,
+      "english_words": 417,
+      "short_french_words": 79,
+      "short_english_words": 62,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P032",
+      "slug": "p032",
+      "french_words": 800,
+      "english_words": 672,
+      "short_french_words": 117,
+      "short_english_words": 97,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P033",
+      "slug": "p033",
+      "french_words": 450,
+      "english_words": 386,
+      "short_french_words": 87,
+      "short_english_words": 77,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P035",
+      "slug": "p035",
+      "french_words": 421,
+      "english_words": 357,
+      "short_french_words": 75,
+      "short_english_words": 63,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P036",
+      "slug": "p036",
+      "french_words": 590,
+      "english_words": 548,
+      "short_french_words": 90,
+      "short_english_words": 88,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P037",
+      "slug": "p037",
+      "french_words": 674,
+      "english_words": 587,
+      "short_french_words": 77,
+      "short_english_words": 69,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P038",
+      "slug": "p038",
+      "french_words": 761,
+      "english_words": 629,
+      "short_french_words": 73,
+      "short_english_words": 63,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P039",
+      "slug": "p039",
+      "french_words": 539,
+      "english_words": 474,
+      "short_french_words": 84,
+      "short_english_words": 75,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P040",
+      "slug": "p040",
+      "french_words": 541,
+      "english_words": 441,
+      "short_french_words": 90,
+      "short_english_words": 70,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P041",
+      "slug": "p041",
+      "french_words": 703,
+      "english_words": 602,
+      "short_french_words": 73,
+      "short_english_words": 64,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P042",
+      "slug": "p042",
+      "french_words": 661,
+      "english_words": 580,
+      "short_french_words": 70,
+      "short_english_words": 61,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P043",
+      "slug": "p043",
+      "french_words": 660,
+      "english_words": 571,
+      "short_french_words": 70,
+      "short_english_words": 57,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P044",
+      "slug": "p044",
+      "french_words": 617,
+      "english_words": 501,
+      "short_french_words": 69,
+      "short_english_words": 56,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P045",
+      "slug": "p045",
+      "french_words": 646,
+      "english_words": 508,
+      "short_french_words": 84,
+      "short_english_words": 67,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P046",
+      "slug": "p046",
+      "french_words": 716,
+      "english_words": 624,
+      "short_french_words": 121,
+      "short_english_words": 102,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P047",
+      "slug": "p047",
+      "french_words": 773,
+      "english_words": 649,
+      "short_french_words": 63,
+      "short_english_words": 55,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P048",
+      "slug": "p048",
+      "french_words": 550,
+      "english_words": 451,
+      "short_french_words": 104,
+      "short_english_words": 85,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P049",
+      "slug": "p049",
+      "french_words": 486,
+      "english_words": 399,
+      "short_french_words": 95,
+      "short_english_words": 79,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P050",
+      "slug": "p050",
+      "french_words": 359,
+      "english_words": 295,
+      "short_french_words": 73,
+      "short_english_words": 61,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P051",
+      "slug": "p051",
+      "french_words": 943,
+      "english_words": 808,
+      "short_french_words": 88,
+      "short_english_words": 76,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P052",
+      "slug": "p052",
+      "french_words": 1297,
+      "english_words": 1124,
+      "short_french_words": 103,
+      "short_english_words": 87,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P053",
+      "slug": "p053",
+      "french_words": 735,
+      "english_words": 635,
+      "short_french_words": 66,
+      "short_english_words": 63,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P054",
+      "slug": "p054",
+      "french_words": 1042,
+      "english_words": 906,
+      "short_french_words": 69,
+      "short_english_words": 57,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P055",
+      "slug": "p055",
+      "french_words": 1499,
+      "english_words": 1284,
+      "short_french_words": 103,
+      "short_english_words": 90,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P056",
+      "slug": "p056",
+      "french_words": 1084,
+      "english_words": 937,
+      "short_french_words": 107,
+      "short_english_words": 89,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P057",
+      "slug": "p057",
+      "french_words": 844,
+      "english_words": 715,
+      "short_french_words": 100,
+      "short_english_words": 83,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P058",
+      "slug": "p058",
+      "french_words": 581,
+      "english_words": 534,
+      "short_french_words": 78,
+      "short_english_words": 73,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P059",
+      "slug": "p059",
+      "french_words": 694,
+      "english_words": 603,
+      "short_french_words": 94,
+      "short_english_words": 82,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P060",
+      "slug": "p060",
+      "french_words": 542,
+      "english_words": 512,
+      "short_french_words": 90,
+      "short_english_words": 81,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P061",
+      "slug": "p061",
+      "french_words": 1186,
+      "english_words": 1030,
+      "short_french_words": 134,
+      "short_english_words": 114,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P062",
+      "slug": "p062",
+      "french_words": 773,
+      "english_words": 715,
+      "short_french_words": 91,
+      "short_english_words": 86,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P063",
+      "slug": "p063",
+      "french_words": 1009,
+      "english_words": 890,
+      "short_french_words": 108,
+      "short_english_words": 90,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P064",
+      "slug": "p064",
+      "french_words": 2399,
+      "english_words": 2034,
+      "short_french_words": 105,
+      "short_english_words": 95,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P065",
+      "slug": "p065",
+      "french_words": 1062,
+      "english_words": 956,
+      "short_french_words": 78,
+      "short_english_words": 68,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P066",
+      "slug": "p066",
+      "french_words": 540,
+      "english_words": 515,
+      "short_french_words": 112,
+      "short_english_words": 103,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P067",
+      "slug": "p067",
+      "french_words": 1744,
+      "english_words": 1442,
+      "short_french_words": 108,
+      "short_english_words": 91,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P068",
+      "slug": "p068",
+      "french_words": 437,
+      "english_words": 377,
+      "short_french_words": 97,
+      "short_english_words": 80,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P069",
+      "slug": "p069",
+      "french_words": 537,
+      "english_words": 463,
+      "short_french_words": 88,
+      "short_english_words": 68,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P070",
+      "slug": "p070",
+      "french_words": 750,
+      "english_words": 629,
+      "short_french_words": 107,
+      "short_english_words": 90,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P071",
+      "slug": "p071",
+      "french_words": 0,
+      "english_words": 0,
+      "short_french_words": 18,
+      "short_english_words": 15,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P072",
+      "slug": "p072",
+      "french_words": 714,
+      "english_words": 619,
+      "short_french_words": 69,
+      "short_english_words": 58,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "P073",
+      "slug": "p073",
+      "french_words": 0,
+      "english_words": 0,
+      "short_french_words": 16,
+      "short_english_words": 13,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP001",
+      "slug": "pp001",
+      "french_words": 582,
+      "english_words": 491,
+      "short_french_words": 144,
+      "short_english_words": 117,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP002",
+      "slug": "pp002",
+      "french_words": 280,
+      "english_words": 258,
+      "short_french_words": 63,
+      "short_english_words": 61,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP003",
+      "slug": "pp003",
+      "french_words": 452,
+      "english_words": 414,
+      "short_french_words": 66,
+      "short_english_words": 65,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP004",
+      "slug": "pp004",
+      "french_words": 637,
+      "english_words": 552,
+      "short_french_words": 88,
+      "short_english_words": 75,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP005",
+      "slug": "pp005",
+      "french_words": 625,
+      "english_words": 524,
+      "short_french_words": 64,
+      "short_english_words": 54,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP006",
+      "slug": "pp006",
+      "french_words": 821,
+      "english_words": 696,
+      "short_french_words": 79,
+      "short_english_words": 70,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP007",
+      "slug": "pp007",
+      "french_words": 1799,
+      "english_words": 1546,
+      "short_french_words": 81,
+      "short_english_words": 72,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP008",
+      "slug": "pp008",
+      "french_words": 285,
+      "english_words": 265,
+      "short_french_words": 71,
+      "short_english_words": 66,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP009",
+      "slug": "pp009",
+      "french_words": 1043,
+      "english_words": 868,
+      "short_french_words": 74,
+      "short_english_words": 63,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP010",
+      "slug": "pp010",
+      "french_words": 573,
+      "english_words": 512,
+      "short_french_words": 93,
+      "short_english_words": 82,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP011",
+      "slug": "pp011",
+      "french_words": 709,
+      "english_words": 650,
+      "short_french_words": 75,
+      "short_english_words": 73,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP012",
+      "slug": "pp012",
+      "french_words": 401,
+      "english_words": 343,
+      "short_french_words": 67,
+      "short_english_words": 58,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP013",
+      "slug": "pp013",
+      "french_words": 523,
+      "english_words": 469,
+      "short_french_words": 64,
+      "short_english_words": 57,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP014",
+      "slug": "pp014",
+      "french_words": 962,
+      "english_words": 844,
+      "short_french_words": 69,
+      "short_english_words": 63,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP015",
+      "slug": "pp015",
+      "french_words": 1259,
+      "english_words": 1169,
+      "short_french_words": 80,
+      "short_english_words": 81,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP016",
+      "slug": "pp016",
+      "french_words": 712,
+      "english_words": 658,
+      "short_french_words": 67,
+      "short_english_words": 67,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP017",
+      "slug": "pp017",
+      "french_words": 564,
+      "english_words": 505,
+      "short_french_words": 104,
+      "short_english_words": 88,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP018",
+      "slug": "pp018",
+      "french_words": 536,
+      "english_words": 512,
+      "short_french_words": 146,
+      "short_english_words": 137,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP019",
+      "slug": "pp019",
+      "french_words": 347,
+      "english_words": 323,
+      "short_french_words": 129,
+      "short_english_words": 122,
+      "french_narrative_unchanged": true
+    },
+    {
+      "id": "PP020",
+      "slug": "pp020",
+      "french_words": 1589,
+      "english_words": 1377,
+      "short_french_words": 80,
+      "short_english_words": 75,
+      "french_narrative_unchanged": true
+    }
+  ]
+}

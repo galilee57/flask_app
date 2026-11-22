@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "components/typography.html" import hero %}
+{% from "components/ui.html" import button %}
+{% from "realizations/components.html" import case_image, project_card with context %}
+{% block title %}{{ project.title }} · Emmanuel Fix{% endblock %}
+{% block content %}
+<article data-display-version="{{ project.display_version }}" class="realizations mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12">
+  <div class="mb-8">{{ button(t({'fr': '← Tous les projets', 'en': '← All projects'}), href=url_for('realizations.preview'), variant='third') }}</div>
+  <header class="realizations-hero max-w-4xl">
+    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary-600">{{ t({'fr': 'Projet professionnel · Étude de cas', 'en': 'Professional project · Case study'}) if project.origin == 'professional' else t({'fr': 'Projet personnel · Étude de cas', 'en': 'Personal project · Case study'}) }}</p>
+    <div lang="{{ project.language }}">{{ hero(project.title, project.summary, heading=True) }}</div>
+    {% if project.language != current_lang() %}<p class="mb-4 text-sm text-neutral-700">{{ t({'fr': 'Texte source en anglais.', 'en': 'French source text.'}) }}</p>{% endif %}
+    {% if project.editorial_status %}
+    {% set statuses = {
+      'Validé': {'fr': 'Validé', 'en': 'Validated'},
+      'À relire': {'fr': 'À relire', 'en': 'Awaiting review'},
+      'Validé · A enrichir': {'fr': 'Validé · A enrichir', 'en': 'Validated · To expand'},
+      'Validéprimaire à compléter': {'fr': 'Validéprimaire à compléter', 'en': 'Validated · Primary review to complete'}
+    } %}
+    <p class="mb-4 text-sm text-neutral-700">{{ t(statuses.get(project.editorial_status, {'fr': project.editorial_status, 'en': project.editorial_status})) }}</p>
+    {% endif %}
+  </header>
+  <div class="grid gap-5 sm:grid-cols-2 {% if project.slug != 'astronomy' %}sm:grid-cols-1{% endif %}">
+    {% for image in project.images if 'ouverture' in image.emplacements %}{{ case_image(image, opening=True) }}{% endfor %}
+  </div>
+  <div class="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12">
+    <div lang="{{ project.language }}" class="min-w-0 space-y-10">
+      {% for section in sections %}
+      <section id="{{ section.id }}" class="scroll-mt-28 border-t border-primary-100 pt-8" aria-labelledby="{{ section.id }}-title">
+        {% if project.display_version == "long" %}<p class="mb-3 text-xs font-bold text-primary-600" aria-hidden="true">{{ '%02d' | format(loop.index) }}</p>{% endif %}
+        <h2 id="{{ section.id }}-title" class="mb-5 text-2xl font-bold leading-tight text-primary-800 sm:text-3xl">{{ section.title }}</h2>
+        <div class="space-y-6">
+          {% for block in section.blocks %}
+            {% if block.image %}{{ case_image(block.image) }}{% else %}<div class="realizations-prose">{{ block.html | safe }}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+    </div>
+    <aside class="order-first rounded-3xl border border-secondary-200 bg-secondary-50 p-6 lg:order-none lg:sticky lg:top-28">
+      <h2 class="text-lg font-bold text-primary-800">{{ t({'fr': 'Compétences mobilisées', 'en': 'Skills used'}) }}</h2>
+      <ul class="mt-4 space-y-3 text-sm text-secondary-900">{% for skill in project.skill_labels %}<li>{{ skill }}</li>{% endfor %}</ul>
+      {% if project.display_version == "long" %}
+      <nav class="mt-7 border-t border-secondary-200 pt-5" aria-label="{{ t({'fr': 'Dans cette étude', 'en': 'In this case study'}) }}">
+        <p class="mb-3 text-xs font-bold uppercase tracking-wide text-secondary-800">{{ t({'fr': 'Dans cette étude', 'en': 'In this case study'}) }}</p>
+        {% for section in sections %}<a class="block rounded-lg py-3 text-sm leading-5 text-primary-800 hover:underline focus-visible:outline-2 focus-visible:outline-primary-600" href="#{{ section.id }}">{{ section.title }}</a>{% endfor %}
+      </nav>
+      {% endif %}
+    </aside>
+  </div>
+  {% if related %}
+  <section class="mt-14 border-t border-primary-100 pt-8" aria-labelledby="related-title">
+    <h2 id="related-title" class="mb-6 text-2xl font-bold text-primary-800">{{ t({'fr': 'Une autre réalisation à découvrir', 'en': 'Another project to explore'}) }}</h2>
+    <div class="max-w-xl">{% for item in related %}{{ project_card(item, themes, show_all=True) }}{% endfor %}</div>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}
