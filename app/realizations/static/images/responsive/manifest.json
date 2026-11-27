@@ -2420,5 +2420,57 @@
         "height": 788
       }
     ]
+  },
+  "generated/formation-arts-et-metiers/cover.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/formation-arts-et-metiers/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/formation-arts-et-metiers/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/formation-arts-et-metiers/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/formation-arts-et-metiers/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/formation-management-maintenance/cover.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/formation-management-maintenance/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/formation-management-maintenance/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/formation-management-maintenance/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/formation-management-maintenance/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
   }
 }

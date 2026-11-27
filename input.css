@@ -127,3 +127,29 @@
   --color-paper: #ffffff;
   --color-red: #dd2222;
 }
+
+@layer components {
+  .llm-answer-markdown > * + * {
+    @apply mt-3;
+  }
+
+  .llm-answer-markdown :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-semibold;
+  }
+
+  .llm-answer-markdown :is(ul, ol) {
+    @apply ps-6;
+  }
+
+  .llm-answer-markdown ul { @apply list-disc; }
+  .llm-answer-markdown ol { @apply list-decimal; }
+  .llm-answer-markdown a { @apply underline; }
+
+  .llm-answer-markdown blockquote {
+    @apply border-s-2 ps-3;
+  }
+
+  .llm-answer-markdown pre {
+    @apply overflow-x-auto rounded border p-3;
+  }
+}

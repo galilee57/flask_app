@@ -194,3 +194,72 @@ Pour les futurs agents, `app.core.llm.chat_completion` accepte les messages
 et les schémas d’outils de Chat Completions. Il renvoie le message assistant,
 que l’appelant peut examiner avant d’exécuter un outil et d’en transmettre le
 résultat au modèle.
+
+## RAG des projets dans Test LLM
+
+Le RAG indexe les fiches Markdown du Lab et les réalisations du catalogue admin
+dans leur version éditoriale active, en français et en anglais. Les vecteurs
+sont produits par Qwen3-Embedding-0.6B via un second processus llama.cpp.
+La première exécution télécharge son GGUF Q8_0. LFM3 continue à servir le chat
+sur son port habituel.
+
+```bash
+LLAMA_SERVER=/chemin/vers/llama-server sh infra/llm/start-embeddings.sh
+```
+
+Après une modification du corpus, cliquer sur **Reconstruire tout l’index RAG**
+dans **Test LLM**, avec une session admin et Flask en mode développement.
+Le bouton recalcule tous les passages. Le dernier index reste disponible durant
+le calcul et est remplacé seulement après une reconstruction réussie.
+Utiliser **Actualiser l’état** pour suivre le résultat.
+
+On peut aussi reconstruire depuis un autre terminal, à la racine du portfolio :
+
+```bash
+FLASK_CONFIG=development .venv/bin/flask --app wsgi rag-build
+```
+
+Le JSON est enregistré dans `instance/portfolio-rag.json` par défaut. Il contient
+les textes privés et leurs vecteurs. Le dossier `instance/` est ignoré par Git.
+`RAG_INDEX_PATH` permet de définir un autre fichier privé et
+`RAG_EMBEDDING_BASE_URL` de configurer le serveur d’embeddings compatible,
+`http://127.0.0.1:8082/v1` par défaut. Utiliser le même modèle pour indexer et
+retrouver les passages.
+
+Dans **Test LLM**, choisir **Chercher dans mes projets** dans le champ **Type de recherche**. Flask cherche
+par similarité cosinus dans la langue de l’interface et joint jusqu’à cinq
+extraits à la question. La page affiche les extraits, leurs références et leurs
+scores. Avec `LLM_PROVIDER=local`, embeddings et génération restent sur le Mac.
+Avec `LLM_PROVIDER=openai`, la génération transmet à OpenAI la question et les
+extraits retenus. Le calcul des embeddings utilise toujours le serveur configuré
+pour le RAG. Pour activer ce mode sur un autre hôte, lui fournir un index privé
+et un serveur d’embeddings accessible depuis Flask.
+
+**Synthèse des compétences** affiche les effectifs calculés pendant la dernière
+reconstruction sur les fiches du Lab et du catalogue. Les versions française
+et anglaise comptent comme une seule fiche. Le bilan indique la couverture des
+tags existants et jusqu’à trois exemples par compétence. Le contexte
+**Synthèse des compétences du catalogue** permet de poser une question à partir
+de ces statistiques, tandis que **Chercher dans mes projets** retrouve
+des extraits pour les questions ciblées.
+
+**Comparer une offre à mes projets** accepte un descriptif de 4 000 caractères
+maximum. La recherche par similarité interroge plusieurs parties de l’offre et
+sélectionne jusqu’à six fiches distinctes par similarité. Les formations sont
+ajoutées au contexte pour documenter les exigences de diplôme. Le modèle rapproche les exigences
+des extraits et des compétences déclarées, puis indique les points partiellement
+étayés ou sans preuve dans ces sources. Avec LFM3, l’offre reste en local.
+
+### RAG admin sur Railway avec OpenAI
+
+Utiliser `LLM_PROVIDER=openai`, `OPENAI_MODEL=gpt-6-luna`,
+`OPENAI_API_KEY` et `RAG_EMBEDDING_PROVIDER=openai` sur `flask_app`.
+OpenAI reçoit les passages lors de l’indexation et les questions lors des
+recherches. La génération reçoit le contexte sélectionné. Le catalogue,
+les illustrations et la page de test restent derrière la session admin.
+
+Monter un volume privé sur `/rag` et définir
+`RAG_INDEX_PATH=/rag/portfolio-rag.json`. Au démarrage Railway, exécuter
+`flask --app wsgi rag-build --if-stale` avant Gunicorn. La commande réutilise
+l’index si le modèle et le corpus sont identiques. Le volume doit être
+accessible à l’utilisateur `flask` du conteneur.

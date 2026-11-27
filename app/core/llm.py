@@ -28,6 +28,10 @@ class LLMError(Exception):
 
 def chat_completion(messages, *, tools=None, max_completion_tokens=512):
     """Return the assistant message, including any tool calls for the caller."""
+    return _chat_choice(messages, tools=tools, max_completion_tokens=max_completion_tokens)["message"]
+
+
+def _chat_choice(messages, *, tools=None, max_completion_tokens):
     config = current_app.config
     provider = config["LLM_PROVIDER"]
     headers = {}
@@ -63,14 +67,23 @@ def chat_completion(messages, *, tools=None, max_completion_tokens=512):
         raise LLMError("unavailable") from None
 
     try:
-        message = response.json()["choices"][0]["message"]
+        choice = response.json()["choices"][0]
+        message = choice["message"]
         if not isinstance(message, dict) or not (
             isinstance(message.get("content"), str) or message.get("tool_calls")
         ):
             raise ValueError
     except (KeyError, IndexError, TypeError, ValueError):
         raise LLMError("response") from None
-    return message
+    return choice
+
+
+def complete_text(messages):
+    choice = _chat_choice(messages, max_completion_tokens=1024)
+    content = choice["message"].get("content")
+    if not content:
+        raise LLMError("response")
+    return content, choice.get("finish_reason") == "length"
 
 
 def prompt_llm(prompt):

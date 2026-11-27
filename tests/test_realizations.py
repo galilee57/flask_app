@@ -54,9 +54,12 @@ def test_catalogue_preview_includes_reviewed_studies(admin_client, entry, langua
 
 @pytest.mark.parametrize('query,expected', [
     ({'view': 'personal'}, 20),
-    ({'view': 'professional'}, 64),
-    ({'view': 'all'}, 84),
+    ({'view': 'professional'}, 66),
+    ({'view': 'all'}, 86),
     ({'view': 'all', 'q': 'PP001'}, 1),
+    ({'kind': 'experience', 'q': 'P030'}, 1),
+    ({'kind': 'project', 'q': 'P030'}, 0),
+    ({'kind': 'hobby', 'q': 'PP001'}, 1),
     ({'view': 'all', 'q': 'refractaires'}, 1),
     ({'view': 'professional', 'theme': 'image'}, 2),
     ({'view': 'all', 'q': '<script>missing</script>'}, 0),
@@ -128,8 +131,8 @@ def test_markdown_edits_update_cards_and_case_without_restart(admin_client, tmp_
 def test_every_project_is_available_in_both_interfaces():
     for language in ['fr', 'en']:
         projects = content.load_projects(language)
-        assert len(projects) == 84
-        assert len({project['id'] for project in projects}) == 84
+        assert len(projects) == 86
+        assert len({project['id'] for project in projects}) == 86
         for project in projects:
             assert project['title']
             assert isinstance(project['summary'], str)
@@ -161,7 +164,7 @@ def test_existing_pro_pages_remain_the_main_entry(client, entry, language):
 @pytest.mark.parametrize('path', [
     '/realizations/', '/realizations/projects/pp001',
     '/realizations/projects/pp002',
-    '/realizations/static/images/astronomy/jupiter.png',
+    '/realizations/static/images/imported/pp001-lobservation-images-planetaires/jupiter.png',
     '/realizations/static/js/realizations.js',
 ])
 def test_preview_requires_admin_session(client, admin_headers, path):
@@ -188,13 +191,13 @@ def test_imported_case_uses_translated_english_source(admin_client):
     html = response.get_data(as_text=True)
     source = next(project for project in content.load_projects('en') if project['slug'] == 'p035')
     assert 'French source text.' not in html
-    assert 'Professional project · Case study' in html
+    assert 'Project · Professional background' in html
     assert source['title'] in html
 
 
 def test_imported_studies_have_visible_sections_and_local_media():
     projects = [p for p in content.load_projects('fr') if p['detail']]
-    assert len(projects) == 80
+    assert len(projects) == 82
     for project in projects:
         sections = content.case_sections(project)
         assert any(block.get('html') for section in sections for block in section['blocks'])
@@ -289,7 +292,7 @@ def test_missing_short_content_does_not_reveal_the_long_version(tmp_path, monkey
 
 def test_all_projects_have_complete_long_and_short_language_sources():
     paths = [path for path in content.CONTENT_DIR.glob('*.fr.md') if '.short.' not in path.name]
-    assert len(paths) == 84
+    assert len(paths) == 86
     for path in paths:
         french = frontmatter.load(path)
         slug = path.name.removesuffix('.fr.md')
@@ -356,3 +359,16 @@ def test_responsive_images_are_available_only_to_admin(admin_client, client, lan
     assert 'decoding="async"' in html
     assert '960w' in html
     assert '1440w' not in html  # Cards never request full-size detail variants.
+
+
+@pytest.mark.parametrize('lang,label', [('fr', 'Formation'), ('en', 'Education')])
+def test_education_filter_and_detail(admin_client, lang, label):
+    page = admin_client.get('/realizations/', query_string={'kind': 'education', 'lang': lang})
+    parser = Projects()
+    parser.feed(page.get_data(as_text=True))
+    assert len(parser.visible) == 3
+    assert all(row['data-kind'] == 'education' for row in parser.visible)
+    for slug in ('formation-arts-et-metiers', 'formation-management-maintenance'):
+        html = admin_client.get('/realizations/projects/' + slug, query_string={'lang': lang}).get_data(as_text=True)
+        assert label in html
+        assert 'Arts et Métiers' in html or 'Maintenance' in html

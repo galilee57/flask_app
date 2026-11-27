@@ -8,7 +8,7 @@
 {% endmacro %}
 
 {% macro project_card(project, themes, show_all=False) %}
-<article class="realizations-card" data-project data-display-version="{{ project.display_version }}" data-year="{{ project.year if project.year is not none else '' }}" data-skills="{{ project.skills | join(' ') }}" data-origin="{{ project.origin }}" data-featured="{{ 'true' if project.featured else 'false' }}" data-themes="{{ project.themes | join(' ') }}" data-search="{{ project.search | default(project.title ~ ' ' ~ project.summary) }}" {% if not show_all and not project.visible %}hidden{% endif %}>
+<article class="realizations-card" data-project data-display-version="{{ project.display_version }}" data-year="{{ project.year if project.year is not none else '' }}" data-skills="{{ project.skills | join(' ') }}" data-origin="{{ project.origin }}" data-kind="{{ project.kind }}" data-featured="{{ 'true' if project.featured else 'false' }}" data-themes="{{ project.themes | join(' ') }}" data-search="{{ project.search | default(project.title ~ ' ' ~ project.summary) }}" {% if not show_all and not project.visible %}hidden{% endif %}>
   {% set cover = namespace(present=false) %}
   {% for image in project.images if 'ouverture' in image.emplacements %}{% set cover.present = true %}{% endfor %}
   {% if cover.present %}
@@ -30,7 +30,7 @@
   <div class="flex flex-1 flex-col p-6 sm:p-7">
     <div class="mb-4 flex flex-wrap gap-2">
       <span class="realizations-badge">{{ t({'fr': 'Professionnel', 'en': 'Professional'}) if project.origin == 'professional' else t({'fr': 'Personnel', 'en': 'Personal'}) }}</span>
-      {% if project.detail %}<span class="realizations-badge bg-secondary-100 text-secondary-900">{{ t({'fr': 'Étude de cas', 'en': 'Case study'}) }}</span>{% endif %}
+      <span class="realizations-badge bg-secondary-100 text-secondary-900">{{ project.kind_label }}</span>
     </div>
     <h3 lang="{{ project.language }}" class="text-xl font-bold leading-snug text-primary-800 sm:text-2xl">
       {% if project.detail %}<a class="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary-600" href="{{ url_for('realizations.case_study', slug=project.slug) }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}
@@ -40,7 +40,7 @@
       {% for skill in project.skill_labels %}<li class="rounded-lg bg-neutral-100 px-2.5 py-1.5 text-xs text-neutral-700">{{ skill }}</li>{% endfor %}
     </ul>
     {% if project.detail %}
-    <a href="{{ url_for('realizations.case_study', slug=project.slug) }}" class="mt-auto inline-flex min-h-11 items-center gap-3 self-start rounded-full font-semibold text-primary-700 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600" aria-label="{{ t({'fr': 'Lire l’étude : ', 'en': 'Read the case study: '}) }}{{ project.title }}">{{ t({'fr': 'Lire l’étude', 'en': 'Read case study'}) }} <span aria-hidden="true">↗</span></a>
+    <a href="{{ url_for('realizations.case_study', slug=project.slug) }}" class="mt-auto inline-flex min-h-11 items-center gap-3 self-start rounded-full font-semibold text-primary-700 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-600" aria-label="{{ t({'fr': 'Lire la fiche ', 'en': 'Read the entry '}) }}{{ project.title }}">{{ t({'fr': 'Lire la fiche', 'en': 'Read entry'}) }} <span aria-hidden="true">↗</span></a>
     {% endif %}
   </div>
 </article>

@@ -2762,9 +2762,9 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  .md\:grid-cols-\[1fr_1fr_auto\] {
+  .md\:grid-cols-\[1fr_1fr_1fr_auto\] {
     @media (width >= 48rem) {
-      grid-template-columns: 1fr 1fr auto;
+      grid-template-columns: 1fr 1fr 1fr auto;
     }
   }
   .md\:grid-cols-\[minmax\(0\,2fr\)_minmax\(280px\,\.8fr\)\] {
@@ -4314,6 +4314,39 @@
 :root {
   --font-primary: "EB Garamond", ui-serif, Georgia, serif;
   --font-secondary: "Roboto", system-ui, sans-serif;
+}
+@layer components {
+  .llm-answer-markdown > * + * {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .llm-answer-markdown :is(h1, h2, h3, h4, h5, h6) {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .llm-answer-markdown :is(ul, ol) {
+    padding-inline-start: calc(var(--spacing) * 6);
+  }
+  .llm-answer-markdown ul {
+    list-style-type: disc;
+  }
+  .llm-answer-markdown ol {
+    list-style-type: decimal;
+  }
+  .llm-answer-markdown a {
+    text-decoration-line: underline;
+  }
+  .llm-answer-markdown blockquote {
+    border-inline-start-style: var(--tw-border-style);
+    border-inline-start-width: 2px;
+    padding-inline-start: calc(var(--spacing) * 3);
+  }
+  .llm-answer-markdown pre {
+    overflow-x: auto;
+    border-radius: 0.25rem;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    padding: calc(var(--spacing) * 3);
+  }
 }
 @property --tw-translate-x {
   syntax: "*";

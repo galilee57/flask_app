@@ -7,7 +7,7 @@
 <article data-display-version="{{ project.display_version }}" class="realizations mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12">
   <div class="mb-8">{{ button(t({'fr': '← Tous les projets', 'en': '← All projects'}), href=url_for('realizations.preview'), variant='third') }}</div>
   <header class="realizations-hero max-w-4xl">
-    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary-600">{{ t({'fr': 'Projet professionnel · Étude de cas', 'en': 'Professional project · Case study'}) if project.origin == 'professional' else t({'fr': 'Projet personnel · Étude de cas', 'en': 'Personal project · Case study'}) }}</p>
+    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary-600">{{ project.kind_label }} · {{ t({'fr': 'Parcours professionnel', 'en': 'Professional background'}) if project.origin == 'professional' else t({'fr': 'Parcours personnel', 'en': 'Personal background'}) }}</p>
     <div lang="{{ project.language }}">{{ hero(project.title, project.summary, heading=True) }}</div>
     {% if project.language != current_lang() %}<p class="mb-4 text-sm text-neutral-700">{{ t({'fr': 'Texte source en anglais.', 'en': 'French source text.'}) }}</p>{% endif %}
     {% if project.editorial_status %}

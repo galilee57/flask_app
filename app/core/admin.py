@@ -4,10 +4,15 @@ from hashlib import sha256
 import secrets
 import time
 
-from flask import abort, redirect, render_template, request, session, url_for
+from flask import abort, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash
 
-from .llm import ERROR_MESSAGES, MAX_PROMPT_LENGTH, LLMError, prompt_llm
+from .llm import ERROR_MESSAGES, MAX_PROMPT_LENGTH, LLMError
+from .rag import (
+    RAG_ERRORS, RagError, answer_from_projects, answer_from_summary, compare_offer, load_portfolio_summary,
+)
+from .rag_rebuild import rebuild_state, start_rag_rebuild
+from .response_markdown import render_model_markdown
 
 
 def is_admin():
@@ -77,11 +82,25 @@ def configure_admin(app):
         provider = app.config["LLM_PROVIDER"]
         model = {"local": app.config["LLM_LOCAL_MODEL"], "openai": app.config["OPENAI_MODEL"]}.get(provider)
         prompt = ""
-        answer = error = None
+        answer = error = summary = None
+        sources = []
+        mode = "passages"
+        truncated = False
         status = 200
+        if request.method == "GET" and request.args.get("summary") == "skills":
+            try:
+                summary = load_portfolio_summary(g.lang)
+            except RagError as exc:
+                error = RAG_ERRORS[str(exc)]
+                status = 503
         if request.method == "POST":
             verify_csrf()
             prompt = request.form.get("prompt", "").strip()
+            mode = request.form.get("mode", "passages")
+            if request.form.get("use_rag") == "on":
+                mode = "passages"
+            if mode not in {"passages", "summary", "offer"}:
+                abort(400)
             if not 1 <= len(prompt) <= MAX_PROMPT_LENGTH:
                 error = {
                     "fr": f"Saisis entre 1 et {MAX_PROMPT_LENGTH} caractères.",
@@ -91,15 +110,37 @@ def configure_admin(app):
                 status = 400
             else:
                 try:
-                    answer = prompt_llm(prompt)
+                    if mode == "summary":
+                        summary = load_portfolio_summary(g.lang)
+                        answer, truncated = answer_from_summary(prompt, g.lang, summary)
+                    elif mode == "offer":
+                        answer, sources, truncated = compare_offer(prompt, g.lang)
+                    else:
+                        answer, sources, truncated = answer_from_projects(prompt, g.lang)
+                except RagError as exc:
+                    error = RAG_ERRORS[str(exc)]
+                    status = 503
                 except LLMError as exc:
                     error = ERROR_MESSAGES[str(exc)]
                     status = 503 if str(exc) == "configuration" else 502
 
         return render_template(
             "admin_llm.html", provider=provider, model=model, prompt=prompt,
-            answer=answer, error=error, max_length=MAX_PROMPT_LENGTH,
+            answer=render_model_markdown(answer) if answer else None, error=error,
+            max_length=MAX_PROMPT_LENGTH, sources=sources, mode=mode, truncated=truncated,
+            summary=summary, embedding_provider=app.config["RAG_EMBEDDING_PROVIDER"],
+            rebuild_status=rebuild_state() if app.config["ENV"] == "development" else None,
         ), status
+
+    @app.post("/admin/llm/rebuild")
+    def admin_rag_rebuild():
+        if app.config["ENV"] != "development":
+            abort(404)
+        if not is_admin():
+            abort(403)
+        verify_csrf()
+        start_rag_rebuild()
+        return redirect(url_for("admin_llm"), code=303)
 
     @app.post("/admin/logout")
     def admin_logout():

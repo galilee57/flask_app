@@ -53,6 +53,8 @@ def create_app(config_name: str | None = None) -> Flask:
     configure_admin(app)
     from .core.llm import register_llm_command
     register_llm_command(app)
+    from .core.rag import register_rag_command
+    register_rag_command(app)
 
     from app.storage.snow_import import register_snow_import
     register_snow_import(app)

@@ -19,6 +19,12 @@ THEMES = {
     "image": {"fr": "Image & acquisition", "en": "Imaging & capture"},
     "learning": {"fr": "Transmission & apprentissage", "en": "Sharing & learning"},
 }
+KINDS = {
+    "education": {"fr": "Formation", "en": "Education"},
+    "experience": {"fr": "Expérience", "en": "Experience"},
+    "project": {"fr": "Projet", "en": "Project"},
+    "hobby": {"fr": "Hobby", "en": "Hobby"},
+}
 VIEWS = ("selection", "all", "professional", "personal")
 
 
@@ -53,6 +59,10 @@ def load_projects(language):
         if version == "short":
             project["images"] = selected.get("images", [])
             project["related_ids"] = selected.get("related_ids", [])
+        project["kind"] = project.get("kind", "project")
+        if project["kind"] not in KINDS:
+            raise ValueError(f"{slug}: invalid kind")
+        project["kind_label"] = KINDS[project["kind"]][language]
         project["summary"] = project.get("summary") or ""
         project["images"] = [dict(image, responsive=image_manifest.get(image["file"]))
                              for image in project.get("images", [])]
@@ -79,17 +89,21 @@ def catalogue_context(language, args):
     theme = args.get("theme", "")
     if theme not in THEMES:
         theme = ""
+    kind = args.get("kind", "")
+    if kind not in KINDS:
+        kind = ""
     query = args.get("q", "").strip()[:200]
     for project in projects:
-        search = " ".join([project["id"], project["title"], project["summary"], *project["skill_labels"]])
+        search = " ".join([project["id"], project["title"], project["summary"], project["kind_label"], *project["skill_labels"]])
         project["search"] = search
         project["visible"] = (
             (view == "all" or (view == "selection" and project["featured"])
              or view == project["origin"])
+            and (not kind or kind == project["kind"])
             and (not theme or theme in project["themes"])
             and _search_text(query) in _search_text(search)
         )
-    return dict(projects=projects, themes=THEMES, view=view, theme=theme, query=query,
+    return dict(projects=projects, themes=THEMES, kinds=KINDS, view=view, theme=theme, kind=kind, query=query,
                 result_count=sum(project["visible"] for project in projects))
 
 

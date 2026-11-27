@@ -9,15 +9,53 @@
     <p class="mt-2">{{ t({'fr': 'Configure un fournisseur et un modèle pour activer le test.', 'en': 'Configure a provider and model to enable testing.'}) }}</p>
   {% endif %}
   {% if provider == 'openai' and model %}
-    <p class="mt-2 text-sm">{{ t({'fr': 'Le prompt sera envoyé à OpenAI.', 'en': 'The prompt will be sent to OpenAI.'}) }}</p>
+    <p class="mt-2 text-sm">{{ t({'fr': 'Le prompt et le contexte choisi seront envoyés à OpenAI.', 'en': 'The prompt and the selected context will be sent to OpenAI.'}) }}</p>
   {% endif %}
+  {% if embedding_provider == 'openai' %}
+    <p class="mt-2 text-sm">{{ t({'fr': 'OpenAI calcule aussi les embeddings des fiches et des requêtes de recherche.', 'en': 'OpenAI also computes embeddings for portfolio entries and search queries.'}) }}</p>
+  {% endif %}
+  {% if rebuild_status %}
+    {% set rebuild_messages = {
+      'ready': {'fr': 'Index disponible.', 'en': 'Index available.'},
+      'missing': {'fr': 'Aucun index disponible.', 'en': 'No index available.'},
+      'running': {'fr': 'Reconstruction en cours.', 'en': 'Rebuild in progress.'},
+      'complete': {'fr': 'L’index de tous les projets a été reconstruit.', 'en': 'The index for all projects has been rebuilt.'},
+      'embeddings': {'fr': 'Reconstruction échouée. Vérifie que le serveur d’embeddings est actif.', 'en': 'Rebuild failed. Check that the embedding server is running.'},
+      'interrupted': {'fr': 'La reconstruction a été interrompue. Tu peux la relancer.', 'en': 'The rebuild was interrupted. You can restart it.'},
+      'failed': {'fr': 'Reconstruction échouée. Consulte le journal Flask.', 'en': 'Rebuild failed. Check the Flask log.'}
+    } %}
+    <section class="mt-6 rounded-lg border p-3" aria-labelledby="rag-index">
+      <h2 id="rag-index" class="font-semibold">{{ t({'fr': 'Index des projets', 'en': 'Project index'}) }}</h2>
+      <p class="mt-2" role="status">{{ t(rebuild_messages.get(rebuild_status, rebuild_messages.failed)) }}</p>
+      {% if rebuild_status == 'running' %}
+        <a href="{{ url_for('admin_llm') }}" class="inline-flex min-h-11 items-center underline">{{ t({'fr': 'Actualiser l’état', 'en': 'Refresh status'}) }}</a>
+      {% else %}
+        <form method="post" action="{{ url_for('admin_rag_rebuild') }}" class="mt-2">
+          <input type="hidden" name="csrf_token" value="{{ admin_csrf_token() }}">
+          <button type="submit" class="min-h-11 rounded-lg border px-4 font-semibold">
+            {{ t({'fr': 'Reconstruire tout l’index RAG', 'en': 'Rebuild the full RAG index'}) }}
+          </button>
+        </form>
+      {% endif %}
+    </section>
+  {% endif %}
+  <a href="{{ url_for('admin_llm', summary='skills', lang=current_lang()) }}#skills-summary"
+     class="mt-4 inline-flex min-h-11 items-center rounded-lg border px-4 font-semibold">
+    {{ t({'fr': 'Synthèse des compétences', 'en': 'Skills overview'}) }}
+  </a>
   {% if error %}
     <p class="mt-4 font-semibold" role="alert">{{ t(error) }}</p>
   {% endif %}
   {% if model %}
     <form method="post" class="mt-6 flex flex-col gap-3">
       <input type="hidden" name="csrf_token" value="{{ admin_csrf_token() }}">
-      <label for="prompt" class="font-semibold">Prompt</label>
+      <label for="llm-mode" class="font-semibold">{{ t({'fr': 'Type de recherche', 'en': 'Search type'}) }}</label>
+      <select id="llm-mode" name="mode" class="min-h-11 rounded-lg border p-2">
+        <option value="passages" {% if mode == 'passages' %}selected{% endif %}>{{ t({'fr': 'Chercher dans mes projets', 'en': 'Search my projects'}) }}</option>
+        <option value="summary" {% if mode == 'summary' %}selected{% endif %}>{{ t({'fr': 'Synthèse des compétences du catalogue', 'en': 'Catalogue skills overview'}) }}</option>
+        <option value="offer" {% if mode == 'offer' %}selected{% endif %}>{{ t({'fr': 'Comparer une offre à mes projets', 'en': 'Compare a job offer with my projects'}) }}</option>
+      </select>
+      <label for="prompt" class="font-semibold">{{ t({'fr': 'Question ou descriptif de l’offre', 'en': 'Question or job description'}) }}</label>
       <textarea id="prompt" name="prompt" rows="7" maxlength="{{ max_length }}" required
                 class="w-full rounded-lg border p-3">{{ prompt }}</textarea>
       <button type="submit" class="min-h-11 rounded-lg bg-primary-800 px-4 font-semibold text-white sm:self-start">
@@ -28,7 +66,62 @@
   {% if answer %}
     <section class="mt-8" aria-labelledby="llm-answer">
       <h2 id="llm-answer" class="text-xl font-semibold">{{ t({'fr': 'Réponse', 'en': 'Response'}) }}</h2>
-      <p class="mt-2 whitespace-pre-wrap break-words rounded-lg border p-3">{{ answer }}</p>
+      {% if truncated %}
+        <p class="mt-2 font-semibold" role="status">{{ t({'fr': 'La réponse a atteint la limite de génération. Essaie une question plus ciblée.', 'en': 'The answer reached the generation limit. Try a more focused question.'}) }}</p>
+      {% endif %}
+      <div class="llm-answer-markdown mt-2 break-words rounded-lg border p-3">{{ answer }}</div>
+    </section>
+  {% endif %}
+  {% if summary %}
+    <section id="skills-summary" class="mt-6 rounded-lg border p-3" aria-labelledby="skills-summary-title">
+      <h2 id="skills-summary-title" class="text-xl font-semibold">{{ t({'fr': 'Compétences les plus représentées', 'en': 'Most represented skills'}) }}</h2>
+      <p class="mt-2">
+        {{ t({
+          'fr': '%(tagged)s fiches sur %(total)s ont des compétences renseignées. Chaque fiche compte une fois par compétence.',
+          'en': '%(tagged)s of %(total)s project sheets have skill tags. Each sheet counts once per skill.'
+        }) | format(tagged=summary.tagged, total=summary.total) }}
+      </p>
+      {% if summary.skills %}
+        <ol class="mt-4 flex flex-col gap-3">
+          {% for skill in summary.skills %}
+            <li>
+              <p class="font-semibold">{{ skill.label }} · {{ skill.count }}</p>
+              <p class="text-sm">
+                {% for project in skill.examples %}
+                  {% if project.url %}<a class="underline" href="{{ project.url }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}{{ ', ' if not loop.last }}
+                {% endfor %}
+              </p>
+            </li>
+          {% endfor %}
+        </ol>
+      {% endif %}
+    </section>
+  {% endif %}
+  {% if sources %}
+    <section class="mt-8" aria-labelledby="llm-sources">
+      <h2 id="llm-sources" class="text-xl font-semibold">{{ t({'fr': 'Extraits consultés', 'en': 'Retrieved excerpts'}) }}</h2>
+      <ul class="mt-2 flex flex-col gap-3">
+        {% for source in sources %}
+          <li class="rounded-lg border p-3">
+            <p class="font-semibold">
+              [{{ source.number }}] {{ source.project_id }} · {% if source.kind_label %}{{ source.kind_label }} ·{% endif %}
+              {% if source.url %}
+                <a href="{{ source.url }}" class="underline">{{ source.title }}</a>
+              {% else %}
+                {{ source.title }}
+              {% endif %}
+              {% if source.section %} · {{ source.section }}{% endif %}
+            </p>
+            {% if mode == 'offer' and source.skills %}
+              <p class="mt-2 text-sm">{{ t({'fr': 'Compétences déclarées', 'en': 'Declared skills'}) }} · {{ source.skills | join(', ') }}</p>
+            {% endif %}
+            <p class="mt-2 text-sm break-words">{{ source.text }}</p>
+            {% if source.score is not none %}
+              <p class="mt-2 text-sm">{{ t({'fr': 'Similarité du passage', 'en': 'Passage similarity'}) }} {{ '%.3f' | format(source.score) }}</p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     </section>
   {% endif %}
 </section>
