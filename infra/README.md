@@ -120,3 +120,77 @@ Références : [Azure](https://learn.microsoft.com/en-us/azure/container-apps/gi
 [identité managée ACR](https://learn.microsoft.com/en-us/azure/container-apps/managed-identity-image-pull),
 [Vercel Container Images](https://vercel.com/docs/functions/container-images),
 [Render Docker](https://render.com/docs/docker).
+
+## Test de prompts avec LFM3 ou OpenAI
+
+La page `/admin/llm` est accessible via **Test LLM** dans le bandeau admin après
+connexion sur `/admin`. Elle utilise la session admin et son jeton CSRF. Configure
+`ADMIN_PASSWORD_HASH` selon les instructions du README principal. Le formulaire affiche
+le fournisseur actif et la réponse en texte brut. Il ne conserve pas d’historique.
+
+### Mac Apple Silicon
+
+Télécharger l’archive macOS arm64 de [llama.cpp b11960](https://github.com/ggml-org/llama.cpp/releases/tag/b11960).
+Dans les commandes ci-dessous, remplacer le chemin par celui du binaire extrait.
+
+```bash
+LLAMA_SERVER=/chemin/vers/llama-server sh infra/llm/start.sh
+```
+
+Le premier lancement télécharge et vérifie le GGUF officiel LFM3‑1.7B `Q4_K_M`
+(~1,1 Go) dans `~/.cache/flask-portfolio-llm`. `LLM_CACHE_DIR` permet de choisir
+un autre chemin. Le serveur écoute sur `127.0.0.1:8081`. Dans un autre terminal,
+avec l’environnement virtuel du projet activé :
+
+```bash
+LLM_PROVIDER=local FLASK_CONFIG=development flask --app wsgi llm-prompt 'Explique le RAG en français en une phrase.'
+LLM_PROVIDER=local FLASK_CONFIG=development flask --app wsgi --debug run
+```
+
+### Docker Compose
+
+Arrêter d’abord le serveur natif s’il occupe le port 8081.
+
+```bash
+LLM_PROVIDER=local docker compose --profile llm up --build
+```
+
+Le service CPU `llm` télécharge le modèle dans le volume `llm-models`.
+Flask utilise `http://llm:8081/v1` et la machine hôte peut vérifier
+`http://127.0.0.1:8081/health`. Le premier démarrage peut prendre le temps du
+téléchargement. Pour utiliser le serveur natif depuis le conteneur web sous Docker
+Desktop, définir `LLM_LOCAL_BASE_URL=http://host.docker.internal:8081/v1` et
+démarrer Compose sans activer le profil `llm`.
+
+### Railway staging
+
+Dans `renewed-freedom`, ajouter un service privé nommé `llm` dans le même
+environnement que `flask_app`. Connecter le dépôt sur la branche `staging` et
+régler le répertoire racine de ce service sur `/infra/llm`. Railway construit le
+`Dockerfile` de ce répertoire. Monter un volume sur `/models`. Utiliser une seule
+réplique et aucun domaine public ni proxy TCP pour le service d’inférence.
+
+- Service `llm` : fixer `PORT=8081`, configurer le healthcheck HTTP sur `/health`
+  et laisser jusqu’à 600 secondes au premier démarrage.
+- Service `flask_app` : définir `LLM_PROVIDER=local` et
+  `LLM_LOCAL_BASE_URL=http://llm.railway.internal:8081/v1`. Configurer le hash admin
+  dans les variables du service pour utiliser la page.
+- Après déploiement, vérifier le healthcheck et envoyer un prompt via Flask.
+  Mesurer la latence et la RAM avant d’augmenter le contexte (`LLM_CONTEXT_SIZE`,
+  4096 tokens par défaut). Le serveur traite une génération à la fois.
+
+Le circuit de déploiement Flask et ses migrations suivent toujours le workflow
+staging du dépôt. La disponibilité du LLM est vérifiée indépendamment de
+`/health/ready` de Flask.
+
+### Utiliser OpenAI
+
+Définir `LLM_PROVIDER=openai`, `OPENAI_MODEL` avec un modèle Chat Completions
+accessible au compte et `OPENAI_API_KEY` dans les variables du serveur ou
+le `.env` local. La page et la commande utilisent alors l’API OpenAI et lui
+envoient le texte saisi. Le choix reste explicite si un fournisseur est indisponible.
+
+Pour les futurs agents, `app.core.llm.chat_completion` accepte les messages
+et les schémas d’outils de Chat Completions. Il renvoie le message assistant,
+que l’appelant peut examiner avant d’exécuter un outil et d’en transmettre le
+résultat au modèle.

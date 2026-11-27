@@ -7,6 +7,8 @@ import time
 from flask import abort, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash
 
+from .llm import ERROR_MESSAGES, MAX_PROMPT_LENGTH, LLMError, prompt_llm
+
 
 def is_admin():
     from flask import current_app
@@ -64,6 +66,40 @@ def configure_admin(app):
                 return redirect(url_for("main.lab"))
             error = "Identifiant ou mot de passe incorrect."
         return render_template("admin.html", error=error)
+
+    @app.route("/admin/llm", methods=["GET", "POST"])
+    def admin_llm():
+        if not is_admin():
+            if request.method == "POST":
+                abort(403)
+            return redirect(url_for("admin_login"))
+
+        provider = app.config["LLM_PROVIDER"]
+        model = {"local": app.config["LLM_LOCAL_MODEL"], "openai": app.config["OPENAI_MODEL"]}.get(provider)
+        prompt = ""
+        answer = error = None
+        status = 200
+        if request.method == "POST":
+            verify_csrf()
+            prompt = request.form.get("prompt", "").strip()
+            if not 1 <= len(prompt) <= MAX_PROMPT_LENGTH:
+                error = {
+                    "fr": f"Saisis entre 1 et {MAX_PROMPT_LENGTH} caractères.",
+                    "en": f"Enter 1 to {MAX_PROMPT_LENGTH} characters.",
+                }
+                prompt = prompt[:MAX_PROMPT_LENGTH]
+                status = 400
+            else:
+                try:
+                    answer = prompt_llm(prompt)
+                except LLMError as exc:
+                    error = ERROR_MESSAGES[str(exc)]
+                    status = 503 if str(exc) == "configuration" else 502
+
+        return render_template(
+            "admin_llm.html", provider=provider, model=model, prompt=prompt,
+            answer=answer, error=error, max_length=MAX_PROMPT_LENGTH,
+        ), status
 
     @app.post("/admin/logout")
     def admin_logout():

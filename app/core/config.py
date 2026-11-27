@@ -34,6 +34,11 @@ class Config:
     ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
     ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH")
     ADMIN_API_TOKEN = os.getenv("ADMIN_API_TOKEN")
+    LLM_PROVIDER = os.getenv("LLM_PROVIDER", "disabled")
+    LLM_LOCAL_BASE_URL = os.getenv("LLM_LOCAL_BASE_URL", "http://127.0.0.1:8081/v1")
+    LLM_LOCAL_MODEL = os.getenv("LLM_LOCAL_MODEL", "lfm3-1.7b")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL")
     REQUIRE_ADMIN_API_TOKEN = True
     MAX_CONTENT_LENGTH = 1 * 1024 * 1024
     SESSION_COOKIE_HTTPONLY = True

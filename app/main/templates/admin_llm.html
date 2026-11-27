@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ t({'fr': 'Test du LLM', 'en': 'Test the LLM'}) }}{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-3xl px-4 py-8 sm:px-8">
+  <h1 class="text-2xl font-semibold">{{ t({'fr': 'Test du LLM', 'en': 'Test the LLM'}) }}</h1>
+  {% if model %}
+    <p class="mt-2">{{ 'OpenAI' if provider == 'openai' else 'llama.cpp' }} · {{ model }}</p>
+  {% else %}
+    <p class="mt-2">{{ t({'fr': 'Configure un fournisseur et un modèle pour activer le test.', 'en': 'Configure a provider and model to enable testing.'}) }}</p>
+  {% endif %}
+  {% if provider == 'openai' and model %}
+    <p class="mt-2 text-sm">{{ t({'fr': 'Le prompt sera envoyé à OpenAI.', 'en': 'The prompt will be sent to OpenAI.'}) }}</p>
+  {% endif %}
+  {% if error %}
+    <p class="mt-4 font-semibold" role="alert">{{ t(error) }}</p>
+  {% endif %}
+  {% if model %}
+    <form method="post" class="mt-6 flex flex-col gap-3">
+      <input type="hidden" name="csrf_token" value="{{ admin_csrf_token() }}">
+      <label for="prompt" class="font-semibold">Prompt</label>
+      <textarea id="prompt" name="prompt" rows="7" maxlength="{{ max_length }}" required
+                class="w-full rounded-lg border p-3">{{ prompt }}</textarea>
+      <button type="submit" class="min-h-11 rounded-lg bg-primary-800 px-4 font-semibold text-white sm:self-start">
+        {{ t({'fr': 'Envoyer', 'en': 'Send'}) }}
+      </button>
+    </form>
+  {% endif %}
+  {% if answer %}
+    <section class="mt-8" aria-labelledby="llm-answer">
+      <h2 id="llm-answer" class="text-xl font-semibold">{{ t({'fr': 'Réponse', 'en': 'Response'}) }}</h2>
+      <p class="mt-2 whitespace-pre-wrap break-words rounded-lg border p-3">{{ answer }}</p>
+    </section>
+  {% endif %}
+</section>
+{% endblock %}

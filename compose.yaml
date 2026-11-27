@@ -1,7 +1,7 @@
 x-app: &app
   image: flask-portfolio:local
   build: .
-  environment:
+  environment: &app-env
     SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
     ADMIN_API_TOKEN: ${ADMIN_API_TOKEN:?Set ADMIN_API_TOKEN in .env}
     DATABASE_URL: ${DOCKER_DATABASE_URL:?Set DOCKER_DATABASE_URL in .env (Mac PostgreSQL via host.docker.internal)}
@@ -12,6 +12,14 @@ services:
     command: ["flask", "--app", "wsgi", "db", "upgrade"]
   web:
     <<: *app
+    environment:
+      <<: *app-env
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-disabled}
+      LLM_LOCAL_BASE_URL: ${LLM_LOCAL_BASE_URL:-http://llm:8081/v1}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-}
     ports:
       - "8080:8080"
     depends_on:
@@ -22,3 +30,16 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+
+  llm:
+    profiles: [llm]
+    build: ./infra/llm
+    environment:
+      LLM_HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:8081:8081"
+    volumes:
+      - llm-models:/models
+
+volumes:
+  llm-models:

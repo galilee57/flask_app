@@ -294,3 +294,9 @@ dans le code ; les bases applicatives, sauvegardes et fichiers `.env` sont exclu
 La commande de seed est transactionnelle et ne s’applique qu’une fois par
 empreinte. Vérifier ensuite `/health/ready`, `/projects/snow_layers/` et les
 API de saisons/comparaison (76 saisons attendues pour l’historique initial).
+
+## Test du LLM en mode admin
+
+La page **Test LLM** et la commande `flask --app wsgi llm-prompt` utilisent le
+fournisseur choisi par `LLM_PROVIDER`. Voir le [guide de configuration LLM](infra/README.md#test-de-prompts-avec-lfm3-ou-openai)
+pour LFM3 sur Mac, Docker Compose, Railway staging et l’API OpenAI.
