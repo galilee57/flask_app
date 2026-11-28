@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 
-from flask import current_app, jsonify, render_template, url_for, abort
+from flask import abort, current_app, g, jsonify, redirect, render_template, url_for
 from . import bp
 
 
@@ -45,7 +45,7 @@ def about():
 
 @bp.route("/experiences_menu")
 def experiences_menu():
-    return render_template("experiences_menu.html")
+    return redirect(url_for("realizations.preview", lang=g.lang))
 
 @bp.route("/exploration")
 def exploration():

@@ -2,7 +2,6 @@
 
 Run with Python 3.11+ after installing requirements-images.txt.
 """
-from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -29,16 +28,19 @@ def build_images(image_dir=IMAGE_DIR):
                 continue
             image = ImageOps.exif_transpose(original)
             image = image.convert("RGBA" if "A" in image.getbands() or "transparency" in image.info else "RGB")
-            relative = source.relative_to(image_dir).as_posix()
-            digest = sha256(source.read_bytes() + relative.encode() + b"webp-v1").hexdigest()[:20]
+            relative_path = source.relative_to(image_dir)
+            relative = relative_path.as_posix()
+            # Source assets live under imported/<project>/ or generated/<project>/.
+            # Keep the project folder and source name so variants are easy to find.
+            project_dir = relative_path.parent.name
             variants = []
             for width in sorted({min(width, image.width) for width in WIDTHS}):
                 height = max(1, round(image.height * width / image.width))
-                target = output_dir / f"{digest}-{width}.webp"
-                if not target.exists():
-                    resized = image.resize((width, height), Image.Resampling.LANCZOS)
-                    resized.save(target, "WEBP", quality=78 if width <= 960 else 82,
-                                 method=6, icc_profile=image.info.get("icc_profile", b""))
+                target = output_dir / project_dir / f"{source.stem}-{width}.webp"
+                target.parent.mkdir(parents=True, exist_ok=True)
+                resized = image.resize((width, height), Image.Resampling.LANCZOS)
+                resized.save(target, "WEBP", quality=78 if width <= 960 else 82,
+                             method=6, icc_profile=image.info.get("icc_profile", b""))
                 variants.append({"file": target.relative_to(image_dir).as_posix(),
                                  "width": width, "height": height})
             manifest[relative] = {"width": image.width, "height": image.height,

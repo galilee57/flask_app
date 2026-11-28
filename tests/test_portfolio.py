@@ -7,7 +7,7 @@ import pytest
 
 
 PUBLIC_PAGES = (
-    "/", "/about", "/experiences_menu", "/exploration", "/lab",
+    "/", "/about", "/realizations/", "/exploration", "/lab",
     "/experiences/", "/experiences/big_data", "/experiences/machine_learning",
     "/experiences/power_platform", "/experiences/web_design",
     "/experiences/deep_learning", "/experiences/fablab",

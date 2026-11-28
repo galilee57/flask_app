@@ -26,6 +26,7 @@ KINDS = {
     "hobby": {"fr": "Hobby", "en": "Hobby"},
 }
 VIEWS = ("selection", "all", "professional", "personal")
+DEGREE_ORDER = {"F001": 0, "F002": 1, "PP014": 2}
 
 
 def load_projects(language):
@@ -73,7 +74,16 @@ def load_projects(language):
             for skill in project["skills"]
         ]
         projects.append(project)
-    return sorted(projects, key=lambda project: (not project["featured"], project["id"]))
+    return sorted(projects, key=_catalogue_order)
+
+
+def _catalogue_order(project):
+    project_id = project["id"]
+    if project["kind"] == "education":
+        degree_rank = DEGREE_ORDER.get(project_id, len(DEGREE_ORDER))
+        hours = project.get("estimated_training_hours") or 0
+        return (not project["featured"], 0, degree_rank, -hours, project_id)
+    return (not project["featured"], 1, 0, 0, project_id)
 
 
 def _search_text(value):

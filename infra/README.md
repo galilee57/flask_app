@@ -255,8 +255,8 @@ des extraits et des compétences déclarées, puis indique les points partiellem
 Utiliser `LLM_PROVIDER=openai`, `OPENAI_MODEL=gpt-6-luna`,
 `OPENAI_API_KEY` et `RAG_EMBEDDING_PROVIDER=openai` sur `flask_app`.
 OpenAI reçoit les passages lors de l’indexation et les questions lors des
-recherches. La génération reçoit le contexte sélectionné. Le catalogue,
-les illustrations et la page de test restent derrière la session admin.
+recherches. La génération reçoit le contexte sélectionné. Le catalogue et ses illustrations sont publics. La page de test LLM reste
+réservée à la session admin.
 
 Monter un volume privé sur `/rag` et définir
 `RAG_INDEX_PATH=/rag/portfolio-rag.json`. Au démarrage Railway, exécuter

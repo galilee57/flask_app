@@ -56,5 +56,23 @@
     form.elements.q.value = params.get('q') || '';
     filter(false);
   });
+  const backToMenu = document.getElementById('realizations-back-to-menu');
+  const menu = document.getElementById('mobileMenu') || document.querySelector('header');
+  let frame = 0;
+  function updateBackToMenu() {
+    frame = 0;
+    const pastMenu = window.scrollY > 240;
+    const menuVisible = menu && menu.getBoundingClientRect().bottom > 0;
+    backToMenu.hidden = !pastMenu || menuVisible;
+  }
+  window.addEventListener('scroll', () => {
+    if (!frame) frame = window.requestAnimationFrame(updateBackToMenu);
+  }, {passive: true});
+  window.addEventListener('resize', updateBackToMenu, {passive: true});
+  backToMenu.addEventListener('click', () => {
+    const nav = document.getElementById('mobileMenuBtn') ? document.getElementById('mobileMenu') : document.querySelector('header');
+    (nav || document.body).scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+  updateBackToMenu();
   filter(false);
 })();

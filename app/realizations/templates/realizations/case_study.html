@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% from "components/typography.html" import hero %}
 {% from "components/ui.html" import button %}
-{% from "realizations/components.html" import case_image, project_card with context %}
+{% from "realizations/components.html" import case_image, kind_badge, project_card with context %}
 {% block title %}{{ project.title }} · Emmanuel Fix{% endblock %}
 {% block content %}
 <article data-display-version="{{ project.display_version }}" class="realizations mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12">
   <div class="mb-8">{{ button(t({'fr': '← Tous les projets', 'en': '← All projects'}), href=url_for('realizations.preview'), variant='third') }}</div>
   <header class="realizations-hero max-w-4xl">
-    <p class="mb-4 text-xs font-bold uppercase tracking-widest text-primary-600">{{ project.kind_label }} · {{ t({'fr': 'Parcours professionnel', 'en': 'Professional background'}) if project.origin == 'professional' else t({'fr': 'Parcours personnel', 'en': 'Personal background'}) }}</p>
+    <div class="mb-4">
+      {{ kind_badge(project) }}
+    </div>
     <div lang="{{ project.language }}">{{ hero(project.title, project.summary, heading=True) }}</div>
     {% if project.language != current_lang() %}<p class="mb-4 text-sm text-neutral-700">{{ t({'fr': 'Texte source en anglais.', 'en': 'French source text.'}) }}</p>{% endif %}
     {% if project.editorial_status %}
@@ -50,8 +52,10 @@
   </div>
   {% if related %}
   <section class="mt-14 border-t border-primary-100 pt-8" aria-labelledby="related-title">
-    <h2 id="related-title" class="mb-6 text-2xl font-bold text-primary-800">{{ t({'fr': 'Une autre réalisation à découvrir', 'en': 'Another project to explore'}) }}</h2>
-    <div class="max-w-xl">{% for item in related %}{{ project_card(item, themes, show_all=True) }}{% endfor %}</div>
+    <h2 id="related-title" class="mb-6 text-2xl font-bold text-primary-800">{{ t({'fr': 'Fiches associées', 'en': 'Related entries'}) }}</h2>
+    <div class="grid grid-cols-1 gap-5 px-2 py-2 md:grid-cols-2 md:gap-6 md:px-4">
+      {% for item in related %}{{ project_card(item, themes, show_all=True) }}{% endfor %}
+    </div>
   </section>
   {% endif %}
 </article>

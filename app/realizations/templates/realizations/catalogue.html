@@ -82,6 +82,9 @@
     </div>
   </section>
 </div>
+<button id="realizations-back-to-menu" type="button" class="realizations-back-to-menu" aria-label="{{ t({'fr': 'Revenir au menu', 'en': 'Back to menu'}) }}" title="{{ t({'fr': 'Revenir au menu', 'en': 'Back to menu'}) }}" hidden>
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5m0 0L6 11m6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 {% endblock %}
 {% block js %}
 <script id="realizations-messages" type="application/json">{{ t({'fr': {'one': '{count} fiche', 'many': '{count} fiches'}, 'en': {'one': '{count} entry', 'many': '{count} entries'}}) | tojson }}</script>

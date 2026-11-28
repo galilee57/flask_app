@@ -1,16 +1,19 @@
-"""Admin-only catalogue and case-study pages, separate from legacy experiences."""
-from flask import abort, g, render_template, request
+"""Public catalogue and case-study pages."""
+from flask import abort, g, redirect, render_template, request, url_for
 
-from app.core.admin import can_view_drafts
 from . import bp
 from .content import THEMES, case_sections, catalogue_context, load_projects
 
 
-@bp.before_request
-def protect_preview():
-    # Includes the blueprint's media and scripts, not just its HTML pages.
-    if not can_view_drafts():
-        abort(404)
+LEGACY_SLUGS = {
+    "formation-arts-et-metiers": "f001",
+    "formation-management-maintenance": "f002",
+    "p017": "e001",
+    "p021": "e002",
+    "p025": "e003",
+    "p030": "e004",
+    "p020": "e007",
+}
 
 
 @bp.route("/")
@@ -21,6 +24,8 @@ def preview():
 
 @bp.route("/projects/<slug>")
 def case_study(slug):
+    if slug in LEGACY_SLUGS:
+        return redirect(url_for("realizations.case_study", slug=LEGACY_SLUGS[slug], lang=g.lang))
     projects = load_projects(g.lang)
     project = next((item for item in projects
                     if item["slug"] == slug and item.get("detail")), None)

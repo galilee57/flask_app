@@ -1,2475 +1,2681 @@
 {
-  "3d-printing/IMG_0156.WEBP": {
-    "width": 1800,
-    "height": 1350,
-    "variants": [
-      {
-        "file": "responsive/06107e0150518d179fdd-320.webp",
-        "width": 320,
-        "height": 240
-      },
-      {
-        "file": "responsive/06107e0150518d179fdd-640.webp",
-        "width": 640,
-        "height": 480
-      },
-      {
-        "file": "responsive/06107e0150518d179fdd-960.webp",
-        "width": 960,
-        "height": 720
-      },
-      {
-        "file": "responsive/06107e0150518d179fdd-1440.webp",
-        "width": 1440,
-        "height": 1080
-      }
-    ]
-  },
-  "3d-printing/IMG_0158.JPG": {
-    "width": 1050,
-    "height": 1400,
-    "variants": [
-      {
-        "file": "responsive/7e8741f07a8c55f671b5-320.webp",
-        "width": 320,
-        "height": 427
-      },
-      {
-        "file": "responsive/7e8741f07a8c55f671b5-640.webp",
-        "width": 640,
-        "height": 853
-      },
-      {
-        "file": "responsive/7e8741f07a8c55f671b5-960.webp",
-        "width": 960,
-        "height": 1280
-      },
-      {
-        "file": "responsive/7e8741f07a8c55f671b5-1050.webp",
-        "width": 1050,
-        "height": 1400
-      }
-    ]
-  },
-  "3d-printing/IMG_4429.JPG": {
-    "width": 1400,
-    "height": 1050,
-    "variants": [
-      {
-        "file": "responsive/431076b1cb05faef83a8-320.webp",
-        "width": 320,
-        "height": 240
-      },
-      {
-        "file": "responsive/431076b1cb05faef83a8-640.webp",
-        "width": 640,
-        "height": 480
-      },
-      {
-        "file": "responsive/431076b1cb05faef83a8-960.webp",
-        "width": 960,
-        "height": 720
-      },
-      {
-        "file": "responsive/431076b1cb05faef83a8-1400.webp",
-        "width": 1400,
-        "height": 1050
-      }
-    ]
-  },
-  "astronomy/IMG_0154.JPG": {
-    "width": 600,
-    "height": 600,
-    "variants": [
-      {
-        "file": "responsive/b422db157fa3221273e0-320.webp",
-        "width": 320,
-        "height": 320
-      },
-      {
-        "file": "responsive/b422db157fa3221273e0-600.webp",
-        "width": 600,
-        "height": 600
-      }
-    ]
-  },
-  "astronomy/IMG_0155.JPG": {
-    "width": 447,
-    "height": 447,
-    "variants": [
-      {
-        "file": "responsive/0fed6ae542d6006b74a1-320.webp",
-        "width": 320,
-        "height": 320
-      },
-      {
-        "file": "responsive/0fed6ae542d6006b74a1-447.webp",
-        "width": 447,
-        "height": 447
-      }
-    ]
-  },
-  "astronomy/illustration-detail-v1.png": {
-    "width": 1400,
-    "height": 933,
-    "variants": [
-      {
-        "file": "responsive/c4739c2fef53597d67f6-320.webp",
-        "width": 320,
-        "height": 213
-      },
-      {
-        "file": "responsive/c4739c2fef53597d67f6-640.webp",
-        "width": 640,
-        "height": 427
-      },
-      {
-        "file": "responsive/c4739c2fef53597d67f6-960.webp",
-        "width": 960,
-        "height": 640
-      },
-      {
-        "file": "responsive/c4739c2fef53597d67f6-1400.webp",
-        "width": 1400,
-        "height": 933
-      }
-    ]
-  },
-  "astronomy/jupiter.png": {
-    "width": 240,
-    "height": 216,
-    "variants": [
-      {
-        "file": "responsive/9732774107138754d8fb-240.webp",
-        "width": 240,
-        "height": 216
-      }
-    ]
-  },
-  "astronomy/saturne.png": {
-    "width": 200,
-    "height": 180,
-    "variants": [
-      {
-        "file": "responsive/48eeacddc7fb5f3aaa75-200.webp",
-        "width": 200,
-        "height": 180
-      }
-    ]
-  },
-  "generated/p071/illustration-v1.jpg": {
+  "generated/e005/cover.png": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/af217d9cad63e147ebba-320.webp",
+        "file": "responsive/e005/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/af217d9cad63e147ebba-640.webp",
+        "file": "responsive/e005/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/af217d9cad63e147ebba-960.webp",
+        "file": "responsive/e005/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/af217d9cad63e147ebba-1440.webp",
+        "file": "responsive/e005/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "generated/p072/illustration-v1.jpg": {
+  "generated/e006/cover.png": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/07b079183b7e8290f1ff-320.webp",
+        "file": "responsive/e006/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/07b079183b7e8290f1ff-640.webp",
+        "file": "responsive/e006/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/07b079183b7e8290f1ff-960.webp",
+        "file": "responsive/e006/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/07b079183b7e8290f1ff-1440.webp",
+        "file": "responsive/e006/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "generated/p073/illustration-v1.jpg": {
+  "generated/f001-arts-et-metiers/cover.png": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/6199acf79174bcdb453a-320.webp",
+        "file": "responsive/f001-arts-et-metiers/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/6199acf79174bcdb453a-640.webp",
+        "file": "responsive/f001-arts-et-metiers/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/6199acf79174bcdb453a-960.webp",
+        "file": "responsive/f001-arts-et-metiers/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/6199acf79174bcdb453a-1440.webp",
+        "file": "responsive/f001-arts-et-metiers/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "generated/pp018/illustration-v1.jpg": {
+  "generated/f002-management-maintenance/cover.png": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/d34173522aeb06c888dd-320.webp",
+        "file": "responsive/f002-management-maintenance/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/d34173522aeb06c888dd-640.webp",
+        "file": "responsive/f002-management-maintenance/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/d34173522aeb06c888dd-960.webp",
+        "file": "responsive/f002-management-maintenance/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/d34173522aeb06c888dd-1440.webp",
+        "file": "responsive/f002-management-maintenance/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "generated/pp019/illustration-v1.jpg": {
+  "generated/f003/cover.jpg": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/bc38fe87b963784cfd10-320.webp",
+        "file": "responsive/f003/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/bc38fe87b963784cfd10-640.webp",
+        "file": "responsive/f003/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/bc38fe87b963784cfd10-960.webp",
+        "file": "responsive/f003/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/bc38fe87b963784cfd10-1440.webp",
+        "file": "responsive/f003/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "generated/pp020/illustration-v1.jpg": {
+  "generated/f004/cover.jpg": {
     "width": 1536,
     "height": 1024,
     "variants": [
       {
-        "file": "responsive/e28130d46bbae0926698-320.webp",
+        "file": "responsive/f004/cover-320.webp",
         "width": 320,
         "height": 213
       },
       {
-        "file": "responsive/e28130d46bbae0926698-640.webp",
+        "file": "responsive/f004/cover-640.webp",
         "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/e28130d46bbae0926698-960.webp",
+        "file": "responsive/f004/cover-960.webp",
         "width": 960,
         "height": 640
       },
       {
-        "file": "responsive/e28130d46bbae0926698-1440.webp",
+        "file": "responsive/f004/cover-1440.webp",
         "width": 1440,
         "height": 960
       }
     ]
   },
-  "imported/0432a9e185cb0125a56d.jpg": {
-    "width": 1400,
-    "height": 716,
+  "generated/f005/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
     "variants": [
       {
-        "file": "responsive/0fce73beb1f9f8d0eacd-320.webp",
+        "file": "responsive/f005/cover-320.webp",
         "width": 320,
-        "height": 164
+        "height": 213
       },
       {
-        "file": "responsive/0fce73beb1f9f8d0eacd-640.webp",
+        "file": "responsive/f005/cover-640.webp",
         "width": 640,
-        "height": 327
+        "height": 427
       },
       {
-        "file": "responsive/0fce73beb1f9f8d0eacd-960.webp",
+        "file": "responsive/f005/cover-960.webp",
         "width": 960,
-        "height": 491
+        "height": 640
       },
       {
-        "file": "responsive/0fce73beb1f9f8d0eacd-1400.webp",
-        "width": 1400,
-        "height": 716
+        "file": "responsive/f005/cover-1440.webp",
+        "width": 1440,
+        "height": 960
       }
     ]
   },
-  "imported/0de44d26f9791c1bddb7.jpg": {
+  "generated/f006/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f006/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f006/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f006/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f006/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f007/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f007/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f007/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f007/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f007/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f008/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f008/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f008/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f008/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f008/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f009/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f009/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f009/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f009/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f009/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f010/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f010/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f010/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f010/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f010/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f011/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f011/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f011/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f011/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f011/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f012/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f012/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f012/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f012/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f012/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f013/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f013/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f013/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f013/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f013/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/f014/cover.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/f014/cover-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/f014/cover-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/f014/cover-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/f014/cover-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/p071-donnees-grande-echelle/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/p071-donnees-grande-echelle/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/p071-donnees-grande-echelle/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/p071-donnees-grande-echelle/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/p071-donnees-grande-echelle/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/p072-solution-classification-automatique-photos/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/p072-solution-classification-automatique-photos/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/p072-solution-classification-automatique-photos/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/p072-solution-classification-automatique-photos/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/p072-solution-classification-automatique-photos/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/p073-outils-flask-operations/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/p073-outils-flask-operations/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/p073-outils-flask-operations/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/p073-outils-flask-operations/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/p073-outils-flask-operations/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/pp018-youtube-to-obsidian-lidee/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/pp018-youtube-to-obsidian-lidee/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/pp018-youtube-to-obsidian-lidee/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/pp018-youtube-to-obsidian-lidee/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/pp018-youtube-to-obsidian-lidee/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/pp019-ecrire-journal-local-langle/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/pp019-ecrire-journal-local-langle/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/pp019-ecrire-journal-local-langle/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/pp019-ecrire-journal-local-langle/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/pp019-ecrire-journal-local-langle/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "generated/pp020-codex-plateforme-native-orchestration/cover-v1.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "file": "responsive/pp020-codex-plateforme-native-orchestration/cover-v1-320.webp",
+        "width": 320,
+        "height": 213
+      },
+      {
+        "file": "responsive/pp020-codex-plateforme-native-orchestration/cover-v1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "file": "responsive/pp020-codex-plateforme-native-orchestration/cover-v1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "file": "responsive/pp020-codex-plateforme-native-orchestration/cover-v1-1440.webp",
+        "width": 1440,
+        "height": 960
+      }
+    ]
+  },
+  "imported/e001-situation-urgence-15-ans/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/24b3ed639486fdbc1e1b-320.webp",
+        "file": "responsive/e001-situation-urgence-15-ans/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/24b3ed639486fdbc1e1b-640.webp",
+        "file": "responsive/e001-situation-urgence-15-ans/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/24b3ed639486fdbc1e1b-960.webp",
+        "file": "responsive/e001-situation-urgence-15-ans/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/24b3ed639486fdbc1e1b-1400.webp",
+        "file": "responsive/e001-situation-urgence-15-ans/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/0fb5b65125741f8aa4e9.jpg": {
+  "imported/e002-exploitation-centrale-nucleaire/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/e002-exploitation-centrale-nucleaire/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/e002-exploitation-centrale-nucleaire/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/e002-exploitation-centrale-nucleaire/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/e002-exploitation-centrale-nucleaire/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/e003-responsable-regional-maintenance/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/e003-responsable-regional-maintenance/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/e003-responsable-regional-maintenance/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/e003-responsable-regional-maintenance/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/e003-responsable-regional-maintenance/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/e004-responsable-production/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/e004-responsable-production/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/e004-responsable-production/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/e004-responsable-production/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/e004-responsable-production/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/e007-maintenance-fiabilite-parc/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/e007-maintenance-fiabilite-parc/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/e007-maintenance-fiabilite-parc/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/e007-maintenance-fiabilite-parc/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/e007-maintenance-fiabilite-parc/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p001-benchmark-international-pratiques-manageriales/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p001-benchmark-international-pratiques-manageriales/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p001-benchmark-international-pratiques-manageriales/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p001-benchmark-international-pratiques-manageriales/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p001-benchmark-international-pratiques-manageriales/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p002-amelioration-refractaires-four-industriel/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p002-amelioration-refractaires-four-industriel/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p002-amelioration-refractaires-four-industriel/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p002-amelioration-refractaires-four-industriel/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p002-amelioration-refractaires-four-industriel/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p003-degoulotter-atelier-traitements-thermiques/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p003-degoulotter-atelier-traitements-thermiques/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p003-degoulotter-atelier-traitements-thermiques/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p003-degoulotter-atelier-traitements-thermiques/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p003-degoulotter-atelier-traitements-thermiques/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p004-defauts-incrustation-coulee-continue/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p004-defauts-incrustation-coulee-continue/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p004-defauts-incrustation-coulee-continue/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p004-defauts-incrustation-coulee-continue/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p004-defauts-incrustation-coulee-continue/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p005-maintenance-redresser-budget-10/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p005-maintenance-redresser-budget-10/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p005-maintenance-redresser-budget-10/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p005-maintenance-redresser-budget-10/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p005-maintenance-redresser-budget-10/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p006-arrets-maintenance-industrielle-grace/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p006-arrets-maintenance-industrielle-grace/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p006-arrets-maintenance-industrielle-grace/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p006-arrets-maintenance-industrielle-grace/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p006-arrets-maintenance-industrielle-grace/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p007-commissioner-unite-production-gaz/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p007-commissioner-unite-production-gaz/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p007-commissioner-unite-production-gaz/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p007-commissioner-unite-production-gaz/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p007-commissioner-unite-production-gaz/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p012-24-10-heures-temps/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p012-24-10-heures-temps/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p012-24-10-heures-temps/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p012-24-10-heures-temps/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p012-24-10-heures-temps/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p013-optimiser-passes-laminage-mesure/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p013-optimiser-passes-laminage-mesure/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p013-optimiser-passes-laminage-mesure/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p013-optimiser-passes-laminage-mesure/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p013-optimiser-passes-laminage-mesure/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p014-logistique-arret-quinquennal-industriel/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p014-logistique-arret-quinquennal-industriel/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p014-logistique-arret-quinquennal-industriel/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p014-logistique-arret-quinquennal-industriel/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p014-logistique-arret-quinquennal-industriel/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p015-chantier-maintenance-industrielle-sous/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p015-chantier-maintenance-industrielle-sous/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p015-chantier-maintenance-industrielle-sous/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p015-chantier-maintenance-industrielle-sous/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p015-chantier-maintenance-industrielle-sous/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p016-surveillance-vibratoire-machines-critiques/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p016-surveillance-vibratoire-machines-critiques/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p016-surveillance-vibratoire-machines-critiques/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p016-surveillance-vibratoire-machines-critiques/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p016-surveillance-vibratoire-machines-critiques/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p018-reception-technique-machines-tournantes/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p018-reception-technique-machines-tournantes/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p018-reception-technique-machines-tournantes/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p018-reception-technique-machines-tournantes/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p018-reception-technique-machines-tournantes/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p019-sap-pm-maintenance-industrielle/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p019-sap-pm-maintenance-industrielle/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p019-sap-pm-maintenance-industrielle/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p019-sap-pm-maintenance-industrielle/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p019-sap-pm-maintenance-industrielle/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p024-salaries-ouverture-capital/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p024-salaries-ouverture-capital/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p024-salaries-ouverture-capital/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p024-salaries-ouverture-capital/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p024-salaries-ouverture-capital/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p026-projet-stockage-industriel/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p026-projet-stockage-industriel/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p026-projet-stockage-industriel/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p026-projet-stockage-industriel/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p026-projet-stockage-industriel/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p028-modeliser-charge-capacite-atelier/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p028-modeliser-charge-capacite-atelier/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p028-modeliser-charge-capacite-atelier/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p028-modeliser-charge-capacite-atelier/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p028-modeliser-charge-capacite-atelier/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p029-reconstruction-dun-banc-controle/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p029-reconstruction-dun-banc-controle/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p029-reconstruction-dun-banc-controle/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p029-reconstruction-dun-banc-controle/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p029-reconstruction-dun-banc-controle/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p032-redresser-pilotage-economique-maintenance/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p032-redresser-pilotage-economique-maintenance/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p032-redresser-pilotage-economique-maintenance/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p032-redresser-pilotage-economique-maintenance/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p032-redresser-pilotage-economique-maintenance/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p033-diagnostic-dun-dysfonctionnement-four/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p033-diagnostic-dun-dysfonctionnement-four/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p033-diagnostic-dun-dysfonctionnement-four/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p033-diagnostic-dun-dysfonctionnement-four/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p033-diagnostic-dun-dysfonctionnement-four/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p035-maitrise-risques-qualite/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p035-maitrise-risques-qualite/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p035-maitrise-risques-qualite/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p035-maitrise-risques-qualite/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p035-maitrise-risques-qualite/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p036-digitalisation-automatisation-controle-operationnel/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p036-digitalisation-automatisation-controle-operationnel/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p036-digitalisation-automatisation-controle-operationnel/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p036-digitalisation-automatisation-controle-operationnel/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p036-digitalisation-automatisation-controle-operationnel/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p037-centraliser-rationaliser-donnees-fiabiliser/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p037-centraliser-rationaliser-donnees-fiabiliser/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p037-centraliser-rationaliser-donnees-fiabiliser/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p037-centraliser-rationaliser-donnees-fiabiliser/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p037-centraliser-rationaliser-donnees-fiabiliser/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p038-programmation-lanalyse-campagnes-production/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p038-programmation-lanalyse-campagnes-production/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p038-programmation-lanalyse-campagnes-production/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p038-programmation-lanalyse-campagnes-production/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p038-programmation-lanalyse-campagnes-production/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p039-reportings-process-qualite-power/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p039-reportings-process-qualite-power/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p039-reportings-process-qualite-power/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p039-reportings-process-qualite-power/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p039-reportings-process-qualite-power/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p040-casses-bande-renforcer-maitrise/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p040-casses-bande-renforcer-maitrise/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p040-casses-bande-renforcer-maitrise/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p040-casses-bande-renforcer-maitrise/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p040-casses-bande-renforcer-maitrise/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p041-defauts-surface-machine-learning/cover.jpg": {
     "width": 1400,
     "height": 597,
     "variants": [
       {
-        "file": "responsive/329f94ff063432a954c6-320.webp",
+        "file": "responsive/p041-defauts-surface-machine-learning/cover-320.webp",
         "width": 320,
         "height": 136
       },
       {
-        "file": "responsive/329f94ff063432a954c6-640.webp",
+        "file": "responsive/p041-defauts-surface-machine-learning/cover-640.webp",
         "width": 640,
         "height": 273
       },
       {
-        "file": "responsive/329f94ff063432a954c6-960.webp",
+        "file": "responsive/p041-defauts-surface-machine-learning/cover-960.webp",
         "width": 960,
         "height": 409
       },
       {
-        "file": "responsive/329f94ff063432a954c6-1400.webp",
+        "file": "responsive/p041-defauts-surface-machine-learning/cover-1400.webp",
         "width": 1400,
         "height": 597
       }
     ]
   },
-  "imported/12cf2645f9163c316003.jpg": {
+  "imported/p042-culture-data-ia-adoption/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/96eab1be3ce8ea76bef3-320.webp",
+        "file": "responsive/p042-culture-data-ia-adoption/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/96eab1be3ce8ea76bef3-640.webp",
+        "file": "responsive/p042-culture-data-ia-adoption/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/96eab1be3ce8ea76bef3-960.webp",
+        "file": "responsive/p042-culture-data-ia-adoption/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/96eab1be3ce8ea76bef3-1400.webp",
+        "file": "responsive/p042-culture-data-ia-adoption/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/18382dd54529bf7fd273.jpg": {
+  "imported/p043-automatiser-classification-defauts-surface/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/e4cd7f5533d05eb32c73-320.webp",
+        "file": "responsive/p043-automatiser-classification-defauts-surface/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/e4cd7f5533d05eb32c73-640.webp",
+        "file": "responsive/p043-automatiser-classification-defauts-surface/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/e4cd7f5533d05eb32c73-960.webp",
+        "file": "responsive/p043-automatiser-classification-defauts-surface/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/e4cd7f5533d05eb32c73-1400.webp",
+        "file": "responsive/p043-automatiser-classification-defauts-surface/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/1bac8955ae18f5af34a2.jpg": {
+  "imported/p044-resolution-defauts-derivage-ligne/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/77c7e24a646e3fc435f3-320.webp",
+        "file": "responsive/p044-resolution-defauts-derivage-ligne/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/77c7e24a646e3fc435f3-640.webp",
+        "file": "responsive/p044-resolution-defauts-derivage-ligne/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/77c7e24a646e3fc435f3-960.webp",
+        "file": "responsive/p044-resolution-defauts-derivage-ligne/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/77c7e24a646e3fc435f3-1400.webp",
+        "file": "responsive/p044-resolution-defauts-derivage-ligne/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/1cbae0b1beeffbeb9b8c.jpg": {
+  "imported/p045-maitriser-conditions-fabrication-nouveaux/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/864715a9eec9f1b4ab9f-320.webp",
+        "file": "responsive/p045-maitriser-conditions-fabrication-nouveaux/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/864715a9eec9f1b4ab9f-640.webp",
+        "file": "responsive/p045-maitriser-conditions-fabrication-nouveaux/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/864715a9eec9f1b4ab9f-960.webp",
+        "file": "responsive/p045-maitriser-conditions-fabrication-nouveaux/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/864715a9eec9f1b4ab9f-1400.webp",
+        "file": "responsive/p045-maitriser-conditions-fabrication-nouveaux/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/2932eabbcc782923e9d0.jpg": {
+  "imported/p046-application-web-python-exploiter/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p046-application-web-python-exploiter/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p046-application-web-python-exploiter/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p046-application-web-python-exploiter/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p046-application-web-python-exploiter/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p047-causes-defauts-surface-fiabiliser/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/70132be431a9336658ca-320.webp",
+        "file": "responsive/p047-causes-defauts-surface-fiabiliser/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/70132be431a9336658ca-640.webp",
+        "file": "responsive/p047-causes-defauts-surface-fiabiliser/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/70132be431a9336658ca-960.webp",
+        "file": "responsive/p047-causes-defauts-surface-fiabiliser/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/70132be431a9336658ca-1400.webp",
+        "file": "responsive/p047-causes-defauts-surface-fiabiliser/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/2c057eb8d5f5dbe37917.jpg": {
+  "imported/p048-parcours-formation-ia/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/3bb0d6093ba4ae3dd3bc-320.webp",
+        "file": "responsive/p048-parcours-formation-ia/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/3bb0d6093ba4ae3dd3bc-640.webp",
+        "file": "responsive/p048-parcours-formation-ia/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/3bb0d6093ba4ae3dd3bc-960.webp",
+        "file": "responsive/p048-parcours-formation-ia/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/3bb0d6093ba4ae3dd3bc-1400.webp",
+        "file": "responsive/p048-parcours-formation-ia/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/2fee8f3ffb3b5725e541.jpg": {
+  "imported/p049-degouloter-flux-reparation-fluidifier/cover.jpg": {
     "width": 1400,
-    "height": 788,
+    "height": 700,
     "variants": [
       {
-        "file": "responsive/eeb3f63bd6690871e4d7-320.webp",
+        "file": "responsive/p049-degouloter-flux-reparation-fluidifier/cover-320.webp",
         "width": 320,
-        "height": 180
+        "height": 160
       },
       {
-        "file": "responsive/eeb3f63bd6690871e4d7-640.webp",
+        "file": "responsive/p049-degouloter-flux-reparation-fluidifier/cover-640.webp",
         "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/eeb3f63bd6690871e4d7-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/eeb3f63bd6690871e4d7-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/3048d09b260539b8de09.jpg": {
-    "width": 600,
-    "height": 600,
-    "variants": [
-      {
-        "file": "responsive/1e350f10e18f3348ac92-320.webp",
-        "width": 320,
         "height": 320
       },
       {
-        "file": "responsive/1e350f10e18f3348ac92-600.webp",
-        "width": 600,
-        "height": 600
-      }
-    ]
-  },
-  "imported/3152794bcf8949e58d51.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/bf3aa3420e6e18b99503-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/bf3aa3420e6e18b99503-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/bf3aa3420e6e18b99503-960.webp",
+        "file": "responsive/p049-degouloter-flux-reparation-fluidifier/cover-960.webp",
         "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/bf3aa3420e6e18b99503-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/350077e1037bb69501a5.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/82b120510efaab67ff2d-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/82b120510efaab67ff2d-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/82b120510efaab67ff2d-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/82b120510efaab67ff2d-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/373c9f0c934efa2db413.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/703342fc49d0b51b98a9-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/703342fc49d0b51b98a9-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/703342fc49d0b51b98a9-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/703342fc49d0b51b98a9-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/37ad8fa1c45e497c437c.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/4e06a540d341061b45c6-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/4e06a540d341061b45c6-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/4e06a540d341061b45c6-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/4e06a540d341061b45c6-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/38695b76ef5ee89cc741.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/5a92d22af06f4c0013c7-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/5a92d22af06f4c0013c7-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/5a92d22af06f4c0013c7-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/5a92d22af06f4c0013c7-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/3a4afd5fe652f556dfe9.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/5622b543161a3bf4eeff-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/5622b543161a3bf4eeff-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/5622b543161a3bf4eeff-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/5622b543161a3bf4eeff-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/3cded75636ee8b634819.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/44a93d2b97d300f3e54f-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/44a93d2b97d300f3e54f-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/44a93d2b97d300f3e54f-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/44a93d2b97d300f3e54f-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/3f47c7d9158baca651e6.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/1a7c0542078bc1d1ad52-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/1a7c0542078bc1d1ad52-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/1a7c0542078bc1d1ad52-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/1a7c0542078bc1d1ad52-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/415d50013025ba54d236.jpg": {
-    "width": 1050,
-    "height": 1400,
-    "variants": [
-      {
-        "file": "responsive/15518d63d71d9683d4fc-320.webp",
-        "width": 320,
-        "height": 427
-      },
-      {
-        "file": "responsive/15518d63d71d9683d4fc-640.webp",
-        "width": 640,
-        "height": 853
-      },
-      {
-        "file": "responsive/15518d63d71d9683d4fc-960.webp",
-        "width": 960,
-        "height": 1280
-      },
-      {
-        "file": "responsive/15518d63d71d9683d4fc-1050.webp",
-        "width": 1050,
-        "height": 1400
-      }
-    ]
-  },
-  "imported/41b89ce71f20578801e2.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/8449e0d6f1470d4a9848-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/8449e0d6f1470d4a9848-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/8449e0d6f1470d4a9848-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/8449e0d6f1470d4a9848-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/4447163cfaaf7cded7cb.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/5f62a298033a035e1e2c-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/5f62a298033a035e1e2c-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/5f62a298033a035e1e2c-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/5f62a298033a035e1e2c-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/46182276aa7b94072ca6.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/4ab8d3fb11933807be36-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/4ab8d3fb11933807be36-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/4ab8d3fb11933807be36-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/4ab8d3fb11933807be36-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/492bc8ed882bee819dfd.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/3a3aef8f5a0df4ed1063-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/3a3aef8f5a0df4ed1063-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/3a3aef8f5a0df4ed1063-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/3a3aef8f5a0df4ed1063-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/4d36f61cec415e18c2b8.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/fa9871ffc745759b6217-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/fa9871ffc745759b6217-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/fa9871ffc745759b6217-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/fa9871ffc745759b6217-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/51725f40dd29912d1dad.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/c3e56df4615f228e2380-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/c3e56df4615f228e2380-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/c3e56df4615f228e2380-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/c3e56df4615f228e2380-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/580c4433a889aa81fce7.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/47657b4137b7565db65a-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/47657b4137b7565db65a-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/47657b4137b7565db65a-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/47657b4137b7565db65a-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/61022a50f8870f992671.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/c093d83459749559224d-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/c093d83459749559224d-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/c093d83459749559224d-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/c093d83459749559224d-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/611d07d654dbb8d53975.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/59fa29fab2858b30dca7-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/59fa29fab2858b30dca7-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/59fa29fab2858b30dca7-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/59fa29fab2858b30dca7-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/65ba1cf542e9b40de578.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/dcc79c4647f39b695f92-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/dcc79c4647f39b695f92-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/dcc79c4647f39b695f92-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/dcc79c4647f39b695f92-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/6614569266d628fa300b.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/c20ef09f096e47db4b05-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/c20ef09f096e47db4b05-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/c20ef09f096e47db4b05-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/c20ef09f096e47db4b05-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/697d677800cf1b8b1844.webp": {
-    "width": 1800,
-    "height": 1350,
-    "variants": [
-      {
-        "file": "responsive/45cfc7edc111ae1ca9a4-320.webp",
-        "width": 320,
-        "height": 240
-      },
-      {
-        "file": "responsive/45cfc7edc111ae1ca9a4-640.webp",
-        "width": 640,
         "height": 480
       },
       {
-        "file": "responsive/45cfc7edc111ae1ca9a4-960.webp",
-        "width": 960,
-        "height": 720
-      },
-      {
-        "file": "responsive/45cfc7edc111ae1ca9a4-1440.webp",
-        "width": 1440,
-        "height": 1080
+        "file": "responsive/p049-degouloter-flux-reparation-fluidifier/cover-1400.webp",
+        "width": 1400,
+        "height": 700
       }
     ]
   },
-  "imported/72b9cffce32df37f863f.jpg": {
+  "imported/p050-defauts-surface-lies-poussieres/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p050-defauts-surface-lies-poussieres/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p050-defauts-surface-lies-poussieres/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p050-defauts-surface-lies-poussieres/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p050-defauts-surface-lies-poussieres/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p051-systeme-diagnostic-qualite-base/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p051-systeme-diagnostic-qualite-base/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p051-systeme-diagnostic-qualite-base/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p051-systeme-diagnostic-qualite-base/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p051-systeme-diagnostic-qualite-base/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p052-exploitation-donnees-environnement-big/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p052-exploitation-donnees-environnement-big/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p052-exploitation-donnees-environnement-big/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p052-exploitation-donnees-environnement-big/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p052-exploitation-donnees-environnement-big/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p053-valoriser-donnees-jauges-epaisseur/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p053-valoriser-donnees-jauges-epaisseur/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p053-valoriser-donnees-jauges-epaisseur/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p053-valoriser-donnees-jauges-epaisseur/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p053-valoriser-donnees-jauges-epaisseur/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p054-maitrise-qualite-ligne-industrielle/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p054-maitrise-qualite-ligne-industrielle/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p054-maitrise-qualite-ligne-industrielle/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p054-maitrise-qualite-ligne-industrielle/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p054-maitrise-qualite-ligne-industrielle/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p055-machine-learning-plus-30/cover.jpg": {
     "width": 1400,
     "height": 466,
     "variants": [
       {
-        "file": "responsive/19b34bd5b252805c6586-320.webp",
+        "file": "responsive/p055-machine-learning-plus-30/cover-320.webp",
         "width": 320,
         "height": 107
       },
       {
-        "file": "responsive/19b34bd5b252805c6586-640.webp",
+        "file": "responsive/p055-machine-learning-plus-30/cover-640.webp",
         "width": 640,
         "height": 213
       },
       {
-        "file": "responsive/19b34bd5b252805c6586-960.webp",
+        "file": "responsive/p055-machine-learning-plus-30/cover-960.webp",
         "width": 960,
         "height": 320
       },
       {
-        "file": "responsive/19b34bd5b252805c6586-1400.webp",
+        "file": "responsive/p055-machine-learning-plus-30/cover-1400.webp",
         "width": 1400,
         "height": 466
       }
     ]
   },
-  "imported/764b071d04d3dc2a9460.jpg": {
+  "imported/p056-transformation-ligne-galvanisation-elargir/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/45be5ee70e74b1d37e59-320.webp",
+        "file": "responsive/p056-transformation-ligne-galvanisation-elargir/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/45be5ee70e74b1d37e59-640.webp",
+        "file": "responsive/p056-transformation-ligne-galvanisation-elargir/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/45be5ee70e74b1d37e59-960.webp",
+        "file": "responsive/p056-transformation-ligne-galvanisation-elargir/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/45be5ee70e74b1d37e59-1400.webp",
+        "file": "responsive/p056-transformation-ligne-galvanisation-elargir/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/7870c6d58953a7e71093.jpg": {
+  "imported/p057-gestion-tracabilite-manchons-ligne/cover.jpg": {
     "width": 1400,
-    "height": 788,
+    "height": 716,
     "variants": [
       {
-        "file": "responsive/4093883562db52e7e0ef-320.webp",
+        "file": "responsive/p057-gestion-tracabilite-manchons-ligne/cover-320.webp",
         "width": 320,
-        "height": 180
+        "height": 164
       },
       {
-        "file": "responsive/4093883562db52e7e0ef-640.webp",
+        "file": "responsive/p057-gestion-tracabilite-manchons-ligne/cover-640.webp",
         "width": 640,
-        "height": 360
+        "height": 327
       },
       {
-        "file": "responsive/4093883562db52e7e0ef-960.webp",
+        "file": "responsive/p057-gestion-tracabilite-manchons-ligne/cover-960.webp",
         "width": 960,
-        "height": 540
+        "height": 491
       },
       {
-        "file": "responsive/4093883562db52e7e0ef-1400.webp",
+        "file": "responsive/p057-gestion-tracabilite-manchons-ligne/cover-1400.webp",
         "width": 1400,
-        "height": 788
+        "height": 716
       }
     ]
   },
-  "imported/7bb2d1685e68fbba9cfb.jpg": {
-    "width": 447,
-    "height": 447,
+  "imported/p058-informatisation-equipement-manutention-industrielle/cover.jpg": {
+    "width": 1400,
+    "height": 700,
     "variants": [
       {
-        "file": "responsive/5339e9e88ae0e14b18d1-320.webp",
+        "file": "responsive/p058-informatisation-equipement-manutention-industrielle/cover-320.webp",
         "width": 320,
+        "height": 160
+      },
+      {
+        "file": "responsive/p058-informatisation-equipement-manutention-industrielle/cover-640.webp",
+        "width": 640,
         "height": 320
       },
       {
-        "file": "responsive/5339e9e88ae0e14b18d1-447.webp",
-        "width": 447,
-        "height": 447
+        "file": "responsive/p058-informatisation-equipement-manutention-industrielle/cover-960.webp",
+        "width": 960,
+        "height": 480
+      },
+      {
+        "file": "responsive/p058-informatisation-equipement-manutention-industrielle/cover-1400.webp",
+        "width": 1400,
+        "height": 700
       }
     ]
   },
-  "imported/8219661428a0a2bf4bbd.jpg": {
+  "imported/p059-modele-diagnostic-qualite-base/cover.jpg": {
     "width": 1400,
     "height": 716,
     "variants": [
       {
-        "file": "responsive/8b6416cf977c17e9af61-320.webp",
+        "file": "responsive/p059-modele-diagnostic-qualite-base/cover-320.webp",
         "width": 320,
         "height": 164
       },
       {
-        "file": "responsive/8b6416cf977c17e9af61-640.webp",
+        "file": "responsive/p059-modele-diagnostic-qualite-base/cover-640.webp",
         "width": 640,
         "height": 327
       },
       {
-        "file": "responsive/8b6416cf977c17e9af61-960.webp",
+        "file": "responsive/p059-modele-diagnostic-qualite-base/cover-960.webp",
         "width": 960,
         "height": 491
       },
       {
-        "file": "responsive/8b6416cf977c17e9af61-1400.webp",
+        "file": "responsive/p059-modele-diagnostic-qualite-base/cover-1400.webp",
         "width": 1400,
         "height": 716
       }
     ]
   },
-  "imported/82ce61e3a1462ad2ea55.jpg": {
+  "imported/p060-chantier-nettoyage-chimique/cover.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/p060-chantier-nettoyage-chimique/cover-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/p060-chantier-nettoyage-chimique/cover-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/p060-chantier-nettoyage-chimique/cover-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/p060-chantier-nettoyage-chimique/cover-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/p061-migration-deploiement-multisite-plateforme/cover.jpg": {
     "width": 1400,
     "height": 716,
     "variants": [
       {
-        "file": "responsive/6f57dc2d8bbb213d2aa3-320.webp",
+        "file": "responsive/p061-migration-deploiement-multisite-plateforme/cover-320.webp",
         "width": 320,
         "height": 164
       },
       {
-        "file": "responsive/6f57dc2d8bbb213d2aa3-640.webp",
+        "file": "responsive/p061-migration-deploiement-multisite-plateforme/cover-640.webp",
         "width": 640,
         "height": 327
       },
       {
-        "file": "responsive/6f57dc2d8bbb213d2aa3-960.webp",
+        "file": "responsive/p061-migration-deploiement-multisite-plateforme/cover-960.webp",
         "width": 960,
         "height": 491
       },
       {
-        "file": "responsive/6f57dc2d8bbb213d2aa3-1400.webp",
+        "file": "responsive/p061-migration-deploiement-multisite-plateforme/cover-1400.webp",
         "width": 1400,
         "height": 716
       }
     ]
   },
-  "imported/830aa4a53a3084906424.jpg": {
+  "imported/p062-distribuer-application-python-visualisation/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/b44bc5145b46a24eaf7e-320.webp",
+        "file": "responsive/p062-distribuer-application-python-visualisation/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/b44bc5145b46a24eaf7e-640.webp",
+        "file": "responsive/p062-distribuer-application-python-visualisation/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/b44bc5145b46a24eaf7e-960.webp",
+        "file": "responsive/p062-distribuer-application-python-visualisation/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/b44bc5145b46a24eaf7e-1400.webp",
+        "file": "responsive/p062-distribuer-application-python-visualisation/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/889b8b4652eb861e87c3.jpg": {
+  "imported/p063-strategie-big-data-qualite/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p063-strategie-big-data-qualite/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p063-strategie-big-data-qualite/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p063-strategie-big-data-qualite/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p063-strategie-big-data-qualite/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p064-exploitation-donnees-pyspark/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p064-exploitation-donnees-pyspark/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p064-exploitation-donnees-pyspark/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p064-exploitation-donnees-pyspark/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p064-exploitation-donnees-pyspark/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p065-initier-solution-ia-agentique/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/874f09b1f053339a6ed9-320.webp",
+        "file": "responsive/p065-initier-solution-ia-agentique/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/874f09b1f053339a6ed9-640.webp",
+        "file": "responsive/p065-initier-solution-ia-agentique/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/874f09b1f053339a6ed9-960.webp",
+        "file": "responsive/p065-initier-solution-ia-agentique/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/874f09b1f053339a6ed9-1400.webp",
+        "file": "responsive/p065-initier-solution-ia-agentique/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/8a7a678a5f2fb7d6d989.jpg": {
+  "imported/p066-generaliser-technologie-amelioration-rendement/cover.jpg": {
+    "width": 1400,
+    "height": 716,
+    "variants": [
+      {
+        "file": "responsive/p066-generaliser-technologie-amelioration-rendement/cover-320.webp",
+        "width": 320,
+        "height": 164
+      },
+      {
+        "file": "responsive/p066-generaliser-technologie-amelioration-rendement/cover-640.webp",
+        "width": 640,
+        "height": 327
+      },
+      {
+        "file": "responsive/p066-generaliser-technologie-amelioration-rendement/cover-960.webp",
+        "width": 960,
+        "height": 491
+      },
+      {
+        "file": "responsive/p066-generaliser-technologie-amelioration-rendement/cover-1400.webp",
+        "width": 1400,
+        "height": 716
+      }
+    ]
+  },
+  "imported/p067-reorganiser-atelier-industriel-fluidifier/cover.jpg": {
     "width": 1400,
     "height": 687,
     "variants": [
       {
-        "file": "responsive/302588c9285461a469f2-320.webp",
+        "file": "responsive/p067-reorganiser-atelier-industriel-fluidifier/cover-320.webp",
         "width": 320,
         "height": 157
       },
       {
-        "file": "responsive/302588c9285461a469f2-640.webp",
+        "file": "responsive/p067-reorganiser-atelier-industriel-fluidifier/cover-640.webp",
         "width": 640,
         "height": 314
       },
       {
-        "file": "responsive/302588c9285461a469f2-960.webp",
+        "file": "responsive/p067-reorganiser-atelier-industriel-fluidifier/cover-960.webp",
         "width": 960,
         "height": 471
       },
       {
-        "file": "responsive/302588c9285461a469f2-1400.webp",
+        "file": "responsive/p067-reorganiser-atelier-industriel-fluidifier/cover-1400.webp",
         "width": 1400,
         "height": 687
       }
     ]
   },
-  "imported/8b8b2668a0d9ffbec1c6.png": {
-    "width": 200,
-    "height": 180,
-    "variants": [
-      {
-        "file": "responsive/bb0514c64c4b76215e9d-200.webp",
-        "width": 200,
-        "height": 180
-      }
-    ]
-  },
-  "imported/8d804de803c2adb422a9.jpg": {
+  "imported/p068-generaliser-terminaux-mobiles-securiser/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/e5c2ac6b073e34c3b6b5-320.webp",
+        "file": "responsive/p068-generaliser-terminaux-mobiles-securiser/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/e5c2ac6b073e34c3b6b5-640.webp",
+        "file": "responsive/p068-generaliser-terminaux-mobiles-securiser/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/e5c2ac6b073e34c3b6b5-960.webp",
+        "file": "responsive/p068-generaliser-terminaux-mobiles-securiser/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/e5c2ac6b073e34c3b6b5-1400.webp",
+        "file": "responsive/p068-generaliser-terminaux-mobiles-securiser/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/93b305932b7cd2d15ad3.jpg": {
+  "imported/p069-reorganisation-vestiaires-releves-pendant/cover.jpg": {
     "width": 1400,
     "height": 788,
     "variants": [
       {
-        "file": "responsive/9ce34bcaf90de34cc6fb-320.webp",
+        "file": "responsive/p069-reorganisation-vestiaires-releves-pendant/cover-320.webp",
         "width": 320,
         "height": 180
       },
       {
-        "file": "responsive/9ce34bcaf90de34cc6fb-640.webp",
+        "file": "responsive/p069-reorganisation-vestiaires-releves-pendant/cover-640.webp",
         "width": 640,
         "height": 360
       },
       {
-        "file": "responsive/9ce34bcaf90de34cc6fb-960.webp",
+        "file": "responsive/p069-reorganisation-vestiaires-releves-pendant/cover-960.webp",
         "width": 960,
         "height": 540
       },
       {
-        "file": "responsive/9ce34bcaf90de34cc6fb-1400.webp",
+        "file": "responsive/p069-reorganisation-vestiaires-releves-pendant/cover-1400.webp",
         "width": 1400,
         "height": 788
       }
     ]
   },
-  "imported/952615c9e75dc34fb177.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/5c2e9207e17b89e3e842-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/5c2e9207e17b89e3e842-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/5c2e9207e17b89e3e842-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/5c2e9207e17b89e3e842-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/97e3a1391d6a0e962fac.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/deeb47739be84a92fca6-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/deeb47739be84a92fca6-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/deeb47739be84a92fca6-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/deeb47739be84a92fca6-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/990e4a52296653c3fb4c.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/e91cd3959248dd57d9fa-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/e91cd3959248dd57d9fa-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/e91cd3959248dd57d9fa-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/e91cd3959248dd57d9fa-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/9ac6e3837154a3613d58.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/f4724cc39355f6872dde-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/f4724cc39355f6872dde-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/f4724cc39355f6872dde-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/f4724cc39355f6872dde-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/9db525fca48bbe544304.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/c419f7e0dad26de36f0e-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/c419f7e0dad26de36f0e-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/c419f7e0dad26de36f0e-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/c419f7e0dad26de36f0e-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/9edce4942beb3749cfdf.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/180cc751d8d24c319836-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/180cc751d8d24c319836-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/180cc751d8d24c319836-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/180cc751d8d24c319836-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/a1c7780a773b21d7e048.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/cfc28fa5d6172129093e-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/cfc28fa5d6172129093e-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/cfc28fa5d6172129093e-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/cfc28fa5d6172129093e-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/a20c705b62584d962582.jpg": {
+  "imported/p070-qualifier-systeme-mesure-optique/cover.jpg": {
     "width": 1400,
     "height": 716,
     "variants": [
       {
-        "file": "responsive/acab76f24ff0b9bd0cd0-320.webp",
+        "file": "responsive/p070-qualifier-systeme-mesure-optique/cover-320.webp",
         "width": 320,
         "height": 164
       },
       {
-        "file": "responsive/acab76f24ff0b9bd0cd0-640.webp",
+        "file": "responsive/p070-qualifier-systeme-mesure-optique/cover-640.webp",
         "width": 640,
         "height": 327
       },
       {
-        "file": "responsive/acab76f24ff0b9bd0cd0-960.webp",
+        "file": "responsive/p070-qualifier-systeme-mesure-optique/cover-960.webp",
         "width": 960,
         "height": 491
       },
       {
-        "file": "responsive/acab76f24ff0b9bd0cd0-1400.webp",
+        "file": "responsive/p070-qualifier-systeme-mesure-optique/cover-1400.webp",
         "width": 1400,
         "height": 716
       }
     ]
   },
-  "imported/a6d97e95a88812b646b3.jpg": {
-    "width": 1400,
-    "height": 788,
+  "imported/pp001-lobservation-images-planetaires/camera-photo.jpg": {
+    "width": 447,
+    "height": 447,
     "variants": [
       {
-        "file": "responsive/55fe301fba74baaec509-320.webp",
+        "file": "responsive/pp001-lobservation-images-planetaires/camera-photo-320.webp",
         "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/55fe301fba74baaec509-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/55fe301fba74baaec509-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/55fe301fba74baaec509-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/b19cc13015024ad5f2f0.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/fc42a1aaaa6fb3f75fb2-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/fc42a1aaaa6fb3f75fb2-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/fc42a1aaaa6fb3f75fb2-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/fc42a1aaaa6fb3f75fb2-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/b2f6b5a4647d0b0ab0b6.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/e5083cc8da9161027815-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/e5083cc8da9161027815-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/e5083cc8da9161027815-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/e5083cc8da9161027815-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/b3f4d4fc9d5005c046af.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/456b68fe72a33661c5f3-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/456b68fe72a33661c5f3-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/456b68fe72a33661c5f3-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/456b68fe72a33661c5f3-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/b4b9938a9bce0aaa5ed7.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/e68630adc09498a4e7c7-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/e68630adc09498a4e7c7-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/e68630adc09498a4e7c7-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/e68630adc09498a4e7c7-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/b840338abcca0bc98a83.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/9bd8135bd19a78c5b0d0-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/9bd8135bd19a78c5b0d0-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/9bd8135bd19a78c5b0d0-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/9bd8135bd19a78c5b0d0-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/bf3fdd0a70a08aa507b5.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/7cd4648cf31275cfbcc0-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/7cd4648cf31275cfbcc0-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/7cd4648cf31275cfbcc0-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/7cd4648cf31275cfbcc0-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c0812652caffa43dc9f7.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/7bffe68524843ebad40c-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/7bffe68524843ebad40c-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/7bffe68524843ebad40c-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/7bffe68524843ebad40c-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c0bd9fc22ac86324b4bd.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/658b52a1c5189730d471-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/658b52a1c5189730d471-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/658b52a1c5189730d471-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/658b52a1c5189730d471-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/c156436c685b254909c3.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/0cf488e3c35e7484204e-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/0cf488e3c35e7484204e-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/0cf488e3c35e7484204e-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/0cf488e3c35e7484204e-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c2d628b320491ac27b7d.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/39fda5e2300c5db26564-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/39fda5e2300c5db26564-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/39fda5e2300c5db26564-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/39fda5e2300c5db26564-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c424530845b031d95519.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/620a29604cf955cb9327-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/620a29604cf955cb9327-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/620a29604cf955cb9327-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/620a29604cf955cb9327-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c4316a2fca33eea965d2.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/c2d70995be4808918d6c-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/c2d70995be4808918d6c-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/c2d70995be4808918d6c-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/c2d70995be4808918d6c-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/c4c7bbf7fbd63726ff1c.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/d3cf7b48e8b70cb31ec4-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/d3cf7b48e8b70cb31ec4-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/d3cf7b48e8b70cb31ec4-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/d3cf7b48e8b70cb31ec4-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c4c92d71c85c2257d8b8.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/9e67a66979ce75a67cd8-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/9e67a66979ce75a67cd8-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/9e67a66979ce75a67cd8-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/9e67a66979ce75a67cd8-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/c5519b973ad4a5363941.jpg": {
-    "width": 1400,
-    "height": 716,
-    "variants": [
-      {
-        "file": "responsive/b4eca9cf7f110c1c6174-320.webp",
-        "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/b4eca9cf7f110c1c6174-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/b4eca9cf7f110c1c6174-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/b4eca9cf7f110c1c6174-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/c91e648e8dd6684c596e.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/c06422b584fb5a1e5463-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/c06422b584fb5a1e5463-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/c06422b584fb5a1e5463-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/c06422b584fb5a1e5463-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/d4e6ed5f3be9a088b810.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/8ac2b55bcc95f207e5bd-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/8ac2b55bcc95f207e5bd-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/8ac2b55bcc95f207e5bd-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/8ac2b55bcc95f207e5bd-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/d54fea5e25951d395e73.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/6460bc077ba432e0d0a3-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/6460bc077ba432e0d0a3-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/6460bc077ba432e0d0a3-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/6460bc077ba432e0d0a3-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/d6fe22b3b0a87535c6aa.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/30179c2f572f4fa8b80e-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/30179c2f572f4fa8b80e-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/30179c2f572f4fa8b80e-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/30179c2f572f4fa8b80e-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/e0b9feeb11d65d1a4bbb.jpg": {
-    "width": 1400,
-    "height": 700,
-    "variants": [
-      {
-        "file": "responsive/4eb31dcff9a60ee7e52a-320.webp",
-        "width": 320,
-        "height": 160
-      },
-      {
-        "file": "responsive/4eb31dcff9a60ee7e52a-640.webp",
-        "width": 640,
         "height": 320
       },
       {
-        "file": "responsive/4eb31dcff9a60ee7e52a-960.webp",
-        "width": 960,
-        "height": 480
-      },
-      {
-        "file": "responsive/4eb31dcff9a60ee7e52a-1400.webp",
-        "width": 1400,
-        "height": 700
+        "file": "responsive/pp001-lobservation-images-planetaires/camera-photo-447.webp",
+        "width": 447,
+        "height": 447
       }
     ]
   },
-  "imported/e1535c7d52303c9d32f1.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/84a6189d8e851d8c111e-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/84a6189d8e851d8c111e-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/84a6189d8e851d8c111e-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/84a6189d8e851d8c111e-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/e30b7d7cb655c3e4d824.jpg": {
-    "width": 1400,
-    "height": 1050,
-    "variants": [
-      {
-        "file": "responsive/5635e9ef2d364b15e748-320.webp",
-        "width": 320,
-        "height": 240
-      },
-      {
-        "file": "responsive/5635e9ef2d364b15e748-640.webp",
-        "width": 640,
-        "height": 480
-      },
-      {
-        "file": "responsive/5635e9ef2d364b15e748-960.webp",
-        "width": 960,
-        "height": 720
-      },
-      {
-        "file": "responsive/5635e9ef2d364b15e748-1400.webp",
-        "width": 1400,
-        "height": 1050
-      }
-    ]
-  },
-  "imported/e7644fbc6c4651b1e399.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/acb03565166bf76555b8-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/acb03565166bf76555b8-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/acb03565166bf76555b8-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/acb03565166bf76555b8-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/e9d2232c7d50f280bc79.jpg": {
-    "width": 1400,
-    "height": 700,
-    "variants": [
-      {
-        "file": "responsive/11f4922af1276f27cbe1-320.webp",
-        "width": 320,
-        "height": 160
-      },
-      {
-        "file": "responsive/11f4922af1276f27cbe1-640.webp",
-        "width": 640,
-        "height": 320
-      },
-      {
-        "file": "responsive/11f4922af1276f27cbe1-960.webp",
-        "width": 960,
-        "height": 480
-      },
-      {
-        "file": "responsive/11f4922af1276f27cbe1-1400.webp",
-        "width": 1400,
-        "height": 700
-      }
-    ]
-  },
-  "imported/ef0b312da010c0992635.png": {
+  "imported/pp001-lobservation-images-planetaires/jupiter.png": {
     "width": 240,
     "height": 216,
     "variants": [
       {
-        "file": "responsive/f72b0f95e0d18b4f48dc-240.webp",
+        "file": "responsive/pp001-lobservation-images-planetaires/jupiter-240.webp",
         "width": 240,
         "height": 216
       }
     ]
   },
-  "imported/ef8783ec32cb93cd44e7.jpg": {
-    "width": 1400,
-    "height": 788,
+  "imported/pp001-lobservation-images-planetaires/saturne.png": {
+    "width": 200,
+    "height": 180,
     "variants": [
       {
-        "file": "responsive/d5af7deb0276a773bc0a-320.webp",
-        "width": 320,
+        "file": "responsive/pp001-lobservation-images-planetaires/saturne-200.webp",
+        "width": 200,
         "height": 180
-      },
-      {
-        "file": "responsive/d5af7deb0276a773bc0a-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/d5af7deb0276a773bc0a-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/d5af7deb0276a773bc0a-1400.webp",
-        "width": 1400,
-        "height": 788
       }
     ]
   },
-  "imported/ef96859cba93042b7eee.jpg": {
+  "imported/pp001-lobservation-images-planetaires/transmission-photo.jpg": {
+    "width": 600,
+    "height": 600,
+    "variants": [
+      {
+        "file": "responsive/pp001-lobservation-images-planetaires/transmission-photo-320.webp",
+        "width": 320,
+        "height": 320
+      },
+      {
+        "file": "responsive/pp001-lobservation-images-planetaires/transmission-photo-600.webp",
+        "width": 600,
+        "height": 600
+      }
+    ]
+  },
+  "imported/pp002-limprimante-kit-fabrication-pieces/presse-projet.jpg": {
     "width": 1400,
-    "height": 788,
+    "height": 1050,
     "variants": [
       {
-        "file": "responsive/abdf851667186e01ab25-320.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/presse-projet-320.webp",
         "width": 320,
-        "height": 180
+        "height": 240
       },
       {
-        "file": "responsive/abdf851667186e01ab25-640.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/presse-projet-640.webp",
         "width": 640,
-        "height": 360
+        "height": 480
       },
       {
-        "file": "responsive/abdf851667186e01ab25-960.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/presse-projet-960.webp",
         "width": 960,
-        "height": 540
+        "height": 720
       },
       {
-        "file": "responsive/abdf851667186e01ab25-1400.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/presse-projet-1400.webp",
         "width": 1400,
-        "height": 788
+        "height": 1050
       }
     ]
   },
-  "imported/f3a7749f95ee08cd151f.jpg": {
-    "width": 1400,
-    "height": 716,
+  "imported/pp002-limprimante-kit-fabrication-pieces/sculpture-projet.jpg": {
+    "width": 1050,
+    "height": 1400,
     "variants": [
       {
-        "file": "responsive/71d8f95f67afe7cb259a-320.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/sculpture-projet-320.webp",
         "width": 320,
-        "height": 164
-      },
-      {
-        "file": "responsive/71d8f95f67afe7cb259a-640.webp",
-        "width": 640,
-        "height": 327
-      },
-      {
-        "file": "responsive/71d8f95f67afe7cb259a-960.webp",
-        "width": 960,
-        "height": 491
-      },
-      {
-        "file": "responsive/71d8f95f67afe7cb259a-1400.webp",
-        "width": 1400,
-        "height": 716
-      }
-    ]
-  },
-  "imported/f4dcf9c0234f80624435.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/3b4c111aa576cf012e77-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/3b4c111aa576cf012e77-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/3b4c111aa576cf012e77-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/3b4c111aa576cf012e77-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "imported/f5d322958039362b5bc0.jpg": {
-    "width": 1400,
-    "height": 788,
-    "variants": [
-      {
-        "file": "responsive/f5b0c47021c9549b277b-320.webp",
-        "width": 320,
-        "height": 180
-      },
-      {
-        "file": "responsive/f5b0c47021c9549b277b-640.webp",
-        "width": 640,
-        "height": 360
-      },
-      {
-        "file": "responsive/f5b0c47021c9549b277b-960.webp",
-        "width": 960,
-        "height": 540
-      },
-      {
-        "file": "responsive/f5b0c47021c9549b277b-1400.webp",
-        "width": 1400,
-        "height": 788
-      }
-    ]
-  },
-  "generated/formation-arts-et-metiers/cover.png": {
-    "width": 1536,
-    "height": 1024,
-    "variants": [
-      {
-        "file": "responsive/formation-arts-et-metiers/cover-320.webp",
-        "width": 320,
-        "height": 213
-      },
-      {
-        "file": "responsive/formation-arts-et-metiers/cover-640.webp",
-        "width": 640,
         "height": 427
       },
       {
-        "file": "responsive/formation-arts-et-metiers/cover-960.webp",
-        "width": 960,
-        "height": 640
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/sculpture-projet-640.webp",
+        "width": 640,
+        "height": 853
       },
       {
-        "file": "responsive/formation-arts-et-metiers/cover-1440.webp",
-        "width": 1440,
-        "height": 960
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/sculpture-projet-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/sculpture-projet-1050.webp",
+        "width": 1050,
+        "height": 1400
       }
     ]
   },
-  "generated/formation-management-maintenance/cover.png": {
-    "width": 1536,
-    "height": 1024,
+  "imported/pp002-limprimante-kit-fabrication-pieces/ultimaker-kit.webp": {
+    "width": 1800,
+    "height": 1350,
     "variants": [
       {
-        "file": "responsive/formation-management-maintenance/cover-320.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/ultimaker-kit-320.webp",
         "width": 320,
-        "height": 213
+        "height": 240
       },
       {
-        "file": "responsive/formation-management-maintenance/cover-640.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/ultimaker-kit-640.webp",
         "width": 640,
-        "height": 427
+        "height": 480
       },
       {
-        "file": "responsive/formation-management-maintenance/cover-960.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/ultimaker-kit-960.webp",
         "width": 960,
-        "height": 640
+        "height": 720
       },
       {
-        "file": "responsive/formation-management-maintenance/cover-1440.webp",
+        "file": "responsive/pp002-limprimante-kit-fabrication-pieces/ultimaker-kit-1440.webp",
         "width": 1440,
-        "height": 960
+        "height": 1080
+      }
+    ]
+  },
+  "imported/pp003-fabrication-numerique-prototypage-fablab/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp003-fabrication-numerique-prototypage-fablab/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp003-fabrication-numerique-prototypage-fablab/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp003-fabrication-numerique-prototypage-fablab/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp003-fabrication-numerique-prototypage-fablab/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp004-3d-realiser-renovation-complete/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp004-3d-realiser-renovation-complete/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp004-3d-realiser-renovation-complete/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp004-3d-realiser-renovation-complete/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp004-3d-realiser-renovation-complete/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp005-publier-applications-openai-codex/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp005-publier-applications-openai-codex/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp005-publier-applications-openai-codex/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp005-publier-applications-openai-codex/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp005-publier-applications-openai-codex/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp006-applications-automatiser-gestion-contenus/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp006-applications-automatiser-gestion-contenus/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp006-applications-automatiser-gestion-contenus/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp006-applications-automatiser-gestion-contenus/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp006-applications-automatiser-gestion-contenus/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp007-application-web-complete-flask/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp007-application-web-complete-flask/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp007-application-web-complete-flask/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp007-application-web-complete-flask/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp007-application-web-complete-flask/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp008-renover-regler-vtt-mecanique/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp008-renover-regler-vtt-mecanique/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp008-renover-regler-vtt-mecanique/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp008-renover-regler-vtt-mecanique/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp008-renover-regler-vtt-mecanique/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp009-technologies-image-photographie-aerienne/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp009-technologies-image-photographie-aerienne/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp009-technologies-image-photographie-aerienne/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp009-technologies-image-photographie-aerienne/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp009-technologies-image-photographie-aerienne/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp010-pratique-durable-musculation-discipline/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp010-pratique-durable-musculation-discipline/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp010-pratique-durable-musculation-discipline/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp010-pratique-durable-musculation-discipline/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp010-pratique-durable-musculation-discipline/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp011-numeriser-bibliotheque-construire-base/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp011-numeriser-bibliotheque-construire-base/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp011-numeriser-bibliotheque-construire-base/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp011-numeriser-bibliotheque-construire-base/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp011-numeriser-bibliotheque-construire-base/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp012-musique-travers-pratique-piano/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp012-musique-travers-pratique-piano/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp012-musique-travers-pratique-piano/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp012-musique-travers-pratique-piano/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp012-musique-travers-pratique-piano/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp013-electronique-objets-connectes-raspberry/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp013-electronique-objets-connectes-raspberry/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp013-electronique-objets-connectes-raspberry/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp013-electronique-objets-connectes-raspberry/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp013-electronique-objets-connectes-raspberry/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp014-comprehension-relations-humaines-etudes/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp014-comprehension-relations-humaines-etudes/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp014-comprehension-relations-humaines-etudes/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp014-comprehension-relations-humaines-etudes/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp014-comprehension-relations-humaines-etudes/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp015-flint-harness-agent-ia/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp015-flint-harness-agent-ia/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp015-flint-harness-agent-ia/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp015-flint-harness-agent-ia/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp015-flint-harness-agent-ia/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp016-agents-ia-python-application/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp016-agents-ia-python-application/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp016-agents-ia-python-application/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp016-agents-ia-python-application/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp016-agents-ia-python-application/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
+      }
+    ]
+  },
+  "imported/pp017-experiences-connaissances-techniques-travers/supporting-visual.jpg": {
+    "width": 1400,
+    "height": 788,
+    "variants": [
+      {
+        "file": "responsive/pp017-experiences-connaissances-techniques-travers/supporting-visual-320.webp",
+        "width": 320,
+        "height": 180
+      },
+      {
+        "file": "responsive/pp017-experiences-connaissances-techniques-travers/supporting-visual-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "file": "responsive/pp017-experiences-connaissances-techniques-travers/supporting-visual-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "file": "responsive/pp017-experiences-connaissances-techniques-travers/supporting-visual-1400.webp",
+        "width": 1400,
+        "height": 788
       }
     ]
   }

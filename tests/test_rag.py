@@ -53,7 +53,7 @@ def test_training_and_employment_metadata_is_indexed(app):
         documents = list(portfolio_documents())
         for language in ("fr", "en"):
             for project_id, kind in (
-                ("F001", "education"), ("F002", "education"), ("P030", "experience"),
+                ("F001", "education"), ("F002", "education"), ("E004", "experience"),
             ):
                 document = next(row for row in documents
                                 if row["project_id"] == project_id and row["language"] == language)

@@ -4,6 +4,46 @@ Le champ `display_version` de la fiche française longue sélectionne la version
 
 Les compétences sont définies dans [skills.yml](skills.yml).
 
+## Formations
+
+| Formation | Français long | Français court | English long | English short |
+| --- | --- | --- | --- | --- |
+| F001 · Diplôme d’ingénieur Arts et Métiers (ENSAM) | [FR](f001.fr.md) | [FR court](f001.short.fr.md) | [EN](f001.en.md) | [EN short](f001.short.en.md) |
+| F002 · Mastère spécialisé en management de la maintenance — Arts et Métiers (ENSAM) | [FR](f002.fr.md) | [FR court](f002.short.fr.md) | [EN](f002.en.md) | [EN short](f002.short.en.md) |
+| PP014 · Licence de psychologie — Université Paris VIII | [FR](pp014.fr.md) | [FR court](pp014.short.fr.md) | [EN](pp014.en.md) | [EN short](pp014.short.en.md) |
+
+### Formation continue
+
+**470 h de formation** selon les volumes indiqués dans les douze fiches relues. Ces volumes sont indicatifs. Ils excluent Pix et les entrées complémentaires de l’inventaire. Le certificat de spécialisation Big Data ne rajoute aucune heure au total de ses six cours.
+
+| Formation | Volume estimé | Français long | Français court | English long | English short |
+| --- | ---: | --- | --- | --- | --- |
+| F003 · Spécialisation Big Data | 105 h | [FR](f003.fr.md) | [FR court](f003.short.fr.md) | [EN](f003.en.md) | [EN court](f003.short.en.md) |
+| F014 · Électrotechnique | 60 h | [FR](f014.fr.md) | [FR court](f014.short.fr.md) | [EN](f014.en.md) | [EN court](f014.short.en.md) |
+| F004 · Management d’équipe et développement des talents | 55 h | [FR](f004.fr.md) | [FR court](f004.short.fr.md) | [EN](f004.en.md) | [EN court](f004.short.en.md) |
+| F012 · Concevoir et intégrer des interfaces web | 45 h | [FR](f012.fr.md) | [FR court](f012.short.fr.md) | [EN](f012.en.md) | [EN court](f012.short.en.md) |
+| F005 · Six Sigma et ingénierie de la qualité | 40 h | [FR](f005.fr.md) | [FR court](f005.short.fr.md) | [EN](f005.en.md) | [EN court](f005.short.en.md) |
+| F007 · Analyse et visualisation des données avec Power BI et Python avancé | 30 h | [FR](f007.fr.md) | [FR court](f007.short.fr.md) | [EN](f007.en.md) | [EN court](f007.short.en.md) |
+| F008 · Machine learning, deep learning et vision par ordinateur | 30 h | [FR](f008.fr.md) | [FR court](f008.short.fr.md) | [EN](f008.en.md) | [EN court](f008.short.en.md) |
+| F011 · Développer en Python pour le web et les données | 30 h | [FR](f011.fr.md) | [FR court](f011.short.fr.md) | [EN](f011.en.md) | [EN court](f011.short.en.md) |
+| F009 · Concevoir des agents IA avec Python et Microsoft Copilot Studio | 20 h | [FR](f009.fr.md) | [FR court](f009.short.fr.md) | [EN](f009.en.md) | [EN court](f009.short.en.md) |
+| F010 · Structurer, maintenir et versionner du code | 20 h | [FR](f010.fr.md) | [FR court](f010.short.fr.md) | [EN](f010.en.md) | [EN court](f010.short.en.md) |
+| F013 · Cloud et conteneurs avec Docker et Azure | 20 h | [FR](f013.fr.md) | [FR court](f013.short.fr.md) | [EN](f013.en.md) | [EN court](f013.short.en.md) |
+| F006 · Lecture des états financiers | 15 h | [FR](f006.fr.md) | [FR court](f006.short.fr.md) | [EN](f006.en.md) | [EN court](f006.short.en.md) |
+
+## Expériences
+
+| Expérience | Français long | Français court | English long | English short |
+| --- | --- | --- | --- | --- |
+| E001 · Commander en situation d'urgence - 15 ans d'astreinte, d'exercices POI et d'interventions industrielles | [FR](e001.fr.md) | [FR court](e001.short.fr.md) | [EN](e001.en.md) | [EN short](e001.short.en.md) |
+| E002 · Chef d’Exploitation en Centrale nucléaire | [FR](e002.fr.md) | [FR court](e002.short.fr.md) | [EN](e002.en.md) | [EN short](e002.short.en.md) |
+| E003 · Responsable Régional de Maintenance | [FR](e003.fr.md) | [FR court](e003.short.fr.md) | [EN](e003.en.md) | [EN short](e003.short.en.md) |
+| E004 · Reponsable Production - Chef de Département | [FR](e004.fr.md) | [FR court](e004.short.fr.md) | [EN](e004.en.md) | [EN short](e004.short.en.md) |
+| E005 · Manager Support Process Qualité | [FR](e005.fr.md) | [FR court](e005.short.fr.md) | [EN](e005.en.md) | [EN short](e005.short.en.md) |
+| E006 · Manager Support Big Data Qualité | [FR](e006.fr.md) | [FR court](e006.short.fr.md) | [EN](e006.en.md) | [EN short](e006.short.en.md) |
+| E007 · Ingénieur Maintenance Mécanique | [FR](e007.fr.md) | [FR court](e007.short.fr.md) | [EN](e007.en.md) | [EN short](e007.short.en.md) |
+
+
 ## Projets professionnels
 
 | Projet | Français long | Français court | English long | English short |
@@ -20,17 +60,12 @@ Les compétences sont définies dans [skills.yml](skills.yml).
 | P014 · Organiser la logistique d'un arrêt quinquennal industriel | [FR](p014.fr.md) | [FR court](p014.short.fr.md) | [EN](p014.en.md) | [EN short](p014.short.en.md) |
 | P015 · Piloter un chantier de maintenance industrielle sous contraintes de sécurité et de délais | [FR](p015.fr.md) | [FR court](p015.short.fr.md) | [EN](p015.en.md) | [EN short](p015.short.en.md) |
 | P016 · Déployer la surveillance vibratoire de 5 machines critiques pour anticiper les défaillances | [FR](p016.fr.md) | [FR court](p016.short.fr.md) | [EN](p016.en.md) | [EN short](p016.short.en.md) |
-| P017 · Commander en situation d'urgence - 15 ans d'astreinte, d'exercices POI et d'interventions industrielles | [FR](p017.fr.md) | [FR court](p017.short.fr.md) | [EN](p017.en.md) | [EN short](p017.short.en.md) |
 | P018 · Piloter la réception technique de machines tournantes auprès de fournisseurs européens | [FR](p018.fr.md) | [FR court](p018.short.fr.md) | [EN](p018.en.md) | [EN short](p018.short.en.md) |
 | P019 · Déployer SAP PM pour digitaliser la maintenance industrielle sur plusieurs sites européens | [FR](p019.fr.md) | [FR court](p019.short.fr.md) | [EN](p019.en.md) | [EN short](p019.short.en.md) |
-| P020 · Piloter la maintenance et la fiabilité d'un parc de 2 000 équipements industriels | [FR](p020.fr.md) | [FR court](p020.short.fr.md) | [EN](p020.en.md) | [EN short](p020.short.en.md) |
-| P021 · Chef d’Exploitation en Centrale nucléaire | [FR](p021.fr.md) | [FR court](p021.short.fr.md) | [EN](p021.en.md) | [EN short](p021.short.en.md) |
-| P024 · Accompagner les salariésdans une opération d'ouverture du capital | [FR](p024.fr.md) | [FR court](p024.short.fr.md) | [EN](p024.en.md) | [EN short](p024.short.en.md) |
-| P025 · Responsable Régional de Maintenance | [FR](p025.fr.md) | [FR court](p025.short.fr.md) | [EN](p025.en.md) | [EN short](p025.short.en.md) |
+| P024 · Accompagner les salariés dans une opération d'ouverture du capital | [FR](p024.fr.md) | [FR court](p024.short.fr.md) | [EN](p024.en.md) | [EN short](p024.short.en.md) |
 | P026 · Piloter un projet de stockage industriel | [FR](p026.fr.md) | [FR court](p026.short.fr.md) | [EN](p026.en.md) | [EN short](p026.short.en.md) |
 | P028 · Modéliser la charge et la capacité d'un atelier de traitements thermiques pour éclairer les décisions industrielles | [FR](p028.fr.md) | [FR court](p028.short.fr.md) | [EN](p028.en.md) | [EN short](p028.short.en.md) |
 | P029 · Reconstruction d’un banc de contrôle après un incendie | [FR](p029.fr.md) | [FR court](p029.short.fr.md) | [EN](p029.en.md) | [EN short](p029.short.en.md) |
-| P030 · Reponsable Production - Chef de Département | [FR](p030.fr.md) | [FR court](p030.short.fr.md) | [EN](p030.en.md) | [EN short](p030.short.en.md) |
 | P032 · Redresser le pilotage économique de la maintenance par l'anticipation et le management | [FR](p032.fr.md) | [FR court](p032.short.fr.md) | [EN](p032.en.md) | [EN short](p032.short.en.md) |
 | P033 · Préparer le diagnostic d’un dysfonctionnement de four | [FR](p033.fr.md) | [FR court](p033.short.fr.md) | [EN](p033.en.md) | [EN short](p033.short.en.md) |
 | P035 · Structurer et digitaliser la maîtrise des risques qualité | [FR](p035.fr.md) | [FR court](p035.short.fr.md) | [EN](p035.en.md) | [EN short](p035.short.en.md) |
@@ -90,7 +125,6 @@ Les compétences sont définies dans [skills.yml](skills.yml).
 | PP011 · Numériser ma bibliothèque pour construire une base de connaissances personnelle avec l'IA | [FR](pp011.fr.md) | [FR court](pp011.short.fr.md) | [EN](pp011.en.md) | [EN short](pp011.short.en.md) |
 | PP012 · Explorer la musique à travers la pratique du piano et de la guitare | [FR](pp012.fr.md) | [FR court](pp012.short.fr.md) | [EN](pp012.en.md) | [EN short](pp012.short.en.md) |
 | PP013 · Expérimenter l'électronique et les objets connectés avec Raspberry Pi et Arduino | [FR](pp013.fr.md) | [FR court](pp013.short.fr.md) | [EN](pp013.en.md) | [EN short](pp013.short.en.md) |
-| PP014 · Développer une compréhension des relations humaines par des études universitaires en psychologie | [FR](pp014.fr.md) | [FR court](pp014.short.fr.md) | [EN](pp014.en.md) | [EN short](pp014.short.en.md) |
 | PP015 · Concevoir et développer Flint, un harness d'agent IA avec Ollama et OpenAI | [FR](pp015.fr.md) | [FR court](pp015.short.fr.md) | [EN](pp015.en.md) | [EN short](pp015.short.en.md) |
 | PP016 · Développer des agents IA en Python pour une application d'analyse financière | [FR](pp016.fr.md) | [FR court](pp016.short.fr.md) | [EN](pp016.en.md) | [EN short](pp016.short.en.md) |
 | PP017 · Partager mes expériences et mes connaissances techniques à travers des articles sur Medium | [FR](pp017.fr.md) | [FR court](pp017.short.fr.md) | [EN](pp017.en.md) | [EN short](pp017.short.en.md) |

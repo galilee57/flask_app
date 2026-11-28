@@ -29,9 +29,6 @@
     {% if is_admin %}
     <aside class="p-4" style="background: #fff3cd;">
       Mode admin · Les brouillons privés sont visibles.
-      <a href="{{ url_for('realizations.preview') }}" class="mx-3 inline-flex min-h-11 items-center rounded-full bg-primary-800 px-4 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">
-        {{ t({'fr': 'Aperçu projets', 'en': 'Projects preview'}) }}
-      </a>
       <a href="{{ url_for('admin_llm') }}" class="mx-3 inline-flex min-h-11 items-center rounded-full bg-primary-800 px-4 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">
         {{ t({'fr': 'Test LLM', 'en': 'Test LLM'}) }}
       </a>

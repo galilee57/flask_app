@@ -40,10 +40,9 @@ Le titre de page visible vient de `title` du fichier correspondant à la version
 
 Les versions actives des maquettes de `diagnostic_projets_pros` ont été importées le 11 novembre 2026. Les notes de contrôle restent dans les archives. Les cartes personnelles et professionnelles sont classées selon le champ `origin` et répertoriées dans l’index de relecture.
 
-## Intégration différée
+## Accès au catalogue
 
-La navigation PRO conserve les anciennes pages par domaine. Le futur catalogue reste consultable séparément à `/realizations/`, uniquement avec une session admin valide. Le bandeau admin propose le lien « Aperçu projets ». Les pages détaillées et leurs médias sont également réservés à cette session. Les études et leurs sources sont conservées pour une intégration ultérieure, lorsque suffisamment de projets seront prêts.
-
+La navigation PRO ouvre le catalogue public à `/realizations/`. Les fiches détaillées et leurs médias sont accessibles sans connexion. L’ancien lien `/experiences_menu` redirige vers le catalogue, et les pages par domaine restent accessibles à partir de `/experiences/`.
 
 ## Cartographie de compétences
 
@@ -64,11 +63,11 @@ Modifier ensuite un texte français appelle une relecture de sa traduction angla
 
 ## Illustrations complémentaires
 
-Les [six illustrations ajoutées le 22 novembre 2026](visuals/README.md) sont rangées par projet dans `app/realizations/static/images/generated/`. Les briefs conservent les prompts exacts, la provenance et les fichiers retenus. Les légendes et alternatives sont éditables dans les fiches longues FR/EN. Les médias des variantes courtes restent indépendants.
+Les [six illustrations ajoutées le 22 novembre 2026](../../../../../artifacts/realizations/illustration-briefs/README.md) sont rangées par projet dans `app/realizations/static/images/generated/`. Les briefs conservent les prompts exacts, la provenance et les fichiers retenus. Les légendes et alternatives sont éditables dans les fiches longues FR/EN. Les médias des variantes courtes restent indépendants.
 
 ## Miniatures et images adaptées aux écrans
 
-Les originaux restent dans leurs dossiers. Les cartes utilisent des variantes WebP de 320, 640 et 960 px ; les études peuvent aussi utiliser 1440 px. Le navigateur choisit la taille avec `srcset` et `sizes`, et les médias hors écran sont chargés à la demande. Les variantes restent protégées par la session admin, comme les originaux.
+Les sources sont classées par provenance puis par fiche, dans `imported/` ou `generated/`. Le dossier commence par l’identifiant de la fiche en minuscules, suivi si nécessaire d’un nom descriptif séparé par des tirets (par exemple `f003` ou `e002-exploitation-centrale-nucleaire`). Les fichiers portent un nom de rôle (`cover`, `detail`, `jupiter`, `camera-photo`, etc.). Les variantes WebP reprennent le dossier du projet dans `responsive/` et ajoutent leur largeur réelle au nom, par exemple `responsive/p071-donnees-grande-echelle/cover-v1-640.webp`. Le manifeste associe chaque source à ses dimensions et variantes. Les cartes utilisent les tailles adaptées à l’écran ; les études peuvent aussi charger les variantes jusqu’à 1440 px. Le navigateur choisit la taille avec `srcset` et `sizes`, et les médias hors écran sont chargés à la demande.
 
 Après un ajout ou une modification d’image, reconstruire les variantes avec Python 3.11 ou plus récent :
 
@@ -77,4 +76,4 @@ pip install -r requirements-images.txt
 python scripts/build_realization_images.py
 ```
 
-Le script conserve les proportions et l’orientation, ne grossit pas les petites images et préserve les originaux. Les SVG restent vectoriels. Le dossier `app/realizations/static/images/responsive/` et son manifeste doivent être inclus dans le commit. Aucune bibliothèque d’image supplémentaire n’est nécessaire au serveur. La conversion utilise [Pillow](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp).
+Le script conserve les proportions et l’orientation, ne grossit pas les petites images et préserve les originaux. Les SVG restent vectoriels. Après avoir ajouté, renommé ou déplacé une source, reconstruire les variantes et le manifeste ; inclure `app/realizations/static/images/responsive/` dans le commit. Aucune bibliothèque d’image supplémentaire n’est nécessaire au serveur. La conversion utilise [Pillow](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp).

@@ -37,3 +37,7 @@ Validation avant commit : 229 tests Pytest réussis et compilation Tailwind réu
 97 images disposent de variantes WebP de 320, 640, 960 et jusqu’à 1440 px sans agrandissement. Les originaux sont conservés. Le poids cumulé des variantes à 640 px est de 2 553 450 octets contre 29 683 750 octets pour les sources (−91,4 %). Pour les seules couvertures du catalogue, les variantes à 960 px totalisent 4 026 236 octets contre 26 083 690 octets (−84,6 %). Ces mesures portent sur les fichiers, pas sur un temps de chargement réseau garanti.
 
 Les contrôles Chromium FR/EN aux largeurs 390 (densité 3), 768 et 1280 px confirment l’utilisation des WebP, l’absence de chargement des originaux sur les cartes testées et le rendu des études. Voir `responsive-images-checks.json` et `responsive-thumbnails-mobile.jpg`. Les variantes restent protégées par la session admin. Suite complète : 231 tests réussis.
+
+## Sources iconographiques
+
+Les [briefs des illustrations](illustration-briefs/README.md) conservent les prompts et la provenance des six couvertures générées. Le dossier [unused-media](unused-media/) conserve six sources des fiches PP001 et PP002 qui ne figurent plus dans les versions FR/EN du catalogue.

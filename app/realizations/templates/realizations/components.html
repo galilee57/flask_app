@@ -7,6 +7,10 @@
 </picture>
 {% endmacro %}
 
+{% macro kind_badge(project) %}
+<span class="realizations-badge realizations-kind-badge" data-kind="{{ project.kind }}">{{ project.kind_label }}</span>
+{% endmacro %}
+
 {% macro project_card(project, themes, show_all=False) %}
 <article class="realizations-card" data-project data-display-version="{{ project.display_version }}" data-year="{{ project.year if project.year is not none else '' }}" data-skills="{{ project.skills | join(' ') }}" data-origin="{{ project.origin }}" data-kind="{{ project.kind }}" data-featured="{{ 'true' if project.featured else 'false' }}" data-themes="{{ project.themes | join(' ') }}" data-search="{{ project.search | default(project.title ~ ' ' ~ project.summary) }}" {% if not show_all and not project.visible %}hidden{% endif %}>
   {% set cover = namespace(present=false) %}
@@ -28,9 +32,8 @@
   </div>
   {% endif %}
   <div class="flex flex-1 flex-col p-6 sm:p-7">
-    <div class="mb-4 flex flex-wrap gap-2">
-      <span class="realizations-badge">{{ t({'fr': 'Professionnel', 'en': 'Professional'}) if project.origin == 'professional' else t({'fr': 'Personnel', 'en': 'Personal'}) }}</span>
-      <span class="realizations-badge bg-secondary-100 text-secondary-900">{{ project.kind_label }}</span>
+    <div class="mb-4">
+      {{ kind_badge(project) }}
     </div>
     <h3 lang="{{ project.language }}" class="text-xl font-bold leading-snug text-primary-800 sm:text-2xl">
       {% if project.detail %}<a class="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary-600" href="{{ url_for('realizations.case_study', slug=project.slug) }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}
